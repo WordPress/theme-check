@@ -1,3 +1,3 @@
 === Theme-Check ===
 
-Stable tag: 10112010
+Stable tag: 10112010_r1
