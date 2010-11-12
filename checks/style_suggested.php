@@ -13,9 +13,7 @@ checkcount();
 
 		// things to check for
 		$checks = array(
-'^License:' => 'License:',
-'^License URI:' => 'License URI:',
-'^Tags:' => 'Tags:'
+		'^Tags:' => 'Tags:'
 			);
 
 

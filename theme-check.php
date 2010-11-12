@@ -5,7 +5,7 @@ Plugin URI: http://pross.org.uk/plugins
 Description: Run checks on the current theme before uploading to wordpress.
 Author: Pross
 Author URI: http://pross.org.uk
-Version: 10112010
+Version: 20101110.2
 */
 add_action('admin_menu', 'themecheck_add_page');
 

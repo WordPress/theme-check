@@ -30,14 +30,9 @@ $files = listdir(TEMPLATEPATH);
 			// second loop, to display the errors
 			$plugins = get_plugins();
 			global $checkcount;
-			
-			echo 'Running Version: <strong>'. $plugins['theme-check/theme-check.php']['Version'] . '</strong><br />';
-			echo $checkcount . ' checks ran.<br>';
-			if ($failed) {
-				echo "<br /><br />One or more errors were found.<br>";
-			} else {
-				echo "Theme was a pass !<br>";
-			}
+			$version = explode('.', $plugins['theme-check/theme-check.php']['Version']);
+			echo 'Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
+			echo $checkcount . ' checks ran against <strong> ' . get_option('template') . '</strong><br>';
 
 			// display the errors. Each checker class can return an array of strings as errors
 			//echo '<br>Error List:<br>';
@@ -59,10 +54,7 @@ $info = array();
 
 					if (!empty($error)) {
 						foreach ($error as $e) {
-
-
-
-if (preg_match('/DOS2UNIX/',$e)) { $e = str_replace('DOS2UNIX','',$e); array_push($dos2unix, $e); }
+//if (preg_match('/DOS2UNIX/',$e)) { $e = str_replace('DOS2UNIX','',$e); array_push($dos2unix, $e); }
 if (preg_match('/DEPRECATED/',$e)) { $e = str_replace('DEPRECATED','',$e); array_push($deprecated, $e); }
 if (preg_match('/REQUIRED/',$e)) { $e = str_replace('REQUIRED','',$e); array_push($required, $e); }
 if (preg_match('/CSSNEEDED/',$e)) { $e = str_replace('CSSNEEDED','',$e); array_push($required, $e); }
@@ -71,21 +63,18 @@ if (preg_match('/CRITICAL/',$e)) { $e = str_replace('CRITICAL','',$e); array_pus
 if (preg_match('/SHORT/',$e)) { $e = str_replace('SHORT','',$e); array_push($short, $e); }
 if (preg_match('/RECOMMENDED/',$e)) { $e = str_replace('RECOMMENDED','',$e); array_push($recommended, $e); }
 if (preg_match('/INFO/',$e)) { $e = str_replace('INFO','',$e); array_push($info, $e); }
-
-
-				//	if (!empty($e))	echo '<li>'.$e.'</li>';
-
-
-
-
-
 						}
 					}
 				}
 			}
-
+			if ($deprecated || $required || $critical || $short) {
+				echo "<br /><h1>One or more errors were found.</h1>";
+			} else {
+				echo "<h2>Theme passed all the tests!</h2>";
+			}
+			if (!defined('WP_DEBUG') || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with debug enabled before you upload!</span>';
 if ($critical) {
-echo 'div style="padding:20px 0;border-top:1px solid #ccc;"';
+echo '<div style="padding:20px 0;border-top:1px solid #ccc;"';
 echo '<ul>';
 foreach($critical as $error){
 echo '<li><span style="color:red">Critical: </span>'.$error.'</li>';
@@ -129,7 +118,7 @@ if ($cssoptional) {
 echo '<div style="padding:20px 0;border-top:1px solid #ccc;"';
 echo '<ul>';
 foreach($cssoptional as $error){
-echo '<li><span style="color:black">Optional: </span>'.$error.'</li>';
+echo '<li><span style="color:green">Optional: </span>'.$error.'</li>';
 }
 echo '</ul>';
 echo '</div>';
@@ -139,7 +128,7 @@ if ($info) {
 echo '<div style="padding:20px 0;border-top:1px solid #ccc;"';
 echo '<ul>';
 foreach($info as $error){
-echo '<li><span style="color:black">Info: </span>'.$error.'</li>';
+echo '<li><span style="color:green">Info: </span>'.$error.'</li>';
 }
 echo '</ul>';
 echo '</div>';
