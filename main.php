@@ -33,7 +33,7 @@ $files = listdir(TEMPLATEPATH);
 			$version = explode('.', $plugins['theme-check/theme-check.php']['Version']);
 			echo 'Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
 			echo $checkcount . ' checks ran against <strong> ' . get_option('template') . '</strong><br>';
-
+			if (!defined('WP_DEBUG') || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with debug enabled before you upload!</span>';
 			// display the errors. Each checker class can return an array of strings as errors
 			//echo '<br>Error List:<br>';
 			//echo '<ul>';
@@ -72,7 +72,6 @@ if (preg_match('/INFO/',$e)) { $e = str_replace('INFO','',$e); array_push($info,
 			} else {
 				echo "<h2>Theme passed all the tests!</h2>";
 			}
-			if (!defined('WP_DEBUG') || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with debug enabled before you upload!</span>';
 if ($critical) {
 echo '<div style="padding:20px 0;border-top:1px solid #ccc;"';
 echo '<ul>';

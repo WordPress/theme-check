@@ -12,23 +12,13 @@ class License_Checks implements themecheck {
 
 	//	foreach ($other_files as $other_key => $otherfile) {
 		checkcount();
-		
+		$found = false;
 		foreach ($other_files as $other_key => $otherfile) {
 		
 		if (basename($other_key) == 'license.txt') $found = true;
-		
-		
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		if ( !$found ) {
+		if ( $found === false ) {
 				
 		// licence.txt not found, look in header...
 		$css = implode(' ', $css_files);

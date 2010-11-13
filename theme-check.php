@@ -5,7 +5,7 @@ Plugin URI: http://pross.org.uk/plugins
 Description: Run checks on the current theme before uploading to wordpress.
 Author: Pross
 Author URI: http://pross.org.uk
-Version: 20101110.2
+Version: 20101110.3
 */
 add_action('admin_menu', 'themecheck_add_page');
 
@@ -19,8 +19,7 @@ function themecheck_do_page() {
     wp_die( __('You do not have sufficient permissions to access this page.') );
   }
 
-
-// main global to hold our checks
+  // main global to hold our checks
 global $themechecks;
 $themechecks = array();
 

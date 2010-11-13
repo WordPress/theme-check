@@ -13,7 +13,7 @@ checkcount();
 
 		// things to check for
 		$checks = array(
-		'^Tags:' => 'Tags:'
+'^Tags:' => 'Tags:'
 			);
 
 
