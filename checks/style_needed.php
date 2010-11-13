@@ -13,24 +13,26 @@ class Style_Needed implements themecheck {
 
 		// things to check for
 		$checks = array(
-'^Theme Name:' => 'Theme name:',
-'^Theme URI:' => 'Theme URI:',
-'^Description:' => 'Description:',
-'^Author:' => 'Author:',
-'^Version' => 'Version:',
-'\.alignleft' => '.alignleft',
-'\.aligncenter' => '.aligncenter',
-'\.wp-caption' => '.wp-caption',
-'\.wp-caption-text' => '.wp-caption-text',
-'\.gallery-caption' => '.gallery-caption',
-'\.alignright' => '.alignright'
+		'^Theme Name:' => '<strong>Theme name:</strong> is missing from your style.css header.',
+		'^Theme URI:' => '<strong>Theme URI:</strong> is missing from your style.css header.',
+		'^Description:' => '<strong>Description:</strong> is missing from your style.css header.',
+		'^Author:' => '<strong>Author:</strong> is missing from your style.css header.',
+		'^Version' => '<strong>Version:</strong> is missing from your style.css header.',
+		'\.alignleft' => '<strong>.alignleft</strong> css class is needed in your theme css.',
+		'\.aligncenter' => '<strong>.aligncenter</strong> css class is needed in your theme css.',
+		'\.wp-caption' => '<strong>.wp-caption</strong> css class is needed in your theme css.',
+		'\.wp-caption-text' => '<strong>.wp-caption-text</strong> css class is needed in your theme css.',
+		'\.gallery-caption' => '<strong>.gallery-caption</strong> css class is needed in your theme css.',
+		'\.sticky' => '<strong>.sticky</strong> css class is needed in your theme css.',
+		'\.bypostauthor' => '<strong>.bypostauthor</strong> css class is needed in your theme css.',
+		'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.'
 			);
 
 
 		foreach ($checks as $key => $check) {
 		checkcount();
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
-				$this->error[] = "CSSNEEDED<strong>{$check}</strong> is missing.";
+				$this->error[] = "CSSNEEDED{$check}";
 				$ret = false;
 			}
 

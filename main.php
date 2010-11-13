@@ -35,8 +35,6 @@ $files = listdir(TEMPLATEPATH);
 			echo $checkcount . ' checks ran against <strong> ' . get_option('template') . '</strong><br>';
 			if (!defined('WP_DEBUG') || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with debug enabled before you upload!</span>';
 			// display the errors. Each checker class can return an array of strings as errors
-			//echo '<br>Error List:<br>';
-			//echo '<ul>';
 $dos2unix = array();
 $deprecated = array();
 $required = array();
@@ -54,7 +52,6 @@ $info = array();
 
 					if (!empty($error)) {
 						foreach ($error as $e) {
-//if (preg_match('/DOS2UNIX/',$e)) { $e = str_replace('DOS2UNIX','',$e); array_push($dos2unix, $e); }
 if (preg_match('/DEPRECATED/',$e)) { $e = str_replace('DEPRECATED','',$e); array_push($deprecated, $e); }
 if (preg_match('/REQUIRED/',$e)) { $e = str_replace('REQUIRED','',$e); array_push($required, $e); }
 if (preg_match('/CSSNEEDED/',$e)) { $e = str_replace('CSSNEEDED','',$e); array_push($required, $e); }

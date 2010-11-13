@@ -12,8 +12,9 @@ class CSSAlignOptionalCheck implements themecheck {
 
 		// things to check for
 		$checks = array(
-			'\.sticky' => '.sticky',
-			'\.bypostauthor' => '.bypostauthor',
+		// kept blank for now, no harm!
+		//	'\.sticky' => '.sticky',
+		//	'\.bypostauthor' => '.bypostauthor',
 		);
 
 		foreach ($checks as $key => $check) {

@@ -39,7 +39,6 @@ if ($handle = opendir($dir)) {
 	while (($file = readdir($handle)) !== false) {
 		if (filetype("$dir/".$file) == 'file' && substr($file,-4) == '.php') {
 			include "$dir/".$file;
-//echo '<br>check found:'.$file;
 		}
 	}
 	closedir($handle);
