@@ -1,14 +1,11 @@
 <?php
 function check_main() {
 global $themechecks;
-
 $files = listdir(TEMPLATEPATH);
-
 		if ($files) {
 				foreach($files as $key => $filename) {
-
 				if (substr($filename, -4) == '.php') {
-					$php[$filename] = file_get_contents($filename);
+					$php[$filename] = php_strip_whitespace($filename);
 				}
 				else if (substr($filename, -4) == '.css') {
 					$css[$filename] = file_get_contents($filename);
@@ -17,7 +14,6 @@ $files = listdir(TEMPLATEPATH);
 					$other[$filename] = file_get_contents($filename);
 				}
 			}
-
 			$failed = false;
 			foreach($themechecks as $check) {
 				if ($check instanceof themecheck) {
@@ -26,7 +22,6 @@ $files = listdir(TEMPLATEPATH);
 					}
 				}
 			}
-
 			// second loop, to display the errors
 			$plugins = get_plugins();
 			global $checkcount;
