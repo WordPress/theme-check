@@ -15,16 +15,14 @@ class Style_Needed implements themecheck {
 		'^Author:' => '<strong>Author:</strong> is missing from your style.css header.',
 		'^Version' => '<strong>Version:</strong> is missing from your style.css header.',
 		'\.alignleft' => '<strong>.alignleft</strong> css class is needed in your theme css.',
+		'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.',
 		'\.aligncenter' => '<strong>.aligncenter</strong> css class is needed in your theme css.',
 		'\.wp-caption' => '<strong>.wp-caption</strong> css class is needed in your theme css.',
 		'\.wp-caption-text' => '<strong>.wp-caption-text</strong> css class is needed in your theme css.',
 		'\.gallery-caption' => '<strong>.gallery-caption</strong> css class is needed in your theme css.',
 		'\.sticky' => '<strong>.sticky</strong> css class is needed in your theme css.',
-		'\.bypostauthor' => '<strong>.bypostauthor</strong> css class is needed in your theme css.',
-		'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.',
-		'\.sticky' => '.sticky',
-		'\.bypostauthor' => '.bypostauthor'
-			);
+		'\.bypostauthor' => '<strong>.bypostauthor</strong> css class is needed in your theme css.'
+		);
 		foreach ($checks as $key => $check) {
 		checkcount();
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
