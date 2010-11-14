@@ -124,7 +124,7 @@ $grep = '';
 			foreach ($php_files as $php_key => $phpfile) {
 		foreach ( $checks as $alt => $check) {
 		checkcount();
-			$version = $check[0];
+			$version = $check;
 			$key = key($check);
 			$alt = $check[$key]; 
 			if ( preg_match( '/[\s|]' . $key . '\(/m', $phpfile, $matches ) ) {

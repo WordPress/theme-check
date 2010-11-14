@@ -21,7 +21,7 @@ class Style_Needed implements themecheck {
 		'\.gallery-caption' => '<strong>.gallery-caption</strong> css class is needed in your theme css.',
 		'\.sticky' => '<strong>.sticky</strong> css class is needed in your theme css.',
 		'\.bypostauthor' => '<strong>.bypostauthor</strong> css class is needed in your theme css.',
-		'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.'
+		'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.',
 		'\.sticky' => '.sticky',
 		'\.bypostauthor' => '.bypostauthor'
 			);
