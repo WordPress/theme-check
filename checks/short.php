@@ -15,7 +15,7 @@ checkcount();
 				if (preg_match( '/<\?(?!php|xml)/', $phpfile)){
 				$file = basename($php_key);
 $grep = tc_grep( $error, $php_key);
-				$this->error[] = "SHORTFound PHP short tags in file <strong>{$file}</strong>.{$grep}";
+				$this->error[] = "CRITICALFound PHP short tags in file <strong>{$file}</strong>.{$grep}";
 				$ret = false;
 }
 

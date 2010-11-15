@@ -1,0 +1,41 @@
+<?php
+
+// do some basic checks for strings
+class File_Checks implements themecheck {
+	protected $error = array();
+
+	function check( $php_files, $css_files, $other_files) {
+
+		// combine all the php files into one string to make it easier to search
+		$ret = true;
+
+
+		$filenames = array();
+
+		foreach ($php_files as $php_key => $phpfile) {
+		array_push( $filenames, basename( $php_key ) );
+		}
+		foreach ($other_files as $php_key => $phpfile) {
+		array_push( $filenames, basename( $php_key ) );
+		}
+		foreach ($css_files as $php_key => $phpfile) {
+		array_push( $filenames, basename( $php_key ) );
+		}
+		$musthave = array( 'index.php', 'comments.php', 'screenshot.png', 'style.css' );
+checkcount();		
+		foreach( $musthave as $file ) {
+		if ( !in_array( $file, $filenames ) ) {
+
+				$this->error[] = "CRITICALcould not find the file <strong>{$file}</strong> in the theme.";
+				$ret = false;
+			}
+
+		}
+		// return the pass/fail
+		return $ret;
+
+}
+	function getError() { return $this->error; }
+}
+
+$themechecks[] = new File_Checks;

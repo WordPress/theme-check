@@ -26,7 +26,7 @@ class Style_Needed implements themecheck {
 		foreach ($checks as $key => $check) {
 		checkcount();
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
-				$this->error[] = "CSSNEEDED{$check}";
+				$this->error[] = "REQUIRED{$check}";
 				$ret = false;
 			}
 		}

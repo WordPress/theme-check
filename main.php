@@ -29,7 +29,7 @@ $files = listdir( TEMPLATEPATH );
 			$version = explode( '.', $plugins['theme-check/theme-check.php']['Version'] );
 			echo 'Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
 			echo $checkcount . ' checks ran against <strong> ' . get_option( 'template' ) . '</strong><br>';
-			if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with debug enabled before you upload!</span>';
+			if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</span>';
 
 			// display the errors. Each checker class can return an array of strings as errors
 			$dos2unix = array();
@@ -49,10 +49,7 @@ $files = listdir( TEMPLATEPATH );
 						foreach ( $error as $e ) {
 									if ( preg_match( '/DEPRECATED/',$e ) ) { $e = str_replace( 'DEPRECATED','',$e ); array_push( $deprecated, $e ); }
 									if ( preg_match( '/REQUIRED/',$e ) ) { $e = str_replace( 'REQUIRED','',$e ); array_push( $required, $e ); }
-									if ( preg_match( '/CSSNEEDED/',$e ) ) { $e = str_replace( 'CSSNEEDED','',$e ); array_push( $required, $e ); }
-									if ( preg_match( '/CSSOPTIONAL/',$e ) ) { $e = str_replace( 'CSSOPTIONAL','',$e ); array_push( $cssoptional, $e ); }
 									if ( preg_match( '/CRITICAL/',$e ) ) { $e = str_replace( 'CRITICAL','',$e ); array_push( $critical, $e ); }
-									if ( preg_match( '/SHORT/',$e ) ) { $e = str_replace( 'SHORT','',$e ); array_push( $short, $e ); }
 									if ( preg_match( '/RECOMMENDED/',$e ) ) { $e = str_replace( 'RECOMMENDED','',$e ); array_push( $recommended, $e ); }
 									if ( preg_match( '/INFO/',$e ) ) { $e = str_replace( 'INFO','',$e ); array_push( $info, $e ); }
 						}
@@ -99,16 +96,6 @@ $files = listdir( TEMPLATEPATH );
 					echo '<ul>';
 					foreach( $recommended as $error ) {
 					echo '<li><span style="color:blue">Recommended: </span>'.$error.'</li>';
-					}
-					echo '</ul>';
-					echo '</div>';
-					}
-
-			if ( $cssoptional ) {
-					echo '<div style="padding:20px 0;border-top:1px solid #ccc;"';
-					echo '<ul>';
-					foreach( $cssoptional as $error ) {
-					echo '<li><span style="color:green">Optional: </span>'.$error.'</li>';
 					}
 					echo '</ul>';
 					echo '</div>';
