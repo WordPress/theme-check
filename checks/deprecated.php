@@ -132,7 +132,7 @@ $grep = '';
 				$error = rtrim($matches[0],'(');
 				$version = $check[0];
 				$grep = tc_grep( $error, $php_key);
-				$this->error[] = "DEPRECATED<strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>.<br />Use <strong>{$alt}</strong> instead.{$grep}";
+				$this->error[] = "DEPRECATED<strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";
 				$ret = false;
 			}
 		}

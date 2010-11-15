@@ -13,23 +13,7 @@ class Suggested implements themecheck {
 
 		// things to check for
 		$checks = array(
-'/[\s|]get_bloginfo\((\s|)("|\')url("|\')(\s|)\)/m' => 'home_url()',
-'/[\s|]get_bloginfo\((\s|)("|\')wpurl("|\')(\s|)\)/m' => 'site_url()',
-'/[\s|]get_bloginfo\((\s|)("|\')stylesheet_directory("|\')(\s|)\)/m' => 'get_stylesheet_directory_uri()',
-'/[\s|]get_bloginfo\((\s|)("|\')template_directory("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-'/[\s|]get_bloginfo\((\s|)("|\')template_url("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-'/[\s|]get_bloginfo\((\s|)("|\')text_direction("|\')(\s|)\)/m' => 'is_rtl()',
-'/[\s|]get_bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
 
-'/[\s|]bloginfo\((\s|)("|\')url("|\')(\s|)\)/m' => 'echo home_url()',
-'/[\s|]bloginfo\((\s|)("|\')wpurl("|\')(\s|)\)/m' => 'echo site_url()',
-'/[\s|]bloginfo\((\s|)("|\')stylesheet_directory("|\')(\s|)\)/m' => 'get_stylesheet_directory_uri()',
-'/[\s|]bloginfo\((\s|)("|\')template_directory("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-'/[\s|]bloginfo\((\s|)("|\')template_url("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-'/[\s|]bloginfo\((\s|)("|\')text_direction("|\')(\s|)\)/m' => 'is_rtl()',
-'/[\s|]bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
-'/[\s|]get_option\((\s|)("|\')home("|\')(\s|)\)/m' => 'home_url()',
-'/[\s|]get_option\((\s|)("|\')site_url("|\')(\s|)\)/m' => 'site_url()',
 //'/get_the_time\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'get_the_time( get_option( \'date_format\' ) )',
 '/[^get_]the_time\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'the_time( get_option( \'date_format\' ) )'
 			);
@@ -41,7 +25,7 @@ class Suggested implements themecheck {
 			    $filename = basename($php_key);
 				$error = esc_html( rtrim($matches[0],'(') );
 $grep = tc_grep( rtrim($matches[0],'('), $php_key);
-				$this->error[] = "RECOMMENDED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>.<br />Use <strong>{$check}</strong> instead.{$grep}";
+				$this->error[] = "RECOMMENDED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
 				$ret = false;
 			}
 

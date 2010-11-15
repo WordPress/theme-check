@@ -11,11 +11,11 @@ class PostThumbnailCheck implements themecheck {
 		$php = implode(' ', $php_files);
 checkcount();
 		if ( strpos( $php, 'the_post_thumbnail' ) === false ) {
-			$this->error[] = "RECOMMENDEDNo reference to the_post_thumbnail() was found in the theme. It is recommended that the theme implement this functionality instead of using custom fields for thumbnails.";
+			$this->error[] = "RECOMMENDEDNo reference to <strong>the_post_thumbnail()</strong> was found in the theme. It is recommended that the theme implement this functionality instead of using custom fields for thumbnails.";
 		}
 
 		if ( strpos( $php, 'post-thumbnails' ) === false ) {
-			$this->error[] = "RECOMMENDEDNo reference to post-thumbnails was found in the theme. If the theme has a thumbnail like functionality, it should be implemented with add_theme_support('post-thumbnails') in the functions.php file.";
+			$this->error[] = "RECOMMENDEDNo reference to post-thumbnails was found in the theme. If the theme has a thumbnail like functionality, it should be implemented with <strong>add_theme_support('post-thumbnails')</strong> in the functions.php file.";
 		}
 
 		return $ret;

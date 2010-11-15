@@ -22,6 +22,7 @@ class File_Checks implements themecheck {
 		array_push( $filenames, basename( $php_key ) );
 		}
 		$musthave = array( 'index.php', 'comments.php', 'screenshot.png', 'style.css' );
+		$rechave = array( 'readme.txt' );
 checkcount();		
 		foreach( $musthave as $file ) {
 		if ( !in_array( $file, $filenames ) ) {
@@ -29,8 +30,17 @@ checkcount();
 				$this->error[] = "CRITICALcould not find the file <strong>{$file}</strong> in the theme.";
 				$ret = false;
 			}
-
 		}
+
+		foreach( $rechave as $file ) {
+		if ( !in_array( $file, $filenames ) ) {
+
+				$this->error[] = "RECOMMENDEDcould not find the file <strong>{$file}</strong> in the theme.";
+				$ret = false;
+			}
+		}		
+		
+		
 		// return the pass/fail
 		return $ret;
 

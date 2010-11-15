@@ -12,23 +12,15 @@ class License_Checks implements themecheck {
 
 	//	foreach ($other_files as $other_key => $otherfile) {
 		checkcount();
-		$found = false;
-		foreach ($other_files as $other_key => $otherfile) {
-		
-		if (basename($other_key) == 'license.txt') $found = true;
-		}
-		
-		if ( $found === false ) {
-				
-		// licence.txt not found, look in header...
+
 		$css = implode(' ', $css_files);
 		$checks = array(
-		'((^Licence:.*Licence\sURI:)|(^Licence\sURI:.*Licence:))' => ' you must include a licence.txt or put <strong>License:</strong> and <strong>Licence URI:</strong> in style.css header.',
+		'((^Licence:.*Licence\sURI:)|(^Licence\sURI:.*Licence:))' => ' you must include <strong>License:</strong> and <strong>Licence URI:</strong> in style.css header.',
 		);
 		
-				foreach ($checks as $key => $check) {
+			foreach ($checks as $key => $check) {
 			if ( !preg_match( '/' . $key . '/ms', $css, $matches ) ) {
-				$this->error[] = "REQUIRED<strong>license.txt</strong> is missing{$check}.";
+				$this->error[] = "REQUIRED<strong>License Tags</strong> are missing{$check}";
 				$ret = false;
 			}
 		
@@ -38,7 +30,7 @@ class License_Checks implements themecheck {
 		
 		
 		}
-		}
+		
 
 		// return the pass/fail
 		return $ret;
