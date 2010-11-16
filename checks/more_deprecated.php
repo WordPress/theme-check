@@ -23,7 +23,7 @@ class More_Deprecated implements themecheck {
 			    $filename = basename($php_key);
 				$error = rtrim($matches[0],'(');
 $grep = tc_grep( $error, $php_key);
-				$this->error[] = "DEPRECATED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
+				$this->error[] = "DEPRECATED" . do_strong($error) ." was found in the file " . do_strong($filename) .". Use " . do_strong($check) ." instead.{$grep}";
 				$ret = false;
 			}
 

@@ -24,7 +24,7 @@ class Required implements themecheck {
 			    $filename = basename($php_key);
 				$error = esc_html( rtrim($matches[0],'(') );
 $grep = tc_grep( rtrim($matches[0],'('), $php_key);
-				$this->error[] = "REQUIRED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
+				$this->error[] = "REQUIRED" . do_strong( $error ) . " was found in the file " . do_strong( $filename ) . ". Use " . do_strong( $check ) . " instead.{$grep}";
 				$ret = false;
 			}
 

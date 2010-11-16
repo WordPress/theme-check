@@ -5,8 +5,10 @@ Plugin URI: http://pross.org.uk/plugins
 Description: Run checks on the current theme before uploading to wordpress.
 Author: Pross
 Author URI: http://pross.org.uk
-Version: 20101110.3
+Version: 20101116.4
 */
+$trac = false; // this will tracify all output!
+
 add_action( 'admin_menu', 'themecheck_add_page' );
 function themecheck_add_page() {
 	add_theme_page( 'Theme Check', 'Theme Check', 'manage_options', 'themecheck', 'themecheck_do_page' );
@@ -65,7 +67,8 @@ function tc_grep( $error, $file, $linenumber = true ) {
 	return $bad_lines;
 }
 
-function do_strong( $text, $trac = false ) {
+function do_strong( $text ) {
+	global $trac;
 	if( $trac === false ) {
 	$strong_pre = '<strong>';
 	$strong_post = '</strong>';	
@@ -76,7 +79,27 @@ function do_strong( $text, $trac = false ) {
 return $strong_pre . $text . $strong_post;
 }
 
-function do_code( $text, $trac = false ) {
+function rep_strong( $text ) {
+	global $trac;
+	if( $trac === false ) {
+		return $text;
+	} else {
+	
+$trac_left = array( '<br />', '<strong>', '</strong>' );
+$trac_right= array( "\r\n", "'''", "'''" );
+$html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/is';
+$html_new = '[$1 $3]';
+
+$text =   strip_tags( preg_replace( $html_link, $html_new, str_replace($trac_left, $trac_right, $text) ) );
+
+return $text;
+	
+	}
+
+}
+
+function do_code( $text ) {
+	global $trac;
 	if( $trac != true ) {
 	$strong_pre = '<pre>';
 	$strong_post = '</pre>';	

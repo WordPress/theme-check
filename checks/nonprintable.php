@@ -12,7 +12,7 @@ class NonPrintableCheck implements themecheck {
 			// 0A = line feed
 			// 0D = new line
 			if ( preg_match('/[\x00-\x08\x0B-\x0C\x0E-\x1F\x80-\xFF]/',$content, $matches) ) {
-				$this->error[] = "INFONon-printable characters were found in the <strong>{$name}</strong> file. You may want to check this file for errors.";
+				$this->error[] = "INFONon-printable characters were found in the " . do_strong($name) ." file. You may want to check this file for errors.";
 			}
 		}
 		

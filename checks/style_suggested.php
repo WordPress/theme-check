@@ -19,7 +19,7 @@ checkcount();
 
 		foreach ($checks as $key => $check) {
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
-				$this->error[] = "RECOMMENDED<strong>{$check}</strong> is missing from your style.css header.";
+				$this->error[] = "RECOMMENDED" . do_strong( $check ) . " is missing from your style.css header.";
 				$ret = false;
 			}
 

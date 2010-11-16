@@ -16,7 +16,7 @@ checkcount();
 			( strpos( $php, 'previous_posts_link' ) === false &&
 			  strpos( $php, 'next_posts_link' ) === false )
 		) {
-			$this->error[] = "REQUIREDThe theme doesn't have post pagination code in it. Use <strong>posts_nav_link()</strong> or <strong>paginate_links()</strong> or <strong>next_posts_link()</strong> and <strong>previous_posts_link()</strong> to add post pagination.";
+			$this->error[] = "REQUIREDThe theme doesn't have post pagination code in it. Use " . do_strong( 'posts_nav_link()' ) ." or " . do_strong( 'paginate_links()' ) . " or " . do_strong( 'next_posts_link()' ) ." and " . do_strong( 'previous_posts_link()' ) . " to add post pagination.";
 			$ret = false;
 		}
 
