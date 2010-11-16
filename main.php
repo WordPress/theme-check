@@ -59,7 +59,8 @@ $files = listdir( TEMPLATEPATH );
 			if ( $deprecated || $required || $critical || $short ) {
 				echo "<br /><h1>One or more errors were found.</h1>";
 			} else {
-				echo "<h2>Theme passed all the tests!</h2>";
+				echo '<h2>' . get_option( 'template' ) . ' passed all the tests!</h2>';
+				TC_success();
 			}
 			if ( $critical ) {
 					echo '<div style="padding:20px 0;border-top:1px solid #ccc;"';
@@ -139,3 +140,15 @@ function checkcount() {
 	global $checkcount;
 	$checkcount++;
 	}
+	
+function TC_success() {
+
+echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="6GF2U8ZFUHLPA">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+';
+}
