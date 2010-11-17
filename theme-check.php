@@ -7,7 +7,6 @@ Author: Pross
 Author URI: http://pross.org.uk
 Version: 20101116.4
 */
-$trac = false; // this will tracify all output!
 
 add_action( 'admin_menu', 'themecheck_add_page' );
 function themecheck_add_page() {
@@ -60,28 +59,17 @@ function tc_grep( $error, $file, $linenumber = true ) {
 			if ( stristr ( $this_line, $error ) ) 
 			{
 			$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
-				$bad_lines .= do_code( "Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) );
+				$bad_lines .= "<pre>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 			}
 			$line_index++;
 		}
 	return $bad_lines;
 }
 
-function do_strong( $text ) {
-	global $trac;
-	if( $trac === false ) {
-	$strong_pre = '<strong>';
-	$strong_post = '</strong>';	
-} else {
-	$strong_pre = "'''";
-	$strong_post = "'''";
-}
-return $strong_pre . $text . $strong_post;
-}
 
-function rep_strong( $text ) {
+function make_trac( $text ) {
 	global $trac;
-	if( $trac === false ) {
+	if( !$trac ) {
 		return $text;
 	} else {
 	
@@ -89,23 +77,13 @@ $trac_left = array( '<br />', '<strong>', '</strong>' );
 $trac_right= array( "\r\n", "'''", "'''" );
 $html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/is';
 $html_new = '[$1 $3]';
+$code_left = array( '<pre>', '</pre>' );
+$code_right = array( "\n{{{\n", "\n}}}\n" );
 
-$text =   strip_tags( preg_replace( $html_link, $html_new, str_replace($trac_left, $trac_right, $text) ) );
+$text =   strip_tags( preg_replace( $html_link, $html_new, str_replace($trac_left, $trac_right, str_replace( $code_left, $code_right, $text ) ) ) );
 
 return $text;
 	
 	}
 
-}
-
-function do_code( $text ) {
-	global $trac;
-	if( $trac != true ) {
-	$strong_pre = '<pre>';
-	$strong_post = '</pre>';	
-} else {
-	$strong_pre = "\n{{{\n";
-	$strong_post = "\n}}}";
-}
-return $strong_pre . $text . $strong_post;
 }

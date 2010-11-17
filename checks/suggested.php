@@ -37,8 +37,8 @@ class Suggested implements themecheck {
 			if ( preg_match( $key, $phpfile, $matches ) ) {
 			    $filename = basename($php_key);
 				$error = trim( esc_html( rtrim($matches[0],'(') ) );
-$grep = tc_grep( rtrim($matches[0],'('), $php_key);
-				$this->error[] = "RECOMMENDED" . do_strong($error) . " was found in the file " . do_strong($filename) . ". Use " . do_strong($check) . " instead.{$grep}";
+				$grep = tc_grep( rtrim($matches[0],'('), $php_key);
+				$this->error[] = "RECOMMENDED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
 				$ret = false;
 			}
 

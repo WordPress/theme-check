@@ -27,7 +27,7 @@ checkcount();
 		foreach( $musthave as $file ) {
 		if ( !in_array( $file, $filenames ) ) {
 
-				$this->error[] = "CRITICALcould not find the file " . do_strong($file) ." in the theme.";
+				$this->error[] = "CRITICALcould not find the file <strong>{$file}</strong> in the theme.";
 				$ret = false;
 			}
 		}
@@ -35,7 +35,7 @@ checkcount();
 		foreach( $rechave as $file ) {
 		if ( !in_array( $file, $filenames ) ) {
 
-				$this->error[] = "RECOMMENDEDcould not find the file " . do_strong($file) ." in the theme.";
+				$this->error[] = "RECOMMENDEDcould not find the file <strong>{$file}</strong> in the theme.";
 				$ret = false;
 			}
 		}		

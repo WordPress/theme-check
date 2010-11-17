@@ -47,11 +47,11 @@ $files = listdir( TEMPLATEPATH );
 					$error = (array) $error;
 					if ( !empty( $error ) ) {
 						foreach ( $error as $e ) {
-									if ( preg_match( '/DEPRECATED/',$e ) ) { $e = str_replace( 'DEPRECATED','',$e ); array_push( $deprecated, $e ); }
-									if ( preg_match( '/REQUIRED/',$e ) ) { $e = str_replace( 'REQUIRED','',$e ); array_push( $required, $e ); }
-									if ( preg_match( '/CRITICAL/',$e ) ) { $e = str_replace( 'CRITICAL','',$e ); array_push( $critical, $e ); }
-									if ( preg_match( '/RECOMMENDED/',$e ) ) { $e = str_replace( 'RECOMMENDED','',$e ); array_push( $recommended, $e ); }
-									if ( preg_match( '/INFO/',$e ) ) { $e = str_replace( 'INFO','',$e ); array_push( $info, $e ); }
+									if ( preg_match( '/DEPRECATED/',$e ) ) { $e = str_replace( 'DEPRECATED','',$e ); array_push( $deprecated, make_trac( $e ) ); }
+									if ( preg_match( '/REQUIRED/',$e ) ) { $e = str_replace( 'REQUIRED','',$e ); array_push( $required, make_trac( $e ) ); }
+									if ( preg_match( '/CRITICAL/',$e ) ) { $e = str_replace( 'CRITICAL','',$e ); array_push( $critical, make_trac( $e ) ); }
+									if ( preg_match( '/RECOMMENDED/',$e ) ) { $e = str_replace( 'RECOMMENDED','',$e ); array_push( $recommended, make_trac( $e ) ); }
+									if ( preg_match( '/INFO/',$e ) ) { $e = str_replace( 'INFO','',$e ); array_push( $info, make_trac( $e ) ); }
 						}
 					}
 				}

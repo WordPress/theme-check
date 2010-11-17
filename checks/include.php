@@ -11,7 +11,7 @@ class IncludeCheck implements themecheck {
 		$php = implode(' ', $php_files);
 checkcount();
 		if ( preg_match( '/include[\s|]*\(/', $php ) != 0 || preg_match( '/require[\s|]*\(/', $php ) != 0 ) {
-			$this->error[] = "INFOThe theme appears to use include or require. If these are being used to include separate sections of a template from independant files, then " . do_strong('get_template_part()') ." should be used instead.";
+			$this->error[] = "INFOThe theme appears to use include or require. If these are being used to include separate sections of a template from independant files, then <strong>get_template_part()</strong> should be used instead.";
 		}
 
 		return $ret;

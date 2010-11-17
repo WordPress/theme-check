@@ -35,7 +35,7 @@ $grep = '';
 				if ($key === 'add_theme_support\((\s|)("|\')automatic-feed-links("|\')(\s|)\)') $key = 'add_theme_support( \'automatic-feed-links\' )';
 				if ($key === 'wp_enqueue_script\((\s|)("|\')comment-reply("|\')(\s|)\)') $key = 'wp_enqueue_script( \'comment-reply\' )';
 				$key = rtrim($key,'\(');
-				$this->error[] = "REQUIREDCould not find " . do_strong( $key ) . ". " . rep_strong( $check );
+				$this->error[] = "REQUIREDCould not find <strong>{$key}</strong>. {$check}";
 				$ret = false;
 			}
 		}

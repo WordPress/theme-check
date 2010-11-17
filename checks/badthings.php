@@ -29,8 +29,8 @@ $grep = '';
 			if ( preg_match( $key, $phpfile, $matches ) ) {
 			    $filename = basename($php_key);
 				$error = rtrim($matches[0],'(');
-$grep = tc_grep( $error, $php_key);
-				$this->error[] = "CRITICALFound " . do_strong( $error ) . " in the file " . do_strong( $filename ) . " " . rep_strong($check) . ".{$grep}";
+				$grep = tc_grep( $error, $php_key);
+				$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
 				$ret = false;
 			}
 		}
@@ -50,8 +50,8 @@ $grep = tc_grep( $error, $php_key);
 			if ( preg_match( $key, $phpfile, $matches ) ) {
 			    $filename = basename($php_key);
 				$error = rtrim($matches[0],'(');
-$grep = tc_grep( $error, $php_key);
-				$this->error[] = "CRITICALFound " . do_strong( $error ) . " in the file " . do_strong( $filename ) . " {$check}.{$grep}";
+				$grep = tc_grep( $error, $php_key);
+				$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
 				$ret = false;
 			}
 		}

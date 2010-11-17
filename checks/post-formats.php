@@ -11,7 +11,7 @@ class PostFormatCheck implements themecheck {
 		$php = implode(' ', $php_files);
 checkcount();
 		if ( strpos( $php, 'the_post_thumbnail' ) === false ) {
-			$this->error[] = "RECOMMENDEDNo reference to " . do_strong( 'post-formats' ) . " was found in the theme. It is recommended that the theme implement this functionality.";
+			$this->error[] = "RECOMMENDEDNo reference to <strong>post-formats</strong> was found in the theme. It is recommended that the theme implement this functionality.";
 		}
 
 		return $ret;
