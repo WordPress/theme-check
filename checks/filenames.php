@@ -13,13 +13,13 @@ class File_Checks implements themecheck {
 		$filenames = array();
 
 		foreach ($php_files as $php_key => $phpfile) {
-		array_push( $filenames, basename( $php_key ) );
+		array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		foreach ($other_files as $php_key => $phpfile) {
-		array_push( $filenames, basename( $php_key ) );
+		array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		foreach ($css_files as $php_key => $phpfile) {
-		array_push( $filenames, basename( $php_key ) );
+		array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		$musthave = array( 'index.php', 'comments.php', 'screenshot.png', 'style.css' );
 		$rechave = array( 'readme.txt' );

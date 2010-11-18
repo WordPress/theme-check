@@ -43,47 +43,11 @@ if ( $handle = opendir( $dir ) ) {
 	closedir( $handle );
 }
 include( 'main.php' );
+echo '<div id="theme-check" class="wrap">';
+echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
 
-echo '<div class="wrap">';
 
-check_main();
-
+if (!$_POST['themename']) tc_form();
+if ( $_POST['themename'] ) check_main( $_POST['themename'] );
 echo '</div>';
-}
-function tc_grep( $error, $file, $linenumber = true ) {
-		$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
-		$line_index = 0;
-		$bad_lines = '';
-		foreach( $lines as $this_line )
-		{
-			if ( stristr ( $this_line, $error ) ) 
-			{
-			$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
-				$bad_lines .= "<pre>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
-			}
-			$line_index++;
-		}
-	return $bad_lines;
-}
-
-
-function make_trac( $text ) {
-	global $trac;
-	if( !$trac ) {
-		return $text;
-	} else {
-	
-$trac_left = array( '<br />', '<strong>', '</strong>' );
-$trac_right= array( "\r\n", "'''", "'''" );
-$html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/is';
-$html_new = '[$1 $3]';
-$code_left = array( '<pre>', '</pre>' );
-$code_right = array( "\n{{{\n", "\n}}}\n" );
-
-$text =   strip_tags( preg_replace( $html_link, $html_new, str_replace($trac_left, $trac_right, str_replace( $code_left, $code_right, $text ) ) ) );
-
-return $text;
-	
-	}
-
 }

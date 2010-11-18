@@ -1,7 +1,7 @@
 <?php
-function check_main() {
+function check_main( $theme ) {
 global $themechecks;
-$files = listdir( TEMPLATEPATH );
+$files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 		if ( $files ) {
 				foreach( $files as $key => $filename ) {
 				if ( substr( $filename, -4 ) == '.php' ) {
@@ -22,15 +22,10 @@ $files = listdir( TEMPLATEPATH );
 					}
 				}
 			}
-
-			// second loop, to display the errors
-			$plugins = get_plugins();
 			global $checkcount;
-			$version = explode( '.', $plugins['theme-check/theme-check.php']['Version'] );
-			echo 'Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
-			echo $checkcount . ' checks ran against <strong> ' . get_option( 'template' ) . '</strong><br>';
-			if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</span>';
-
+			tc_form();
+			// second loop, to display the errors
+			echo $checkcount . ' checks ran against <strong> ' . $theme . '</strong><br>';
 			// display the errors. Each checker class can return an array of strings as errors
 			$dos2unix = array();
 			$deprecated = array();
@@ -57,9 +52,9 @@ $files = listdir( TEMPLATEPATH );
 				}
 			}
 			if ( $deprecated || $required || $critical || $short ) {
-				echo "<br /><h1>One or more errors were found.</h1>";
+				echo "<br /><h1>One or more errors were found for " . $theme . ".</h1>";
 			} else {
-				echo '<h2>' . get_option( 'template' ) . ' passed all the tests!</h2>';
+				echo '<h2>' . $theme . ' passed all the tests!</h2>';
 				TC_success();
 			}
 			if ( $critical ) {
@@ -142,7 +137,6 @@ function checkcount() {
 	}
 	
 function TC_success() {
-
 echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -151,4 +145,79 @@ echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
 <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 ';
+}
+function tc_grep( $error, $file, $linenumber = true ) {
+		$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
+		$line_index = 0;
+		$bad_lines = '';
+		foreach( $lines as $this_line )
+		{
+			if ( stristr ( $this_line, $error ) ) 
+			{
+			$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
+				$bad_lines .= "<pre>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
+			}
+			$line_index++;
+		}
+	return $bad_lines;
+}
+
+
+function make_trac( $text ) {
+	global $trac;
+	if( !$trac ) {
+		return $text;
+	} else {
+	
+$trac_left = array( '<br />', '<strong>', '</strong>' );
+$trac_right= array( "\r\n", "'''", "'''" );
+$html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/is';
+$html_new = '[$1 $3]';
+$code_left = array( '<pre>', '</pre>' );
+$code_right = array( "\n{{{\n", "\n}}}\n" );
+
+$text =   strip_tags( preg_replace( $html_link, $html_new, str_replace($trac_left, $trac_right, str_replace( $code_left, $code_right, $text ) ) ) );
+
+return $text;
+	
+	}
+}
+function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
+   if(strrpos($haystack, $needle)){
+       //Everything before last $needle in $haystack.
+       $left =  substr($haystack, 0, strrpos($haystack, $needle) + $l_inclusive);
+        //Switch value of $r_inclusive from 0 to 1 and viceversa.
+       $r_inclusive = ($r_inclusive == 0) ? 1 : 0;
+        //Everything after last $needle in $haystack.
+       $right =  substr(strrchr($haystack, $needle), $r_inclusive);
+       //Return $left and $right into an array.
+       return array($left, $right);
+   } else {
+       if(strrchr($haystack, $needle)) return array('', substr(strrchr($haystack, $needle), $r_inclusive));
+       else return false;
+   }
+}
+
+function tc_form() {
+			$plugins = get_plugins( '/theme-check' );
+			$version = explode( '.', $plugins['theme-check.php']['Version'] );
+			echo 'Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
+
+			if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</span>';
+
+$themes = get_themes();
+echo '<form action="themes.php?page=themecheck" method="POST">';
+echo '<select name="themename">';
+foreach($themes as $name => $location) {
+
+echo '<option ';
+if ( basename(TEMPLATEPATH) === $location['Template'] ) echo 'selected ';
+
+echo 'value="' . $location['Template'] . '">' . $name . '</option>';
+
+}
+echo '</select>';
+echo '<input type="submit" value="Check it!" />';
+
+echo '</form>';
 }
