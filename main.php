@@ -146,18 +146,30 @@ echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
 </form>
 ';
 }
-function tc_grep( $error, $file, $linenumber = true ) {
+function tc_grep( $error, $file, $code, $linenumber = true ) {
 		$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
 		$line_index = 0;
 		$bad_lines = '';
 		foreach( $lines as $this_line )
 		{
-			if ( stristr ( $this_line, $error ) ) 
-			{
-			$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
+		if ($code === 1) {
+
+if ( preg_match( '/'. $error . '/' , $this_line ) ) {
+
+$bad_lines .= '<pre>Line ' . ( $line_index+1 ) . ': ' . trim( ltrim( htmlspecialchars( $this_line ) ) ) . '</pre>';
+
+}
+
+} else {
+			if ( stristr ( $this_line, $error ) ) {
+				$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
 				$bad_lines .= "<pre>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 			}
-			$line_index++;
+			
+
+}
+
+		    $line_index++;
 		}
 	return $bad_lines;
 }
