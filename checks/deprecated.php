@@ -11,8 +11,7 @@ $grep = '';
 
 		// things to check for
 		$checks = array(
-
-		
+			// start wp-includes deprecated
 			array('get_post_data' => 'get_post()', '1.5.1'),
 			array('start_wp' => 'Use the Loop', '1.5'),
 			array('the_category_id' => 'get_the_category()', '0.71'),
@@ -117,9 +116,33 @@ $grep = '';
 			array('funky_javascript_fix' => 'none available', '3.0'),
 			array('is_taxonomy' => 'taxonomy_exists()', '3.0'),
 			array('is_term' => 'term_exists()', '3.0'),
-			array('is_plugin_page' => '$plugin_page and/or get_plugin_page_hookname() hooks', '3.1')	
-		
-
+			array('is_plugin_page' => '$plugin_page and/or get_plugin_page_hookname() hooks', '3.1'),	
+			array('update_category_cache' => 'No alternatives', '3.1'),
+			// end wp-includes deprecated
+	
+			// start wp-admin deprecated
+			array('tinymce_include' => 'wp_tiny_mce()', '2.1'),
+			array('documentation_link' => 'None available', '2.5'),
+			array('wp_shrink_dimensions' => 'wp_constrain_dimensions()','3.0'),
+			array('dropdown_categories' => 'wp_category_checklist()','2.6'),
+			array('dropdown_link_categories' => 'wp_link_category_checklist()','2.6'),
+			array('wp_dropdown_cats' => 'wp_dropdown_categories()','3.0'),
+			array('add_option_update_handler' => 'register_setting()','3.0'),
+			array('remove_option_update_handler' => 'unregister_setting()','3.0'),
+			array('codepress_get_lang' => 'None available','3.0'),
+			array('codepress_footer_js' => 'None available','3.0'),
+			array('use_codepress' => 'None available','3.0'),
+			array('get_author_user_ids' => 'None available','3.1'),
+			array('get_editable_authors' => 'None available','3.1'),
+			array('get_editable_user_ids' => 'None available','3.1'),
+			array('get_nonauthor_user_ids' => 'None available','3.1'),
+			array('WP_User_Search' => 'WP_User_Query','3.1'),
+			array('get_others_unpublished_posts' => 'None available','3.1'),
+			array('get_others_drafts' => 'None available','3.1'),
+			array('get_others_pending' => 'None available','3.1'),
+			array('register_column_headers' => 'WP_list_table','3.1'),
+			array('print_column_headers WP_list_table' => 'None available','3.1')
+			// end wp-admin 
 			);
 			foreach ($php_files as $php_key => $phpfile) {
 		foreach ( $checks as $alt => $check) {
