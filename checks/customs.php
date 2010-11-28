@@ -11,7 +11,7 @@ class CustomCheck implements themecheck {
 		$php = implode(' ', $php_files);
 checkcount();
 		if ( strpos( $php, 'add_custom_image_header' ) === false ) {
-			$this->error[] = "RECOMMENDEDNo reference to <strong>add_custom_image_header</strong> was found in the theme. It is recommended that the theme implement this functionality if using an image for the header.";
+			$this->error[] = "RECOMMENDEDNo reference to <strong>add_custom_image_header</strong>was found in the theme. It is recommended that the theme implement this functionality if using an image for the header.";
 		}
 
 		if ( strpos( $php, 'add_custom_background' ) === false ) {

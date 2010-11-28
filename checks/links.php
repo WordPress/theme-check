@@ -20,7 +20,7 @@ class Check_Links implements themecheck {
 if ( preg_match_all( "/(<a)(\\s+)(href".$space_re."=".$space_re."\"".$space_re."((http|https|ftp):\\/\\/)?)".$url_re."(\"".$space_re.$title_re.$space_re.">)".$title_re."(<\\/a>)/is", $phpfile, $out, PREG_SET_ORDER ) ) {			
 			$filename = basename($php_key);
 			    foreach( $out as $key ) {
-				if ( !strpos( $key[0], 'http://wordpress.org' ) ) {
+				if ( $key[0] && !strpos( $key[0], 'http://wordpress.org' ) ) {
 				$grep .= tc_grep( $key[0], $php_key);	
 				$this->error[] = "INFOPossible hard-coded links were found in the file <strong>{$filename}</strong>.{$grep}";
 				$ret = false;				
