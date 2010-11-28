@@ -5,22 +5,17 @@ class Bad_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-		// combine all the php files into one string to make it easier to search
-	//	$php = implode(' ', $php_files);
-
 		$ret = true;
-
 		// things to check for
 		$checks = array(
 			'/[\s|]eval\([^\$|\'](.){25}/' => 'eval() is not allowed.',
 			'/base64_decode/ms' => 'base64_decode() is not allowed',
-		//	'/uudecode/ms' => 'uudecode() is not allowed',
+			'/uudecode/ms' => 'uudecode() is not allowed',
 			'/str_rot13/ms' => 'str_rot13() is not allowed',
 			'/[^_]unescape/ms' => 'unescape() is not allowed',
 			'/cx=[0-9]{21}:[a-z0-9]{10}/ms' => 'Google search code detected',
 			'/_page\s?\x28.*,\s?[0-9]\s?,/' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
 			'/pub-[0-9]{16}/' => 'Googe advertising code detected'
-
 			);
 $grep = '';
 		foreach ($php_files as $php_key => $phpfile) {
@@ -35,13 +30,10 @@ $grep = '';
 			}
 		}
 }
-
 			$checks = array(
 			'/cx=[0-9]{21}:[a-z0-9]{10}/ms' => 'Google search code detected',
 			'/pub-[0-9]{16}/' => 'Googe advertising code detected'
 			);
-
-
 		foreach ($other_files as $php_key => $phpfile) {
 		foreach ($checks as $key => $check) {
 		checkcount();
@@ -54,11 +46,8 @@ $grep = '';
 			}
 		}
 }
-
 		return $ret;
 	}
-
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new Bad_Checks;
