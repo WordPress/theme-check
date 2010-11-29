@@ -18,31 +18,10 @@ function themecheck_do_page() {
     wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
   }
 
-// main global to hold our checks
-global $themechecks;
-$themechecks = array();
+include 'checkbase.php';
 
-// interface that all checks should implement
-interface themecheck
-{
-	// should return true for good/okay/acceptable, false for bad/not-okay/unacceptable
-	public function check( $php_files, $css_files, $other_files );
+include 'main.php';
 
-	// should return an array of strings explaining any problems found
-	public function getError();
-}
-
-// load all the checks in the checks directory
-$dir = WP_PLUGIN_DIR . '/theme-check/checks';
-if ( $handle = opendir( $dir ) ) {
-	while ( ( $file = readdir( $handle ) ) !== false ) {
-		if ( filetype( "$dir/".$file ) == 'file' && substr( $file,-4 ) == '.php' ) {
-			include "$dir/".$file;
-		}
-	}
-	closedir( $handle );
-}
-include( 'main.php' );
 echo '<div id="theme-check" class="wrap">';
 echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
 
