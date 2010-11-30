@@ -22,11 +22,11 @@ class Suggested implements themecheck {
 		'/[\s|]get_bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
 		'/[\s|]bloginfo\((\s|)("|\')url("|\')(\s|)\)/m' => 'echo home_url()',
 		'/[\s|]bloginfo\((\s|)("|\')wpurl("|\')(\s|)\)/m' => 'echo site_url()',
-		'/[\s|]bloginfo\((\s|)("|\')stylesheet_directory("|\')(\s|)\)/m' => 'get_stylesheet_directory_uri()',
-		'/[\s|]bloginfo\((\s|)("|\')template_directory("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-		'/[\s|]bloginfo\((\s|)("|\')template_url("|\')(\s|)\)/m' => 'get_template_directory_uri()',
+		'/[\s|]bloginfo\((\s|)("|\')stylesheet_directory("|\')(\s|)\)/m' => 'echo get_stylesheet_directory_uri()',
+		'/[\s|]bloginfo\((\s|)("|\')template_directory("|\')(\s|)\)/m' => 'echo get_template_directory_uri()',
+		'/[\s|]bloginfo\((\s|)("|\')template_url("|\')(\s|)\)/m' => 'echo get_template_directory_uri()',
 		'/[\s|]bloginfo\((\s|)("|\')text_direction("|\')(\s|)\)/m' => 'is_rtl()',
-		'/[\s|]bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
+		'/[\s|]bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'echo get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {
