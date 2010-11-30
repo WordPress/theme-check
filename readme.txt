@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
 Tags: template, theme, check
-Stable tag: 20101110.4
+Stable tag: 20101110.4_r1
 
 == Description ==
 
@@ -23,6 +23,9 @@ The date is the revision of the [guidelines](http://codex.wordpress.org/Theme_Re
 = 20101110.7 =
 * Re-added malware.php checks for fopen and file_get_contents (INFO)
 * fixed a couple of undefined index errors.
+
+= 20101110.4_r1 =
+* Added `echo` to suggested.php
 
 = 20101110.4 =
 * Fixed deprecated function call to get_plugins()
