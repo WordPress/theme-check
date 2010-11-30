@@ -6,10 +6,10 @@ class CustomCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files) {
 	
 		$ret = true;
-		
-		// combine all the php files into one string to make it easier to search
 		$php = implode(' ', $php_files);
-checkcount();
+
+		checkcount();
+
 		if ( strpos( $php, 'add_custom_image_header' ) === false ) {
 			$this->error[] = "RECOMMENDEDNo reference to <strong>add_custom_image_header</strong> was found in the theme. It is recommended that the theme implement this functionality if using an image for the header.";
 		}

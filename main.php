@@ -131,10 +131,6 @@ Function listdir( $start_dir='.' ) {
   }
   return $files;
 }
-function checkcount() {
-	global $checkcount;
-	$checkcount++;
-	}
 	
 function TC_success() {
 echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
@@ -146,22 +142,6 @@ echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
 </form>
 ';
 }
-function tc_grep( $error, $file ) {
-		$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
-		$line_index = 0;
-		$bad_lines = '';
-		foreach( $lines as $this_line )
-		{
-			if ( stristr ( $this_line, $error ) ) 
-			{
-			$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
-				$bad_lines .= "<pre>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
-			}
-			$line_index++;
-		}
-	return $bad_lines;
-}
-
 
 function make_trac( $text ) {
 	global $trac;
@@ -181,21 +161,6 @@ $text =   strip_tags( preg_replace( $html_link, $html_new, str_replace($trac_lef
 return $text;
 	
 	}
-}
-function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
-   if(strrpos($haystack, $needle)){
-       //Everything before last $needle in $haystack.
-       $left =  substr($haystack, 0, strrpos($haystack, $needle) + $l_inclusive);
-        //Switch value of $r_inclusive from 0 to 1 and viceversa.
-       $r_inclusive = ($r_inclusive == 0) ? 1 : 0;
-        //Everything after last $needle in $haystack.
-       $right =  substr(strrchr($haystack, $needle), $r_inclusive);
-       //Return $left and $right into an array.
-       return array($left, $right);
-   } else {
-       if(strrchr($haystack, $needle)) return array('', substr(strrchr($haystack, $needle), $r_inclusive));
-       else return false;
-   }
 }
 
 function tc_form() {

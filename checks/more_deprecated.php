@@ -1,36 +1,29 @@
 <?php
 
-// search for some bad things
 class More_Deprecated implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
 
-
 		$ret = true;
 
-		// things to check for
 		$checks = array(
-'get_bloginfo\((\s|)("|\')home("|\')(\s|)\)' => 'get_bloginfo( \'url\' )',
-'bloginfo\((\s|)("|\')home("|\')(\s|)\)' => 'bloginfo( \'url\' )'
-
+			'get_bloginfo\((\s|)("|\')home("|\')(\s|)\)' => 'get_bloginfo( \'url\' )',
+			'bloginfo\((\s|)("|\')home("|\')(\s|)\)' => 'bloginfo( \'url\' )'
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {
-		foreach ($checks as $key => $check) {
-		checkcount();
-			if ( preg_match( '/[\s|]' . $key . '/m', $phpfile, $matches ) ) {
-			    $filename = basename($php_key);
-				$error = rtrim($matches[0],'(');
-				$grep = tc_grep( $error, $php_key);
-				$this->error[] = "DEPRECATED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
-				$ret = false;
+			foreach ($checks as $key => $check) {
+			checkcount();
+				if ( preg_match( '/[\s|]' . $key . '/m', $phpfile, $matches ) ) {
+					$filename = basename($php_key);
+					$error = rtrim($matches[0],'(');
+					$grep = tc_grep( $error, $php_key);
+					$this->error[] = "DEPRECATED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
+					$ret = false;
+				}
 			}
-
-
 		}
-
-}
 		return $ret;
 	}
 

@@ -4,10 +4,9 @@ class EditorStyleCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-	checkcount();
+		checkcount();
 		$ret = true;
 		
-		// combine all the php files into one string to make it easier to search
 		$php = implode(' ', $php_files);
 
 		if ( strpos( $php, 'add_editor_style' ) === false ) {

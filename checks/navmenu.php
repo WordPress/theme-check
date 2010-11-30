@@ -9,7 +9,7 @@ class NavMenuCheck implements themecheck {
 		
 		// combine all the php files into one string to make it easier to search
 		$php = implode(' ', $php_files);
-checkcount();
+		checkcount();
 		if ( strpos( $php, 'nav_menu' ) === false ) {
 			$this->error[] = "RECOMMENDEDNo reference to nav_menu's was found in the theme. Note that if your theme has a menu bar, it is required to use the WordPress nav_menu functionality for it.";
 		}

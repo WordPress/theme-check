@@ -6,7 +6,7 @@ class Bad_Checks implements themecheck {
 
 	function check( $php_files, $css_files, $other_files) {
 		$ret = true;
-		// things to check for
+
 		$checks = array(
 			'/[\s|]eval\([^\$|\'](.){25}/' => 'eval() is not allowed.',
 			'/base64_decode/ms' => 'base64_decode() is not allowed',
@@ -17,35 +17,40 @@ class Bad_Checks implements themecheck {
 			'/add_(admin|submenu|theme)_page\s?\x28.*,\s?[0-9]\s?,/' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
 			'/pub-[0-9]{16}/' => 'Googe advertising code detected'
 			);
-$grep = '';
+
+		$grep = '';
+
 		foreach ($php_files as $php_key => $phpfile) {
-		foreach ($checks as $key => $check) {
-		checkcount();
-			if ( preg_match( $key, $phpfile, $matches ) ) {
-			    $filename = basename($php_key);
-				$error = rtrim($matches[0],'(');
-				$grep = tc_grep( $error, $php_key);
-				$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
-				$ret = false;
+			foreach ($checks as $key => $check) {
+			checkcount();
+				if ( preg_match( $key, $phpfile, $matches ) ) {
+					$filename = basename($php_key);
+					$error = rtrim($matches[0],'(');
+					$grep = tc_grep( $error, $php_key);
+					$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
+					$ret = false;
+				}
 			}
 		}
-}
-			$checks = array(
+
+
+		$checks = array(
 			'/cx=[0-9]{21}:[a-z0-9]{10}/ms' => 'Google search code detected',
 			'/pub-[0-9]{16}/' => 'Googe advertising code detected'
 			);
+
 		foreach ($other_files as $php_key => $phpfile) {
-		foreach ($checks as $key => $check) {
-		checkcount();
-			if ( preg_match( $key, $phpfile, $matches ) ) {
-			    $filename = basename($php_key);
-				$error = rtrim($matches[0],'(');
-				$grep = tc_grep( $error, $php_key);
-				$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
-				$ret = false;
+			foreach ($checks as $key => $check) {
+				checkcount();
+				if ( preg_match( $key, $phpfile, $matches ) ) {
+					$filename = basename($php_key);
+					$error = rtrim($matches[0],'(');
+					$grep = tc_grep( $error, $php_key);
+					$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
+					$ret = false;
+				}
 			}
 		}
-}
 		return $ret;
 	}
 	function getError() { return $this->error; }

@@ -1,15 +1,13 @@
 <?php
 
-// search for some bad things
 class Deprecated implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-$grep = '';
+		$grep = '';
 
 		$ret = true;
 
-		// things to check for
 		$checks = array(
 			// start wp-includes deprecated
 			array('get_post_data' => 'get_post()', '1.5.1'),
@@ -144,22 +142,22 @@ $grep = '';
 			array('print_column_headers WP_list_table' => 'None available','3.1')
 			// end wp-admin 
 			);
-			foreach ($php_files as $php_key => $phpfile) {
-		foreach ( $checks as $alt => $check) {
-		checkcount();
-			$version = $check;
-			$key = key($check);
-			$alt = $check[$key]; 
-			if ( preg_match( '/[\s|]' . $key . '\(/m', $phpfile, $matches ) ) {
-			    $filename = basename($php_key);
-				$error = rtrim($matches[0],'(');
-				$version = $check[0];
-				$grep = tc_grep( $error, $php_key);
-				$this->error[] = "DEPRECATED<strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";
-				$ret = false;
+		foreach ($php_files as $php_key => $phpfile) {
+			foreach ( $checks as $alt => $check) {
+			checkcount();
+				$version = $check;
+				$key = key($check);
+				$alt = $check[$key]; 
+				if ( preg_match( '/[\s|]' . $key . '\(/m', $phpfile, $matches ) ) {
+					$filename = basename($php_key);
+					$error = rtrim($matches[0],'(');
+					$version = $check[0];
+					$grep = tc_grep( $error, $php_key);
+					$this->error[] = "DEPRECATED<strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";
+					$ret = false;
+				}
 			}
 		}
-}
 		return $ret;
 	}
 

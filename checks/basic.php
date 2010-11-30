@@ -5,12 +5,11 @@ class Basic_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-		// combine all the php files into one string to make it easier to search
+
 		$php = implode(' ', $php_files);
-$grep = '';
+		$grep = '';
 		$ret = true;
 
-		// things to check for
 		$checks = array(
 			'DOCTYPE' => 'See: <a href="http://codex.wordpress.org/HTML_to_XHTML">http://codex.wordpress.org/HTML_to_XHTML</a><pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"<br />"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"?&gt;</pre>',
 			'wp_footer\(' => 'See: <a href="http://codex.wordpress.org/Function_Reference/wp_footer">wp_footer</a><pre> &lt;?php wp_footer(); ?&gt;</pre>',
@@ -27,20 +26,19 @@ $grep = '';
 			'<body.*body_class\(' => 'See: <a href="http://codex.wordpress.org/Template_Tags/body_class">body_class</a><pre> &lt;?php body_class( $class ); ?&gt;</pre>',
 			'post_class\(' => 'See: <a href="http://codex.wordpress.org/Template_Tags/post_class">post_class</a><pre> &lt;div id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;</pre>'
 			);
-// new dBug($checks);
-		// check for each of them, create an error if it's not found
+
 		foreach ($checks as $key => $check) {
-		checkcount();
+			checkcount();
 			if ( !preg_match( '/' . $key . '/i', $php ) ) {
 				if ($key === 'add_theme_support\((\s|)("|\')automatic-feed-links("|\')(\s|)\)') $key = 'add_theme_support( \'automatic-feed-links\' )';
 				if ($key === 'wp_enqueue_script\((\s|)("|\')comment-reply("|\')(\s|)\)') $key = 'wp_enqueue_script( \'comment-reply\' )';
+				if ($key === '<body.*body_class\(') $key = 'body_class call in body tag';
 				$key = rtrim($key,'\(');
 				$this->error[] = "REQUIREDCould not find <strong>{$key}</strong>. {$check}";
 				$ret = false;
 			}
 		}
 
-		// return the pass/fail
 		return $ret;
 	}
 

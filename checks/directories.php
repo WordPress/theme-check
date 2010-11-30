@@ -9,17 +9,17 @@ class DirectoriesCheck implements themecheck {
 		$found = false;
 		
 		foreach ( $php_files as $name => $file ) {
-		checkcount();
+			checkcount();
 			if ( strpos($name, '.git') !== false || strpos($name, '.svn') !== false ) $found = true;		
 		}
 
 		foreach ( $css_files as $name => $file ) {
-		checkcount();
+			checkcount();
 			if ( strpos($name, '.git') !== false || strpos($name, '.svn') !== false ) $found = true;		
 		}
 
 		foreach ( $other_files as $name => $file ) {
-		checkcount();
+			checkcount();
 			if ( strpos($name, '.git') !== false || strpos($name, '.svn') !== false ) $found = true;		
 		}
 		

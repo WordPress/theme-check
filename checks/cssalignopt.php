@@ -5,23 +5,19 @@ class CSSAlignOptionalCheck implements themecheck {
 
 	function check( $php_files, $css_files, $other_files) {
 	
-		// combine all the css files into one string to make it easier to search
 		$css = implode(' ', $css_files);
 		
 		$ret = true;
 
-		// things to check for
 		$checks = array(
-		// kept blank for now, no harm!
-		//	'\.sticky' => '.sticky',
-		//	'\.bypostauthor' => '.bypostauthor',
+			'\.sticky' => '.sticky',
+			'\.bypostauthor' => '.bypostauthor',
 		);
 
 		foreach ($checks as $key => $check) {
-		checkcount();
+			checkcount();
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
 				$this->error[] = "RECOMMENDEDThe CSS is missing the <strong>{$check}</strong> class.";
-				//$ret = false;
 			}
 		}
 		

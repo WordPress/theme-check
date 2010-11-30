@@ -9,7 +9,8 @@ class PostThumbnailCheck implements themecheck {
 		
 		// combine all the php files into one string to make it easier to search
 		$php = implode(' ', $php_files);
-checkcount();
+		checkcount();
+
 		if ( strpos( $php, 'the_post_thumbnail' ) === false ) {
 			$this->error[] = "RECOMMENDEDNo reference to <strong>the_post_thumbnail()</strong> was found in the theme. It is recommended that the theme implement this functionality instead of using custom fields for thumbnails.";
 		}
