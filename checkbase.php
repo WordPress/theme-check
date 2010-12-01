@@ -1,4 +1,4 @@
-<?php 
+<?php
 // main global to hold our checks
 global $themechecks;
 $themechecks = array();
@@ -12,7 +12,7 @@ interface themecheck
 {
 	// should return true for good/okay/acceptable, false for bad/not-okay/unacceptable
 	public function check( $php_files, $css_files, $other_files );
-	
+
 	// should return an array of strings explaining any problems found
 	public function getError();
 }
@@ -42,7 +42,7 @@ function display_themechecks() {
 			$error = $check->getError();
 			$error = (array) $error;
 			if (!empty($error)) {
-				$errors = array_merge($error, $errors);
+				$errors = array_unique( array_merge( $error, $errors ) );
 			}
 		}
 	}
@@ -66,7 +66,7 @@ function tc_grep( $error, $file ) {
 	$bad_lines = '';
 	foreach( $lines as $this_line )
 	{
-		if ( stristr ( $this_line, $error ) ) 
+		if ( stristr ( $this_line, $error ) )
 		{
 		$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
 			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
