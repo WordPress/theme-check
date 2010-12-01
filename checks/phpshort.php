@@ -1,5 +1,5 @@
 <?php
-class Tag_Checks implements themecheck {
+class PHPShortTagsCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
@@ -22,4 +22,4 @@ class Tag_Checks implements themecheck {
 	function getError() { return $this->error; }
 }
 
-$themechecks[] = new Tag_Checks;
+$themechecks[] = new PHPShortTagsCheck;
