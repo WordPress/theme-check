@@ -69,7 +69,7 @@ function tc_grep( $error, $file ) {
 		if ( stristr ( $this_line, $error ) ) 
 		{
 		$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
-			$bad_lines .= "<pre>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
+			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;
 	}
