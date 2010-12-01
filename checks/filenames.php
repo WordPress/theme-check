@@ -25,14 +25,14 @@ class File_Checks implements themecheck {
 
 		foreach( $musthave as $file ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = "CRITICALcould not find the file <strong>{$file}</strong> in the theme.";
+				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: could not find the file <strong>{$file}</strong> in the theme.";
 				$ret = false;
 			}
 		}
 
 		foreach( $rechave as $file ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = "RECOMMENDEDcould not find the file <strong>{$file}</strong> in the theme.";
+				$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: could not find the file <strong>{$file}</strong> in the theme.";
 				$ret = false;
 			}
 		}		

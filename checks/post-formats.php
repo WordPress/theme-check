@@ -23,7 +23,7 @@ class PostFormatCheck implements themecheck {
 						$filename = basename($php_key);
 						$error = esc_html( rtrim($matches[0],'(') );
 						$grep = tc_grep( rtrim($matches[0],'('), $php_key);
-						$this->error[] = "REQUIRED<strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. However get_post_format and/or has_post_format were not found, and no use of formats in the CSS was detected.";
+						$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. However get_post_format and/or has_post_format were not found, and no use of formats in the CSS was detected.";
 						$ret = false;
 					}
 				}

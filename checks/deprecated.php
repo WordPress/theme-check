@@ -153,7 +153,7 @@ class Deprecated implements themecheck {
 					$error = rtrim($matches[0],'(');
 					$version = $check[0];
 					$grep = tc_grep( $error, $php_key);
-					$this->error[] = "DEPRECATED<strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";
+					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";
 					$ret = false;
 				}
 			}

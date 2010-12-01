@@ -34,7 +34,7 @@ class Basic_Checks implements themecheck {
 				if ($key === 'wp_enqueue_script\((\s|)("|\')comment-reply("|\')(\s|)\)') $key = 'wp_enqueue_script( \'comment-reply\' )';
 				if ($key === '<body.*body_class\(') $key = 'body_class call in body tag';
 				$key = rtrim($key,'\(');
-				$this->error[] = "REQUIREDCould not find <strong>{$key}</strong>. {$check}";
+				$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: Could not find <strong>{$key}</strong>. {$check}";
 				$ret = false;
 			}
 		}

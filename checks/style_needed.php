@@ -21,14 +21,12 @@ class Style_Needed implements themecheck {
 			'\.wp-caption' => '<strong>.wp-caption</strong> css class is needed in your theme css.',
 			'\.wp-caption-text' => '<strong>.wp-caption-text</strong> css class is needed in your theme css.',
 			'\.gallery-caption' => '<strong>.gallery-caption</strong> css class is needed in your theme css.',
-			'\.sticky' => '<strong>.sticky</strong> css class is needed in your theme css.',
-			'\.bypostauthor' => '<strong>.bypostauthor</strong> css class is needed in your theme css.'
 		);
 
 		foreach ($checks as $key => $check) {
 			checkcount();
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
-				$this->error[] = "REQUIRED{$check}";
+				$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: {$check}";
 				$ret = false;
 			}
 		}

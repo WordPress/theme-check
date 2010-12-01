@@ -10,7 +10,7 @@ class TagCheck implements themecheck {
 		checkcount();
 		$ret = true;		
 		if ( strpos( $php, 'the_tags' ) === false && strpos( $php, 'get_the_tag_list' ) === false && strpos( $php, 'get_the_term_list' ) === false ) {
-			$this->error[] = "REQUIREDThis theme doesn't seem to display tags. Modify it to display tags in appropriate locations.";
+			$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: This theme doesn't seem to display tags. Modify it to display tags in appropriate locations.";
 			$ret = false;
 		}
 		

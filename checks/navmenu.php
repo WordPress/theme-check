@@ -11,7 +11,7 @@ class NavMenuCheck implements themecheck {
 		$php = implode(' ', $php_files);
 		checkcount();
 		if ( strpos( $php, 'nav_menu' ) === false ) {
-			$this->error[] = "RECOMMENDEDNo reference to nav_menu's was found in the theme. Note that if your theme has a menu bar, it is required to use the WordPress nav_menu functionality for it.";
+			$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: No reference to nav_menu's was found in the theme. Note that if your theme has a menu bar, it is required to use the WordPress nav_menu functionality for it.";
 		}
 
 		return $ret;

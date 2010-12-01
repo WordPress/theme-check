@@ -11,7 +11,7 @@ class Tag_Checks implements themecheck {
 			if (preg_match( '/<\?(?!php|xml)/', $phpfile)){
 			$file = basename($php_key);
 			$grep = tc_grep( $error, $php_key);
-			$this->error[] = "CRITICALFound PHP short tags in file <strong>{$file}</strong>.{$grep}";
+			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found PHP short tags in file <strong>{$file}</strong>.{$grep}";
 			$ret = false;
 			}
 		}

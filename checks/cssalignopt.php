@@ -17,7 +17,7 @@ class CSSAlignOptionalCheck implements themecheck {
 		foreach ($checks as $key => $check) {
 			checkcount();
 			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
-				$this->error[] = "RECOMMENDEDThe CSS is missing the <strong>{$check}</strong> class.";
+				$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: The CSS is missing the <strong>{$check}</strong> class.";
 			}
 		}
 		

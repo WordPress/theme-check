@@ -12,7 +12,7 @@ class IncludeCheck implements themecheck {
 		checkcount();
 		
 		if ( preg_match( '/include[\s|]*\(/', $php ) != 0 || preg_match( '/require[\s|]*\(/', $php ) != 0 ) {
-			$this->error[] = "INFOThe theme appears to use include or require. If these are being used to include separate sections of a template from independant files, then <strong>get_template_part()</strong> should be used instead.";
+			$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: The theme appears to use include or require. If these are being used to include separate sections of a template from independant files, then <strong>get_template_part()</strong> should be used instead.";
 		}
 
 		return $ret;

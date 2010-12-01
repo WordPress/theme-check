@@ -27,7 +27,7 @@ class Bad_Checks implements themecheck {
 					$filename = basename($php_key);
 					$error = rtrim($matches[0],'(');
 					$grep = tc_grep( $error, $php_key);
-					$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
+					$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
 					$ret = false;
 				}
 			}
@@ -46,7 +46,7 @@ class Bad_Checks implements themecheck {
 					$filename = basename($php_key);
 					$error = rtrim($matches[0],'(');
 					$grep = tc_grep( $error, $php_key);
-					$this->error[] = "CRITICALFound <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
+					$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found <strong>{$error}</strong> in the file <strong>{$filename}</strong>. {$check}.{$grep}";
 					$ret = false;
 				}
 			}
