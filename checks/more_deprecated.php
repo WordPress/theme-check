@@ -19,7 +19,7 @@ class More_Deprecated implements themecheck {
 					$filename = basename($php_key);
 					$error = rtrim($matches[0],'(');
 					$grep = tc_grep( $error, $php_key);
-					$this->error[] = "<span class='tc-lead tc-required'>REQUIREd</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
+					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
 					$ret = false;
 				}
 			}

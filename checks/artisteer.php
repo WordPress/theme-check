@@ -8,6 +8,8 @@ class ArtisteerCheck implements themecheck {
 		// combine all the php files into one string to make it easier to search
 		$php = implode(' ', $php_files);
 		
+		checkcount();
+		
 		$ret = true;		
 		if ( 		
 			strpos( $php, 'art_normalize_widget_style_tokens' ) !== false
