@@ -1,6 +1,4 @@
 <?php
-
-// search for some bad things
 class Bad_Checks implements themecheck {
 	protected $error = array();
 
@@ -8,14 +6,14 @@ class Bad_Checks implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'/[\s|]eval\([^\$|\'](.){25}/' => 'eval() is not allowed.',
-			'/base64_decode/ms' => 'base64_decode() is not allowed',
-			'/uudecode/ms' => 'uudecode() is not allowed',
-			'/str_rot13/ms' => 'str_rot13() is not allowed',
-			'/[^_]unescape/ms' => 'unescape() is not allowed',
-			'/cx=[0-9]{21}:[a-z0-9]{10}/ms' => 'Google search code detected',
-			'/add_(admin|submenu|theme)_page\s?\x28.*,\s?[0-9]\s?,/' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
-			'/pub-[0-9]{16}/' => 'Googe advertising code detected'
+			'/[\s|]eval\s*\([^\$|\'](.){25}/i' => 'eval() is not allowed.',
+			'/base64_decode/ims' => 'base64_decode() is not allowed',
+			'/uudecode/ims' => 'uudecode() is not allowed',
+			'/str_rot13/ims' => 'str_rot13() is not allowed',
+			'/[^_]unescape/ims' => 'unescape() is not allowed',
+			'/cx=[0-9]{21}:[a-z0-9]{10}/ims' => 'Google search code detected',
+			'/add_(admin|submenu|theme)_page\s?\x28.*,\s?[0-9]\s?,/i' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
+			'/pub-[0-9]{16}/i' => 'Googe advertising code detected'
 			);
 
 		$grep = '';
