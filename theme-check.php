@@ -5,7 +5,7 @@ Plugin URI: http://pross.org.uk/plugins
 Description: Run checks on the current theme before uploading to wordpress.
 Author: Pross
 Author URI: http://pross.org.uk
-Version: 20101118.7
+Version: 20101118.8
 */
 
 add_action( 'admin_menu', 'themecheck_add_page' );
@@ -25,8 +25,7 @@ include 'main.php';
 echo '<div id="theme-check" class="wrap">';
 echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
 
-
-if (!isset($_POST['themename'])) tc_form();
-if ( isset($_POST['themename'] )) check_main( $_POST['themename'] );
+if ( !isset( $_POST[ 'themename' ] ) ) tc_form();
+if ( isset( $_POST[ 'themename' ] ) ) check_main( $_POST[ 'themename' ] );
 echo '</div>';
 }

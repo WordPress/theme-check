@@ -25,7 +25,7 @@ $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 			echo $checkcount . ' checks ran against <strong> ' . $theme . '</strong><br>';
 
 			if ( $failed ) {
-				echo "<br /><h1>One or more errors were found for " . $theme . ".</h1>";
+				echo '<br /><h1>One or more errors were found for ' . $theme . '.</h1>';
 			} else {
 				echo '<h2>' . $theme . ' passed the tests</h2>';
 				tc_success();
@@ -51,9 +51,9 @@ $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 			</style>
 			<?php
 			echo '<div style="padding:20px 0;border-top:1px solid #ccc;">';
-			echo "<ul class='tc-result'>";
+			echo '<ul class="tc-result">';
 			display_themechecks();
-			echo "</ul></div>";
+			echo '</ul></div>';
 		}
 	}
 
