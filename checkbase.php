@@ -66,14 +66,25 @@ function tc_grep( $error, $file ) {
 	$bad_lines = '';
 	foreach( $lines as $this_line )
 	{
-		if ( stristr ( $this_line, $error ) )
-		{
+		if ( stristr ( $this_line, $error ) ) {
+		$double = '';
+		if ( strpos ($error ,'"' )) $double = 'yes'; // tc-grep fails if a " instead of '
+
+		if ( $double === 'yes' ) {
+			$error = str_replace( '"', "'", $error );
+			$this_line = str_replace( '"', "'", $this_line );
+		}
+
 		$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
 			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;
 	}
-	return $bad_lines;
+	if ( $double === 'yes' ):
+		return str_replace( $error, '<span class="tc-grep">' . str_replace( "'", '"', $error ) . '</span>', $bad_lines );
+	else:
+		return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
+	endif;
 }
 
 function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){

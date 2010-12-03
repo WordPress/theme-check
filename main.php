@@ -14,16 +14,16 @@ $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 					$other[$filename] = file_get_contents( $filename );
 				}
 			}
-			
+
 			// run the checks
 			$failed = !run_themechecks($php, $css, $other);
-			
+
 			global $checkcount;
 			tc_form();
-			
+
 			// second loop, to display the errors
 			echo $checkcount . ' checks ran against <strong> ' . $theme . '</strong><br>';
-			
+
 			if ( $failed ) {
 				echo "<br /><h1>One or more errors were found for " . $theme . ".</h1>";
 			} else {
@@ -43,12 +43,17 @@ $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 			.tc-info {
 				color: blue;
 			}
+
+			.tc-grep span {
+				color: red;
+				font-weight: bold;
+			}
 			</style>
 			<?php
 			echo '<div style="padding:20px 0;border-top:1px solid #ccc;">';
 			echo "<ul class='tc-result'>";
 			display_themechecks();
-			echo "</ul></div>";		
+			echo "</ul></div>";
 		}
 	}
 
@@ -73,7 +78,7 @@ function listdir( $start_dir='.' ) {
   }
   return $files;
 }
-	
+
 function tc_success() {
 echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
