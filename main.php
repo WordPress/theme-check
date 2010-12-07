@@ -2,6 +2,7 @@
 function check_main( $theme ) {
 global $themechecks;
 $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
+$data = get_theme_data( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css');
 		if ( $files ) {
 				foreach( $files as $key => $filename ) {
 				if ( substr( $filename, -4 ) == '.php' ) {
@@ -17,21 +18,14 @@ $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 
 			// run the checks
 			$failed = !run_themechecks($php, $css, $other);
-
-			global $checkcount;
-			tc_form();
-
-			// second loop, to display the errors
-			echo $checkcount . ' checks ran against <strong> ' . $theme . '</strong><br>';
-
-			if ( $failed ) {
-				echo '<br /><h1>One or more errors were found for ' . $theme . '.</h1>';
-			} else {
-				echo '<h2>' . $theme . ' passed the tests</h2>';
-				tc_success();
-			}
 			?>
 			<style type="text/css">
+			.tc-box {
+			padding:10px 0;
+			border-top:1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+			}
+
 			.tc-warning, .tc-required, .tc-fail {
 				color:red;
 			}
@@ -48,9 +42,38 @@ $files = listdir( WP_CONTENT_DIR . '/themes/' . $theme );
 				color: red;
 				font-weight: bold;
 			}
+
+			.tc-data {
+				float: left;
+				width: 80px;
+			}
 			</style>
 			<?php
-			echo '<div style="padding:20px 0;border-top:1px solid #ccc;">';
+			global $checkcount;
+			tc_form();
+
+			// second loop, to display the errors
+
+			echo '<strong>Theme Info:</strong>';
+			echo '<br /><span class="tc-data">Title</span>:' . $data[ 'Title' ];
+			echo '<br /><span class="tc-data">Version</span>:' . $data[ 'Version' ];
+			echo '<br /><span class="tc-data">Author</span>:' . $data[ 'Author' ];
+			echo '<br /><span class="tc-data">Description</span>:' . $data[ 'Description' ];
+			if ( $data[ 'Template' ] ) echo '<br />This is a child theme. The parent theme is: ' . $data[ 'Template' ];
+
+			$plugins = get_plugins( '/theme-check' );
+			$version = explode( '.', $plugins['theme-check.php']['Version'] );
+			echo '<br />Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
+
+			if ( $failed ) {
+				echo '<h3>One or more errors were found for ' . $data[ 'Title' ] . '.</h3>';
+			} else {
+				echo '<h2>' . $data[ 'Title' ] . ' passed the tests</h2>';
+				tc_success();
+			}
+			if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">WARNING</span> <strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</div>';
+
+			echo '<div class="tc-box">';
 			echo '<ul class="tc-result">';
 			display_themechecks();
 			echo '</ul></div>';
@@ -91,12 +114,6 @@ echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
 }
 
 function tc_form() {
-	$plugins = get_plugins( '/theme-check' );
-	$version = explode( '.', $plugins['theme-check.php']['Version'] );
-	echo 'Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
-
-	if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<span><strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</span>';
-
 	$themes = get_themes();
 	echo '<form action="themes.php?page=themecheck" method="POST">';
 	echo '<select name="themename">';
