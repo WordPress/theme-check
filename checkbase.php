@@ -35,6 +35,7 @@ function run_themechecks($php, $css, $other) {
 }
 
 function display_themechecks() {
+	$results = '';
 	global $themechecks;
 	$errors = array();
 	foreach ($themechecks as $check) {
@@ -49,9 +50,10 @@ function display_themechecks() {
 	if (!empty($errors)) {
 		rsort($errors);
 		foreach ($errors as $e) {
-			echo '<li>'.$e.'</li>';
+		$results .= '<li>'.$e.'</li>';
 		}
 	}
+return $results;
 }
 
 function checkcount() {

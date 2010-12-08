@@ -19,7 +19,6 @@ function themecheck_do_page() {
   }
 
 include 'checkbase.php';
-
 include 'main.php';
 
 echo '<div id="theme-check" class="wrap">';

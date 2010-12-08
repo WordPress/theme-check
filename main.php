@@ -47,6 +47,9 @@ $data = get_theme_data( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css');
 				float: left;
 				width: 80px;
 			}
+
+			.tc-success {
+			}
 			</style>
 			<?php
 			global $checkcount;
@@ -63,9 +66,13 @@ $data = get_theme_data( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css');
 
 			$plugins = get_plugins( '/theme-check' );
 			$version = explode( '.', $plugins['theme-check.php']['Version'] );
-			echo '<br />Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
+			echo '<br /><br />Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
 
-			if ( $failed ) {
+			$results = display_themechecks();
+			$success = true;
+			if (strpos( $results, 'WARNING') !== false) $success = false;
+			if (strpos( $results, 'REQUIRED') !== false) $success = false;
+			if ( $success === false ) {
 				echo '<h3>One or more errors were found for ' . $data[ 'Title' ] . '.</h3>';
 			} else {
 				echo '<h2>' . $data[ 'Title' ] . ' passed the tests</h2>';
@@ -75,7 +82,7 @@ $data = get_theme_data( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css');
 
 			echo '<div class="tc-box">';
 			echo '<ul class="tc-result">';
-			display_themechecks();
+			echo $results;
 			echo '</ul></div>';
 		}
 	}
@@ -103,13 +110,21 @@ function listdir( $start_dir='.' ) {
 }
 
 function tc_success() {
-echo 'Now your theme has passed the basic tests why not buy me a beer ;)<br />
+echo '<div class="tc-success">Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.<br />
+<br />
+Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.
+<h3>Codex Links</h3>
+<a href="http://codex.wordpress.org/Theme_Development">Theme Development</a><br />
+<a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a><br />
+<a href="http://codex.wordpress.org/Theme_Unit_Test">Theme Unit Tests</a>
+
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="6GF2U8ZFUHLPA">
-<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
+</div>
 ';
 }
 

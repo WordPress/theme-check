@@ -7,8 +7,8 @@ class Theme_Support implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'/add_theme_support\((\s|)("|\')custom-headers("|\')/m' => 'add_custom_image_header()',
-			'/add_theme_support\((\s|)("|\')custom-background("|\')/m' => 'add_custom_background()',
+			'/add_theme_support\((\s|)("|\')custom-headers("|\')(\s|)\)/' => 'add_custom_image_header()',
+			'/add_theme_support\((\s|)("|\')custom-background("|\')(\s|)\)/' => 'add_custom_background()',
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {
