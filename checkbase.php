@@ -77,7 +77,9 @@ function tc_grep( $error, $file ) {
 			$this_line = str_replace( '"', "'", $this_line );
 		}
 
-		$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
+//		$pre = ltrim( htmlspecialchars( stristr( $this_line, $error, true ) ) );
+		$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
+		$pre = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre. htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;

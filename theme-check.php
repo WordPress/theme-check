@@ -2,7 +2,7 @@
 /*
 Plugin Name: Theme-Check
 Plugin URI: http://pross.org.uk/plugins
-Description: Run checks on the current theme before uploading to wordpress.
+Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 Author: Pross
 Author URI: http://pross.org.uk
 Version: 20101118.9
