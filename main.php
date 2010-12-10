@@ -114,10 +114,15 @@ echo '<div class="tc-success">Now your theme has passed the basic tests you need
 <br />
 Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.
 <h3>Codex Links</h3>
+<p>
 <a href="http://codex.wordpress.org/Theme_Development">Theme Development</a><br />
 <a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a><br />
 <a href="http://codex.wordpress.org/Theme_Unit_Test">Theme Unit Tests</a>
-
+</p>
+<h3>Contact</h3>
+<p>Theme-Check is maintained by <a href="http://profiles.wordpress.org/users/pross/">Pross</a> and <a href="http://profiles.wordpress.org/users/otto42/">Otto42</a><br />
+If you think you have found a bug please report it in the <a href="http://wordpress.org/tags/theme-check?forum_id=10">forums</a> or create a <a href="https://github.com/Pross/theme-check/issues">ticket on Github</a>.
+</p>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6">
