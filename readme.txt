@@ -4,21 +4,37 @@ Author URI: http://www.pross.org.uk
 Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
-Tags: template, theme, check
+Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
 Stable tag: 20101110.4_r1
+
+A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
 == Description ==
 
-This plugin uses the same API and is kept more or less in sync with the WordPress.org uploader tool.
-Test your theme before uploading to wordpress, all errors will be shown in an admin page.
+The theme check plugin is an easy way to test your theme and make sure it's up to spec with the latest [http://codex.wordpress.org/Theme_Review](theme review) standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.
+
+The tests are run through a simple admin menu and all results are displayed at once. This is very handy for theme developers, or anybody looking to make sure that their theme supports the latest WordPress theme standards and practices.
 
 == Frequently Asked Questions ==
 
 = What's with the version numbers? =
 
-The date is the revision of the [guidelines](http://codex.wordpress.org/Theme_Review).
+The version numer is the date of the revision of the [guidelines](http://codex.wordpress.org/Theme_Review) used to create it.
+
+= Why does it flag something as bad? =
+
+It's not flagging "bad" things, as such. The theme check is designed to be a non-perfect way to test for compliance with the [http://codex.wordpress.org/Theme_Review](Theme Review) guidelines. Not all themes must adhere to these guidelines. The purpose of the checking tool is to ensure that themes uploaded to the central [http://wordpress.org/extend/themes/](WordPress.org theme repository) meet the latest standards of WordPress themes and will work on a wide variety of sites. 
+
+Many sites use customized themes, and that's perfectly okay. But themes that are intended for use on many different kinds of sites by the public need to have a certain minimum level of capabilities, in order to ensure proper functioning in many different environments. The Theme Review guidelines are created with that goal in mind.
+
+This theme checker is not perfect, and never will be. It is only a tool to help theme authors, or anybody else who wants to make their theme more capable. All themes submitted to WordPress.org are hand-reviewed by a team of experts. The automated theme checker is meant to be a useful tool only, not an absolute system of measurement.
+
+This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [http://lists.wordpress.org/mailman/listinfo/theme-reviewers](Theme Reviewers mailing list).
 
 == Changelog ==
+
+= 20101209 = 
+* Whole system redesign to allow easier synching with WordPress.org uploader. Many other additions/subtractions/changes as well. 
 
 = 20101110.7 =
 * Re-added malware.php checks for fopen and file_get_contents (INFO)
@@ -31,11 +47,9 @@ The date is the revision of the [guidelines](http://codex.wordpress.org/Theme_Re
 * Fixed deprecated function call to get_plugins()
 
 = 20101110.3 =
-
 * Fixed undefined index. 
 
 = 20101110.2 =
-
 * Missing `<` in main.php
 * Added conditional checks for licence.txt OR Licence tags in style.css
 * UI improvements.
@@ -48,4 +62,3 @@ The date is the revision of the [guidelines](http://codex.wordpress.org/Theme_Re
 
 = 10112010 =
 * First release.
-
