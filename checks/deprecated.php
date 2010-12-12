@@ -114,10 +114,10 @@ class Deprecated implements themecheck {
 			array('funky_javascript_fix' => 'none available', '3.0'),
 			array('is_taxonomy' => 'taxonomy_exists()', '3.0'),
 			array('is_term' => 'term_exists()', '3.0'),
-			array('is_plugin_page' => '$plugin_page and/or get_plugin_page_hookname() hooks', '3.1'),	
+			array('is_plugin_page' => '$plugin_page and/or get_plugin_page_hookname() hooks', '3.1'),
 			array('update_category_cache' => 'No alternatives', '3.1'),
 			// end wp-includes deprecated
-	
+
 			// start wp-admin deprecated
 			array('tinymce_include' => 'wp_tiny_mce()', '2.1'),
 			array('documentation_link' => 'None available', '2.5'),
@@ -140,16 +140,16 @@ class Deprecated implements themecheck {
 			array('get_others_pending' => 'None available','3.1'),
 			array('register_column_headers' => 'WP_list_table','3.1'),
 			array('print_column_headers WP_list_table' => 'None available','3.1')
-			// end wp-admin 
+			// end wp-admin
 			);
 		foreach ($php_files as $php_key => $phpfile) {
 			foreach ( $checks as $alt => $check) {
 			checkcount();
 				$version = $check;
 				$key = key($check);
-				$alt = $check[$key]; 
+				$alt = $check[$key];
 				if ( preg_match( '/[\s|]' . $key . '\(/m', $phpfile, $matches ) ) {
-					$filename = basename($php_key);
+					$filename = tc_filename( $php_key );
 					$error = rtrim($matches[0],'(');
 					$version = $check[0];
 					$grep = tc_grep( $error, $php_key);

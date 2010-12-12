@@ -9,9 +9,9 @@ class PHPShortTagsCheck implements themecheck {
 		foreach ($php_files as $php_key => $phpfile) {
 			checkcount();
 			if (preg_match( '/<\?(?!php|xml)/', $phpfile)){
-			$file = basename($php_key);
+			$filename = tc_filename( $php_key );
 			$grep = tc_grep( $error, $php_key);
-			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found PHP short tags in file <strong>{$file}</strong>.{$grep}";
+			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found PHP short tags in file <strong>{$filename}</strong>.{$grep}";
 			$ret = false;
 			}
 		}

@@ -10,13 +10,13 @@ class TimThumbCheck implements themecheck {
 			if ( strpos( $content, 'cleanSource($src);') !== false ) {
 			preg_match( "/define\s\('VERSION',\s'([0-9]\.[0-9]+)'\)/", $content, $matches );
 			$version = $matches[1];
-			$file = basename($name);
+			$filename = tc_filename( $name );
 
 			if ($version < 1.19) { //set to latest timthumb
-				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: TimThumb detected in file <strong>{$file}</strong>. Version <strong>{$version}</strong> is out of date!";
+				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: TimThumb detected in file <strong>{$filename}</strong>. Version <strong>{$version}</strong> is out of date!";
 				$ret = false;
 			} else {
-				$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: TimThumb detected in file <strong>{$file}</strong>. Version detected was <strong>{$version}</strong>";
+				$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: TimThumb detected in file <strong>{$filename}</strong>. Version detected was <strong>{$version}</strong>";
 			}
 }
 		}
