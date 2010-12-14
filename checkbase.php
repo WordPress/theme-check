@@ -105,7 +105,7 @@ function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
 }
 
 function tc_filename( $file ) {
-		$filename = strxchr($file, '/themes/');
+		$filename = tc_strxchr($file, '/themes/');
 		$filename = str_replace( $filename, '', $file );
 		$filename = str_replace( '/themes/', '', $filename );
 		$filename .= basename($file);
