@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20101110.4_r1
+Stable tag: 20101110.4_r2
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -19,7 +19,7 @@ The tests are run through a simple admin menu and all results are displayed at o
 
 = What's with the version numbers? =
 
-The version numer is the date of the revision of the [guidelines](http://codex.wordpress.org/Theme_Review) used to create it.
+The version number is the date of the revision of the [guidelines](http://codex.wordpress.org/Theme_Review) used to create it.
 
 = Why does it flag something as bad? =
 
@@ -40,6 +40,9 @@ This plugin does not decide the guidelines used. Any issues with particular them
 = 20101110.7 =
 * Re-added malware.php checks for fopen and file_get_contents (INFO)
 * fixed a couple of undefined index errors.
+
+= 20101110.4_r2 =
+* Fixed Warning: Wrong parameter count for stristr() 
 
 = 20101110.4_r1 =
 * Added `echo` to suggested.php
