@@ -39,8 +39,7 @@ $data = get_theme_data( WP_CONTENT_DIR . '/themes/' . $theme . '/style.css');
 			}
 
 			.tc-grep span {
-				color: red;
-				font-weight: bold;
+				background: yellow;
 			}
 
 			.tc-data {

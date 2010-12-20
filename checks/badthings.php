@@ -8,6 +8,7 @@ class Bad_Checks implements themecheck {
 		$checks = array(
 			'/[\s|]eval\s*\([^\$|\'](.){25}/i' => 'eval() is not allowed.',
 			'/base64_decode/ims' => 'base64_decode() is not allowed',
+			'/base64_encode/ims' => 'base64_encode() is not allowed',
 			'/uudecode/ims' => 'uudecode() is not allowed',
 			'/str_rot13/ims' => 'str_rot13() is not allowed',
 			'/[^_]unescape/ims' => 'unescape() is not allowed',
