@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20101110.4_r2
+Stable tag: 20101226
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
