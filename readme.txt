@@ -33,7 +33,7 @@ This plugin does not decide the guidelines used. Any issues with particular them
 
 == Changelog ==
 
-= 20101209 = 
+= 20101226 = 
 * Whole system redesign to allow easier synching with WordPress.org uploader. Many other additions/subtractions/changes as well. 
 * WordPress 3.1 guidelines added, to help theme authors ensure compatibility for upcoming release.
 
