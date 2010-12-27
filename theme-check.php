@@ -5,7 +5,7 @@ Plugin URI: http://pross.org.uk/plugins
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 Author: Pross
 Author URI: http://pross.org.uk
-Version: 20101226
+Version: 20101226.1
 */
 
 add_action( 'admin_menu', 'themecheck_add_page' );
