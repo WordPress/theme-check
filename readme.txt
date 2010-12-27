@@ -11,7 +11,7 @@ A simple and easy way to test your theme for all the latest WordPress standards 
 
 == Description ==
 
-The theme check plugin is an easy way to test your theme and make sure it's up to spec with the latest [http://codex.wordpress.org/Theme_Review](theme review) standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.
+The theme check plugin is an easy way to test your theme and make sure it's up to spec with the latest [theme review](http://codex.wordpress.org/Theme_Review) standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.
 
 The tests are run through a simple admin menu and all results are displayed at once. This is very handy for theme developers, or anybody looking to make sure that their theme supports the latest WordPress theme standards and practices.
 
