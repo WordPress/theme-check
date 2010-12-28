@@ -8,13 +8,13 @@ class Style_Needed implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'^(\s+|\t+|)Theme Name:' => '<strong>Theme name:</strong> is missing from your style.css header.',
-			'^(\s+|\t+|)Theme URI:' => '<strong>Theme URI:</strong> is missing from your style.css header.',
-			'^(\s+|\t+|)Description:' => '<strong>Description:</strong> is missing from your style.css header.',
-			'^(\s+|\t+|)Author:' => '<strong>Author:</strong> is missing from your style.css header.',
-			'^(\s+|\t+|)Version' => '<strong>Version:</strong> is missing from your style.css header.',
-			'^(\s+|\t+|)License:' => '<strong>License:</strong> is missing from your style.css header.',
-			'^(\s+|\t+|)License URI:' => '<strong>License URI:</strong> is missing from your style.css header.',		
+			'^[ \t\/*#]*Theme Name:' => '<strong>Theme name:</strong> is missing from your style.css header.',
+			'^[ \t\/*#]*Theme URI:' => '<strong>Theme URI:</strong> is missing from your style.css header.',
+			'^[ \t\/*#]*Description:' => '<strong>Description:</strong> is missing from your style.css header.',
+			'^[ \t\/*#]*Author:' => '<strong>Author:</strong> is missing from your style.css header.',
+			'^[ \t\/*#]*Version' => '<strong>Version:</strong> is missing from your style.css header.',
+			'^[ \t\/*#]*License:' => '<strong>License:</strong> is missing from your style.css header.',
+			'^[ \t\/*#]*License URI:' => '<strong>License URI:</strong> is missing from your style.css header.',		
 			'\.alignleft' => '<strong>.alignleft</strong> css class is needed in your theme css.',
 			'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.',
 			'\.aligncenter' => '<strong>.aligncenter</strong> css class is needed in your theme css.',
