@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20101226.1
+Stable tag: 20101228.1
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -33,7 +33,10 @@ This plugin does not decide the guidelines used. Any issues with particular them
 
 == Changelog ==
 
-= 20101226 = 
+= 20101228.1 =
+* Fix embed_defaults filter check and stylesheet file data check.
+
+= 20101226.1 = 
 * Whole system redesign to allow easier synching with WordPress.org uploader. Many other additions/subtractions/changes as well. 
 * WordPress 3.1 guidelines added, to help theme authors ensure compatibility for upcoming release.
 
