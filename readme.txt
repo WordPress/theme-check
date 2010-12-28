@@ -23,13 +23,13 @@ The version number is the date of the revision of the [guidelines](http://codex.
 
 = Why does it flag something as bad? =
 
-It's not flagging "bad" things, as such. The theme check is designed to be a non-perfect way to test for compliance with the [http://codex.wordpress.org/Theme_Review](Theme Review) guidelines. Not all themes must adhere to these guidelines. The purpose of the checking tool is to ensure that themes uploaded to the central [http://wordpress.org/extend/themes/](WordPress.org theme repository) meet the latest standards of WordPress themes and will work on a wide variety of sites. 
+It's not flagging "bad" things, as such. The theme check is designed to be a non-perfect way to test for compliance with the [Theme Review](http://codex.wordpress.org/Theme_Review) guidelines. Not all themes must adhere to these guidelines. The purpose of the checking tool is to ensure that themes uploaded to the central [WordPress.org theme repository](http://wordpress.org/extend/themes/) meet the latest standards of WordPress themes and will work on a wide variety of sites. 
 
 Many sites use customized themes, and that's perfectly okay. But themes that are intended for use on many different kinds of sites by the public need to have a certain minimum level of capabilities, in order to ensure proper functioning in many different environments. The Theme Review guidelines are created with that goal in mind.
 
 This theme checker is not perfect, and never will be. It is only a tool to help theme authors, or anybody else who wants to make their theme more capable. All themes submitted to WordPress.org are hand-reviewed by a team of experts. The automated theme checker is meant to be a useful tool only, not an absolute system of measurement.
 
-This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [http://lists.wordpress.org/mailman/listinfo/theme-reviewers](Theme Reviewers mailing list).
+This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [Theme Reviewers mailing list](http://lists.wordpress.org/mailman/listinfo/theme-reviewers).
 
 == Changelog ==
 
