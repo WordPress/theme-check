@@ -66,11 +66,29 @@ function tc_grep( $error, $file ) {
 	$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
 	$line_index = 0;
 	$bad_lines = '';
-	$trimed = '';
 	foreach( $lines as $this_line )
 	{
 		if ( stristr ( $this_line, $error ) ) {
 			$error = str_replace( '"', "'", $error );
+			$this_line = str_replace( '"', "'", $this_line );
+			$error = ltrim( $error );
+		$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
+		$pre = ltrim( htmlspecialchars( $pre ) );
+			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
+		}
+		$line_index++;
+	}
+		return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
+}
+
+function tc_preg( $preg, $file ) {
+	$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
+	$line_index = 0;
+	$bad_lines = '';
+	foreach( $lines as $this_line )
+	{
+		if ( preg_match( $preg, $this_line, $matches ) ) {
+			$error = $matches[0];
 			$this_line = str_replace( '"', "'", $this_line );
 			$error = ltrim( $error );
 		$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
