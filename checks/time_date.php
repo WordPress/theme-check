@@ -7,7 +7,7 @@ class Time_Date implements themecheck {
 		$ret = true;
 
 		$checks = array(
-		//'/get_the_time\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'get_the_time( get_option( \'date_format\' ) )',
+		'/\sdate_i18n\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'date_i18n( get_option( \'date_format\' ) )',
 		'/\sdate\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'date( get_option( \'date_format\' ) )',
 		'/[^get_]the_date\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'the_date( get_option( \'date_format\' ) )',
 		'/[^get_]the_time\((\s|)["|\'][A-Za-z\s]+(\s|)["|\']\)/' => 'the_time( get_option( \'date_format\' ) )'
