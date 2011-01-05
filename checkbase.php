@@ -50,10 +50,14 @@ function display_themechecks() {
 	if (!empty($errors)) {
 		rsort($errors);
 		foreach ($errors as $e) {
-		$results .= '<li>'.$e.'</li>';
+		$results .= '<li>' . tc_trac( $e ) . '</li>';
 		}
 	}
-return $results;
+	if ( defined( 'REVIEWER' ) ) {
+		if ( defined( 'TC_PRE' ) ) $results = TC_PRE . $results;
+		if ( defined( 'TC_POST' ) ) $results = $results . TC_POST;
+	}
+	return $results;
 }
 
 function checkcount() {
@@ -122,5 +126,19 @@ function tc_filename( $file ) {
 		$filename = str_replace( '/themes/', '', $filename );
 		$filename .= basename($file);
 		$remove = explode( '/', $filename );
-return ltrim( str_replace( $remove[0], '', $filename ), '/' );
+		return ltrim( str_replace( $remove[0], '', $filename ), '/' );
+}
+
+function tc_trac( $e ) {
+		$trac_left = array( '<strong>', '</strong>' );
+		$trac_right= array( "'''", "'''" );
+		$html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/is';
+		$html_new = '[$1 $3]';
+		if ( defined( 'REVIEWER' ) ) {
+			$e = preg_replace( $html_link, $html_new, $e);
+			$e = str_replace($trac_left, $trac_right, $e);
+			$e = preg_replace( '/<pre.*?>/', '<br />{{{<br />', $e);
+			$e = str_replace( '</pre>', '<br />}}}', $e);
+		}
+		return $e;
 }

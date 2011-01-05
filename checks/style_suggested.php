@@ -12,8 +12,8 @@ class Style_Suggested implements themecheck {
 
 		$checks = array(
 			'^Tags:' => 'Tags:',
-			'^[ \t\/*#]*Theme URI:' => '<strong>Theme URI:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*Author URI:' => '<strong>Author URI:</strong> is missing from your style.css header.',		
+			'^[ \t\/*#]*Theme URI:' => 'Theme URI:',
+			'^[ \t\/*#]*Author URI:' => 'Author URI:',		
 			);
 
 		foreach ($checks as $key => $check) {
