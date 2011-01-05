@@ -9,7 +9,6 @@ class Style_Needed implements themecheck {
 
 		$checks = array(
 			'^[ \t\/*#]*Theme Name:' => '<strong>Theme name:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*Theme URI:' => '<strong>Theme URI:</strong> is missing from your style.css header.',
 			'^[ \t\/*#]*Description:' => '<strong>Description:</strong> is missing from your style.css header.',
 			'^[ \t\/*#]*Author:' => '<strong>Author:</strong> is missing from your style.css header.',
 			'^[ \t\/*#]*Version' => '<strong>Version:</strong> is missing from your style.css header.',
