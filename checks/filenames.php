@@ -19,7 +19,7 @@ class File_Checks implements themecheck {
 		}
 
 		$musthave = array( 'index.php', 'comments.php', 'screenshot.png', 'style.css' );
-		$rechave = array( 'readme.txt' );
+		$rechave = array( 'readme.txt' => ' Please see <a href = "http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.' );
 
 		checkcount();		
 
@@ -30,9 +30,9 @@ class File_Checks implements themecheck {
 			}
 		}
 
-		foreach( $rechave as $file ) {
+		foreach( $rechave as $file => $reason ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: could not find the file <strong>{$file}</strong> in the theme.";
+				$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: could not find the file <strong>{$file}</strong> in the theme.{$reason}";
 				$ret = false;
 			}
 		}		
