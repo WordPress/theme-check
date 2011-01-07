@@ -19,9 +19,10 @@ class Check_Links implements themecheck {
 			$filename = tc_filename( $php_key );
 				foreach( $out as $key ) {
 					if ( $key[0] && !strpos( $key[0], 'wordpress.org' ) ) {
-						$grep .= tc_grep( $key[0], $php_key );
-							}
+						preg_match( '/\<a\s?href\s?=\s?["|\'](.*?)[\'|"](.*?)\>(.*?)\<\/a\>/is', $key[0], $stripped );
+						$grep .= tc_grep( $stripped[1], $php_key );
 						}
+					}
 				if ( $grep ) $this->error[] = "<span class='tc-lead tc-info'>INFO</span>: Possible hard-coded links were found in the file <strong>{$filename}</strong>.{$grep}";
 			}
 		}
