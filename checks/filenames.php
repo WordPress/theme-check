@@ -19,7 +19,7 @@ class File_Checks implements themecheck {
 		}
 
 		$musthave = array( 'index.php', 'comments.php', 'screenshot.png', 'style.css' );
-		$rechave = array( 'readme.txt' => ' Please see <a href = "http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.' );
+		$rechave = array( 'readme.txt' => ' Please see <a href="http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.' );
 
 		checkcount();		
 

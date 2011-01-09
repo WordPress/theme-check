@@ -132,7 +132,7 @@ function tc_filename( $file ) {
 function tc_trac( $e ) {
 		$trac_left = array( '<strong>', '</strong>' );
 		$trac_right= array( "'''", "'''" );
-		$html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/is';
+		$html_link = '/\<a href=\"(.*?)\"(.*?)\>(.*?)\<\/a\>/i';
 		$html_new = '[$1 $3]';
 		if ( defined( 'REVIEWER' ) ) {
 			$e = preg_replace( $html_link, $html_new, $e);
