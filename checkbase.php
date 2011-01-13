@@ -78,7 +78,7 @@ function tc_grep( $error, $file ) {
 			$error = ltrim( $error );
 		$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
 		$pre = ltrim( htmlspecialchars( $pre ) );
-			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
+			$bad_lines .= __("<pre class='tc-grep'>Line ", "themecheck") . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;
 	}
@@ -97,7 +97,7 @@ function tc_preg( $preg, $file ) {
 			$error = ltrim( $error );
 		$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
 		$pre = ltrim( htmlspecialchars( $pre ) );
-			$bad_lines .= "<pre class='tc-grep'>Line " . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
+			$bad_lines .= __("<pre class='tc-grep'>Line ", "themecheck") . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;
 	}

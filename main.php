@@ -59,12 +59,12 @@ function check_main( $theme ) {
 
 		// second loop, to display the errors
 
-		echo '<strong>Theme Info:</strong>';
-		echo '<br /><span class="tc-data">Title</span>:' . $data[ 'Title' ];
-		echo '<br /><span class="tc-data">Version</span>:' . $data[ 'Version' ];
-		echo '<br /><span class="tc-data">Author</span>:' . $data[ 'Author' ];
-		echo '<br /><span class="tc-data">Description</span>:' . $data[ 'Description' ];
-		if ( $data[ 'Template' ] ) echo '<br />This is a child theme. The parent theme is: ' . $data[ 'Template' ];
+		echo '<strong>' . __( 'Theme Info', 'themecheck' ) . ':</strong>';
+		echo '<br /><span class="tc-data">' . __( 'Title', 'themecheck' ) . '</span>:' . $data[ 'Title' ];
+		echo '<br /><span class="tc-data">' . __( 'Version', 'themecheck' ) . '</span>:' . $data[ 'Version' ];
+		echo '<br /><span class="tc-data">' . __( 'Author', 'themecheck' ) . '</span>:' . $data[ 'Author' ];
+		echo '<br /><span class="tc-data">' . __( 'Description', 'themecheck' ) . '</span>:' . $data[ 'Description' ];
+		if ( $data[ 'Template' ] ) echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': ' . $data[ 'Template' ];
 
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
@@ -75,9 +75,9 @@ function check_main( $theme ) {
 		if (strpos( $results, 'WARNING') !== false) $success = false;
 		if (strpos( $results, 'REQUIRED') !== false) $success = false;
 		if ( $success === false ) {
-			echo '<h3>One or more errors were found for ' . $data[ 'Title' ] . '.</h3>';
+			echo '<h3>' . __( 'One or more errors were found for ', 'themecheck' ) . $data[ 'Title' ] . '.</h3>';
 		} else {
-			echo '<h2>' . $data[ 'Title' ] . ' passed the tests</h2>';
+			echo '<h2>' . $data[ 'Title' ] . __( ' passed the tests', 'themecheck' ) . '</h2>';
 			tc_success();
 		}
 		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">WARNING</span> <strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</div>';
@@ -145,6 +145,6 @@ function tc_form() {
 		echo 'value="' . $location['Template'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
-	echo '<input type="submit" value="Check it!" />';
+	echo __( '<input type="submit" value="Check it!" />', 'themecheck' );
 	echo '</form>';
 }

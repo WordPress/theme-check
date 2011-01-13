@@ -7,6 +7,11 @@ Author: Pross
 Author URI: http://pross.org.uk
 Version: 20101228.1
 */
+add_action( 'admin_init', 'tc_i18n' );
+
+function tc_i18n() {
+load_plugin_textdomain( 'themecheck', false, dirname( plugin_basename( __FILE__ ) ) );
+}
 
 add_action( 'admin_menu', 'themecheck_add_page' );
 function themecheck_add_page() {
@@ -15,7 +20,7 @@ function themecheck_add_page() {
 
 function themecheck_do_page() {
   if ( !current_user_can( 'manage_options' ) )  {
-    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+    wp_die( __( 'You do not have sufficient permissions to access this page.', 'themecheck' ) );
   }
 
 include 'checkbase.php';
