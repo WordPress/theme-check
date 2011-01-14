@@ -7,13 +7,13 @@ class Bad_Checks implements themecheck {
 
 		$checks = array(
 			'/[\s|]eval\s*\([^\$|\'](.){25}/i' => 'eval() is not allowed.',
-			'/[\s](popen|proc_open|exec|shell_exec|system|passthru)\(/is' => 'PHP sytem calls should be disabled by server admins anyway!',
-			'/base64_decode/ims' => 'base64_decode() is not allowed',
-			'/base64_encode/ims' => 'base64_encode() is not allowed',
+			'/\s?(popen|proc_open|exec|shell_exec|system|passthru)\(/' => 'PHP sytem calls should be disabled by server admins anyway!',
+			'/base64_decode/' => 'base64_decode() is not allowed',
+			'/base64_encode/' => 'base64_encode() is not allowed',
 			'/uudecode/ims' => 'uudecode() is not allowed',
 			'/str_rot13/ims' => 'str_rot13() is not allowed',
-			'/cx=[0-9]{21}:[a-z0-9]{10}/ims' => 'Google search code detected',
-			'/add_(admin|submenu|theme)_page\s?\x28.*,\s?[0-9]\s?,/i' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
+			'/cx=[0-9]{21}:[a-z0-9]{10}/' => 'Google search code detected',
+			'/add_(admin|submenu|theme)_page\s?\x28.*,\s?[0-9]\s?,/' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
 			'/pub-[0-9]{16}/i' => 'Googe advertising code detected'
 			);
 
@@ -34,7 +34,7 @@ class Bad_Checks implements themecheck {
 
 
 		$checks = array(
-			'/cx=[0-9]{21}:[a-z0-9]{10}/ms' => 'Google search code detected',
+			'/cx=[0-9]{21}:[a-z0-9]{10}/' => 'Google search code detected',
 			'/pub-[0-9]{16}/' => 'Googe advertising code detected'
 			);
 

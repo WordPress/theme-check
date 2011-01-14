@@ -8,12 +8,12 @@ class Style_Needed implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'^[ \t\/*#]*Theme Name:' => '<strong>Theme name:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*Description:' => '<strong>Description:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*Author:' => '<strong>Author:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*Version' => '<strong>Version:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*License:' => '<strong>License:</strong> is missing from your style.css header.',
-			'^[ \t\/*#]*License URI:' => '<strong>License URI:</strong> is missing from your style.css header.',		
+			'[ \t\/*#]*Theme Name:' => '<strong>Theme name:</strong> is missing from your style.css header.',
+			'[ \t\/*#]*Description:' => '<strong>Description:</strong> is missing from your style.css header.',
+			'[ \t\/*#]*Author:' => '<strong>Author:</strong> is missing from your style.css header.',
+			'[ \t\/*#]*Version' => '<strong>Version:</strong> is missing from your style.css header.',
+			'[ \t\/*#]*License:' => '<strong>License:</strong> is missing from your style.css header.',
+			'[ \t\/*#]*License URI:' => '<strong>License URI:</strong> is missing from your style.css header.',
 			'\.alignleft' => '<strong>.alignleft</strong> css class is needed in your theme css.',
 			'\.alignright' => '<strong>.alignright</strong> css class is needed in your theme css.',
 			'\.aligncenter' => '<strong>.aligncenter</strong> css class is needed in your theme css.',
@@ -24,7 +24,7 @@ class Style_Needed implements themecheck {
 
 		foreach ($checks as $key => $check) {
 			checkcount();
-			if ( !preg_match( '/' . $key . '/mi', $css, $matches ) ) {
+			if ( !preg_match( '/' . $key . '/i', $css, $matches ) ) {
 				$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: {$check}";
 				$ret = false;
 			}

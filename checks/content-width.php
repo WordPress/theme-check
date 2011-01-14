@@ -10,7 +10,7 @@ class ContentWidthCheck implements themecheck {
 		// combine all the php files into one string to make it easier to search
 		$php = implode(' ', $php_files);
 		checkcount();
-		if ( strpos( $php, '$content_width' ) === false && !preg_match( '/add_filter\((\s|)("|\')embed_defaults/', $php ) ) {
+		if ( strpos( $php, '$content_width' ) === false && !preg_match( '/add_filter\(\s?("|\')embed_defaults/', $php ) ) {
 			$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: No content width has been defined. Example: <pre>if ( ! isset( \$content_width ) ) \$content_width = 900;</pre>";
 			$ret = false;
 		}

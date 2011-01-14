@@ -12,7 +12,7 @@ class PostFormatCheck implements themecheck {
 		checkcount();
 
 		$checks = array(
-			'/add_theme_support\((\s|)("|\')post-formats("|\')/m'
+			'/add_theme_support\(\s?("|\')post-formats("|\')/m'
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {

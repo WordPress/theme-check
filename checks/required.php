@@ -6,10 +6,9 @@ class Required implements themecheck {
 	function check( $php_files, $css_files, $other_files) {
 
 		$ret = true;
-
 		$checks = array(
-			'/[\s|]get_option\((\s|)("|\')home("|\')(\s|)\)/m' => 'home_url()',
-			'/[\s|]get_option\((\s|)("|\')site_url("|\')(\s|)\)/m' => 'site_url()',
+			'/\s?get_option\(\s?("|\')home("|\')\s?\)/' => 'home_url()',
+			'/\s?get_option\(\s?("|\')site_url("|\')\s?\)/' => 'site_url()',
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {
@@ -26,8 +25,6 @@ class Required implements themecheck {
 		}
 		return $ret;
 	}
-
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new Required;

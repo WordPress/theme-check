@@ -148,7 +148,7 @@ class Deprecated implements themecheck {
 				$version = $check;
 				$key = key($check);
 				$alt = $check[$key];
-				if ( preg_match( '/[\s|]' . $key . '\(/m', $phpfile, $matches ) ) {
+				if ( preg_match( '/[\s?]' . $key . '\(/', $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
 					$error = rtrim($matches[0],'(');
 					$version = $check[0];

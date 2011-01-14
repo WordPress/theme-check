@@ -7,20 +7,20 @@ class Suggested implements themecheck {
 		$ret = true;
 
 		$checks = array(
-		'/[\s|]get_bloginfo\((\s|)("|\')url("|\')(\s|)\)/m' => 'home_url()',
-		'/[\s|]get_bloginfo\((\s|)("|\')wpurl("|\')(\s|)\)/m' => 'site_url()',
-		'/[\s|]get_bloginfo\((\s|)("|\')stylesheet_directory("|\')(\s|)\)/m' => 'get_stylesheet_directory_uri()',
-		'/[\s|]get_bloginfo\((\s|)("|\')template_directory("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-		'/[\s|]get_bloginfo\((\s|)("|\')template_url("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-		'/[\s|]get_bloginfo\((\s|)("|\')text_direction("|\')(\s|)\)/m' => 'is_rtl()',
-		'/[\s|]get_bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
-		'/[\s|]bloginfo\((\s|)("|\')url("|\')(\s|)\)/m' => 'echo home_url()',
-		'/[\s|]bloginfo\((\s|)("|\')wpurl("|\')(\s|)\)/m' => 'echo site_url()',
-		'/[\s|]bloginfo\((\s|)("|\')stylesheet_directory("|\')(\s|)\)/m' => 'get_stylesheet_directory_uri()',
-		'/[\s|]bloginfo\((\s|)("|\')template_directory("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-		'/[\s|]bloginfo\((\s|)("|\')template_url("|\')(\s|)\)/m' => 'get_template_directory_uri()',
-		'/[\s|]bloginfo\((\s|)("|\')text_direction("|\')(\s|)\)/m' => 'is_rtl()',
-		'/[\s|]bloginfo\((\s|)("|\')feed_url("|\')(\s|)\)/m' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
+		'/[\s|]get_bloginfo\(\s?("|\')url("|\')\s?\)/' => 'home_url()',
+		'/[\s|]get_bloginfo\(\s?("|\')wpurl("|\')\s?\)/' => 'site_url()',
+		'/[\s|]get_bloginfo\(\s?("|\')stylesheet_directory("|\')\s?\)/' => 'get_stylesheet_directory_uri()',
+		'/[\s|]get_bloginfo\(\s?("|\')template_directory("|\')\s?\)/' => 'get_template_directory_uri()',
+		'/[\s|]get_bloginfo\(\s?("|\')template_url("|\')\s?\)/' => 'get_template_directory_uri()',
+		'/[\s|]get_bloginfo\(\s?("|\')text_direction("|\')\s?\)/' => 'is_rtl()',
+		'/[\s|]get_bloginfo\(\s?("|\')feed_url("|\')\s?\)/' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
+		'/[\s|]bloginfo\(\s?("|\')url("|\')\s?\)/' => 'echo home_url()',
+		'/[\s|]bloginfo\(\s?("|\')wpurl("|\')\s?\)/' => 'echo site_url()',
+		'/[\s|]bloginfo\(\s?("|\')stylesheet_directory("|\')\s?\)/' => 'get_stylesheet_directory_uri()',
+		'/[\s|]bloginfo\(\s?("|\')template_directory("|\')\s?\)/' => 'get_template_directory_uri()',
+		'/[\s|]bloginfo\(\s?("|\')template_url("|\')\s?\)/' => 'get_template_directory_uri()',
+		'/[\s|]bloginfo\(\s?("|\')text_direction("|\')\s?\)/' => 'is_rtl()',
+		'/[\s|]bloginfo\(\s?("|\')feed_url("|\')\s?\)/' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {

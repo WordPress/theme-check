@@ -8,14 +8,14 @@ class More_Deprecated implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'get_bloginfo\((\s|)("|\')home("|\')(\s|)\)' => 'get_bloginfo( \'url\' )',
-			'bloginfo\((\s|)("|\')home("|\')(\s|)\)' => 'bloginfo( \'url\' )'
+			'get_bloginfo\(\s?("|\')home("|\')\s?\)' => 'get_bloginfo( \'url\' )',
+			'bloginfo\(\s?("|\')home("|\')\s?\)' => 'bloginfo( \'url\' )'
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {
 			foreach ($checks as $key => $check) {
 			checkcount();
-				if ( preg_match( '/[\s|]' . $key . '/m', $phpfile, $matches ) ) {
+				if ( preg_match( '/[\s|]' . $key . '/', $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
 					$error = rtrim($matches[0],'(');
 					$grep = tc_grep( $error, $php_key);
