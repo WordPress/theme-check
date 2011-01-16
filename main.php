@@ -59,11 +59,13 @@ function check_main( $theme ) {
 
 		// second loop, to display the errors
 
-		echo '<strong>' . __( 'Theme Info', 'theme-check' ) . ':</strong>';
-		echo '<br /><span class="tc-data">' . __( 'Title', 'theme-check' ) . '</span>:' . $data[ 'Title' ];
-		echo '<br /><span class="tc-data">' . __( 'Version', 'theme-check' ) . '</span>:' . $data[ 'Version' ];
-		echo '<br /><span class="tc-data">' . __( 'Author', 'theme-check' ) . '</span>:' . $data[ 'Author' ];
-		echo '<br /><span class="tc-data">' . __( 'Description', 'theme-check' ) . '</span>:' . $data[ 'Description' ];
+		echo '<strong>' . __( 'Theme Info', 'theme-check' ) . ': </strong>';
+		echo '<br /><span class="tc-data">' . __( 'Title', 'theme-check' ) . '</span>: ' . $data[ 'Title' ];
+		echo '<br /><span class="tc-data">' . __( 'Version', 'theme-check' ) . '</span>: ' . $data[ 'Version' ];
+		echo '<br /><span class="tc-data">' . __( 'Author', 'theme-check' ) . '</span>: ' . $data[ 'AuthorName' ];
+		echo '<br /><span class="tc-data">' . __( 'Author URI', 'theme-check' ) . '</span>: <a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>';
+		echo '<br /><span class="tc-data">' . __( 'Theme URI', 'theme-check' ) . '</span>: <a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>';
+		echo '<br /><span class="tc-data">' . __( 'Description', 'theme-check' ) . '</span>: ' . $data[ 'Description' ];
 		if ( $data[ 'Template' ] ) echo '<br />' . __( 'This is a child theme. The parent theme is', 'theme-check' ) . ': ' . $data[ 'Template' ];
 
 		$plugins = get_plugins( '/theme-check' );
