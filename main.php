@@ -5,7 +5,6 @@ function check_main( $theme ) {
 	$theme = get_theme_root( $theme ) . "/$theme";
 	$files = listdir( $theme );
 	$data = get_theme_data( $theme . '/style.css' );
-
 	if ( $files ) {
 		foreach( $files as $key => $filename ) {
 			if ( substr( $filename, -4 ) == '.php' ) {
@@ -66,8 +65,10 @@ function check_main( $theme ) {
 		echo '<br /><span class="tc-data">' . __( 'Author URI', 'theme-check' ) . '</span>: <a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>';
 		echo '<br /><span class="tc-data">' . __( 'Theme URI', 'theme-check' ) . '</span>: <a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>';
 		echo '<br /><span class="tc-data">' . __( 'Description', 'theme-check' ) . '</span>: ' . $data[ 'Description' ];
-		if ( $data[ 'Template' ] ) echo '<br />' . __( 'This is a child theme. The parent theme is', 'theme-check' ) . ': ' . $data[ 'Template' ];
-
+		if ( $data[ 'Template' ] ) {
+			echo '<br />' . __( 'This is a child theme. The parent theme is', 'theme-check' ) . ': ' . $data[ 'Template' ] . ' <strong>exiting as child themes are not yet supported!</strong>';
+			return;
+		 }
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
 		echo '<br /><br />Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
@@ -144,7 +145,7 @@ function tc_form() {
 	foreach($themes as $name => $location) {
 		echo '<option ';
 		if ( basename(TEMPLATEPATH) === $location['Template'] ) echo 'selected ';
-		echo 'value="' . $location['Template'] . '">' . $name . '</option>';
+		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
 	echo '<input type="submit" value="' . __( 'Check it!', 'theme-check' ) . '" />';

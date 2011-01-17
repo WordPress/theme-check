@@ -7,7 +7,7 @@ class Bad_Checks implements themecheck {
 
 		$checks = array(
 			'/[\s|]eval\s*\([^\$|\'](.){25}/i' => 'eval() is not allowed.',
-			'/\s?(popen|proc_open|exec|shell_exec|system|passthru)\(/' => 'PHP sytem calls should be disabled by server admins anyway!',
+			'/\s?(popen|proc_open|[^_]exec|shell_exec|system|passthru)\(/' => 'PHP sytem calls should be disabled by server admins anyway!',
 			'/\s?ini_set\(/' => 'Themes should not change server PHP settings',
 			'/base64_decode/' => 'base64_decode() is not allowed',
 			'/base64_encode/' => 'base64_encode() is not allowed',
