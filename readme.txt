@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20101228.1
+Stable tag: 20101228.2
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -23,7 +23,7 @@ The version number is the date of the revision of the [guidelines](http://codex.
 
 = Why does it flag something as bad? =
 
-It's not flagging "bad" things, as such. The theme check is designed to be a non-perfect way to test for compliance with the [Theme Review](http://codex.wordpress.org/Theme_Review) guidelines. Not all themes must adhere to these guidelines. The purpose of the checking tool is to ensure that themes uploaded to the central [WordPress.org theme repository](http://wordpress.org/extend/themes/) meet the latest standards of WordPress themes and will work on a wide variety of sites. 
+It's not flagging "bad" things, as such. The theme check is designed to be a non-perfect way to test for compliance with the [Theme Review](http://codex.wordpress.org/Theme_Review) guidelines. Not all themes must adhere to these guidelines. The purpose of the checking tool is to ensure that themes uploaded to the central [WordPress.org theme repository](http://wordpress.org/extend/themes/) meet the latest standards of WordPress themes and will work on a wide variety of sites.
 
 Many sites use customized themes, and that's perfectly okay. But themes that are intended for use on many different kinds of sites by the public need to have a certain minimum level of capabilities, in order to ensure proper functioning in many different environments. The Theme Review guidelines are created with that goal in mind.
 
@@ -33,11 +33,17 @@ This plugin does not decide the guidelines used. Any issues with particular them
 
 == Changelog ==
 
+= 20101228.2 =
+* Added menu checking.
+* ThemeURI AuthourURI added to results.
+* Lots of small fixes
+* Started translation.
+
 = 20101228.1 =
 * Fix embed_defaults filter check and stylesheet file data check.
 
-= 20101226.1 = 
-* Whole system redesign to allow easier synching with WordPress.org uploader. Many other additions/subtractions/changes as well. 
+= 20101226.1 =
+* Whole system redesign to allow easier synching with WordPress.org uploader. Many other additions/subtractions/changes as well.
 * WordPress 3.1 guidelines added, to help theme authors ensure compatibility for upcoming release.
 
 = 20101110.7 =
@@ -45,7 +51,7 @@ This plugin does not decide the guidelines used. Any issues with particular them
 * fixed a couple of undefined index errors.
 
 = 20101110.4_r2 =
-* Fixed Warning: Wrong parameter count for stristr() 
+* Fixed Warning: Wrong parameter count for stristr()
 
 = 20101110.4_r1 =
 * Added `echo` to suggested.php
@@ -54,7 +60,7 @@ This plugin does not decide the guidelines used. Any issues with particular them
 * Fixed deprecated function call to get_plugins()
 
 = 20101110.3 =
-* Fixed undefined index. 
+* Fixed undefined index.
 
 = 20101110.2 =
 * Missing `<` in main.php
