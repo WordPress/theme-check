@@ -77,9 +77,9 @@ function check_main( $theme ) {
 		if (strpos( $results, 'WARNING') !== false) $success = false;
 		if (strpos( $results, 'REQUIRED') !== false) $success = false;
 		if ( $success === false ) {
-			echo '<h3>' . __( 'One or more errors were found for ', 'themecheck' ) . $data[ 'Title' ] . '.</h3>';
+			echo '<h3>' . __( 'One or more errors were found for ', 'theme-check' ) . $data[ 'Title' ] . '.</h3>';
 		} else {
-			echo '<h2>' . $data[ 'Title' ] . __( ' passed the tests', 'themecheck' ) . '</h2>';
+			echo '<h2>' . $data[ 'Title' ] . __( ' passed the tests', 'theme-check' ) . '</h2>';
 			tc_success();
 		}
 		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">WARNING</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</div>', 'theme-check' );
