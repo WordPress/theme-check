@@ -11,7 +11,6 @@ class Style_Suggested implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'Tags:' => 'Tags:',
 			'[ \t\/*#]*Theme URI:' => 'Theme URI:',
 			'[ \t\/*#]*Author URI:' => 'Author URI:',
 			);
