@@ -46,9 +46,15 @@ function check_main( $theme ) {
 
 		.tc-data {
 			float: left;
-			width: 80px;
+			width: 68px;
+			clear: both;
 		}
 
+		.tc-header {
+			width: 1024px;
+			float: left;
+			padding-left: 5px;
+		}
 		.tc-success {
 		}
 		</style>
@@ -57,15 +63,18 @@ function check_main( $theme ) {
 		tc_form();
 
 		// second loop, to display the errors
-
 		echo '<strong>' . __( 'Theme Info', 'theme-check' ) . ': </strong>';
-		echo '<br /><span class="tc-data">' . __( 'Title', 'theme-check' ) . '</span>: ' . $data[ 'Title' ];
-		echo '<br /><span class="tc-data">' . __( 'Version', 'theme-check' ) . '</span>: ' . $data[ 'Version' ];
-		echo '<br /><span class="tc-data">' . __( 'Author', 'theme-check' ) . '</span>: ' . $data[ 'AuthorName' ];
-		echo '<br /><span class="tc-data">' . __( 'Author URI', 'theme-check' ) . '</span>: <a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>';
-		echo '<br /><span class="tc-data">' . __( 'Theme URI', 'theme-check' ) . '</span>: <a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>';
-		echo '<br /><span class="tc-data">' . __( 'Description', 'theme-check' ) . '</span>: ' . $data[ 'Description' ];
-		echo '<br /><span class="tc-data">' . __( 'Tags', 'theme-check' ) . '</span>: ' . implode( $data[ 'Tags' ], ', ');
+		echo '<br /><div class="tc-data">' . __( 'Title', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Version', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Author', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Author URI', 'theme-check' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Theme URI', 'theme-check' ) . '</div><div class="tc-header"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'License', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'License' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'LicenseURI', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'License URI' ] . '</div>';
+
+		echo '<br /><div class="tc-data">' . __( 'Tags', 'theme-check' ) . '</div><div class="tc-header">' . implode( $data[ 'Tags' ], ', ') . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Description', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'Description' ] . '</div>';
+		echo '<br style="clear:both" />';
 		if ( $data[ 'Template' ] ) {
 			echo '<br />' . __( 'This is a child theme. The parent theme is', 'theme-check' ) . ': ' . $data[ 'Template' ] . ' <strong>exiting as child themes are not yet supported!</strong>';
 			return;
