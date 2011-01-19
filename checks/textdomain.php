@@ -13,7 +13,7 @@ class TextDomainCheck implements themecheck {
 
 		if ( strpos( $css, 'Theme Name: Twenty Ten' ) ) return $ret;
 
-		if ( preg_match( '/[__|_e]\(\s?[\'|"].*[\'|"],\s?[\'|"]twentyten[\'|"]\s?\)/', $php ) ) {
+		if ( preg_match( '/(__|_e)\(.*?["|\']twentyten["|\']\s?\)?/', $php ) ) {
 			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Theme is using <strong>twentyten</strong> as the textdomain!";
 			$ret = false;
 		return $ret;
