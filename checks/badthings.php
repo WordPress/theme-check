@@ -14,7 +14,6 @@ class Bad_Checks implements themecheck {
 			'/uudecode/ims' => 'uudecode() is not allowed',
 			'/str_rot13/ims' => 'str_rot13() is not allowed',
 			'/cx=[0-9]{21}:[a-z0-9]{10}/' => 'Google search code detected',
-	//		'/add_(admin|submenu|theme)_page\s?\x28.*,\s?[0-9]\s?,/' => 'Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>',
 			'/pub-[0-9]{16}/i' => 'Googe advertising code detected'
 			);
 

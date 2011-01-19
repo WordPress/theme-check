@@ -21,12 +21,9 @@ class Time_Date implements themecheck {
 				$error = trim( esc_html( rtrim($matches[0],'(') ) );
 				$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: At least one hard coded date was found in the file <strong>{$filename}</strong>. Consider get_option( 'date_format' )";
 				$ret = false;
+				}
 			}
-
-
 		}
-
-}
 		return $ret;
 	}
 

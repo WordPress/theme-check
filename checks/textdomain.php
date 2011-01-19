@@ -6,27 +6,26 @@ class TextDomainCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files) {
 
 		$ret = true;
-
-		$php = implode(' ', $php_files);
 		$css = implode(' ', $css_files);
 		checkcount();
 
 		if ( strpos( $css, 'Theme Name: Twenty Ten' ) ) return $ret;
 
-		if ( preg_match( '/(__|_e)\(.*?["|\']twentyten["|\']\s?\)?/', $php ) ) {
-			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Theme is using <strong>twentyten</strong> as the textdomain!";
-			$ret = false;
-		return $ret;
-		}
+		$checks1 = '/(__|_e)\([^\)]*\)/';
+		foreach ( $php_files as $php_key => $phpfile ) {
+			checkcount();
+			if ( preg_match_all( $checks1, $phpfile, $matches ) ) {
+				if ($out = preg_grep( '/twentyten/', $matches[0] ) ) {
+					$filename = tc_filename( $php_key );
+					foreach( $out as $error ) {
+						$grep .= tc_grep( $error , $php_key );
+					}
+				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Theme is using <strong>twentyten</strong> as the textdomain in <strong>{$filename}</strong>.{$grep}";
+				$ret = false;
+				}
+			}
 
-// experimental check if i18n exists and has no domain?
-/*		if ( preg_match( '/[__|_e]\(/', $php ) &&  !preg_match( '/_[_|e]\(\s?["|\'].*[\'|"],\s[\'|"][a-z-?]+["|\']\s?\)/', $php, $out)  ) {
-			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Theme is using i18n but there is no textdomain!";
-			$ret = false;
-		return $ret;
 		}
-*/
-
 		return $ret;
 	}
 
