@@ -142,3 +142,12 @@ function tc_trac( $e ) {
 		}
 		return $e;
 }
+
+    function html_print_r( $data ) {
+        $out = "\n<pre class='html-print-r'";
+        $out .= " style='border: 1px solid #ccc; padding: 7px;'>\n";
+        $out .= esc_html( print_r( $data, TRUE ) );
+        $out .= "\n</pre>\n";
+
+        echo $out;
+    }
