@@ -10,7 +10,7 @@ class AdminMenu implements themecheck {
 //check for user roles deprecated in 2.0.
 
 		$checks = array(
-			'/(add_(admin|submenu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page\s?\(.*?\);)/' => 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>'
+			'/(add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page\s?\(.*?\);)/' => 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>'
 			);
 
 		foreach ($php_files as $php_key => $phpfile) {
@@ -30,7 +30,7 @@ class AdminMenu implements themecheck {
 //check for add_admin_page
 
 		$checks = array(
-			'/(add_(admin|submenu|dashboard|posts|media|links|pages|comments|plugins|users|management|options)_page\()/' => 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.'
+			'/(add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|plugins|users|management|options)_page\()/' => 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.'
 			);
 
 
