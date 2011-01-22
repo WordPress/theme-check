@@ -50,12 +50,19 @@ function display_themechecks() {
 	if (!empty($errors)) {
 		rsort($errors);
 		foreach ($errors as $e) {
-		$results .= '<li>' . tc_trac( $e ) . '</li>';
+		if ( defined( 'REVIEWER' ) ) {
+			$results .= tc_trac( $e ) . "\r\n";
+		} else {
+			$results .= '<li>' . tc_trac( $e ) . '</li>';
+			}
 		}
 	}
 	if ( defined( 'REVIEWER' ) ) {
+
 		if ( defined( 'TC_PRE' ) ) $results = TC_PRE . $results;
+		$results = '<textarea cols=140 rows=20>' . strip_tags( $results );
 		if ( defined( 'TC_POST' ) ) $results = $results . TC_POST;
+		$results .= '</textarea>';
 	}
 	return $results;
 }
@@ -100,6 +107,7 @@ function tc_preg( $preg, $file ) {
 			$bad_lines .= __("<pre class='tc-grep'>Line ", "theme-check") . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;
+
 	}
 		return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
 }
@@ -137,8 +145,8 @@ function tc_trac( $e ) {
 		if ( defined( 'REVIEWER' ) ) {
 			$e = preg_replace( $html_link, $html_new, $e);
 			$e = str_replace($trac_left, $trac_right, $e);
-			$e = preg_replace( '/<pre.*?>/', '<br />{{{<br />', $e);
-			$e = str_replace( '</pre>', '<br />}}}', $e);
+			$e = preg_replace( '/<pre.*?>/', "\r\n{{{\r\n", $e);
+			$e = str_replace( '</pre>', "\r\n}}}\r\n", $e);
 		}
 		return $e;
 }
