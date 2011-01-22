@@ -6,7 +6,7 @@ class ArtisteerCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files) {
 
 		// combine all the php files into one string to make it easier to search
-		$php = implode(' ', $php_files);
+		$php = implode( ' ', $php_files );
 
 		checkcount();
 
@@ -29,5 +29,4 @@ class ArtisteerCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new ArtisteerCheck;

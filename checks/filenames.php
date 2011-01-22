@@ -2,19 +2,19 @@
 class File_Checks implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
 		$filenames = array();
 
-		foreach ($php_files as $php_key => $phpfile) {
+		foreach ( $php_files as $php_key => $phpfile ) {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
-		foreach ($other_files as $php_key => $phpfile) {
+		foreach ( $other_files as $php_key => $phpfile ) {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
-		foreach ($css_files as $php_key => $phpfile) {
+		foreach ( $css_files as $php_key => $phpfile ) {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		$blacklist = array(
@@ -29,13 +29,13 @@ class File_Checks implements themecheck {
 				);
 
 		$musthave = array( 'index.php', 'comments.php', 'screenshot.png', 'style.css' );
-		$rechave = array( 'readme.txt' => __( ' Please see <a href="http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'theme-check' ) );
+		$rechave = array( 'readme.txt' => __( 'Please see <a href="http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'theme-check' ) );
 
 		checkcount();
 
 		foreach( $blacklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error = implode($filename, ' ');
+				$error = implode( $filename, ' ' );
 				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: <strong>{$error}</strong> {$reason} found.";
 				$ret = false;
 			}
@@ -50,7 +50,7 @@ class File_Checks implements themecheck {
 
 		foreach( $rechave as $file => $reason ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: could not find the file <strong>{$file}</strong> in the theme.{$reason}", "theme-check" );
+				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: could not find the file <strong>{$file}</strong> in the theme. {$reason}", "theme-check" );
 				$ret = false;
 			}
 		}
@@ -60,5 +60,4 @@ class File_Checks implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new File_Checks;

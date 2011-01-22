@@ -2,10 +2,10 @@
 class Style_Suggested implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		// combine all the css files into one string to make it easier to search
-		$css = implode(' ', $css_files);
+		$css = implode( ' ', $css_files );
 
 		checkcount();
 		$ret = true;
@@ -27,5 +27,4 @@ class Style_Suggested implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new Style_Suggested;

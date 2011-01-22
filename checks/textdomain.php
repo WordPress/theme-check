@@ -3,10 +3,10 @@
 class TextDomainCheck implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
-		$css = implode(' ', $css_files);
+		$css = implode( ' ', $css_files );
 		checkcount();
 
 		if ( strpos( $css, 'Theme Name: Twenty Ten' ) ) return $ret;
@@ -33,5 +33,4 @@ class TextDomainCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new TextDomainCheck;

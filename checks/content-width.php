@@ -3,15 +3,15 @@
 class ContentWidthCheck implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
 		// combine all the php files into one string to make it easier to search
-		$php = implode(' ', $php_files);
+		$php = implode( ' ', $php_files );
 		checkcount();
 		if ( strpos( $php, '$content_width' ) === false && !preg_match( '/add_filter\(\s?("|\')embed_defaults/', $php ) ) {
-			$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: No content width has been defined. Example: <pre>if ( ! isset( \$content_width ) ) \$content_width = 900;</pre>";
+			$this->error[] = __( "<span class='tc-lead tc-required'>REQUIRED</span>: No content width has been defined. Example: <pre>if ( ! isset( \$content_width ) ) \$content_width = 900;</pre>", "theme-check" );
 			$ret = false;
 		}
 
@@ -20,5 +20,4 @@ class ContentWidthCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new ContentWidthCheck;

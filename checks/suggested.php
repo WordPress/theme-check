@@ -2,7 +2,7 @@
 class Suggested implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
@@ -23,13 +23,13 @@ class Suggested implements themecheck {
 		'/[\s|]bloginfo\(\s?("|\')feed_url("|\')\s?\)/' => 'get_feed_link( \'feed\' ) (where feed is rss, rss2, atom)',
 			);
 
-		foreach ($php_files as $php_key => $phpfile) {
-			foreach ($checks as $key => $check) {
+		foreach ( $php_files as $php_key => $phpfile ) {
+			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
-					$error = trim( esc_html( rtrim($matches[0],'(') ) );
-					$grep = tc_grep( rtrim($matches[0],'('), $php_key);
+					$error = trim( esc_html( rtrim($matches[0], '(' ) ) );
+					$grep = tc_grep( rtrim( $matches[0], '(' ), $php_key );
 					$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
 					$ret = false;
 				}
@@ -40,5 +40,4 @@ class Suggested implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new Suggested;
