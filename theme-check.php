@@ -10,7 +10,12 @@ Version: 20101228.2
 add_action( 'admin_init', 'tc_i18n' );
 
 function tc_i18n() {
-load_plugin_textdomain( 'theme-check', false, dirname( plugin_basename( __FILE__ ) ) );
+
+$currentLocale = get_locale();
+	if(!empty($currentLocale)) {
+	        $moFile = dirname(__FILE__) . "/lang/theme-check_" . $currentLocale . ".mo";
+	        if(file_exists($moFile) && is_readable($moFile)) load_textdomain('themecheck', $moFile);
+	}
 }
 
 add_action( 'admin_menu', 'themecheck_add_page' );
@@ -20,7 +25,7 @@ function themecheck_add_page() {
 
 function themecheck_do_page() {
   if ( !current_user_can( 'manage_options' ) )  {
-    wp_die( __( 'You do not have sufficient permissions to access this page.', 'theme-check' ) );
+    wp_die( __( 'You do not have sufficient permissions to access this page.', 'themecheck' ) );
   }
 
 add_filter( 'extra_theme_headers', 'tc_add_headers' );

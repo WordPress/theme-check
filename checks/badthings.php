@@ -6,15 +6,15 @@ class Bad_Checks implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'/[\s|]eval\s*\([^\$|\'](.){25}/i' => __( 'eval() is not allowed.', 'theme-check' ),
-			'/\s?(popen|proc_open|[^_]exec|shell_exec|system|passthru)\(/' => __( 'PHP sytem calls should be disabled by server admins anyway!', 'theme-check' ),
-			'/\s?ini_set\(/' => __( 'Themes should not change server PHP settings', 'theme-check' ),
-			'/base64_decode/' => __( 'base64_decode() is not allowed', 'theme-check' ),
-			'/base64_encode/' => __( 'base64_encode() is not allowed', 'theme-check' ),
-			'/uudecode/ims' => __( 'uudecode() is not allowed', 'theme-check' ),
-			'/str_rot13/ims' => __( 'str_rot13() is not allowed', 'theme-check' ),
-			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
-			'/pub-[0-9]{16}/i' => __( 'Googe advertising code detected', 'theme-check' )
+			'/[\s|]eval\s*\([^\$|\'](.){25}/i' => __( 'eval() is not allowed.', 'themecheck' ),
+			'/\s?(popen|proc_open|[^_]exec|shell_exec|system|passthru)\(/' => __( 'PHP sytem calls should be disabled by server admins anyway!', 'themecheck' ),
+			'/\s?ini_set\(/' => __( 'Themes should not change server PHP settings', 'themecheck' ),
+			'/base64_decode/' => __( 'base64_decode() is not allowed', 'themecheck' ),
+			'/base64_encode/' => __( 'base64_encode() is not allowed', 'themecheck' ),
+			'/uudecode/ims' => __( 'uudecode() is not allowed', 'themecheck' ),
+			'/str_rot13/ims' => __( 'str_rot13() is not allowed', 'themecheck' ),
+			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'themecheck' ),
+			'/pub-[0-9]{16}/i' => __( 'Googe advertising code detected', 'themecheck' )
 			);
 
 		$grep = '';
@@ -34,8 +34,8 @@ class Bad_Checks implements themecheck {
 
 
 		$checks = array(
-			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
-			'/pub-[0-9]{16}/' => __( 'Googe advertising code detected', 'theme-check' )
+			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'themecheck' ),
+			'/pub-[0-9]{16}/' => __( 'Googe advertising code detected', 'themecheck' )
 			);
 
 		foreach ( $other_files as $php_key => $phpfile ) {

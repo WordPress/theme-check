@@ -6,7 +6,7 @@ class WormCheck implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'/wshell\.php/'=> __( '<strong>PHP shell was found!</strong>', 'theme-check' )
+			'/wshell\.php/'=> __( '<strong>PHP shell was found!</strong>', 'themecheck' )
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {

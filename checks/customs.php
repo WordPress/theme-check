@@ -11,11 +11,11 @@ class CustomCheck implements themecheck {
 		checkcount();
 
 		if ( strpos( $php, 'add_custom_image_header' ) === false ) {
-			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: No reference to <strong>add_custom_image_header</strong> was found in the theme. It is recommended that the theme implement this functionality if using an image for the header.", "theme-check" );
+			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: No reference to <strong>add_custom_image_header</strong> was found in the theme. It is recommended that the theme implement this functionality if using an image for the header.", "themecheck" );
 		}
 
 		if ( strpos( $php, 'add_custom_background' ) === false ) {
-			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: No reference to <strong>add_custom_background()</strong> was found in the theme. If the theme uses background images or solid colors for the background, then it is recommended that the theme implement this functionality.", "theme-check" );
+			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: No reference to <strong>add_custom_background()</strong> was found in the theme. If the theme uses background images or solid colors for the background, then it is recommended that the theme implement this functionality.", "themecheck" );
 		}
 
 		return $ret;

@@ -63,20 +63,20 @@ function check_main( $theme ) {
 		tc_form();
 
 		// second loop, to display the errors
-		echo '<strong>' . __( 'Theme Info', 'theme-check' ) . ': </strong>';
-		echo '<br /><div class="tc-data">' . __( 'Title', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'Version', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'Author', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'Author URI', 'theme-check' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'Theme URI', 'theme-check' ) . '</div><div class="tc-header"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'License', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'License' ] . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'LicenseURI', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'License URI' ] . '</div>';
+		echo '<strong>' . __( 'Theme Info', 'themecheck' ) . ': </strong>';
+		echo '<br /><div class="tc-data">' . __( 'Title', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Author', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Author URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Theme URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'License', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'License' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'LicenseURI', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'License URI' ] . '</div>';
 
-		echo '<br /><div class="tc-data">' . __( 'Tags', 'theme-check' ) . '</div><div class="tc-header">' . implode( $data[ 'Tags' ], ', ') . '</div>';
-		echo '<br /><div class="tc-data">' . __( 'Description', 'theme-check' ) . '</div><div class="tc-header">' . $data[ 'Description' ] . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Tags', 'themecheck' ) . '</div><div class="tc-header">' . implode( $data[ 'Tags' ], ', ') . '</div>';
+		echo '<br /><div class="tc-data">' . __( 'Description', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Description' ] . '</div>';
 		echo '<br style="clear:both" />';
 		if ( $data[ 'Template' ] ) {
-			echo '<br />' . __( 'This is a child theme. The parent theme is', 'theme-check' ) . ': ' . $data[ 'Template' ] . ' <strong>exiting as child themes are not yet supported!</strong>';
+			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': ' . $data[ 'Template' ] . ' <strong>exiting as child themes are not yet supported!</strong>';
 			return;
 		 }
 		$plugins = get_plugins( '/theme-check' );
@@ -88,12 +88,12 @@ function check_main( $theme ) {
 		if (strpos( $results, 'WARNING') !== false) $success = false;
 		if (strpos( $results, 'REQUIRED') !== false) $success = false;
 		if ( $success === false ) {
-			echo '<h3>' . __( 'One or more errors were found for ', 'theme-check' ) . $data[ 'Title' ] . '.</h3>';
+			echo '<h3>' . __( 'One or more errors were found for ', 'themecheck' ) . $data[ 'Title' ] . '.</h3>';
 		} else {
-			echo '<h2>' . $data[ 'Title' ] . __( ' passed the tests', 'theme-check' ) . '</h2>';
+			echo '<h2>' . $data[ 'Title' ] . __( ' passed the tests', 'themecheck' ) . '</h2>';
 			tc_success();
 		}
-		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">WARNING</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</div>', 'theme-check' );
+		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">WARNING</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!</div>', 'themecheck' );
 
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
@@ -158,6 +158,6 @@ function tc_form() {
 		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
-	echo '<input type="submit" value="' . __( 'Check it!', 'theme-check' ) . '" />';
+	echo '<input type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
 	echo '</form>';
 }

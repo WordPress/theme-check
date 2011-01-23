@@ -20,7 +20,7 @@ class ArtisteerCheck implements themecheck {
 			|| strpos ( $php, "ew = '<!-- end_widget -->';" ) !== false
 			|| strpos ( $php, "end_widget' => '<!-- end_widget -->'") !== false
 		) {
-			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: " . __( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'theme-check' );
+			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: " . __( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'themecheck' );
 			$ret = false;
 		}
 

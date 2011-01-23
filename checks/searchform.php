@@ -11,7 +11,7 @@ class SearchFormCheck implements themecheck {
 		$ret = true;
 
 		if ( preg_match( '/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/', $php ) ) {
-			$this->error[] = __( "<span class='tc-lead tc-required'>REQUIRED</span>: Please use <strong>get_search_form()</strong> instead of including searchform.php directly.", "theme-check" );
+			$this->error[] = __( "<span class='tc-lead tc-required'>REQUIRED</span>: Please use <strong>get_search_form()</strong> instead of including searchform.php directly.", "themecheck" );
 			$ret = false;
 		}
 

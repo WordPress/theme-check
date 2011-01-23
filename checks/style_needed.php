@@ -8,18 +8,18 @@ class Style_Needed implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'[ \t\/*#]*Theme Name:' => __( '<strong>Theme name:</strong> is missing from your style.css header.', 'theme-check' ),
-			'[ \t\/*#]*Description:' => __( '<strong>Description:</strong> is missing from your style.css header.', 'theme-check' ),
-			'[ \t\/*#]*Author:' => __( '<strong>Author:</strong> is missing from your style.css header.', 'theme-check' ),
-			'[ \t\/*#]*Version' => __( '<strong>Version:</strong> is missing from your style.css header.', 'theme-check' ),
-			'[ \t\/*#]*License:' => __( '<strong>License:</strong> is missing from your style.css header.', 'theme-check' ),
-			'[ \t\/*#]*License URI:' => __( '<strong>License URI:</strong> is missing from your style.css header.', 'theme-check' ),
-			'\.alignleft' => __( '<strong>.alignleft</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.alignright' => __( '<strong>.alignright</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.aligncenter' => __( '<strong>.aligncenter</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.wp-caption' => __( '<strong>.wp-caption</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.wp-caption-text' => __( '<strong>.wp-caption-text</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is needed in your theme css.', 'theme-check' )
+			'[ \t\/*#]*Theme Name:' => __( '<strong>Theme name:</strong> is missing from your style.css header.', 'themecheck' ),
+			'[ \t\/*#]*Description:' => __( '<strong>Description:</strong> is missing from your style.css header.', 'themecheck' ),
+			'[ \t\/*#]*Author:' => __( '<strong>Author:</strong> is missing from your style.css header.', 'themecheck' ),
+			'[ \t\/*#]*Version' => __( '<strong>Version:</strong> is missing from your style.css header.', 'themecheck' ),
+			'[ \t\/*#]*License:' => __( '<strong>License:</strong> is missing from your style.css header.', 'themecheck' ),
+			'[ \t\/*#]*License URI:' => __( '<strong>License URI:</strong> is missing from your style.css header.', 'themecheck' ),
+			'\.alignleft' => __( '<strong>.alignleft</strong> css class is needed in your theme css.', 'themecheck' ),
+			'\.alignright' => __( '<strong>.alignright</strong> css class is needed in your theme css.', 'themecheck' ),
+			'\.aligncenter' => __( '<strong>.aligncenter</strong> css class is needed in your theme css.', 'themecheck' ),
+			'\.wp-caption' => __( '<strong>.wp-caption</strong> css class is needed in your theme css.', 'themecheck' ),
+			'\.wp-caption-text' => __( '<strong>.wp-caption-text</strong> css class is needed in your theme css.', 'themecheck' ),
+			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is needed in your theme css.', 'themecheck' )
 		);
 
 		foreach ($checks as $key => $check) {

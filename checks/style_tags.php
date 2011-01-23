@@ -17,7 +17,7 @@ class Style_Tags implements themecheck {
 		}
 
 		if ( !$data[ 'Tags' ] ) {
-			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: <strong>Tags:</strong> is either empty or missing in style.css header.", "theme-check" );
+			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: <strong>Tags:</strong> is either empty or missing in style.css header.", "themecheck" );
 			$ret = false;
 			return $ret;
 		}
