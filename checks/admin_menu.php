@@ -41,7 +41,7 @@ class AdminMenu implements themecheck {
 					$filename = tc_filename( $php_key );
 					$error = rtrim( $matches[0], '(' );
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: <strong>{$filename}</strong>. {$check}{$grep}";
+					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$filename}</strong>. {$check}{$grep}";
 					$ret = false;
 				}
 			}
