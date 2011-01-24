@@ -128,12 +128,9 @@ function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
 }
 
 function tc_filename( $file ) {
-		$filename = tc_strxchr($file, '/themes/');
-		$filename = str_replace( $filename, '', $file );
-		$filename = str_replace( '/themes/', '', $filename );
-		$filename .= basename($file);
-		$remove = explode( '/', $filename );
-		return ltrim( str_replace( $remove[0], '', $filename ), '/' );
+		$filename = ( preg_match( '/themes\/[a-z0-9]*\/(.*)/', $file, $out ) ) ? $out[1] : '??' . basename( $file );
+		return $filename;
+
 }
 
 function tc_trac( $e ) {
