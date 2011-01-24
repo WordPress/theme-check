@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.1
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20101228.2
+Stable tag: 20101228.3
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -32,6 +32,16 @@ This theme checker is not perfect, and never will be. It is only a tool to help 
 This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [Theme Reviewers mailing list](http://lists.wordpress.org/mailman/listinfo/theme-reviewers).
 
 == Changelog ==
+
+= 20101228.3 =
+* Last revision for 3.1 (hopefully)
+* Chips suggestion of checking for inclusion of searchform.php ( not
+perfect yet, need more examples to look for ).
+* add_theme_page is required, all others flagged and displayed with line
+numbers.
+* <?= detected properly, short tags outputted with line umbers.
+* Mostly internationalized, needs translations now.
+* Bug fixes
 
 = 20101228.2 =
 * Added menu checking.
