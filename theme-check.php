@@ -24,24 +24,25 @@ function themecheck_add_page() {
 }
 
 function themecheck_do_page() {
-  if ( !current_user_can( 'manage_options' ) )  {
-    wp_die( __( 'You do not have sufficient permissions to access this page.', 'themecheck' ) );
-  }
+	if ( !current_user_can( 'manage_options' ) )  {
+	wp_die( __( 'You do not have sufficient permissions to access this page.', 'themecheck' ) );
+	}
 
-add_filter( 'extra_theme_headers', 'tc_add_headers' );
+	add_filter( 'extra_theme_headers', 'tc_add_headers' );
 
-include 'checkbase.php';
-include 'main.php';
+	include 'checkbase.php';
+	include 'main.php';
 
-echo '<div id="theme-check" class="wrap">';
-echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
+	echo '<div id="theme-check" class="wrap">';
+	echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
+		tc_form();
+	if ( !isset( $_POST[ 'themename' ] ) )  {
+		tc_intro();
 
-if ( !isset( $_POST[ 'themename' ] ) ) tc_form();
-if ( isset( $_POST[ 'themename' ] ) ) check_main( $_POST[ 'themename' ] );
-echo '</div>';
-}
+	}
 
-function tc_add_headers( $extra_headers ) {
-	$extra_headers = array( 'License', 'License URI' );
-	return $extra_headers;
+	if ( isset( $_POST[ 'themename' ] ) ) {
+		check_main( $_POST[ 'themename' ] );
+		echo '</div>';
+	}
 }

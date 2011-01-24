@@ -60,7 +60,6 @@ function check_main( $theme ) {
 		</style>
 		<?php
 		global $checkcount;
-		tc_form();
 
 		// second loop, to display the errors
 		echo '<strong>' . __( 'Theme Info', 'themecheck' ) . ': </strong>';
@@ -100,64 +99,4 @@ function check_main( $theme ) {
 		echo $results;
 		echo '</ul></div>';
 	}
-}
-
-function listdir( $start_dir='.' ) {
-
-  $files = array();
-  if ( is_dir( $start_dir ) ) {
-    $fh = opendir( $start_dir );
-    while ( ( $file = readdir( $fh ) ) !== false ) {
-      # loop through the files, skipping . and .., and recursing if necessary
-      if ( strcmp( $file, '.' )==0 || strcmp( $file, '..' )==0 ) continue;
-      $filepath = $start_dir . '/' . $file;
-      if ( is_dir( $filepath ) )
-        $files = array_merge( $files, listdir( $filepath ) );
-      else
-        array_push( $files, $filepath );
-    }
-    closedir( $fh );
-  } else {
-    # false if the function was called with an invalid non-directory argument
-    $files = false;
-  }
-  return $files;
-}
-
-function tc_success() {
-echo '<div class="tc-success">Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.<br />
-<br />
-Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.
-<h3>Codex Links</h3>
-<p>
-<a href="http://codex.wordpress.org/Theme_Development">Theme Development</a><br />
-<a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a><br />
-<a href="http://codex.wordpress.org/Theme_Unit_Test">Theme Unit Tests</a>
-</p>
-<h3>Contact</h3>
-<p>Theme-Check is maintained by <a href="http://profiles.wordpress.org/users/pross/">Pross</a> and <a href="http://profiles.wordpress.org/users/otto42/">Otto42</a><br />
-If you think you have found a bug please report it in the <a href="http://wordpress.org/tags/theme-check?forum_id=10">forums</a> or create a <a href="https://github.com/Pross/theme-check/issues">ticket on Github</a>.
-</p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6">
-<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</div>
-';
-}
-
-function tc_form() {
-	$themes = get_themes();
-	echo '<form action="themes.php?page=themecheck" method="POST">';
-	echo '<select name="themename">';
-	foreach($themes as $name => $location) {
-		echo '<option ';
-		if ( basename(TEMPLATEPATH) === $location['Stylesheet'] ) echo 'selected ';
-		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
-	}
-	echo '</select>';
-	echo '<input type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
-	echo '</form>';
 }
