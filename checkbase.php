@@ -185,10 +185,8 @@ function tc_add_headers( $extra_headers ) {
 function tc_intro() {
 echo '<h3>Contact</h3>
 <p>Theme-Check is maintained by <a href="http://profiles.wordpress.org/users/pross/">Pross</a> and <a href="http://profiles.wordpress.org/users/otto42/">Otto42</a><br />
-If you think you have found a bug please report it in the <a href="http://wordpress.org/tags/theme-check?forum_id=10">forums</a> or create a <a href="https://github.com/Pross/theme-check/issues">ticket on Github</a>.
-</p>
-<p>If you have found a bug or would like to make a suggestion or contribution why not join the  <a href="http://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a><br />
-or leave a post on the <a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a>.
+If you have found a bug or would like to make a suggestion or contribution why not join the <a href="http://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a><br />
+or leave a post on the <a href="http://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.<br />
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6">
