@@ -5,6 +5,17 @@ function check_main( $theme ) {
 	$theme = get_theme_root( $theme ) . "/$theme";
 	$files = listdir( $theme );
 	$data = get_theme_data( $theme . '/style.css' );
+
+	if ( $data[ 'Template' ] ) {
+		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
+		 $parent = get_theme_root( $data[ 'Template' ] ) . '/' . $data['Template'];
+		 if ( !get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
+			echo '<h2>Parent theme <strong>' . $data[ 'Template' ] . ' not found! You have to have parent AND child-theme installed!';
+			return;
+		 }
+	$files = array_merge( listdir( $parent ), $files );
+	}
+
 	if ( $files ) {
 		foreach( $files as $key => $filename ) {
 			if ( substr( $filename, -4 ) == '.php' ) {
@@ -75,8 +86,7 @@ function check_main( $theme ) {
 		echo '<br /><div class="tc-data">' . __( 'Description', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Description' ] . '</div>';
 		echo '<br style="clear:both" />';
 		if ( $data[ 'Template' ] ) {
-			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': ' . $data[ 'Template' ] . ' <strong>exiting as child themes are not yet supported!</strong>';
-			return;
+			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': <strong>' . $data[ 'Template' ] . '</strong>. These files have been included automatically!';
 		 }
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
