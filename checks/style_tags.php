@@ -28,7 +28,7 @@ class Style_Tags implements themecheck {
 			'buddypress', 'holiday', 'photoblogging', 'seasonal' );
 
 		foreach( $data[ 'Tags' ] as $tag ) {
-			if ( !in_array( $tag, $allowed_tags ) ) $this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found wrong tag, remove <strong>{$tag}</strong> from your style.css header.";
+			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) $this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found wrong tag, remove <strong>{$tag}</strong> from your style.css header.";
 		}
 		return $ret;
 	}

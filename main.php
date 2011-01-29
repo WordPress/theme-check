@@ -8,11 +8,12 @@ function check_main( $theme ) {
 
 	if ( $data[ 'Template' ] ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
-		 $parent = get_theme_root( $data[ 'Template' ] ) . '/' . $data['Template'];
-		 if ( !get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
+		$parent = get_theme_root( $data[ 'Template' ] ) . '/' . $data['Template'];
+		if ( !get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
 			echo '<h2>Parent theme <strong>' . $data[ 'Template' ] . ' not found! You have to have parent AND child-theme installed!';
 			return;
-		 }
+		
+		}
 	$files = array_merge( listdir( $parent ), $files );
 	}
 
