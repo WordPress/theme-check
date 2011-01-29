@@ -183,30 +183,33 @@ function tc_add_headers( $extra_headers ) {
 }
 
 function tc_intro() {
-echo '<h3>Contact</h3>
-<p>Theme-Check is maintained by <a href="http://profiles.wordpress.org/users/pross/">Pross</a> and <a href="http://profiles.wordpress.org/users/otto42/">Otto42</a><br />
-If you have found a bug or would like to make a suggestion or contribution why not join the <a href="http://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a><br />
-or leave a post on the <a href="http://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.<br />
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6">
-<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>';
+	echo '<h2>About</h2>';
+	echo '<p>The theme check plugin is an easy way to test your theme and make sure it\'s up to spec with the latest theme review standards.<br />';
+	echo 'With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.</p>';
+	echo '<h2>Contact</h2>';
+	echo '<p>Theme-Check is maintained by <a href="http://profiles.wordpress.org/users/pross/">Pross</a> and <a href="http://profiles.wordpress.org/users/otto42/">Otto42</a><br />';
+	echo 'If you have found a bug or would like to make a suggestion or contribution why not join the <a href="http://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a><br />';
+	echo 'or leave a post on the <a href="http://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.<br />';
+	echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6"><input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>';
+	echo '<h2>Contributors</h2>';
+	echo '<h3>localization</h3>';
+	echo '<p><ul>';
+	echo '<li><a href="http://www.onedesigns.com/">Daniel Tara</a></li>';
+	echo '<li><a href="http://themeid.com/">Emil Uzelac</a></li>';
+	echo '</ul></p>';
+	echo '<h3>Testers</h3>';
+	echo '<p><a href="http://make.wordpress.org/themes/">The WordPress Theme Review Team</a></p>'; 
 }
 
 function tc_success() {
-echo '<div class="tc-success">Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.<br />
-<br />
-Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.
-<h3>Codex Links</h3>
-<p>
-<a href="http://codex.wordpress.org/Theme_Development">Theme Development</a><br />
-<a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a><br />
-<a href="http://codex.wordpress.org/Theme_Unit_Test">Theme Unit Tests</a>
-</p>
-</div>
-';
+	echo '<div class="tc-success">Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.<br />';
+	echo '<br />Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.';
+	echo '<h3>Codex Links</h3>';
+	echo '<p><ul>';
+	echo '<li><a href="http://codex.wordpress.org/Theme_Development">Theme Development</a></li>';
+	echo '<li><a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a></li>';
+	echo '<li><a href="http://codex.wordpress.org/Theme_Unit_Test">Theme Unit Tests</a></li>';
+	echo '</ul></p></div>';
 }
 
 function tc_form() {
