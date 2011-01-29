@@ -46,7 +46,7 @@ function check_main( $theme ) {
 
 		.tc-data {
 			float: left;
-			width: 68px;
+			width: 75px;
 			clear: both;
 		}
 
