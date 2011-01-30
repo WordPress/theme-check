@@ -50,14 +50,14 @@ function display_themechecks() {
 	if (!empty($errors)) {
 		rsort($errors);
 		foreach ($errors as $e) {
-		if ( defined( 'REVIEWER' ) ) {
+		if ( defined( 'TC_TRAC' ) ) {
 			$results .= tc_trac( $e ) . "\r\n";
 		} else {
 			$results .= '<li>' . tc_trac( $e ) . '</li>';
 			}
 		}
 	}
-	if ( defined( 'REVIEWER' ) ) {
+	if ( defined( 'TC_TRAC' ) ) {
 
 		if ( defined( 'TC_PRE' ) ) $results = TC_PRE . $results;
 		$results = '<textarea cols=140 rows=20>' . strip_tags( $results );
@@ -223,5 +223,6 @@ function tc_form() {
 	}
 	echo '</select>';
 	echo '<input type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
+	if ( defined( 'TC_PRE' ) || defined( 'TC_POST') ) echo ' <input name="trac" type="checkbox" /> Output in Trac format.';
 	echo '</form>';
 }

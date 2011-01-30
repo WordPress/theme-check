@@ -42,6 +42,7 @@ function themecheck_do_page() {
 	}
 
 	if ( isset( $_POST[ 'themename' ] ) ) {
+		if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
 		check_main( $_POST[ 'themename' ] );
 		echo '</div>';
 	}
