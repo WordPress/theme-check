@@ -3,9 +3,9 @@ Contributors: pross, Otto42
 Author URI: http://www.pross.org.uk
 Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
-Tested Up To: 3.1
+Tested Up To: 3.2
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20101228.3
+Stable tag: 20110201.1
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -31,7 +31,35 @@ This theme checker is not perfect, and never will be. It is only a tool to help 
 
 This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [Theme Reviewers mailing list](http://lists.wordpress.org/mailman/listinfo/theme-reviewers).
 
+== Other Notes ==
+
+= How to enable trac formatting =
+
+The Theme Review team use this plugin while reviewing themes and copy/paste the output into trac tickets, the trac system has its own markup language.
+To enable trac formatting in Theme-Check you need to define a couple of variables in wp-config.php:
+*TC_PRE* and *TC_POST* are used as a ticket header and footer.
+Examples:
+`define( 'TC_PRE', 'Theme Review:[[br]]
+- Themes should be reviewed using "define(\'WP_DEBUG\', true);" in wp-config.php[[br]]
+- Themes should be reviewed using the test data from the Theme Checklists (TC)
+-----
+' );`
+
+`define( 'TC_POST', 'Feel free to make use of the contact details below if you have any questions,
+comments, or feedback:[[br]]
+[[br]]
+* Leave a comment on this ticket[[br]]
+* Send an email to the Theme Review email list[[br]]
+* Use the #wordpress-themes IRC channel on Freenode.' );`
+If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
+
 == Changelog ==
+
+= 20110201.1 =
+* i18n working
+* sr_RS de_DE ro_RO langs props Daniel Tara and Emil Uzelac.
+* Child theme support added, checks made against parent AND child at runtime.
+* Trac formatting button added for reviewers.
 
 = 20101228.3 =
 * Last revision for 3.1 (hopefully)
