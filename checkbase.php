@@ -221,7 +221,7 @@ function tc_form() {
 		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
-	echo '<input type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
+	echo '<input class="button" type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) echo ' <input name="trac" type="checkbox" /> ' . __( 'Output in Trac format.', 'themecheck' );
 	echo '</form>';
 }
