@@ -12,8 +12,8 @@ class TextDomainCheck implements themecheck {
 		if ( strpos( $css, 'Theme Name: Twenty Ten' ) ) return $ret;
 
 		$checks = array(
-		'/_[e|_]\([^,]*,\s?[\'|"]twentyten[\'|"]\s?\)/' => 'twentyten text domain is being used!', 
-		'/_[e|_]\(\s?[\'|"][^\'|"]*[\'|"]\s?\);/' => 'You have not included a text domain!' );
+		'/_[e|_]\([^,]*,\s?[\'|"]twentyten[\'|"]\s?\)/' => __( 'twentyten text domain is being used!', 'themecheck' ), 
+		'/_[e|_]\(\s?[\'|"][^\'|"]*[\'|"]\s?\);/' => __( 'You have not included a text domain!', 'themecheck' ) );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 		foreach ( $checks as $key => $check ) {
@@ -21,7 +21,7 @@ class TextDomainCheck implements themecheck {
 			if ( preg_match( $key, $phpfile, $matches ) ) {
 				$filename = tc_filename( $php_key );
 				$error = tc_grep( $matches[0], $php_key );
-				$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}";
+				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
 				}
 			}
 		}
