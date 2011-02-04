@@ -37,7 +37,6 @@ function check_main( $theme ) {
 		.tc-box {
 		padding:10px 0;
 		border-top:1px solid #ccc;
-		border-bottom: 1px solid #ccc;
 		}
 
 		.tc-warning, .tc-required, .tc-fail {
