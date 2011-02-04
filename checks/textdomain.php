@@ -21,8 +21,7 @@ class TextDomainCheck implements themecheck {
 			if ( preg_match( $key, $phpfile, $matches ) ) {
 				$filename = tc_filename( $php_key );
 				$error = tc_grep( $matches[0], $php_key );
-				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}";
-				$ret = false;
+				$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}";
 				}
 			}
 		}

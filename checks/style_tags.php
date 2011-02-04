@@ -18,7 +18,6 @@ class Style_Tags implements themecheck {
 
 		if ( !$data[ 'Tags' ] ) {
 			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: <strong>Tags:</strong> is either empty or missing in style.css header.", "themecheck" );
-			$ret = false;
 			return $ret;
 		}
 
@@ -29,6 +28,7 @@ class Style_Tags implements themecheck {
 
 		foreach( $data[ 'Tags' ] as $tag ) {
 			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) $this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found wrong tag, remove <strong>{$tag}</strong> from your style.css header.";
+			$ret = false;
 		}
 		return $ret;
 	}
