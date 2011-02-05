@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/theme-check_svn\n"
-"POT-Creation-Date: 2011-01-31 18:56:46+00:00\n"
+"POT-Creation-Date: 2011-02-05 19:47:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,6 +41,12 @@ msgid ""
 "recommended that the theme implement editor styling, so as to make the "
 "editor content match the resulting post output in the theme, for a better "
 "user experience."
+msgstr ""
+
+#: checks/screenshot.php:26
+msgid ""
+"<span class='tc-lead tc-warning'>WARNING</span>: No screenshot detected! "
+"Please include a screenshot.png."
 msgstr ""
 
 #: checks/navmenu.php:14
@@ -83,6 +89,14 @@ msgid ""
 "<strong>add_custom_background()</strong> was found in the theme. If the "
 "theme uses background images or solid colors for the background, then it is "
 "recommended that the theme implement this functionality."
+msgstr ""
+
+#: checks/textdomain.php:15
+msgid "twentyten text domain is being used!"
+msgstr ""
+
+#: checks/textdomain.php:16
+msgid "You have not included a text domain!"
 msgstr ""
 
 #: checks/badthings.php:9
@@ -368,59 +382,59 @@ msgid ""
 "Themes should use <strong>add_theme_page()</strong> for adding admin pages."
 msgstr ""
 
-#: main.php:77
+#: main.php:76
 msgid "Theme Info"
 msgstr ""
 
-#: main.php:78
+#: main.php:77
 msgid "Title"
 msgstr ""
 
-#: main.php:79
+#: main.php:78
 msgid "Version"
 msgstr ""
 
-#: main.php:80
+#: main.php:79
 msgid "Author"
 msgstr ""
 
-#: main.php:81
+#: main.php:80
 msgid "Author URI"
 msgstr ""
 
-#: main.php:82
+#: main.php:81
 msgid "Theme URI"
 msgstr ""
 
-#: main.php:83
+#: main.php:82
 msgid "License"
 msgstr ""
 
-#: main.php:84
+#: main.php:83
 msgid "LicenseURI"
 msgstr ""
 
-#: main.php:86
+#: main.php:85
 msgid "Tags"
 msgstr ""
 
-#: main.php:87
+#: main.php:86
 msgid "Description"
 msgstr ""
 
-#: main.php:90
+#: main.php:89
 msgid "This is a child theme. The parent theme is"
 msgstr ""
 
-#: main.php:101
+#: main.php:100
 msgid "One or more errors were found for "
 msgstr ""
 
-#: main.php:103
+#: main.php:102
 msgid " passed the tests"
 msgstr ""
 
-#: main.php:106
+#: main.php:105
 msgid ""
 "<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a "
 "href=\"http://codex.wordpress.org/Editing_wp-config.php\">debug enabled</a> "
