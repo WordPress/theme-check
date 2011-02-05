@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.2
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20110201.1
+Stable tag: 20110201.2
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -54,6 +54,11 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
+
+= 20110201.2 =
+* UI bug fixes [forum post](http://bit.ly/ff7amN) props Mamaduka.
+* Textdomain checks for twentyten and no domain.
+* Fix div not closing props Mamaduka.
 
 = 20110201.1 =
 * i18n working
