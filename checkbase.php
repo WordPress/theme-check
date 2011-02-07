@@ -137,7 +137,7 @@ function tc_trac( $e ) {
 		$trac_left = array( '<strong>', '</strong>' );
 		$trac_right= array( "'''", "'''" );
 		$html_link = '/<a\s?href\s?=\s?[\'|"]([^"|\']*)[\'|"]>([^<]*)<\/a>/i';
-		$html_new = '[$1 $3]';
+		$html_new = '[$1 $2]';
 		if ( defined( 'TC_TRAC' ) ) {
 			$e = preg_replace( $html_link, $html_new, $e);
 			$e = str_replace($trac_left, $trac_right, $e);
