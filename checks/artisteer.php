@@ -14,6 +14,7 @@ class ArtisteerCheck implements themecheck {
 		if (
 			strpos( $php, 'art_normalize_widget_style_tokens' ) !== false
 			|| strpos( $php, 'art_include_lib' ) !== false
+			|| strpos( $php, '_remove_last_slash($url) {' ) !== false 
 			|| strpos( $php, 'adi_normalize_widget_style_tokens' ) !== false
 			|| strpos( $php, 'm_normalize_widget_style_tokens' ) !== false
 			|| strpos ( $php, "bw = '<!--- BEGIN Widget --->';" ) !== false
