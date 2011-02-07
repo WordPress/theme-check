@@ -12,7 +12,7 @@ class TimThumbCheck implements themecheck {
 			$version = $matches[1];
 			$filename = tc_filename( $name );
 
-			if ( $version < 1.21 ) { //set to latest timthumb http://code.google.com/p/timthumb/source/browse/trunk/timthumb.php
+			if ( $version < 1.22 ) { //set to latest timthumb http://code.google.com/p/timthumb/source/browse/trunk/timthumb.php
 				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: TimThumb detected in file <strong>{$filename}</strong>. Version <strong>{$version}</strong> is out of date!";
 				$ret = false;
 			} else {
