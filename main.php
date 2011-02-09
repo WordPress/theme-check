@@ -1,11 +1,10 @@
 <?php
 function check_main( $theme ) {
-	global $themechecks;
-
+	global $themechecks, $data, $themename;
+	$themename = $theme;
 	$theme = get_theme_root( $theme ) . "/$theme";
 	$files = listdir( $theme );
 	$data = get_theme_data( $theme . '/style.css' );
-
 	if ( $data[ 'Template' ] ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
 		$parent = get_theme_root( $data[ 'Template' ] ) . '/' . $data['Template'];

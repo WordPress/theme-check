@@ -4,12 +4,10 @@ class TextDomainCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
+		global $data;
 		$ret = true;
-		$css = implode( ' ', $css_files );
 		checkcount();
-
-		if ( strpos( $css, 'Theme Name: Twenty Ten' ) ) return $ret;
+		if ( $data['Name'] === 'Twenty Ten' ) return $ret;
 
 		$checks = array(
 		'/_[e|_]\([^,]*,\s?[\'|"]twentyten[\'|"]\s?\)/' => __( 'twentyten text domain is being used!', 'themecheck' ), 
