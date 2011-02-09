@@ -10,7 +10,7 @@ class AdminMenu implements themecheck {
 //check for levels deprecated in 2.0 in creating menus.
 
 		$checks = array(
-			'/(add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page\s?\([^,]*,[^,]*,\s[\'|"]?(level_[0-9]|[0-9])[^;|\r|\r\n]*)/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>', 'themecheck' ),
+			'/([^_]add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page\s?\([^,]*,[^,]*,\s[\'|"]?(level_[0-9]|[0-9])[^;|\r|\r\n]*)/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>', 'themecheck' ),
 			'/[^a-z0-9](current_user_can\s?\(\s?[\'\"]level_[0-9][\'\"]\s?\))[^\r|\r\n]*/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>', 'themecheck' )
 			);
 
@@ -31,7 +31,7 @@ class AdminMenu implements themecheck {
 //check for add_admin_page
 
 		$checks = array(
-			'/(add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|plugins|users|management|options)_page\()/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'themecheck' )
+			'/([^_]add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|plugins|users|management|options)_page\()/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'themecheck' )
 			);
 
 
