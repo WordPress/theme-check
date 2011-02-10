@@ -51,7 +51,7 @@ function display_themechecks() {
 		rsort($errors);
 		foreach ($errors as $e) {
 		if ( defined( 'TC_TRAC' ) ) {
-			$results .= tc_trac( $e ) . "\r\n";
+			$results .= '* ' . tc_trac( $e ) . "\r\n";
 		} else {
 			$results .= '<li>' . tc_trac( $e ) . '</li>';
 			}
@@ -128,23 +128,22 @@ function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
 }
 
 function tc_filename( $file ) {
-		$filename = ( preg_match( '/themes\/[a-z0-9]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
-		return $filename;
-
+	$filename = ( preg_match( '/themes\/[a-z0-9]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
+	return $filename;
 }
 
 function tc_trac( $e ) {
-		$trac_left = array( '<strong>', '</strong>' );
-		$trac_right= array( "'''", "'''" );
-		$html_link = '/<a\s?href\s?=\s?[\'|"]([^"|\']*)[\'|"]>([^<]*)<\/a>/i';
-		$html_new = '[$1 $2]';
-		if ( defined( 'TC_TRAC' ) ) {
-			$e = preg_replace( $html_link, $html_new, $e);
-			$e = str_replace($trac_left, $trac_right, $e);
-			$e = preg_replace( '/<pre.*?>/', "\r\n{{{\r\n", $e);
-			$e = str_replace( '</pre>', "\r\n}}}\r\n", $e);
-		}
-		return $e;
+	$trac_left = array( '<strong>', '</strong>' );
+	$trac_right= array( "'''", "'''" );
+	$html_link = '/<a\s?href\s?=\s?[\'|"]([^"|\']*)[\'|"]>([^<]*)<\/a>/i';
+	$html_new = '[$1 $2]';
+	if ( defined( 'TC_TRAC' ) ) {
+		$e = preg_replace( $html_link, $html_new, $e );
+		$e = str_replace( $trac_left, $trac_right, $e );
+		$e = preg_replace( '/<pre.*?>/', "\r\n{{{\r\n", $e );
+		$e = str_replace( '</pre>', "\r\n}}}\r\n", $e );
+	}
+	return $e;
 }
 
 function listdir( $start_dir='.' ) {
