@@ -4,13 +4,12 @@ class TextDomainCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-		global $data;
+		global $data, $themename;
 		$ret = true;
 		checkcount();
 		if ( $data['Name'] === 'Twenty Ten' ) return $ret;
 
 		$checks = array(
-		'/_[e|_]\([^,]*,\s?[\'|"]twentyten[\'|"]\s?\)/' => __( 'twentyten text domain is being used!', 'themecheck' ), 
 		'/_[e|_]\(\s?[\'|"][^\'|"]*[\'|"]\s?\);/' => __( 'You have not included a text domain!', 'themecheck' ) );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -20,6 +19,32 @@ class TextDomainCheck implements themecheck {
 				$filename = tc_filename( $php_key );
 				$error = tc_grep( $matches[0], $php_key );
 				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
+				}
+			}
+		}
+
+		$checks = array(
+		'/_[e|_]\([^,|;]*,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' ) );
+		foreach ( $php_files as $php_key => $phpfile ) {
+			foreach ( $checks as $key => $check ) {
+				checkcount();
+				if ( preg_match_all( $key, $phpfile, $matches ) ) {
+					$filename = tc_filename( $php_key );
+					$count = 0;
+					while ( isset( $matches[1][$count] ) ) {
+						if ( $matches[1][$count] !== $themename ) {
+							$error = tc_grep( $matches[0][$count], $php_key );
+							if ( $matches[1][$count] === 'twentyten' ):
+								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. The twentyten text domain is being used!{$error}", "themecheck" );
+							else:
+							if ( defined( 'TC_TEST' ) && $matches[1][$count] !== $themename ) {
+								$error = tc_grep( $matches[0][$count], $php_key );
+								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check} You are using: <strong>{$matches[1][$count]}</strong>{$error}", "themecheck" );
+							}
+							endif;
+						}
+					$count++;
+					} //end while
 				}
 			}
 		}

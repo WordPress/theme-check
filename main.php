@@ -74,6 +74,7 @@ function check_main( $theme ) {
 		// second loop, to display the errors
 		echo '<strong>' . __( 'Theme Info', 'themecheck' ) . ': </strong>';
 		echo '<br /><div class="tc-data">' . __( 'Title', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>';
+		if ( defined( 'TC_TEST' ) ) echo '<br /><div class="tc-data">' . __( 'Slug', 'themecheck' ) . '</div><div class="tc-header">' . $themename . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Author', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Author URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>';
