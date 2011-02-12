@@ -167,7 +167,7 @@ function listdir( $start_dir='.' ) {
 	return $files;
 }
 
-function html_print_r( $data ) {
+function tc_print_r( $data ) {
         $out = "\n<pre class='html-print-r'";
         $out .= " style='border: 1px solid #ccc; padding: 7px;'>\n";
         $out .= esc_html( print_r( $data, TRUE ) );
