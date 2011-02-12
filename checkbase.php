@@ -216,7 +216,7 @@ function tc_form() {
 	echo '<select name="themename">';
 	foreach( $themes as $name => $location ) {
 		echo '<option ';
-		if ( basename( TEMPLATEPATH ) === $location['Stylesheet'] ) echo 'selected ';
+		if ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) echo 'selected ';
 		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
