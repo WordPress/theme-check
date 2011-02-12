@@ -176,7 +176,7 @@ function tc_print_r( $data ) {
     }
 
 function tc_add_headers( $extra_headers ) {
-	$extra_headers = array( 'License', 'License URI' );
+	$extra_headers = array( 'License', 'License URI', 'Template Version' );
 	return $extra_headers;
 }
 

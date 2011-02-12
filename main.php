@@ -11,9 +11,18 @@ function check_main( $theme ) {
 		if ( !get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
 			echo '<h2>Parent theme <strong>' . $data[ 'Template' ] . ' not found! You have to have parent AND child-theme installed!';
 			return;
-		
 		}
-	$files = array_merge( listdir( $parent ), $files );
+		$parent_data = get_theme_data( $parent . '/style.css' );
+		$themename = basename( $parent );
+		$files = array_merge( listdir( $parent ), $files );
+		if ( !$data['Template Version'] ) {
+			echo 'Child theme does not have the <strong>Template Version</strong> tag in style.css. Unable to continue!';
+		return;
+		}
+		if ( $data['Template Version'] > $parent_data['Version'] ) {
+			echo "This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update to continue.";
+		return;
+		}
 	}
 
 	if ( $files ) {
@@ -56,7 +65,7 @@ function check_main( $theme ) {
 
 		.tc-data {
 			float: left;
-			width: 75px;
+			width: 120px;
 			clear: both;
 		}
 
@@ -76,6 +85,7 @@ function check_main( $theme ) {
 		echo '<br /><div class="tc-data">' . __( 'Title', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>';
 		if ( defined( 'TC_TEST' ) ) echo '<br /><div class="tc-data">' . __( 'Slug', 'themecheck' ) . '</div><div class="tc-header">' . $themename . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>';
+		 if ( !empty( $parent_data ) ) echo '<br /><div class="tc-data">' . __( 'Template Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Template Version' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Author', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Author URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Theme URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</div>';
@@ -87,6 +97,7 @@ function check_main( $theme ) {
 		echo '<br style="clear:both" />';
 		if ( $data[ 'Template' ] ) {
 			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': <strong>' . $data[ 'Template' ] . '</strong>. These files have been included automatically!';
+			echo ( $data['Template Version'] < $parent_data['Version'] ) ? "<br />Child theme is only tested up to version {$data['Template Version']} of {$parent_data['Title']} breakage may occur! {$parent_data['Title']} installed version is {$parent_data['Version']}" : '';
 		 }
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );

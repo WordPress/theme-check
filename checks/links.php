@@ -18,7 +18,7 @@ class Check_Links implements themecheck {
 
 			$out = array_unique( $out );
 			foreach( $out as $key ) {
-				if ( $key[0] && !strpos( $key[0], $data['URI'] ) && !strpos( $key[0], $data['AuthorURI'] ) && !strpos( $key[0], 'wordpress.' ) ) {
+				if ( !empty( $data['AuthorURI'] ) && $key[0] && !strpos( $key[0], $data['URI'] ) && !strpos( $key[0], $data['AuthorURI'] ) && !strpos( $key[0], 'wordpress.' ) ) {
 					preg_match( '/\<a\s?href\s?=\s?["|\'](.*?)[\'|"](.*?)\>(.*?)\<\/a\>/is', $key[0], $stripped );
 					$grep .= tc_grep( $stripped[1], $php_key );
 					}
