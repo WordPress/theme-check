@@ -29,6 +29,9 @@ class TextDomainCheck implements themecheck {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match_all( $key, $phpfile, $matches ) ) {
+					foreach ($matches[0] as $count => $domaincheck) {
+						if ( preg_match( '/_[e|_]\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $domaincheck ) ) unset( $matches[1][$count] ); //filter out false positives
+					}
 					$filename = tc_filename( $php_key );
 					$count = 0;
 					while ( isset( $matches[1][$count] ) ) {
@@ -37,7 +40,7 @@ class TextDomainCheck implements themecheck {
 							if ( $matches[1][$count] === 'twentyten' ):
 								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. The twentyten text domain is being used!{$error}", "themecheck" );
 							else:
-							if ( defined( 'TC_TEST' ) && $matches[1][$count] !== $themename ) {
+							if ( defined( 'TC_TEST' ) && strpos( $themename, $matches[1][$count] ) === false ) {
 								$error = tc_grep( $matches[0][$count], $php_key );
 								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check} You are using: <strong>{$matches[1][$count]}</strong>{$error}", "themecheck" );
 							}
