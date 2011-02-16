@@ -40,7 +40,7 @@ class TextDomainCheck implements themecheck {
 							if ( $matches[1][$count] === 'twentyten' ):
 								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. The twentyten text domain is being used!{$error}", "themecheck" );
 							else:
-							if ( defined( 'TC_TEST' ) && strpos( $themename, $matches[1][$count] ) === false ) {
+							if ( defined( 'TC_TEST' ) && strpos( strtolower( $themename ), $matches[1][$count] ) === false ) {
 								$error = tc_grep( $matches[0][$count], $php_key );
 								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check} You are using: <strong>{$matches[1][$count]}</strong>{$error}", "themecheck" );
 							}

@@ -14,20 +14,20 @@ class Check_Links implements themecheck {
 			$title_re = '[[:blank:][:alnum:][:punct:]]*';	// 0 or more: any num, letter(upper/lower) or any punc symbol
 			$space_re = '(\\s*)';
 			if ( preg_match_all( "/(<a)(\\s+)(href" . $space_re . "=" . $space_re . "\"" . $space_re . "((http|https|ftp):\\/\\/)?)" . $url_re . "(\"" . $space_re . $title_re . $space_re . ">)" . $title_re . "(<\\/a>)/is", $phpfile, $out, PREG_SET_ORDER ) ) {
-			$filename = tc_filename( $php_key );
-
-			$out = array_unique( $out );
-			foreach( $out as $key ) {
-				if ( !empty( $data['AuthorURI'] ) && $key[0] && !strpos( $key[0], $data['URI'] ) && !strpos( $key[0], $data['AuthorURI'] ) && !strpos( $key[0], 'wordpress.' ) ) {
-					preg_match( '/\<a\s?href\s?=\s?["|\'](.*?)[\'|"](.*?)\>(.*?)\<\/a\>/is', $key[0], $stripped );
-					$grep .= tc_grep( $stripped[1], $php_key );
+				$filename = tc_filename( $php_key );
+				$out = array_unique( $out );
+				foreach( $out as $key ) {
+					if ( preg_match( '/\<a\s?href\s?=\s?["|\'](.*?)[\'|"](.*?)\>(.*?)\<\/a\>/is', $key[0], $stripped ) ) {
+						if ( !empty( $data['AuthorURI'] ) && $stripped[1] && !strpos( $stripped[1], $data['URI'] ) && !strpos( $stripped[1], $data['AuthorURI'] ) && !strpos( $stripped[1], 'wordpress.' ) ) {
+						$grep .= tc_grep( $stripped[1], $php_key );
+						}
 					}
-				}
 				if ( $grep ) $this->error[] = "<span class='tc-lead tc-info'>INFO</span>: Possible hard-coded links were found in the file <strong>{$filename}</strong>.{$grep}";
+				return $ret;
 				}
 			}
-			return $ret;
 		}
+	}
 	function getError() { return $this->error; }
 }
 $themechecks[] = new Check_Links;
