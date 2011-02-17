@@ -50,12 +50,17 @@ function display_themechecks() {
 	if (!empty($errors)) {
 		rsort($errors);
 		foreach ($errors as $e) {
+
 		if ( defined( 'TC_TRAC' ) ) {
-			$results .= '* ' . tc_trac( $e ) . "\r\n";
+			$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '* ' . tc_trac( $e ) . "\r\n";
 		} else {
-			$results .= '<li>' . tc_trac( $e ) . '</li>';
+			$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '<li>' . tc_trac( $e ) . '</li>';
 			}
 		}
+
+
+
+
 	}
 	if ( defined( 'TC_TRAC' ) ) {
 
@@ -221,5 +226,6 @@ function tc_form() {
 	echo '</select>';
 	echo '<input class="button" type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) echo ' <input name="trac" type="checkbox" /> ' . __( 'Output in Trac format.', 'themecheck' );
+	echo ' <input name="s_info" type="checkbox" /> ' . __( 'Suppress INFO.', 'themecheck' );
 	echo '</form>';
 }
