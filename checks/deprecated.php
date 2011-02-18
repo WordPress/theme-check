@@ -151,7 +151,7 @@ class Deprecated implements themecheck {
 				$alt = $check[ $key ];
 				if ( preg_match( '/[\s?]' . $key . '\(/', $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
-					$error = rtrim( $matches[0], '(' );
+					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$version = $check[0];
 					$grep = tc_grep( $error, $php_key );
 					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";

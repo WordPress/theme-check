@@ -19,7 +19,7 @@ class Time_Date implements themecheck {
 			if ( preg_match( $key, $phpfile, $matches ) ) {
 				$filename = tc_filename( $php_key );
 				$error = trim( esc_html( rtrim( $matches[0], '(' ) ) );
-				$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: At least one hard coded date was found in the file <strong>{$filename}</strong>. Consider get_option( 'date_format' )";
+				$this->error[] = '<span class="tc-lead tc-info">INFO</span>: ' . sprintf( __( 'At least one hard coded date was found in the file <strong>%s</strong>. Consider get_option( \'date_format\' )', 'themecheck' ), $filename );
 				}
 			}
 		}

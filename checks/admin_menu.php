@@ -10,7 +10,7 @@ class AdminMenu implements themecheck {
 //check for levels deprecated in 2.0 in creating menus.
 
 		$checks = array(
-			'/([^_]add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page\s?\([^,]*,[^,]*,\s[\'|"]?(level_[0-9]|[0-9])[^;|\r|\r\n]*)/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>', 'themecheck' ),
+			'/([^_](add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page)\s?\([^,]*,[^,]*,\s[\'|"]?(level_[0-9]|[0-9])[^;|\r|\r\n]*)/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>', 'themecheck' ),
 			'/[^a-z0-9](current_user_can\s?\(\s?[\'\"]level_[0-9][\'\"]\s?\))[^\r|\r\n]*/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="http://codex.wordpress.org/Roles_and_Capabilities">Roles_and_Capabilities</a>', 'themecheck' )
 			);
 
@@ -19,8 +19,7 @@ class AdminMenu implements themecheck {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
-
-					$grep = tc_grep( $matches[0], $php_key );
+					$grep = tc_grep( $matches[2], $php_key );
 					$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: <strong>{$filename}</strong>. {$check}{$grep}";
 					$ret = false;
 				}
@@ -40,7 +39,7 @@ class AdminMenu implements themecheck {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
-					$error = rtrim( $matches[0], '(' );
+					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$grep = tc_grep( $error, $php_key );
 					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$filename}</strong>. {$check}{$grep}";
 					$ret = false;

@@ -15,12 +15,8 @@ function check_main( $theme ) {
 		$parent_data = get_theme_data( $parent . '/style.css' );
 		$themename = basename( $parent );
 		$files = array_merge( listdir( $parent ), $files );
-		if ( !$data['Template Version'] ) {
-			echo 'Child theme does not have the <strong>Template Version</strong> tag in style.css. Unable to continue!';
-		return;
-		}
 		if ( $data['Template Version'] > $parent_data['Version'] ) {
-			echo "This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update to continue.";
+			echo "This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update the parent theme to continue.";
 		return;
 		}
 	}
@@ -97,7 +93,11 @@ function check_main( $theme ) {
 		echo '<br style="clear:both" />';
 		if ( $data[ 'Template' ] ) {
 			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': <strong>' . $data[ 'Template' ] . '</strong>. These files have been included automatically!';
-			echo ( $data['Template Version'] < $parent_data['Version'] ) ? "<br />Child theme is only tested up to version {$data['Template Version']} of {$parent_data['Title']} breakage may occur! {$parent_data['Title']} installed version is {$parent_data['Version']}" : '';
+			if ( empty( $data['Template Version'] ) ) {
+				echo '<br />Child theme does not have the <strong>Template Version</strong> tag in style.css.';
+			} else {
+				echo ( $data['Template Version'] < $parent_data['Version'] ) ? "<br />Child theme is only tested up to version {$data['Template Version']} of {$parent_data['Title']} breakage may occur! {$parent_data['Title']} installed version is {$parent_data['Version']}" : '';
+			}
 		 }
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
