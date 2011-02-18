@@ -15,10 +15,6 @@ function check_main( $theme ) {
 		$parent_data = get_theme_data( $parent . '/style.css' );
 		$themename = basename( $parent );
 		$files = array_merge( listdir( $parent ), $files );
-		if ( $data['Template Version'] > $parent_data['Version'] ) {
-			echo "This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update the parent theme to continue.";
-		return;
-		}
 	}
 
 	if ( $files ) {
@@ -61,7 +57,7 @@ function check_main( $theme ) {
 
 		.tc-data {
 			float: left;
-			width: 120px;
+			width: 85px;
 			clear: both;
 		}
 
@@ -81,7 +77,6 @@ function check_main( $theme ) {
 		echo '<br /><div class="tc-data">' . __( 'Title', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Theme slug', 'themecheck' ) . '</div><div class="tc-header">' . $themename . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>';
-		 if ( !empty( $parent_data ) ) echo '<br /><div class="tc-data">' . __( 'Template Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Template Version' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Author', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Author URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>';
 		echo '<br /><div class="tc-data">' . __( 'Theme URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</div>';
@@ -92,6 +87,9 @@ function check_main( $theme ) {
 		echo '<br /><div class="tc-data">' . __( 'Description', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Description' ] . '</div>';
 		echo '<br style="clear:both" />';
 		if ( $data[ 'Template' ] ) {
+		if ( $data['Template Version'] > $parent_data['Version'] ) {
+			echo "<br />This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update the parent theme.";
+		}
 			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': <strong>' . $data[ 'Template' ] . '</strong>. These files have been included automatically!';
 			if ( empty( $data['Template Version'] ) ) {
 				echo '<br />Child theme does not have the <strong>Template Version</strong> tag in style.css.';
