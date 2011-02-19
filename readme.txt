@@ -77,7 +77,7 @@ perfect yet, need more examples to look for ).
 numbers.
 * <?= detected properly, short tags outputted with line umbers.
 * Mostly internationalized, needs translations now.
-* Bug fixes
+* Bug fixes.
 
 = 20101228.2 =
 * Added menu checking.
