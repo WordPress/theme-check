@@ -55,6 +55,9 @@ If **either** of these two vars are defined a new trac tickbox will appear next 
 
 == Changelog ==
 
+= 20110219.1 = 
+* See [commit log](https://github.com/Pross/theme-check/commits/) for changes.
+
 = 20110201.2 =
 * UI bug fixes [forum post](http://bit.ly/ff7amN) props Mamaduka.
 * Textdomain checks for twentyten and no domain.
