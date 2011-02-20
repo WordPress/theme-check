@@ -18,9 +18,14 @@ $currentLocale = get_locale();
 	}
 }
 
+function load_styles() {
+	wp_enqueue_style('style', WP_PLUGIN_URL . '/theme-check/style.css', null, null, 'screen');
+}
+
 add_action( 'admin_menu', 'themecheck_add_page' );
 function themecheck_add_page() {
-	add_theme_page( 'Theme Check', 'Theme Check', 'manage_options', 'themecheck', 'themecheck_do_page' );
+	$page = add_theme_page( 'Theme Check', 'Theme Check', 'manage_options', 'themecheck', 'themecheck_do_page' );
+	add_action('admin_print_styles-' . $page, 'load_styles');
 }
 
 function themecheck_do_page() {
@@ -35,6 +40,7 @@ function themecheck_do_page() {
 
 	echo '<div id="theme-check" class="wrap">';
 	echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
+	echo '<div class="theme-check">';
 		tc_form();
 	if ( !isset( $_POST[ 'themename' ] ) )  {
 		tc_intro();
@@ -45,5 +51,6 @@ function themecheck_do_page() {
 		if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
 		check_main( $_POST[ 'themename' ] );
 	}
-		echo '</div>';
+	echo '</div> <!-- .theme-check-->';
+	echo '</div>';
 }

@@ -191,36 +191,36 @@ function tc_intro() {
 	_e( '<h2>Contact</h2>', 'themecheck' );
 	_e( '<p>Theme-Check is maintained by <a href="http://profiles.wordpress.org/users/pross/">Pross</a> and <a href="http://profiles.wordpress.org/users/otto42/">Otto42</a><br />', 'themecheck' );
 	_e( 'If you have found a bug or would like to make a suggestion or contribution why not join the <a href="http://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a><br />', 'themecheck' );
-	_e( 'or leave a post on the <a href="http://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.<br />', 'themecheck' );
-	echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6"><input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"></form>';
+	_e( 'or leave a post on the <a href="http://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.<br /></p>', 'themecheck' );
+	echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick" /><input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6" /><input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" /><img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" /></form>';
 	_e( '<h2>Contributors</h2>', 'themecheck' );
 	_e( '<h3>localization</h3>', 'themecheck' );
-	echo '<p><ul>';
+	echo '<ul>';
 	echo '<li><a href="http://www.onedesigns.com/">Daniel Tara</a></li>';
 	echo '<li><a href="http://themeid.com/">Emil Uzelac</a></li>';
-	echo '</ul></p>';
+	echo '</ul>';
 	_e( '<h3>Testers</h3>', 'themecheck' );
 	_e( '<p><a href="http://make.wordpress.org/themes/">The WordPress Theme Review Team</a></p>', 'themecheck' ); 
 }
 
 function tc_success() {
-	_e( '<div class="tc-success">Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.<br />', 'themecheck' );
-	_e( '<br />Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.', 'themecheck' );
+	_e( '<div class="tc-success"><p>Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.</p>', 'themecheck' );
+	_e( '<p>Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.</p>', 'themecheck' );
 	_e( '<h3>Codex Links</h3>', 'themecheck' );
-	echo '<p><ul>';
+	echo '<ul>';
 	_e( '<li><a href="http://codex.wordpress.org/Theme_Development">Theme Development</a></li>', 'themecheck' );
 	_e( '<li><a href="http://wordpress.org/support/forum/5">Themes and Templates forum</a></li>', 'themecheck' );
 	_e( '<li><a href="http://codex.wordpress.org/Theme_Unit_Test">Theme Unit Tests</a></li>', 'themecheck' );
-	echo '</ul></p></div>';
+	echo '</ul></div>';
 }
 
 function tc_form() {
 	$themes = get_themes();
-	echo '<form action="themes.php?page=themecheck" method="POST">';
+	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
 	foreach( $themes as $name => $location ) {
 		echo '<option ';
-		if ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) echo 'selected ';
+		if ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) echo 'selected="selected" ';
 		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';

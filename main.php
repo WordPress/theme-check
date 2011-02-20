@@ -32,76 +32,43 @@ function check_main( $theme ) {
 
 		// run the checks
 		$failed = !run_themechecks($php, $css, $other);
-		?>
-		<style type="text/css">
-		.tc-box {
-		padding:10px 0;
-		border-top:1px solid #ccc;
-		}
 
-		.tc-warning, .tc-required, .tc-fail {
-			color:red;
-		}
-
-		.tc-recommended, .tc-pass {
-			color: green;
-		}
-
-		.tc-info {
-			color: blue;
-		}
-
-		.tc-grep span {
-			background: yellow;
-		}
-		.tc-data {
-			float: left;
-			width: 80px;
-			clear: both;
-		}
-		.tc-header {
-			width: 1024px;
-			float: left;
-			padding-left: 5px;
-		}
-		.tc-success {
-		}
-		</style>
-		<?php
 		global $checkcount;
 
 		// second loop, to display the errors
-		echo '<strong>' . __( 'Theme Info', 'themecheck' ) . ': </strong>';
-		echo ( !empty( $data[ 'Title' ] ) ) ? '<br /><div class="tc-data">' . __( 'Title', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Title' ] . '</div>' : '';
-		echo ( !empty( $data[ 'Version' ] ) ) ? '<br /><div class="tc-data">' . __( 'Version', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Version' ] . '</div>' : '';
-		echo ( !empty( $data[ 'AuthorName' ] ) ) ? '<br /><div class="tc-data">' . __( 'Author', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'AuthorName' ] . '</div>' : '';
-		echo ( !empty( $data[ 'AuthorURI' ] ) ) ? '<br /><div class="tc-data">' . __( 'Author URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</div>' : '';
-		echo ( !empty( $data[ 'URI' ] ) ) ? '<br /><div class="tc-data">' . __( 'Theme URI', 'themecheck' ) . '</div><div class="tc-header"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</div>' : '';
-		echo ( !empty( $data[ 'License' ] ) ) ? '<br /><div class="tc-data">' . __( 'License', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'License' ] . '</div>' : '';
-		echo ( !empty( $data[ 'License URI' ] ) ) ? '<br /><div class="tc-data">' . __( 'LicenseURI', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'License URI' ] . '</div>' : '';
-		echo ( !empty( $data[ 'Tags' ] ) ) ? '<br /><div class="tc-data">' . __( 'Tags', 'themecheck' ) . '</div><div class="tc-header">' . implode( $data[ 'Tags' ], ', ') . '</div>' : '';
-		echo ( !empty( $data[ 'Description' ] ) ) ? '<br /><div class="tc-data">' . __( 'Description', 'themecheck' ) . '</div><div class="tc-header">' . $data[ 'Description' ] . '</div>' : '';
-		echo '<br style="clear:both" />';
+		echo '<h2>' . __( 'Theme Info', 'themecheck' ) . ': </h2>';
+		echo '<div class="theme-info">';
+		echo ( !empty( $data[ 'Title' ] ) ) ? '<p><label>' . __( 'Title', 'themecheck' ) . '</label><span class="info">' . $data[ 'Title' ] . '</span></p>' : '';
+		echo ( !empty( $data[ 'Version' ] ) ) ? '<p><label>' . __( 'Version', 'themecheck' ) . '</label><span class="info">' . $data[ 'Version' ] . '</span></p>' : '';
+		echo ( !empty( $data[ 'AuthorName' ] ) ) ? '<p><label>' . __( 'Author', 'themecheck' ) . '</label><span class="info">' . $data[ 'AuthorName' ] . '</span></p>' : '';
+		echo ( !empty( $data[ 'AuthorURI' ] ) ) ? '<p><label>' . __( 'Author URI', 'themecheck' ) . '</label><span class="info"><a href="' . $data[ 'AuthorURI' ] . '">' . $data[ 'AuthorURI' ] . '</a>' . '</span></p>' : '';
+		echo ( !empty( $data[ 'URI' ] ) ) ? '<p><label>' . __( 'Theme URI', 'themecheck' ) . '</label><span class="info"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</span></p>' : '';
+		echo ( !empty( $data[ 'License' ] ) ) ? '<p><label>' . __( 'License', 'themecheck' ) . '</label><span class="info">' . $data[ 'License' ] . '</span></p>' : '';
+		echo ( !empty( $data[ 'License URI' ] ) ) ? '<p><label>' . __( 'LicenseURI', 'themecheck' ) . '</label><span class="info">' . $data[ 'License URI' ] . '</span></p>' : '';
+		echo ( !empty( $data[ 'Tags' ] ) ) ? '<p><label>' . __( 'Tags', 'themecheck' ) . '</label><span class="info">' . implode( $data[ 'Tags' ], ', ') . '</span></p>' : '';
+		echo ( !empty( $data[ 'Description' ] ) ) ? '<p><label>' . __( 'Description', 'themecheck' ) . '</label><span class="info">' . $data[ 'Description' ] . '</span></p>' : '';
+
 		if ( $data[ 'Template' ] ) {
 		if ( $data['Template Version'] > $parent_data['Version'] ) {
-			echo "<br />This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update the parent theme.";
+			echo "<p>This child theme requires at least version <strong>{$data['Template Version']}</strong> of theme <strong>{$parent_data['Title']}</strong> to be installed. You only have <strong>{$parent_data['Version']}</strong> please update the parent theme.</p>";
 		}
-			echo '<br />' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': <strong>' . $data[ 'Template' ] . '</strong>. These files have been included automatically!';
+			echo '<p>' . __( 'This is a child theme. The parent theme is', 'themecheck' ) . ': <strong>' . $data[ 'Template' ] . '</strong>. These files have been included automatically!</p>';
 			if ( empty( $data['Template Version'] ) ) {
-				echo '<br />Child theme does not have the <strong>Template Version</strong> tag in style.css.';
+				echo '<p>Child theme does not have the <strong>Template Version</strong> tag in style.css.</p>';
 			} else {
-				echo ( $data['Template Version'] < $parent_data['Version'] ) ? "<br />Child theme is only tested up to version {$data['Template Version']} of {$parent_data['Title']} breakage may occur! {$parent_data['Title']} installed version is {$parent_data['Version']}" : '';
+				echo ( $data['Template Version'] < $parent_data['Version'] ) ? "<p>Child theme is only tested up to version {$data['Template Version']} of {$parent_data['Title']} breakage may occur! {$parent_data['Title']} installed version is {$parent_data['Version']}</p>" : '';
 			}
 		 }
+	    echo '</div><!-- .theme-info-->';
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
-		echo '<br /><br />Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong><br />';
+		echo '<p>Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong></p>';
 		$results = display_themechecks();
 		$success = true;
 		if (strpos( $results, 'WARNING') !== false) $success = false;
 		if (strpos( $results, 'REQUIRED') !== false) $success = false;
 		if ( $success === false ) {
-			echo '<h3>' . __( 'One or more errors were found for ', 'themecheck' ) . $data[ 'Title' ] . '.</h3>';
+			echo '<h2>' . __( 'One or more errors were found for ', 'themecheck' ) . $data[ 'Title' ] . '.</h2>';
 		} else {
 			echo '<h2>' . $data[ 'Title' ] . __( ' passed the tests', 'themecheck' ) . '</h2>';
 			tc_success();
