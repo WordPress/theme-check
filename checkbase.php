@@ -220,8 +220,12 @@ function tc_form() {
 	echo '<select name="themename">';
 	foreach( $themes as $name => $location ) {
 		echo '<option ';
-		if ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) echo 'selected="selected" ';
-		echo 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
+		if ( isset( $_POST['themename'] ) ) {
+			echo ( $location['Stylesheet'] === $_POST['themename'] ) ? 'selected="selected" ' : ''; 
+		} else {
+			echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'selected="selected" ' : '';
+		}
+		echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'value="' . $location['Stylesheet'] . '" style="font-weight:bold;">' . $name . '</option>' : 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
 	echo '<input class="button" type="submit" value="' . __( 'Check it!', 'themecheck' ) . '" />';
