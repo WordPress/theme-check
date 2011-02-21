@@ -19,7 +19,7 @@ class AdminMenu implements themecheck {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
-					$grep = tc_grep( $matches[2], $php_key );
+					$grep = ( isset( $matches[2] ) ) ? tc_grep( $matches[2], $php_key ) : tc_grep( $matches[1], $php_key );
 					$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: <strong>{$filename}</strong>. {$check}{$grep}";
 					$ret = false;
 				}
