@@ -55,6 +55,11 @@ If **either** of these two vars are defined a new trac tickbox will appear next 
 
 == Changelog ==
 
+= 20110219.2 =
+* Merged new UI props Gua Bob [1](http://guabob.com/) 
+* Last tested theme is always pre-selected in the themes list.
+* Fixed php error in admin_menu.php
+
 = 20110219.1 = 
 * See [commit log](https://github.com/Pross/theme-check/commits/) for changes.
 
