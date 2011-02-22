@@ -87,7 +87,7 @@ numbers.
 = 20101228.2 =
 * Added menu checking.
 * ThemeURI AuthourURI added to results.
-* Lots of small fixes
+* Lots of small fixes.
 * Started translation.
 
 = 20101228.1 =
