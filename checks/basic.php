@@ -24,6 +24,7 @@ class Basic_Checks implements themecheck {
 			'comment_form\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/comment_form">comment_form</a><pre> &lt;?php comment_form(); ?&gt;</pre>', 'themecheck' ),
 			'wp_enqueue_script\(\s?("|\')comment-reply("|\')\s?\)' => __( 'See: <a href="http://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display">Migrating Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?&gt;</pre>', 'themecheck' ),
 			'<body.*body_class\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/body_class">body_class</a><pre> &lt;?php body_class( $class ); ?&gt;</pre>', 'themecheck' ),
+			'wp_link_pages\(' => __( 'See: <a href=http://codex.wordpress.org/Function_Reference/wp_link_pages">wp_link_pages</a><pre> &lt;?php wp_link_pages( $args ); ?&gt;</pre>', 'themecheck' ),
 			'post_class\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/post_class">post_class</a><pre> &lt;div id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;</pre>', 'themecheck' )
 			);
 
@@ -34,7 +35,7 @@ class Basic_Checks implements themecheck {
 				if ( $key === 'wp_enqueue_script\(\s?("|\')comment-reply("|\')\s?\)' ) $key = 'wp_enqueue_script( \'comment-reply\' )';
 				if ( $key === '<body.*body_class\(' ) $key = 'body_class call in body tag';
 				if ( $key === 'register_sidebar[s]?\(' ) $key = 'register_sidebar() or register_sidebars()';
-				$key = ltrim( trim( $key, '(' ) );
+				$key = ltrim( trim ( trim( $key, '(' ), '\\' ) );
 				$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: Could not find <strong>{$key}</strong>. {$check}";
 				$ret = false;
 			}
