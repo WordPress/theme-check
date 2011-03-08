@@ -22,8 +22,10 @@ class Check_Links implements themecheck {
 						$grep .= tc_grep( $stripped[1], $php_key );
 						}
 					}
-				if ( $grep ) $this->error[] = "<span class='tc-lead tc-info'>INFO</span>: Possible hard-coded links were found in the file <strong>{$filename}</strong>.{$grep}";
-				return $ret;
+					if ( $grep ) {
+						$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: Possible hard-coded links were found in the file <strong>{$filename}</strong>.{$grep}";
+					}
+					return $ret;
 				}
 			}
 		}

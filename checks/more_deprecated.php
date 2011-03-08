@@ -14,7 +14,7 @@ class More_Deprecated implements themecheck {
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
-			checkcount();
+				checkcount();
 				if ( preg_match( '/[\s|]' . $key . '/', $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
 					$error = ltrim( rtrim( $matches[0], '(' ) );

@@ -145,7 +145,7 @@ class Deprecated implements themecheck {
 			);
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $alt => $check ) {
-			checkcount();
+				checkcount();
 				$version = $check;
 				$key = key( $check );
 				$alt = $check[ $key ];
