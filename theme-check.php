@@ -28,6 +28,11 @@ function themecheck_add_page() {
 	add_action('admin_print_styles-' . $page, 'load_styles');
 }
 
+function tc_add_headers( $extra_headers ) {
+	$extra_headers = array( 'License', 'License URI', 'Template Version' );
+	return $extra_headers;
+}
+
 function themecheck_do_page() {
 	if ( !current_user_can( 'manage_options' ) )  {
 	wp_die( __( 'You do not have sufficient permissions to access this page.', 'themecheck' ) );
