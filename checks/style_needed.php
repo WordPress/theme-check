@@ -14,6 +14,8 @@ class Style_Needed implements themecheck {
 			'[ \t\/*#]*Version' => __( '<strong>Version:</strong> is missing from your style.css header.', 'themecheck' ),
 			'[ \t\/*#]*License:' => __( '<strong>License:</strong> is missing from your style.css header.', 'themecheck' ),
 			'[ \t\/*#]*License URI:' => __( '<strong>License URI:</strong> is missing from your style.css header.', 'themecheck' ),
+			'\.sticky' => __( '<strong>.sticky</strong> css class is needed in your theme css.', 'themecheck' ),
+			'\.bypostauthor' => __( '<strong>.bypostauthor</strong> css class is needed in your theme css.', 'themecheck' ),
 			'\.alignleft' => __( '<strong>.alignleft</strong> css class is needed in your theme css.', 'themecheck' ),
 			'\.alignright' => __( '<strong>.alignright</strong> css class is needed in your theme css.', 'themecheck' ),
 			'\.aligncenter' => __( '<strong>.aligncenter</strong> css class is needed in your theme css.', 'themecheck' ),

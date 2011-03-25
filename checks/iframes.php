@@ -1,12 +1,12 @@
 <?php
-class MalwareCheck implements themecheck {
+class IframeCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 
 		$checks = array(
-			'/[^a-z0-9](?<!_)(file_get_contents|curl_exec|ob_get_contents|curl_init|readfile|fopen|fsockopen|pfsockopen|fclose|fread|fwrite|file_put_contents)\(/' => __( 'possible file operations', 'themecheck' )
+			'/<(iframe)[^>]*>/' => __( 'iframes are sometimes used to load unwanted adverts and code on your site', 'themecheck' )
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -17,8 +17,7 @@ class MalwareCheck implements themecheck {
 					$error = ltrim( $matches[1], '(' );
 					$error = rtrim( $error, '(' );
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong> {$check}.{$grep}";
-					$ret = false;
+					$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong> {$check}.{$grep}";
 				}
 			}
 		}
@@ -27,4 +26,4 @@ class MalwareCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-$themechecks[] = new MalwareCheck;
+$themechecks[] = new IframeCheck;
