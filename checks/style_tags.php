@@ -9,7 +9,7 @@ class Style_Tags implements themecheck {
 		$filenames = array();
 
 		foreach( $css_files as $cssfile => $content ) {
-			if ( basename( $cssfile ) === 'style.css' ) $data = get_theme_data_from_contents( $cssfile );
+			if ( basename( $cssfile ) === 'style.css' ) $data = get_theme_data_from_contents( $content );
 		}
 
 		if ( !$data[ 'Tags' ] ) {
