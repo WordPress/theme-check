@@ -8,12 +8,8 @@ class Style_Tags implements themecheck {
 		$ret = true;
 		$filenames = array();
 
-		foreach ( $css_files as $css_key => $content ) {
-			array_push( $filenames,  $css_key );
-		}
-
-		foreach( $filenames as $cssfile ) {
-			if ( basename( $cssfile ) === 'style.css' ) $data = get_theme_data( $cssfile );
+		foreach( $css_files as $cssfile => $content ) {
+			if ( basename( $cssfile ) === 'style.css' ) $data = get_theme_data_from_contents( $cssfile );
 		}
 
 		if ( !$data[ 'Tags' ] ) {
@@ -27,9 +23,12 @@ class Style_Tags implements themecheck {
 			'buddypress', 'holiday', 'photoblogging', 'seasonal' );
 
 		foreach( $data[ 'Tags' ] as $tag ) {
-			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) $this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found wrong tag, remove <strong>{$tag}</strong> from your style.css header.";
-			$ret = false;
+			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) {
+				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found wrong tag, remove <strong>{$tag}</strong> from your style.css header.";
+				$ret = false;
+			}
 		}
+		
 		return $ret;
 	}
 

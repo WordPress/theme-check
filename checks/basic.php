@@ -22,7 +22,7 @@ class Basic_Checks implements themecheck {
 			'comments_template\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/comments_template">comments_template</a><pre> &lt;?php comments_template( $file, $separate_comments ); ?&gt;</pre>', 'themecheck' ),
 			'wp_list_comments\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/wp_list_comments">wp_list_comments</a><pre> &lt;?php wp_list_comments( $args ); ?&gt;</pre>', 'themecheck' ),
 			'comment_form\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/comment_form">comment_form</a><pre> &lt;?php comment_form(); ?&gt;</pre>', 'themecheck' ),
-			'wp_enqueue_script\(\s?("|\')comment-reply("|\')\s?\)' => __( 'See: <a href="http://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display">Migrating Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?&gt;</pre>', 'themecheck' ),
+			'wp_enqueue_script\(\s?("|\')comment-reply("|\')' => __( 'See: <a href="http://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display">Migrating Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?&gt;</pre>', 'themecheck' ),
 			'<body.*body_class\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/body_class">body_class</a><pre> &lt;?php body_class( $class ); ?&gt;</pre>', 'themecheck' ),
 			'wp_link_pages\(' => __( 'See: <a href=http://codex.wordpress.org/Function_Reference/wp_link_pages">wp_link_pages</a><pre> &lt;?php wp_link_pages( $args ); ?&gt;</pre>', 'themecheck' ),
 			'post_class\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/post_class">post_class</a><pre> &lt;div id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;</pre>', 'themecheck' )
@@ -32,7 +32,7 @@ class Basic_Checks implements themecheck {
 			checkcount();
 			if ( !preg_match( '/' . $key . '/i', $php ) ) {
 				if ( $key === 'add_theme_support\(\s?("|\')automatic-feed-links("|\')\s?\)' ) $key = 'add_theme_support( \'automatic-feed-links\' )';
-				if ( $key === 'wp_enqueue_script\(\s?("|\')comment-reply("|\')\s?\)' ) $key = 'wp_enqueue_script( \'comment-reply\' )';
+				if ( $key === 'wp_enqueue_script\(\s?("|\')comment-reply("|\')' ) $key = 'wp_enqueue_script( \'comment-reply\' )';
 				if ( $key === '<body.*body_class\(' ) $key = 'body_class call in body tag';
 				if ( $key === 'register_sidebar[s]?\(' ) $key = 'register_sidebar() or register_sidebars()';
 				$key = ltrim( trim ( trim( $key, '(' ), '\\' ) );

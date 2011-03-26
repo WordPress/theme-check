@@ -116,7 +116,6 @@ class Deprecated implements themecheck {
 			array( 'is_term' => 'term_exists()', '3.0' ),
 			array( 'is_plugin_page' => '$plugin_page and/or get_plugin_page_hookname() hooks', '3.1' ),
 			array( 'update_category_cache' => 'No alternatives', '3.1' ),
-			array( 'get_users_of_blog' => 'get_users()', '3.1' ),
 			// end wp-includes deprecated
 
 			// start wp-admin deprecated
