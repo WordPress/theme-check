@@ -4,7 +4,7 @@ class WormCheck implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
-
+$php_files = array_merge( $php_files, $other_files );
 		$checks = array(
 			'/wshell\.php/'=> __( 'This may be a script used by hackers to get control of your server!', 'themecheck' ),
 			'/ShellBOT/' => __( 'This may be a script used by hackers to get control of your server', 'themecheck' ),
@@ -15,7 +15,8 @@ class WormCheck implements themecheck {
 			'/<!--[A-Za-z0-9]+--><\?php/' => __( 'Symptom of a link injection attack <a href="http://www.kyle-brady.com/2009/11/07/wordpress-mediatemple-and-an-injection-attack/">[1]</a>', 'themecheck' ),
 			'/<script>\/\*(GNU GPL|LGPL)\*\/ try\{window.onload.+catch\(e\) \{\}<\/script>/' => __( 'Possible "Gumblar" JavaScript attack <a href="http://threatinfo.trendmicro.com/vinfo/articles/securityarticles.asp?xmlfile=042710-GUMBLAR.xml">[1]</a> <a href="http://justcoded.com/article/gumblar-family-virus-removal-tool/">[2]</a>', 'themecheck' ),
 			'/php \$[a-zA-Z]*=\'as\';/' => __( 'Symptom of the "Pharma Hack" <a href="http://blog.sucuri.net/2010/07/understanding-and-cleaning-the-pharma-hack-on-wordpress.html">[1]</a>', 'themecheck' ),
-			'/defined?\(\'wp_class_support/' => __( 'Symptom of the "Pharma Hack" <a href="http://blog.sucuri.net/2010/07/understanding-and-cleaning-the-pharma-hack-on-wordpress.html">[1]</a>', 'themecheck' )
+			'/defined?\(\'wp_class_support/' => __( 'Symptom of the "Pharma Hack" <a href="http://blog.sucuri.net/2010/07/understanding-and-cleaning-the-pharma-hack-on-wordpress.html">[1]</a>', 'themecheck' ),
+			'/AGiT3NiT3NiT3fUQKxJvI/' => __( 'Malicious footer code injection detected!', 'themecheck' )
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
