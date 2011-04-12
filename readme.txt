@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.2
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20110219.2
+Stable tag: 20110412.1
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -54,6 +54,18 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
+
+= 20110412.1 =
+* Fix regex's
+* Added check for latest footer injection hack.
+* Fix tags check to use new content function correctly
+* Sync of all changes made for wporg uploader theme-check.
+* Updated checks post 3.1. added screenshot check to svn.
+* Fix links check to not return a false failure in some cases
+* rm one of the checks that causes problems on wporg uploader (and which is also unnecessary)
+* Move unneeded functions out of checkbase into main.php.
+* Minor formatting changes only (spacing and such)
+* Add check for wp_link_pages() + fix eval() check
 
 = 20110219.2 =
 * Merged new UI props Gua Bob [1](http://guabob.com/) 
