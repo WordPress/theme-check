@@ -200,7 +200,7 @@ function get_theme_data_from_contents( $theme_data ) {
 	preg_match( '|Description:(.*)$|mi', $theme_data, $description );
 
 	if ( preg_match( '|Author URI:(.*)$|mi', $theme_data, $author_uri ) )
-		$author_uri = clean_url( trim( $author_uri[1]) );
+		$author_uri = esc_url( trim( $author_uri[1]) );
 	else
 		$author_uri = '';
 
@@ -225,7 +225,7 @@ function get_theme_data_from_contents( $theme_data ) {
 		$tags = array();
 
 	$name = $theme = wp_kses( trim( $theme_name[1] ), $themes_allowed_tags );
-	$theme_uri = clean_url( trim( $theme_uri[1] ) );
+	$theme_uri = esc_url( trim( $theme_uri[1] ) );
 	$description = wp_kses( trim( $description[1] ), $themes_allowed_tags );
 
 	if ( preg_match( '|Author:(.*)$|mi', $theme_data, $author_name ) ) {

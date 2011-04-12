@@ -4,7 +4,7 @@ class WormCheck implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
-$php_files = array_merge( $php_files, $other_files );
+		$php_files = array_merge( $php_files, $other_files );
 		$checks = array(
 			'/wshell\.php/'=> __( 'This may be a script used by hackers to get control of your server!', 'themecheck' ),
 			'/ShellBOT/' => __( 'This may be a script used by hackers to get control of your server', 'themecheck' ),
