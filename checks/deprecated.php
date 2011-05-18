@@ -116,6 +116,7 @@ class Deprecated implements themecheck {
 			array( 'is_term' => 'term_exists()', '3.0' ),
 			array( 'is_plugin_page' => '$plugin_page and/or get_plugin_page_hookname() hooks', '3.1' ),
 			array( 'update_category_cache' => 'No alternatives', '3.1' ),
+			array( 'wp_timezone_supported' => 'No alternatives', '3.2' ),
 			// end wp-includes deprecated
 
 			// start wp-admin deprecated
@@ -137,9 +138,7 @@ class Deprecated implements themecheck {
 			array( 'WP_User_Search' => 'WP_User_Query','3.1' ),
 			array( 'get_others_unpublished_posts' => 'None available','3.1' ),
 			array( 'get_others_drafts' => 'None available','3.1' ),
-			array( 'get_others_pending' => 'None available','3.1' ),
-			array( 'register_column_headers' => 'WP_list_table','3.1' ),
-			array( 'print_column_headers WP_list_table' => 'None available','3.1')
+			array( 'get_others_pending' => 'None available','3.1' )
 			// end wp-admin
 			);
 		foreach ( $php_files as $php_key => $phpfile ) {
