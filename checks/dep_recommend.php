@@ -9,7 +9,7 @@ class Deprecated_Recommended implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			array( 'get_users_of_blog' => 'get_users()', '3.1' ),
+			array( 'wp_timezone_supported' => 'No alternatives', '3.2' )
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {

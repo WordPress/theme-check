@@ -8,8 +8,8 @@ class More_Deprecated implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'get_bloginfo\(\s?("|\')home("|\')\s?\)' => 'get_bloginfo( \'url\' )',
-			'bloginfo\(\s?("|\')home("|\')\s?\)' => 'bloginfo( \'url\' )'
+			'get_bloginfo\(\s?("|\')home("|\')\s?\)' => 'home_url()',
+			'bloginfo\(\s?("|\')home("|\')\s?\)' => 'echo home_url()'
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
