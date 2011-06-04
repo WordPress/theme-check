@@ -24,7 +24,7 @@ class LineEndingsCheck implements themecheck {
 		}
 		foreach ( $other_files as $oth_key => $othfile ) {
 			$e = pathinfo($oth_key);
-			if (in_array($e['extension'],array('txt','js'))) {			
+			if ( isset( $e['extension'] ) && in_array( $e['extension'], array( 'txt','js' ) ) ) {			
 				if (preg_match("/\r\n/",$othfile)) {
 					if (preg_match("/[^\r]\n/",$othfile)) {
 						$filename = tc_filename( $oth_key );
