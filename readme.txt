@@ -5,7 +5,7 @@ Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
 Tested Up To: 3.2
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20110602.1
+Stable tag: 20110602.2
 
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
@@ -55,6 +55,11 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
+
+= 20110602.2 =
+* New file list functions hidden folders now detectable.
+* Better fopen checks.
+* TimThumb version bump
 
 = 20110602.1 =
 * DOS/UNIX line ending style checks are now a requirement for proper theme uploading.
