@@ -23,7 +23,7 @@ class File_Checks implements themecheck {
 				'project.properties' => __( 'NetBeans Project File', 'themecheck' ),
 				'project.xml' => __( 'NetBeans Project File', 'themecheck' ),
 				'\.kpf' => __( 'Komodo Project File', 'themecheck' ),
-				'^\..*' => __( 'Hidden File', 'themecheck' ),
+				'^\.+[a-zA-Z0-9]' => __( 'Hidden Files or Folders', 'themecheck' ),
 				'php.ini' => __( 'PHP server settings file', 'themecheck' ),
 				'dwsync.xml' => __( 'Dreamweaver project file', 'themecheck' ),
 				'error_log' => __( 'PHP error log', 'themecheck' ),

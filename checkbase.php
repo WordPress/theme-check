@@ -147,7 +147,18 @@ function tc_trac( $e ) {
 	return $e;
 }
 
-function listdir( $start_dir='.' ) {
+function listdir( $dir ) {
+	$files = array();
+	$dir_iterator = new RecursiveDirectoryIterator( $dir );
+	$iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
+	
+	foreach ($iterator as $file) {
+    	array_push( $files, $file->getPathname() );
+	}
+	return $files;
+}
+
+function old_listdir( $start_dir='.' ) {
 	$files = array();
 	if ( is_dir( $start_dir ) ) {
 		$fh = opendir( $start_dir );
