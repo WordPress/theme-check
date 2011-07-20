@@ -5,7 +5,7 @@ class TimThumbCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 		
-		$latest = '1.30'; // set to latest timthumb http://code.google.com/p/timthumb/source/browse/trunk/timthumb.php 
+		$latest = '1.31'; // set to latest timthumb http://code.google.com/p/timthumb/source/browse/trunk/timthumb.php 
 		
 		foreach ( $php_files as $name => $content ) {
 		checkcount();

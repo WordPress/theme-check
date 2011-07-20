@@ -37,7 +37,7 @@ class File_Checks implements themecheck {
 
 		foreach( $blacklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error = implode( $filename, ' ' );
+				$error = implode( array_unique( $filename ), ' ' );
 				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: <strong>{$error}</strong> {$reason} found.";
 				$ret = false;
 			}
