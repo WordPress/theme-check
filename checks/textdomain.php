@@ -6,6 +6,7 @@ class TextDomainCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 		global $data, $themename;
 		$ret = true;
+		$error = '';
 		checkcount();
 		if ( $data['Name'] === 'Twenty Ten' ) return $ret;
 
@@ -15,10 +16,14 @@ class TextDomainCheck implements themecheck {
 		foreach ( $php_files as $php_key => $phpfile ) {
 		foreach ( $checks as $key => $check ) {
 		checkcount();
-			if ( preg_match( $key, $phpfile, $matches ) ) {
-				$filename = tc_filename( $php_key );
-				$error = tc_grep( $matches[0], $php_key );
-				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
+			if ( preg_match_all( $key, $phpfile, $matches ) ) {
+				
+					$filename = tc_filename( $php_key );
+					
+					foreach ($matches[0] as $match ) {			
+						$error .= tc_grep( $match, $php_key );
+					}
+					$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
 				}
 			}
 		}
