@@ -12,7 +12,9 @@ class TextDomainCheck implements themecheck {
 			return $ret;
 
 		$checks = array(
-		'/_[e|_]\(\s?[\'|"][^\'|"]*[\'|"]\s?\);/' => __( 'You have not included a text domain!', 'themecheck' ) );
+		'/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' ),
+		'/[\s|\(]_x\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?,\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' )
+		 );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 		foreach ( $checks as $key => $check ) {
@@ -22,7 +24,7 @@ class TextDomainCheck implements themecheck {
 					$filename = tc_filename( $php_key );
 					
 					foreach ($matches[0] as $match ) {			
-						$error .= tc_grep( $match, $php_key );
+						$error .= tc_grep( ltrim( $match ), $php_key );
 					}
 					$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
 				}
@@ -30,15 +32,15 @@ class TextDomainCheck implements themecheck {
 		}
 
 		$checks = array(
-		'/_[e|_]\([^,|;]*,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' ),
-		'/_x\s?\([^,]*,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' )
+		'/[\s|\(]_[e|_]\s?\([^,|;]*\s?,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' ),
+		'/[\s|\(]_x\s?\([^,]*\s?,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' )
 		 );
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match_all( $key, $phpfile, $matches ) ) {
 					foreach ($matches[0] as $count => $domaincheck) {
-						if ( preg_match( '/_[e|_]\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $domaincheck ) )
+						if ( preg_match( '/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $domaincheck ) )
 							unset( $matches[1][$count] ); //filter out false positives
 					}
 					$filename = tc_filename( $php_key );
