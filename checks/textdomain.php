@@ -12,21 +12,22 @@ class TextDomainCheck implements themecheck {
 			return $ret;
 
 		$checks = array(
-		'/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' ),
-		'/[\s|\(]_x\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?,\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' )
+		'/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' )
 		 );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
-		foreach ( $checks as $key => $check ) {
-		checkcount();
-			if ( preg_match_all( $key, $phpfile, $matches ) ) {
+			$error = '';
+			foreach ( $checks as $key => $check ) {
+				checkcount();
+				if ( preg_match_all( $key, $phpfile, $matches ) || preg_match_all( '/[\s|\(]_x\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?,\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $phpfile, $matches )) {
 				
 					$filename = tc_filename( $php_key );
-					
-					foreach ($matches[0] as $match ) {			
-						$error .= tc_grep( ltrim( $match ), $php_key );
+					foreach ($matches[0] as $match ) {
+						$grep = tc_grep( ltrim( $match ), $php_key );
+						preg_match( '/Line\s[0-9]+/', $grep, $line);
+						$error .= ( !strpos( $error, $line[0] ) ) ? $grep : '';		
 					}
-					$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
+				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
 				}
 			}
 		}
