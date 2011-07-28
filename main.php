@@ -38,6 +38,15 @@ function check_main( $theme ) {
 		// second loop, to display the errors
 		echo '<h2>' . __( 'Theme Info', 'themecheck' ) . ': </h2>';
 		echo '<div class="theme-info">';
+		if (file_exists( trailingslashit( WP_CONTENT_DIR . '/themes' ) . trailingslashit( basename( $theme ) ) . 'screenshot.png' ) ) {
+			$image = getimagesize( $theme . '/screenshot.png' );
+		echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . trailingslashit( WP_CONTENT_URL . '/themes' ) . trailingslashit( basename( $theme ) ) . 'screenshot.png" />';
+		
+		echo '<br /><div style="text-align:center">' . $image[0] . 'x' . $image[1] . ' ' . round( filesize( $theme . '/screenshot.png' )/1024 ) . 'k</div></div>';
+		
+
+
+		}
 		echo ( !empty( $data[ 'Title' ] ) ) ? '<p><label>' . __( 'Title', 'themecheck' ) . '</label><span class="info">' . $data[ 'Title' ] . '</span></p>' : '';
 		echo ( !empty( $data[ 'Version' ] ) ) ? '<p><label>' . __( 'Version', 'themecheck' ) . '</label><span class="info">' . $data[ 'Version' ] . '</span></p>' : '';
 		echo ( !empty( $data[ 'AuthorName' ] ) ) ? '<p><label>' . __( 'Author', 'themecheck' ) . '</label><span class="info">' . $data[ 'AuthorName' ] . '</span></p>' : '';
@@ -59,7 +68,8 @@ function check_main( $theme ) {
 				echo ( $data['Template Version'] < $parent_data['Version'] ) ? "<p>Child theme is only tested up to version {$data['Template Version']} of {$parent_data['Title']} breakage may occur! {$parent_data['Title']} installed version is {$parent_data['Version']}</p>" : '';
 			}
 		 }
-	    echo '</div><!-- .theme-info-->';
+		echo '</div><!-- .theme-info-->';
+		
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
 		echo '<p>Running <strong>' . $checkcount . '</strong> tests against <strong>' . $data[ 'Title' ] . '</strong> using Guidelines Version: <strong>'. $version[0] . '</strong> Plugin revision: <strong>'. $version[1] .'</strong></p>';
@@ -103,6 +113,7 @@ function tc_intro() {
 
 function tc_success() {
 	_e( '<div class="tc-success"><p>Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.</p>', 'themecheck' );
+	echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick" /><input type="hidden" name="hosted_button_id" value="2V7F4QYMWMBL6" /><input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" /><img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" /></form>';
 	_e( '<p>Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.</p>', 'themecheck' );
 	_e( '<h3>Codex Links</h3>', 'themecheck' );
 	echo '<ul>';
