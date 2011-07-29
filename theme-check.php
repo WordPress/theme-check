@@ -11,12 +11,7 @@ Version: 20110602.2
 add_action( 'admin_init', 'tc_i18n' );
 
 function tc_i18n() {
-
-$currentLocale = get_locale();
-	if(!empty($currentLocale)) {
-	        $moFile = dirname(__FILE__) . "/lang/theme-check_" . $currentLocale . ".mo";
-	        if(file_exists($moFile) && is_readable($moFile)) load_textdomain('themecheck', $moFile);
-	}
+	load_plugin_textdomain( 'themecheck', false, 'theme-check/lang' );
 }
 
 function load_styles() {
