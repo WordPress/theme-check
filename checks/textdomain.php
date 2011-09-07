@@ -12,7 +12,7 @@ class TextDomainCheck implements themecheck {
 			return $ret;
 
 		$checks = array(
-		'/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' )
+		'/[\s|\(|;]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'themecheck' )
 		 );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
