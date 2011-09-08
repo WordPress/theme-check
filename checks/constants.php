@@ -21,8 +21,7 @@ class Constants implements themecheck {
 					$filename = tc_filename( $php_key );
 					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = "<span class='tc-lead tc-info'>INFO</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
-					$ret = false;
+					$this->error[] = "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
 				}
 			}
 		}
