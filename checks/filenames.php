@@ -27,7 +27,8 @@ class File_Checks implements themecheck {
 				'php.ini' => __( 'PHP server settings file', 'themecheck' ),
 				'dwsync.xml' => __( 'Dreamweaver project file', 'themecheck' ),
 				'error_log' => __( 'PHP error log', 'themecheck' ),
-				'web.config' => __( 'Server settings file', 'themecheck' )
+				'web.config' => __( 'Server settings file', 'themecheck' ),
+				'\.sql' => __( 'SQL dump file', 'themecheck' ),
 				);
 
 		$musthave = array( 'index.php', 'comments.php', 'style.css' );
