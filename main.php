@@ -19,7 +19,6 @@ function check_main( $theme ) {
 
 	if ( $files ) {
 		foreach( $files as $key => $filename ) {
-			if ( is_dir( $filename ) ) continue;
 			if ( substr( $filename, -4 ) == '.php' ) {
 				$php[$filename] = php_strip_whitespace( $filename );
 			}
@@ -27,7 +26,7 @@ function check_main( $theme ) {
 				$css[$filename] = file_get_contents( $filename );
 			}
 			else {
-				$other[$filename] = file_get_contents( $filename );
+				$other[$filename] = ( ! is_dir($filename) ) ? file_get_contents( $filename ) : '';
 			}
 		}
 
