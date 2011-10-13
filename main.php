@@ -19,6 +19,7 @@ function check_main( $theme ) {
 
 	if ( $files ) {
 		foreach( $files as $key => $filename ) {
+			if ( is_dir( $filename ) ) continue;
 			if ( substr( $filename, -4 ) == '.php' ) {
 				$php[$filename] = php_strip_whitespace( $filename );
 			}
