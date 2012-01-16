@@ -23,6 +23,8 @@ foreach (glob(dirname(__FILE__). "/{$dir}/*.php") as $file) {
 	include $file;
 }
 
+do_action('themecheck_checks_loaded');
+
 function run_themechecks($php, $css, $other) {
 	global $themechecks;
 	$pass = true;
