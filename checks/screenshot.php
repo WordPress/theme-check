@@ -18,7 +18,7 @@ class Screenshot_Checks implements themecheck {
 					// we have or screenshot!
 					$image = getimagesize( $other_key );
 					if ( $image[0] > 320 || $image[1] > 240 ) {
-						$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Screenshot is wrong size! Detected: <strong>{$image[0]}x{$image[1]}px</strong>. Maximum allowed size is 320x240px.", "themecheck" );
+						$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 320x240px.', 'themecheck'), $image[0], $image[1]);
 					}
 				}
 			}

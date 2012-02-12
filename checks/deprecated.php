@@ -152,7 +152,7 @@ class Deprecated implements themecheck {
 					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$version = $check[0];
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$error}</strong> found in the file <strong>{$filename}</strong>. Deprecated since version <strong>{$version}</strong>. Use <strong>{$alt}</strong> instead.{$grep}";
+					$this->error[] = sprintf(__('<span class="tc-lead tc-required">REQUIRED</span>: <strong>%1$s</strong> found in the file <strong>%2$s</strong>. Deprecated since version <strong>%3$s</strong>. Use <strong>%4$s</strong> instead.%5$s', 'themecheck'), $error, $filename, $version, $alt, $grep );
 					$ret = false;
 				}
 			}

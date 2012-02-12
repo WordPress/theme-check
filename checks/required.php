@@ -19,7 +19,7 @@ class Required implements themecheck {
 					$matches[0] = str_replace(array('"',"'"),'', $matches[0]);
 					$error = esc_html( rtrim($matches[0], '(' ) );
 					$grep = tc_grep( rtrim($matches[0], '(' ), $php_key );
-					$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: <strong>{$error}</strong> was found in the file <strong>{$filename}</strong>. Use <strong>{$check}</strong> instead.{$grep}";
+					$this->error[] = sprintf(__('<span class="tc-lead tc-required">REQUIRED</span>: <strong>%1$s</strong> was found in the file <strong>%2$s</strong>. Use <strong>%3$s</strong> instead.%4$s', 'themecheck'), $error, $filename, $check, $grep);
 					$ret = false;
 				}
 			}

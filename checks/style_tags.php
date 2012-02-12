@@ -25,7 +25,7 @@ class Style_Tags implements themecheck {
 		
 		foreach( $data[ 'Tags' ] as $tag ) {
 			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) {
-				$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: Found wrong tag, remove <strong>{$tag}</strong> from your style.css header.";
+				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: Found wrong tag, remove <strong>%1$s</strong> from your style.css header.', 'themecheck'), $tag);
 				$ret = false;
 			}
 		}

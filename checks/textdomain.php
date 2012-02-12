@@ -27,14 +27,14 @@ class TextDomainCheck implements themecheck {
 						preg_match( '/[^\s]*\s[0-9]+/', $grep, $line);
 						$error .= ( !strpos( $error, $line[0] ) ) ? $grep : '';		
 					}
-				$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check}{$error}", "themecheck" );
+				$this->error[] = sprintf( __( '<span class=\'tc-lead tc-recommended\'>RECOMMENDED</span>: Text domain problems in <strong>%1$s</strong>. %2$s %3$s ', 'themecheck' ), $filename, $check, $error );
 				}
 			}
 		}
 
 		$checks = array(
-		'/[\s|\(]_[e|_]\s?\([^,|;]*\s?,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' ),
-		'/[\s|\(]_x\s?\([^,]*\s?,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => __( 'Text domain should match theme slug: <strong>' . $themename . '</strong>', 'themecheck' )
+		'/[\s|\(]_[e|_]\s?\([^,|;]*\s?,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'themecheck'), $themename ),
+		'/[\s|\(]_x\s?\([^,]*\s?,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'themecheck'), $themename )
 		 );
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -50,11 +50,11 @@ class TextDomainCheck implements themecheck {
 						if ( $matches[1][$count] !== $themename ) {
 							$error = tc_grep( $matches[0][$count], $php_key );
 							if ( $matches[1][$count] === 'twentyten' || $matches[1][$count] === 'twentyeleven' ):
-								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. The twentyten text domain is being used!{$error}", "themecheck" );
+								$this->error[] = sprintf(__( '<span class=\'tc-lead tc-recommended\'>RECOMMENDED</span>: Text domain problems in <strong>%1$s</strong>. The twentyten text domain is being used!%2$s', 'themecheck' ), $filename, $error );
 							else:
 							if ( defined( 'TC_TEST' ) && strpos( strtolower( $themename ), $matches[1][$count] ) === false ) {
 								$error = tc_grep( $matches[0][$count], $php_key );
-								$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: Text domain problems in <strong>{$filename}</strong>. {$check} You are using: <strong>{$matches[1][$count]}</strong>{$error}", "themecheck" );
+								$this->error[] = sprintf( __( '<span class=\'tc-lead tc-recommended\'>RECOMMENDED</span>: Text domain problems in <strong>%1$s</strong>. %2$s You are using: <strong>%3s</strong>%4$s', 'themecheck' ), $filename, $check, $matches[1][$count], $error );
 							}
 							endif;
 						}

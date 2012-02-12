@@ -23,19 +23,19 @@ class Basic_Checks implements themecheck {
 			'wp_list_comments\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/wp_list_comments">wp_list_comments</a><pre> &lt;?php wp_list_comments( $args ); ?&gt;</pre>', 'themecheck' ),
 			'comment_form\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/comment_form">comment_form</a><pre> &lt;?php comment_form(); ?&gt;</pre>', 'themecheck' ),
 			'<body.*body_class\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/body_class">body_class</a><pre> &lt;?php body_class( $class ); ?&gt;</pre>', 'themecheck' ),
-			'wp_link_pages\(' => __( 'See: <a href=http://codex.wordpress.org/Function_Reference/wp_link_pages">wp_link_pages</a><pre> &lt;?php wp_link_pages( $args ); ?&gt;</pre>', 'themecheck' ),
+			'wp_link_pages\(' => __( 'See: <a href="http://codex.wordpress.org/Function_Reference/wp_link_pages">wp_link_pages</a><pre> &lt;?php wp_link_pages( $args ); ?&gt;</pre>', 'themecheck' ),
 			'post_class\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/post_class">post_class</a><pre> &lt;div id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;</pre>', 'themecheck' )
 			);
 
 		foreach ($checks as $key => $check) {
 			checkcount();
 			if ( !preg_match( '/' . $key . '/i', $php ) ) {
-				if ( $key === 'add_theme_support\(\s?("|\')automatic-feed-links("|\')\s?\)' ) $key = 'add_theme_support( \'automatic-feed-links\' )';
-				if ( $key === 'wp_enqueue_script\(\s?("|\')comment-reply("|\')' ) $key = 'wp_enqueue_script( \'comment-reply\' )';
-				if ( $key === '<body.*body_class\(' ) $key = 'body_class call in body tag';
-				if ( $key === 'register_sidebar[s]?\(' ) $key = 'register_sidebar() or register_sidebars()';
+				if ( $key === 'add_theme_support\(\s?("|\')automatic-feed-links("|\')\s?\)' ) $key = __( 'add_theme_support( \'automatic-feed-links\' )', 'themechek');
+				if ( $key === 'wp_enqueue_script\(\s?("|\')comment-reply("|\')' ) $key = __( 'wp_enqueue_script( \'comment-reply\' )', 'themechek');
+				if ( $key === '<body.*body_class\(' ) $key = __( 'body_class call in body tag', 'themechek');
+				if ( $key === 'register_sidebar[s]?\(' ) $key = __( 'register_sidebar() or register_sidebars()', 'themechek');
 				$key = ltrim( trim ( trim( $key, '(' ), '\\' ) );
-				$this->error[] = "<span class='tc-lead tc-required'>REQUIRED</span>: Could not find <strong>{$key}</strong>. {$check}";
+				$this->error[] = sprintf( __( '<span class="tc-lead tc-required">REQUIRED</span>: Could not find <strong>%1$s</strong>. %2$s', 'themecheck' ), $key, $check );
 				$ret = false;
 			}
 		}

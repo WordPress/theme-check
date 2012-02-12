@@ -237,9 +237,11 @@ function get_theme_data_from_contents( $theme_data ) {
 	else
 		$tags = array();
 
-	$name = $theme = wp_kses( trim( $theme_name[1] ), $themes_allowed_tags );
-	$theme_uri = esc_url( trim( $theme_uri[1] ) );
-	$description = wp_kses( trim( $description[1] ), $themes_allowed_tags );
+	$theme = ( isset( $theme_name[1] ) ) ? wp_kses( trim( $theme_name[1] ), $themes_allowed_tags ) : '';
+
+	$theme_uri = ( isset( $theme_uri[1] ) ) ? esc_url( trim( $theme_uri[1] ) ) : '';
+
+	$description = ( isset( $description[1] ) ) ? wp_kses( trim( $description[1] ), $themes_allowed_tags ) : '';
 
 	if ( preg_match( '|Author:(.*)$|mi', $theme_data, $author_name ) ) {
 		if ( empty( $author_uri ) ) {
@@ -251,5 +253,5 @@ function get_theme_data_from_contents( $theme_data ) {
 		$author = __('Anonymous');
 	}
 
-	return array( 'Name' => $name, 'Title' => $theme, 'URI' => $theme_uri, 'Description' => $description, 'Author' => $author, 'Author_URI' => $author_uri, 'Version' => $version, 'Template' => $template, 'Status' => $status, 'Tags' => $tags );
+	return array( 'Name' => $theme, 'Title' => $theme, 'URI' => $theme_uri, 'Description' => $description, 'Author' => $author, 'Author_URI' => $author_uri, 'Version' => $version, 'Template' => $template, 'Status' => $status, 'Tags' => $tags );
 }
