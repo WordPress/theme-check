@@ -18,17 +18,18 @@ class File_Checks implements themecheck {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		$blacklist = array(
-				'thumbs.db' => __( 'Windows thumbnail store', 'themecheck' ),
-				'desktop.ini' => __( 'windows system file', 'themecheck' ),
-				'project.properties' => __( 'NetBeans Project File', 'themecheck' ),
-				'project.xml' => __( 'NetBeans Project File', 'themecheck' ),
-				'\.kpf' => __( 'Komodo Project File', 'themecheck' ),
-				'^\.+[a-zA-Z0-9]' => __( 'Hidden Files or Folders', 'themecheck' ),
-				'php.ini' => __( 'PHP server settings file', 'themecheck' ),
-				'dwsync.xml' => __( 'Dreamweaver project file', 'themecheck' ),
-				'error_log' => __( 'PHP error log', 'themecheck' ),
-				'web.config' => __( 'Server settings file', 'themecheck' ),
-				'\.sql' => __( 'SQL dump file', 'themecheck' ),
+				'thumbs.db'				=> __( 'Windows thumbnail store', 'themecheck' ),
+				'desktop.ini'			=> __( 'windows system file', 'themecheck' ),
+				'project.properties'	=> __( 'NetBeans Project File', 'themecheck' ),
+				'project.xml'			=> __( 'NetBeans Project File', 'themecheck' ),
+				'\.kpf'					=> __( 'Komodo Project File', 'themecheck' ),
+				'^\.+[a-zA-Z0-9]'		=> __( 'Hidden Files or Folders', 'themecheck' ),
+				'php.ini'				=> __( 'PHP server settings file', 'themecheck' ),
+				'dwsync.xml'			=> __( 'Dreamweaver project file', 'themecheck' ),
+				'error_log'				=> __( 'PHP error log', 'themecheck' ),
+				'web.config'			=> __( 'Server settings file', 'themecheck' ),
+				'\.sql'					=> __( 'SQL dump file', 'themecheck' ),
+				'__MACOSX'				=> __( 'OSX system file', 'themecheck' )
 				);
 
 		$musthave = array( 'index.php', 'comments.php', 'style.css' );
