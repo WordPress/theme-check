@@ -20,7 +20,7 @@ class Deprecated_Recommended implements themecheck {
 			array( 'remove_custom_background' => 'remove_theme_support( \'custom-background\' )', '3.4' ),
 			array( 'get_theme_data' => 'wp_get_theme()', '3.4' ),
 			array( 'update_page_cache' => 'update_post_cache()', '3.4' ),
-			array( 'clean_page_cache' => 'update_post_cache()', '3.4' ),
+			array( 'clean_page_cache' => 'clean_post_cache()', '3.4' ),
 			
 			// admin
 			array( 'get_allowed_themes' => 'wp_get_themes( array( \'allowed\' => true ) )', '3.4' ),
