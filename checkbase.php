@@ -302,7 +302,9 @@ function tc_get_theme_data( $theme_file ) {
 		'Tags' => $theme->get('Tags'),
 		'Title' => $theme->get('Name'),
 		'AuthorName' => $theme->display('Author', false, false),
+		'License'	=> $theme->display( 'License', false, false),
+		'License URI'	=> $theme->display( 'License URI', false, false),
+		'Template Version'	=> $theme->display( 'Template Version', false, false)
 	);
-
 	return $theme_data;
 }
