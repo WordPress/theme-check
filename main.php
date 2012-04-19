@@ -4,15 +4,15 @@ function check_main( $theme ) {
 	$themename = $theme;
 	$theme = get_theme_root( $theme ) . "/$theme";
 	$files = listdir( $theme );
-	$data = get_theme_data( $theme . '/style.css' );
+	$data = tc_get_theme_data( $theme . '/style.css' );
 	if ( $data[ 'Template' ] ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
 		$parent = get_theme_root( $data[ 'Template' ] ) . '/' . $data['Template'];
-		if ( !get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
+		if ( ! tc_get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
 			echo '<h2>' . sprintf(__('Parent theme <strong>%1$s</strong> not found! You have to have parent AND child-theme installed!', 'themecheck'), $data[ 'Template' ] ) . '</h2>';
 			return;
 		}
-		$parent_data = get_theme_data( $parent . '/style.css' );
+		$parent_data = tc_get_theme_data( $parent . '/style.css' );
 		$themename = basename( $parent );
 		$files = array_merge( listdir( $parent ), $files );
 	}
@@ -124,7 +124,7 @@ function tc_success() {
 }
 
 function tc_form() {
-	$themes = get_themes();
+	$themes = tc_get_themes();
 	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
 	foreach( $themes as $name => $location ) {
