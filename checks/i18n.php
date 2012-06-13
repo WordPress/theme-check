@@ -12,6 +12,7 @@ class I18NCheck implements themecheck {
 		
 		// make sure the tokenizer is available
 		if ( !function_exists( 'token_get_all' ) ) return true;
+
 		foreach ( $php_files as $php_key => $phpfile ) {
 			$error='';
 			
@@ -37,7 +38,7 @@ class I18NCheck implements themecheck {
 			}
 			
 			foreach ( $stmts as $match ) {
-				$tokens = token_get_all('<?php '.$match.';');
+				$tokens = @token_get_all('<?php '.$match.';');
 				if (!empty($tokens)) {
 					foreach ($tokens as $token) {
 						if (is_array($token) && in_array( $token[0], array( T_VARIABLE ) ) ) {
