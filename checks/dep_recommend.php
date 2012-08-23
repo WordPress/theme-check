@@ -9,6 +9,37 @@ class Deprecated_Recommended implements themecheck {
 		$ret = true;
 
 		$checks = array(
+		
+			// wp-includes deprecated
+			array( 'the_editor' => 'wp_editor', '3.3' ),
+			array( 'get_user_metavalues' => 'none available', '3.3' ),
+			array( 'sanitize_user_object' => 'none available', '3.3' ),
+			array( 'get_boundary_post_rel_link' => 'none available', '3.3' ),
+			array( 'start_post_rel_link' => 'none available ', '3.3' ),
+			array( 'get_index_rel_link' => 'none available', '3.3' ),
+			array( 'index_rel_link' => 'none available', '3.3' ),
+			array( 'get_parent_post_rel_link' => 'none available', '3.3' ),
+			array( 'parent_post_rel_link' => 'none available', '3.3' ),
+			array( 'wp_admin_bar_dashboard_view_site_menu' => 'none available', '3.3' ),
+			array( 'is_blog_user' => 'is_member_of_blog()', '3.3' ),
+			array( 'debug_fopen' => 'error_log()', '3.3' ),
+			array( 'debug_fwrite' => 'error_log()', '3.3' ),
+			array( 'debug_fclose' => 'error_log()', '3.3' ),
+
+			// wp-admin deprecated
+			array( 'screen_layout' => '$current_screen->render_screen_layout()', '3.3' ),
+			array( 'screen_options' => '$current_screen->render_per_page_options()', '3.3' ),
+			array( 'screen_meta' => ' $current_screen->render_screen_meta()', '3.3' ),
+			array( 'media_upload_image' => 'wp_media_upload_handler()', '3.3' ),
+			array( 'media_upload_audio' => 'wp_media_upload_handler()', '3.3' ),
+			array( 'media_upload_video' => 'wp_media_upload_handler()', '3.3' ),
+			array( 'media_upload_file' => 'wp_media_upload_handler()', '3.3' ),
+			array( 'type_url_form_image' => 'wp_media_insert_url_form( \'image\' )', '3.3' ),
+			array( 'type_url_form_audio' => 'wp_media_insert_url_form( \'audio\' )', '3.3' ),
+			array( 'type_url_form_video' => 'wp_media_insert_url_form( \'video\' )', '3.3' ),
+			array( 'type_url_form_file' => 'wp_media_insert_url_form( \'file\' )', '3.3' ),
+			array( 'add_contextual_help' => 'get_current_screen()->add_help_tab()', '3.3' ),		
+
 			// frontend
 			array( 'get_themes' => 'wp_get_themes()', '3.4' ),
 			array( 'get_theme' => 'wp_get_theme()', '3.4' ),
