@@ -17,11 +17,7 @@ class Style_Tags implements themecheck {
 			return $ret;
 		}
 
-		$allowed_tags = array("black","blue","brown","gray","green","orange","pink","purple","red","silver","tan","white","yellow","dark","light","one-column",
-		"two-columns","three-columns","four-columns","left-sidebar","right-sidebar","fixed-width","flexible-width","blavatar","buddypress","custom-background",
-		"custom-colors","custom-header","custom-menu","editor-style","featured-image-header","featured-images","front-page-post-form","full-width-template",
-		"microformats","post-formats","rtl-language-support","sticky-post","theme-options","threaded-comments","translation-ready","holiday","photoblogging",
-		"seasonal");
+		$allowed_tags = array("black","blue","brown","gray","green","orange","pink","purple","red","silver","tan","white","yellow","dark","light","one-column","two-columns","three-columns","four-columns","left-sidebar","right-sidebar","fixed-width","flexible-width","flexible-header", "blavatar","buddypress","custom-background","custom-colors","custom-header","custom-menu","editor-style","featured-image-header","featured-images","front-page-post-form","full-width-template","microformats","post-formats","rtl-language-support","sticky-post","theme-options","threaded-comments","translation-ready","holiday","photoblogging","seasonal");
 		
 		foreach( $data[ 'Tags' ] as $tag ) {
 			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) {
