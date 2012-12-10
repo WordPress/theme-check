@@ -6,7 +6,7 @@ class Bad_Checks implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'/(?<![_|a-z0-9])eval\s?\(/i' => __( 'eval() is not allowed.', 'themecheck' ),
+			'/(?<![_|a-z0-9|\.])eval\s?\(/i' => __( 'eval() is not allowed.', 'themecheck' ),
 			'/[^a-z0-9](?<!_)(popen|proc_open|[^_]exec|shell_exec|system|passthru)\(/' => __( 'PHP sytem calls should be disabled by server admins anyway!', 'themecheck' ),
 			'/\s?ini_set\(/' => __( 'Themes should not change server PHP settings', 'themecheck' ),
 			'/base64_decode/' => __( 'base64_decode() is not allowed', 'themecheck' ),
