@@ -11,36 +11,7 @@ class Deprecated_Recommended implements themecheck {
 		$checks = array(
 		
 			// wp-includes deprecated
-			array( 'the_editor' => 'wp_editor', '3.3' ),
-			array( 'get_user_metavalues' => 'none available', '3.3' ),
-			array( 'sanitize_user_object' => 'none available', '3.3' ),
-			array( 'get_boundary_post_rel_link' => 'none available', '3.3' ),
-			array( 'start_post_rel_link' => 'none available ', '3.3' ),
-			array( 'get_index_rel_link' => 'none available', '3.3' ),
-			array( 'index_rel_link' => 'none available', '3.3' ),
-			array( 'get_parent_post_rel_link' => 'none available', '3.3' ),
-			array( 'parent_post_rel_link' => 'none available', '3.3' ),
-			array( 'wp_admin_bar_dashboard_view_site_menu' => 'none available', '3.3' ),
-			array( 'is_blog_user' => 'is_member_of_blog()', '3.3' ),
-			array( 'debug_fopen' => 'error_log()', '3.3' ),
-			array( 'debug_fwrite' => 'error_log()', '3.3' ),
-			array( 'debug_fclose' => 'error_log()', '3.3' ),
 
-			// wp-admin deprecated
-			array( 'screen_layout' => '$current_screen->render_screen_layout()', '3.3' ),
-			array( 'screen_options' => '$current_screen->render_per_page_options()', '3.3' ),
-			array( 'screen_meta' => ' $current_screen->render_screen_meta()', '3.3' ),
-			array( 'media_upload_image' => 'wp_media_upload_handler()', '3.3' ),
-			array( 'media_upload_audio' => 'wp_media_upload_handler()', '3.3' ),
-			array( 'media_upload_video' => 'wp_media_upload_handler()', '3.3' ),
-			array( 'media_upload_file' => 'wp_media_upload_handler()', '3.3' ),
-			array( 'type_url_form_image' => 'wp_media_insert_url_form( \'image\' )', '3.3' ),
-			array( 'type_url_form_audio' => 'wp_media_insert_url_form( \'audio\' )', '3.3' ),
-			array( 'type_url_form_video' => 'wp_media_insert_url_form( \'video\' )', '3.3' ),
-			array( 'type_url_form_file' => 'wp_media_insert_url_form( \'file\' )', '3.3' ),
-			array( 'add_contextual_help' => 'get_current_screen()->add_help_tab()', '3.3' ),		
-
-			// frontend
 			array( 'get_themes' => 'wp_get_themes()', '3.4' ),
 			array( 'get_theme' => 'wp_get_theme()', '3.4' ),
 			array( 'get_current_theme' => 'wp_get_theme()', '3.4' ),
@@ -52,11 +23,26 @@ class Deprecated_Recommended implements themecheck {
 			array( 'get_theme_data' => 'wp_get_theme()', '3.4' ),
 			array( 'update_page_cache' => 'update_post_cache()', '3.4' ),
 			array( 'clean_page_cache' => 'clean_post_cache()', '3.4' ),
-			
-			// admin
+			array( 'wp_explain_nonce' => 'wp_nonce_ays', '3.4.1' ),
+			array( 'sticky_class' => 'post_class()', '3.5' ),
+			array( '_get_post_ancestors' => 'none', '3.5' ),
+			array( 'wp_load_image' => 'wp_get_image_editor()', '3.5' ),
+			array( 'image_resize' => 'wp_get_image_editor()', '3.5' ),
+			array( 'wp_get_single_post' => 'get_post()', '3.5' ),
+			array( 'user_pass_ok' => 'wp_authenticate()', '3.5' ),
+			array( '_save_post_hook' => 'none', '3.5' ),
+			array( 'gd_edit_image_support' => 'wp_image_editor_supports', '3.5' ),
+
+			// wp-admin deprecated		
 			array( 'get_allowed_themes' => 'wp_get_themes( array( \'allowed\' => true ) )', '3.4' ),
 			array( 'get_broken_themes' => 'wp_get_themes( array( \'errors\' => true )', '3.4' ),
 			array( 'current_theme_info' => 'wp_get_theme()', '3.4' ),
+			array( '_insert_into_post_button' => 'none', '3.5' ),
+			array( '_media_button' => 'none', '3.5' ),
+			array( 'get_post_to_edit' => 'get_post()', '3.5' ),
+			array( 'get_default_page_to_edit' => 'get_default_post_to_edit()', '3.5' ),
+			array( 'wp_create_thumbnail' => 'image_resize()', '3.5' )
+
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
