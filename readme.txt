@@ -56,6 +56,11 @@ If **either** of these two vars are defined a new trac tickbox will appear next 
 
 == Changelog ==
 
+= 20121211.1 =
+
+* Updated for 3.5
+* Remove Paypal button.
+
 = 20110805.1 =
 * TimThumb checks removed.
 * Proper i18n loading. Fixes http://bit.ly/ouD5Ke.
