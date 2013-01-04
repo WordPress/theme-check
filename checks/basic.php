@@ -17,8 +17,6 @@ class Basic_Checks implements themecheck {
 			'language_attributes' => __( 'See: <a href="http://codex.wordpress.org/Function_Reference/language_attributes">language_attributes</a><pre>&lt;html &lt;?php language_attributes(); ?&gt;</pre>', 'themecheck' ),
 			'charset' => __( 'There must be a charset defined in the Content-Type or the meta charset tag in the head.', 'themecheck' ),
 			'add_theme_support\(\s?("|\')automatic-feed-links("|\')\s?\)' => __( 'See: <a href="http://codex.wordpress.org/Function_Reference/add_theme_support">add_theme_support</a><pre> &lt;?php add_theme_support( $feature ); ?&gt;</pre>', 'themecheck' ),
-			'register_sidebar[s]?\(' => __( 'See: <ahref="http://codex.wordpress.org/Function_Reference/register_sidebar">register_sidebar</a><pre> &lt;?php register_sidebar( $args ); ?&gt;</pre>', 'themecheck' ),
-			'dynamic_sidebar\(' => __( 'See: <a href="http://codex.wordpress.org/Function_Reference/dynamic_sidebar">dynamic_sidebar</a><pre> &lt;?php dynamic_sidebar( $index ); ?&gt;</pre>', 'themecheck' ),
 			'comments_template\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/comments_template">comments_template</a><pre> &lt;?php comments_template( $file, $separate_comments ); ?&gt;</pre>', 'themecheck' ),
 			'wp_list_comments\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/wp_list_comments">wp_list_comments</a><pre> &lt;?php wp_list_comments( $args ); ?&gt;</pre>', 'themecheck' ),
 			'comment_form\(' => __( 'See: <a href="http://codex.wordpress.org/Template_Tags/comment_form">comment_form</a><pre> &lt;?php comment_form(); ?&gt;</pre>', 'themecheck' ),
