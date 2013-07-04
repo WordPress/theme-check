@@ -81,6 +81,7 @@ function tc_grep( $error, $file ) {
 	$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
 	$line_index = 0;
 	$bad_lines = '';
+	$error = '';
 	foreach( $lines as $this_line )	{
 		if ( stristr ( $this_line, $error ) ) {
 			$error = str_replace( '"', "'", $error );
@@ -92,13 +93,14 @@ function tc_grep( $error, $file ) {
 		}
 		$line_index++;
 	}
-		return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
+	return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
 }
 
 function tc_preg( $preg, $file ) {
 	$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
 	$line_index = 0;
 	$bad_lines = '';
+	$error = '';
 	foreach( $lines as $this_line ) {
 		if ( preg_match( $preg, $this_line, $matches ) ) {
 			$error = $matches[0];
@@ -140,6 +142,7 @@ function tc_trac( $e ) {
 	$trac_right= array( "'''", "'''" );
 	$html_link = '/<a\s?href\s?=\s?[\'|"]([^"|\']*)[\'|"]>([^<]*)<\/a>/i';
 	$html_new = '[$1 $2]';
+	$e = '';
 	if ( defined( 'TC_TRAC' ) ) {
 		$e = preg_replace( $html_link, $html_new, $e );
 		$e = str_replace( $trac_left, $trac_right, $e );
