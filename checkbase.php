@@ -81,7 +81,6 @@ function tc_grep( $error, $file ) {
 	$lines = file( $file, FILE_IGNORE_NEW_LINES ); // Read the theme file into an array
 	$line_index = 0;
 	$bad_lines = '';
-	$error = '';
 	foreach( $lines as $this_line )	{
 		if ( stristr ( $this_line, $error ) ) {
 			$error = str_replace( '"', "'", $error );
