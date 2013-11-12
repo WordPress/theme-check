@@ -15,7 +15,7 @@ function tc_i18n() {
 }
 
 function load_styles() {
-	wp_enqueue_style('style', plugins_url( 'theme-check/style.css', __FILE__ ), null, null, 'screen');
+	wp_enqueue_style('style', plugins_url( 'style.css', __FILE__ ), null, null, 'screen');
 }
 
 add_action( 'admin_menu', 'themecheck_add_page' );
