@@ -97,7 +97,7 @@ function tc_intro() {
 	<h2><?php _e( 'About', 'theme-check' ); ?></h2>
 	<p><?php _e( "The theme check plugin is an easy way to test your theme and make sure it's up to spec with the latest theme review standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.", 'theme-check' ); ?></p>
 	<h2><?php _e( 'Contact', 'theme-check' ); ?></h2>
-	<p><?php sprintf( __( 'Theme-Check is maintained by %1s and %2s.', 'theme-check' ),
+	<p><?php printf( __( 'Theme-Check is maintained by %1s and %2s.', 'theme-check' ),
 		'<a href="http://profiles.wordpress.org/users/pross/">Pross</a>',
 		'<a href="http://profiles.wordpress.org/users/otto42/">Otto42</a>'
 		); ?></p>

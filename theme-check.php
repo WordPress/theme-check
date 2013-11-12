@@ -3,7 +3,7 @@
 Plugin Name: Theme Check
 Plugin URI: http://pross.org.uk/plugins
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
-Author: Pross
+Author: Pross, Otto42
 Author URI: http://pross.org.uk
 Version: 20121211.1
 Text Domain: theme-check
