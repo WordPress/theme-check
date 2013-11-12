@@ -9,13 +9,13 @@ class I18NCheck implements themecheck {
 		$ret = true;
 		$error = '';
 		checkcount();
-		
+
 		// make sure the tokenizer is available
 		if ( !function_exists( 'token_get_all' ) ) return true;
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			$error='';
-			
+
 			$stmts = array();
 			foreach ( array('_e(', '__(', '_e (', '__ (') as $finder) {
 				$search = $phpfile;
@@ -36,7 +36,7 @@ class I18NCheck implements themecheck {
 					$search = substr($search,$i);
 				}
 			}
-			
+
 			foreach ( $stmts as $match ) {
 				$tokens = @token_get_all('<?php '.$match.';');
 				if (!empty($tokens)) {
@@ -45,16 +45,16 @@ class I18NCheck implements themecheck {
 							$filename = tc_filename( $php_key );
 							$grep = tc_grep( ltrim( $match ), $php_key );
 							preg_match( '/[^\s]*\s[0-9]+/', $grep, $line);
-							$error = ( !strpos( $error, $line[0] ) ) ? $grep : '';	
-							$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: Possible variable <strong>%1$s</strong> found in translation function in <strong>%2$s</strong>. Translation function calls must NOT contain PHP variables. %3$s','themecheck'),
+							$error = ( !strpos( $error, $line[0] ) ) ? $grep : '';
+							$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: Possible variable <strong>%1$s</strong> found in translation function in <strong>%2$s</strong>. Translation function calls must NOT contain PHP variables. %3$s','theme-check'),
 								$token[1], $filename, $error);
 							break; // stop looking at the tokens on this line once a variable is found
 						}
 					}
 				}
 			}
-				
-		
+
+
 		}
 		return $ret;
 	}

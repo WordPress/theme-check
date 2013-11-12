@@ -9,7 +9,7 @@ class Deprecated_Recommended implements themecheck {
 		$ret = true;
 
 		$checks = array(
-		
+
 			// wp-includes deprecated
 
 			array( 'get_themes' => 'wp_get_themes()', '3.4' ),
@@ -33,7 +33,7 @@ class Deprecated_Recommended implements themecheck {
 			array( '_save_post_hook' => 'none', '3.5' ),
 			array( 'gd_edit_image_support' => 'wp_image_editor_supports', '3.5' ),
 
-			// wp-admin deprecated		
+			// wp-admin deprecated
 			array( 'get_allowed_themes' => 'wp_get_themes( array( \'allowed\' => true ) )', '3.4' ),
 			array( 'get_broken_themes' => 'wp_get_themes( array( \'errors\' => true )', '3.4' ),
 			array( 'current_theme_info' => 'wp_get_theme()', '3.4' ),
@@ -56,7 +56,7 @@ class Deprecated_Recommended implements themecheck {
 					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$version = $check[0];
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: <strong>%1$s</strong> found in the file <strong>%2$s</strong>. Deprecated since version <strong>%3$s</strong>. Use <strong>%4$s</strong> instead.%5$s', 'themecheck'), $error, $filename, $version, $alt, $grep) ;
+					$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: <strong>%1$s</strong> found in the file <strong>%2$s</strong>. Deprecated since version <strong>%3$s</strong>. Use <strong>%4$s</strong> instead.%5$s', 'theme-check'), $error, $filename, $version, $alt, $grep) ;
 				}
 			}
 		}

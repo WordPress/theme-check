@@ -6,7 +6,7 @@ class IframeCheck implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			'/<(iframe)[^>]*>/' => __( 'iframes are sometimes used to load unwanted adverts and code on your site', 'themecheck' )
+			'/<(iframe)[^>]*>/' => __( 'iframes are sometimes used to load unwanted adverts and code on your site', 'theme-check' )
 			);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -17,7 +17,7 @@ class IframeCheck implements themecheck {
 					$error = ltrim( $matches[1], '(' );
 					$error = rtrim( $error, '(' );
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = sprintf(__('<span class="tc-lead tc-info">INFO</span>: <strong>%1$s</strong> was found in the file <strong>%2$s</strong> %3$s.%4$s', 'themecheck'), $error, $filename, $check, $grep ) ;
+					$this->error[] = sprintf(__('<span class="tc-lead tc-info">INFO</span>: <strong>%1$s</strong> was found in the file <strong>%2$s</strong> %3$s.%4$s', 'theme-check'), $error, $filename, $check, $grep ) ;
 				}
 			}
 		}

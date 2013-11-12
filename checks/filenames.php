@@ -18,43 +18,43 @@ class File_Checks implements themecheck {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		$blacklist = array(
-				'thumbs.db'				=> __( 'Windows thumbnail store', 'themecheck' ),
-				'desktop.ini'			=> __( 'windows system file', 'themecheck' ),
-				'project.properties'	=> __( 'NetBeans Project File', 'themecheck' ),
-				'project.xml'			=> __( 'NetBeans Project File', 'themecheck' ),
-				'\.kpf'					=> __( 'Komodo Project File', 'themecheck' ),
-				'^\.+[a-zA-Z0-9]'		=> __( 'Hidden Files or Folders', 'themecheck' ),
-				'php.ini'				=> __( 'PHP server settings file', 'themecheck' ),
-				'dwsync.xml'			=> __( 'Dreamweaver project file', 'themecheck' ),
-				'error_log'				=> __( 'PHP error log', 'themecheck' ),
-				'web.config'			=> __( 'Server settings file', 'themecheck' ),
-				'\.sql'					=> __( 'SQL dump file', 'themecheck' ),
-				'__MACOSX'				=> __( 'OSX system file', 'themecheck' )
+				'thumbs.db'				=> __( 'Windows thumbnail store', 'theme-check' ),
+				'desktop.ini'			=> __( 'windows system file', 'theme-check' ),
+				'project.properties'	=> __( 'NetBeans Project File', 'theme-check' ),
+				'project.xml'			=> __( 'NetBeans Project File', 'theme-check' ),
+				'\.kpf'					=> __( 'Komodo Project File', 'theme-check' ),
+				'^\.+[a-zA-Z0-9]'		=> __( 'Hidden Files or Folders', 'theme-check' ),
+				'php.ini'				=> __( 'PHP server settings file', 'theme-check' ),
+				'dwsync.xml'			=> __( 'Dreamweaver project file', 'theme-check' ),
+				'error_log'				=> __( 'PHP error log', 'theme-check' ),
+				'web.config'			=> __( 'Server settings file', 'theme-check' ),
+				'\.sql'					=> __( 'SQL dump file', 'theme-check' ),
+				'__MACOSX'				=> __( 'OSX system file', 'theme-check' )
 				);
 
 		$musthave = array( 'index.php', 'comments.php', 'style.css' );
-		$rechave = array( 'readme.txt' => __( 'Please see <a href="http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'themecheck' ) );
+		$rechave = array( 'readme.txt' => __( 'Please see <a href="http://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'theme-check' ) );
 
 		checkcount();
 
 		foreach( $blacklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
 				$error = implode( array_unique( $filename ), ' ' );
-				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: <strong>%1$s</strong> %2$s found.', 'themecheck'), $error, $reason) ;
+				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: <strong>%1$s</strong> %2$s found.', 'theme-check'), $error, $reason) ;
 				$ret = false;
 			}
 		}
 
 		foreach( $musthave as $file ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: could not find the file <strong>%1$s</strong> in the theme.', 'themecheck'), $file);
+				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: could not find the file <strong>%1$s</strong> in the theme.', 'theme-check'), $file);
 				$ret = false;
 			}
 		}
 
 		foreach( $rechave as $file => $reason ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: could not find the file <strong>%1$s</strong> in the theme. %2$s', 'themecheck'), $file, $reason );
+				$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: could not find the file <strong>%1$s</strong> in the theme. %2$s', 'theme-check'), $file, $reason );
 			}
 		}
 

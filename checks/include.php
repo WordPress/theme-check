@@ -7,7 +7,7 @@ class IncludeCheck implements themecheck {
 
 		$ret = true;
 
-		$checks = array( '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?\(/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'themecheck' ) );
+		$checks = array( '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?\(/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' ) );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -16,7 +16,7 @@ class IncludeCheck implements themecheck {
 					$filename = tc_filename( $php_key );
 					$error = '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?\(/';
 					$grep = tc_preg( $error, $php_key );
-					if ( basename($filename) !== 'functions.php' ) $this->error[] = sprintf ( __( '<span class="tc-lead tc-info">INFO</span>: <strong>%1$s</strong> %2$s %3$s', 'themecheck' ), $filename, $check, $grep );
+					if ( basename($filename) !== 'functions.php' ) $this->error[] = sprintf ( __( '<span class="tc-lead tc-info">INFO</span>: <strong>%1$s</strong> %2$s %3$s', 'theme-check' ), $filename, $check, $grep );
 				}
 			}
 

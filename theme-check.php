@@ -1,17 +1,18 @@
 <?php
 /*
-Plugin Name: Theme-Check
+Plugin Name: Theme Check
 Plugin URI: http://pross.org.uk/plugins
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 Author: Pross
 Author URI: http://pross.org.uk
 Version: 20121211.1
+Text Domain: theme-check
 */
 
 add_action( 'admin_init', 'tc_i18n' );
 
 function tc_i18n() {
-	load_plugin_textdomain( 'themecheck', false, 'theme-check/lang' );
+	load_plugin_textdomain( 'theme-check', false, 'theme-check/lang' );
 }
 
 function load_styles() {
@@ -31,7 +32,7 @@ function tc_add_headers( $extra_headers ) {
 
 function themecheck_do_page() {
 	if ( !current_user_can( 'manage_options' ) )  {
-	wp_die( __( 'You do not have sufficient permissions to access this page.', 'themecheck' ) );
+	wp_die( __( 'You do not have sufficient permissions to access this page.', 'theme-check' ) );
 	}
 
 	add_filter( 'extra_theme_headers', 'tc_add_headers' );

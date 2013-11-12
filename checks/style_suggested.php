@@ -17,7 +17,7 @@ class Style_Suggested implements themecheck {
 
 		foreach ($checks as $key => $check) {
 			if ( !preg_match( '/' . $key . '/i', $css, $matches ) ) {
-				$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: <strong>%1$s</strong> is missing from your style.css header.', 'themecheck'), $check);
+				$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: <strong>%1$s</strong> is missing from your style.css header.', 'theme-check'), $check);
 			}
 		}
 

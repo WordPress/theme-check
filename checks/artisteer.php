@@ -14,14 +14,14 @@ class ArtisteerCheck implements themecheck {
 		if (
 			strpos( $php, 'art_normalize_widget_style_tokens' ) !== false
 			|| strpos( $php, 'art_include_lib' ) !== false
-			|| strpos( $php, '_remove_last_slash($url) {' ) !== false 
+			|| strpos( $php, '_remove_last_slash($url) {' ) !== false
 			|| strpos( $php, 'adi_normalize_widget_style_tokens' ) !== false
 			|| strpos( $php, 'm_normalize_widget_style_tokens' ) !== false
 			|| strpos ( $php, "bw = '<!--- BEGIN Widget --->';" ) !== false
 			|| strpos ( $php, "ew = '<!-- end_widget -->';" ) !== false
 			|| strpos ( $php, "end_widget' => '<!-- end_widget -->'") !== false
 		) {
-			$this->error[] = "<span class='tc-lead tc-warning'>WARNING</span>: " . __( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'themecheck' );
+			$this->error[] = "<span class='tc-lead tc-warning'>" . __('WARNING', 'theme-check' ). "</span>: " . __( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'theme-check' );
 			$ret = false;
 		}
 

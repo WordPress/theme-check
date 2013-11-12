@@ -13,7 +13,7 @@ class NonPrintableCheck implements themecheck {
 			if ( preg_match('/[\x00-\x08\x0B-\x0C\x0E-\x1F\x80-\xFF]/', $content, $matches ) ) {
 				$filename = tc_filename( $name );
 				$non_print = tc_preg( '/[\x00-\x08\x0B-\x0C\x0E-\x1F\x80-\xFF]/', $name );
-				$this->error[] = sprintf(__('<span class="tc-lead tc-info">INFO</span>: Non-printable characters were found in the <strong>%1$s</strong> file. You may want to check this file for errors.%2$s', 'themecheck'), $filename, $non_print);
+				$this->error[] = sprintf(__('<span class="tc-lead tc-info">INFO</span>: Non-printable characters were found in the <strong>%1$s</strong> file. You may want to check this file for errors.%2$s', 'theme-check'), $filename, $non_print);
 			}
 		}
 
