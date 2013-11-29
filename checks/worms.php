@@ -12,7 +12,6 @@ class WormCheck implements themecheck {
 			'/YW55cmVzdWx0cy5uZXQ=/' => __( 'base64 encoded text found in Search Engine Redirect hack <a href="http://blogbuildingu.com/wordpress/wordpress-search-engine-redirect-hack">[1]</a>', 'theme-check' ),
 			'/\$_COOKIE\[\'yahg\'\]/' => __( 'YAHG Googlerank.info exploit code <a href="http://creativebriefing.com/wordpress-hacked-googlerankinfo/">[1]</a>', 'theme-check' ),
 			'/ekibastos/' => __( 'Possible Ekibastos attack <a href="http://ocaoimh.ie/did-your-wordpress-site-get-hacked/">[1]</a>', 'theme-check' ),
-			'/<!--[A-Za-z0-9]+--><\?php/' => __( 'Symptom of a link injection attack <a href="http://www.kyle-brady.com/2009/11/07/wordpress-mediatemple-and-an-injection-attack/">[1]</a>', 'theme-check' ),
 			'/<script>\/\*(GNU GPL|LGPL)\*\/ try\{window.onload.+catch\(e\) \{\}<\/script>/' => __( 'Possible "Gumblar" JavaScript attack <a href="http://threatinfo.trendmicro.com/vinfo/articles/securityarticles.asp?xmlfile=042710-GUMBLAR.xml">[1]</a> <a href="http://justcoded.com/article/gumblar-family-virus-removal-tool/">[2]</a>', 'theme-check' ),
 			'/php \$[a-zA-Z]*=\'as\';/' => __( 'Symptom of the "Pharma Hack" <a href="http://blog.sucuri.net/2010/07/understanding-and-cleaning-the-pharma-hack-on-wordpress.html">[1]</a>', 'theme-check' ),
 			'/defined?\(\'wp_class_support/' => __( 'Symptom of the "Pharma Hack" <a href="http://blog.sucuri.net/2010/07/understanding-and-cleaning-the-pharma-hack-on-wordpress.html">[1]</a>', 'theme-check' ),
