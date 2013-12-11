@@ -13,16 +13,20 @@ class Style_Tags implements themecheck {
 		}
 
 		if ( !$data[ 'Tags' ] ) {
-			$this->error[] = __( "<span class='tc-lead tc-recommended'>RECOMMENDED</span>: <strong>Tags:</strong> is either empty or missing in style.css header.", "theme-check" );
+			$this->error[] = '<span class="tc-lead tc-recommended">' . __('RECOMMENDED','theme-check') . '</span>: ' . __( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' );
 			return $ret;
 		}
 
-		$allowed_tags = array("black","blue","brown","gray","green","orange","pink","purple","red","silver","tan","white","yellow","dark","light","one-column","two-columns","three-columns","four-columns","left-sidebar","right-sidebar","fixed-width","flexible-width","flexible-header", "blavatar","buddypress","custom-background","custom-colors","custom-header","custom-menu","editor-style","featured-image-header","featured-images","front-page-post-form","full-width-template","microformats","post-formats","rtl-language-support","sticky-post","theme-options","threaded-comments","translation-ready","holiday","photoblogging","seasonal");
+		$allowed_tags = array("black","blue","brown","gray","green","orange","pink","purple","red","silver","tan","white","yellow","dark","light","one-column","two-columns","three-columns","four-columns","left-sidebar","right-sidebar","fixed-layout","fluid-layout","responsive-layout","flexible-header", "blavatar","buddypress","custom-background","custom-colors","custom-header","custom-menu","editor-style","featured-image-header","featured-images","front-page-post-form","full-width-template","microformats","post-formats","rtl-language-support","sticky-post","theme-options","threaded-comments","translation-ready","holiday","photoblogging","seasonal");
 
 		foreach( $data[ 'Tags' ] as $tag ) {
 			if ( !in_array( strtolower( $tag ), $allowed_tags ) ) {
-				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: Found wrong tag, remove <strong>%1$s</strong> from your style.css header.', 'theme-check'), $tag);
-				$ret = false;
+				if ( in_array( strtolower( $tag ), array("flexible-width","fixed-width") ) ) {
+					$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . __( 'The flexible-width and fixed-width tags changed to fluid-layout and fixed-layout tags in WordPress 3.8. Additionally, the responsive-layout tag was added. Please change to using one of the new tags.', 'theme-check' );
+				} else {
+					$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . sprintf(__('Found wrong tag, remove <strong>%1$s</strong> from your style.css header.', 'theme-check'), $tag);
+					$ret = false;
+				}
 			}
 		}
 
