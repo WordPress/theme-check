@@ -33,7 +33,7 @@ class Basic_Checks implements themecheck {
 				if ( $key === 'body_class' ) $key = __( 'body_class call in body tag', 'theme-check');
 				if ( $key === 'register_sidebar[s]?\(' ) $key = __( 'register_sidebar() or register_sidebars()', 'theme-check');
 				$key = ltrim( trim ( trim( $key, '(' ), '\\' ) );
-				$this->error[] = sprintf( __( '<span class="tc-lead tc-required">REQUIRED</span>: Could not find <strong>%1$s</strong>. %2$s', 'theme-check' ), $key, $check );
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Could not find <strong>%1$s</strong>. %2$s', 'theme-check' ), $key, $check );
 				$ret = false;
 			}
 		}

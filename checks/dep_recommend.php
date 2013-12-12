@@ -56,7 +56,8 @@ class Deprecated_Recommended implements themecheck {
 					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$version = $check[0];
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: <strong>%1$s</strong> found in the file <strong>%2$s</strong>. Deprecated since version <strong>%3$s</strong>. Use <strong>%4$s</strong> instead.%5$s', 'theme-check'), $error, $filename, $version, $alt, $grep) ;
+					/* translators: 1: error 2: filename 3: version 4: alt 5: grep */
+					$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('<strong>%1$s</strong> found in the file <strong>%2$s</strong>. Deprecated since version <strong>%3$s</strong>. Use <strong>%4$s</strong> instead.%5$s', 'theme-check'), $error, $filename, $version, $alt, $grep) ;
 				}
 			}
 		}

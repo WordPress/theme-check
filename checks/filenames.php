@@ -40,21 +40,21 @@ class File_Checks implements themecheck {
 		foreach( $blacklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
 				$error = implode( array_unique( $filename ), ' ' );
-				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: <strong>%1$s</strong> %2$s found.', 'theme-check'), $error, $reason) ;
+				$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('<strong>%1$s</strong> %2$s found.', 'theme-check'), $error, $reason) ;
 				$ret = false;
 			}
 		}
 
 		foreach( $musthave as $file ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: could not find the file <strong>%1$s</strong> in the theme.', 'theme-check'), $file);
+				$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('could not find the file <strong>%1$s</strong> in the theme.', 'theme-check'), $file);
 				$ret = false;
 			}
 		}
 
 		foreach( $rechave as $file => $reason ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf(__('<span class="tc-lead tc-recommended">RECOMMENDED</span>: could not find the file <strong>%1$s</strong> in the theme. %2$s', 'theme-check'), $file, $reason );
+				$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('could not find the file <strong>%1$s</strong> in the theme. %2$s', 'theme-check'), $file, $reason );
 			}
 		}
 
