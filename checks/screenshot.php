@@ -17,14 +17,14 @@ class Screenshot_Checks implements themecheck {
 				if ( basename( $other_key ) === 'screenshot.png' && preg_match( '/.*themes\/[^\/]*\/screenshot\.png/', $other_key ))  {
 					// we have or screenshot!
 					$image = getimagesize( $other_key );
-					if ( $image[0] > 640 || $image[1] > 480 ) {
-						$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 640x480px.', 'theme-check'), $image[0], $image[1]);
+					if ( $image[0] > 880 || $image[1] > 660 ) {
+						$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 880x660px.', 'theme-check'), $image[0], $image[1]);
 					}
 					if ( $image[1] / $image[0] != 0.75 ) {
 						$this->error[] = '<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot dimensions are wrong! Ratio of width to height should be 4:3.', 'theme-check');
 					}
-					if ( $image[0] != 600 || $image[1] != 450 ) {
-						$this->error[] = '<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot size should be 600x450, to account for HiDPI displays. Any 4:3 image size is acceptable, but 600x450 is preferred.', 'theme-check');
+					if ( $image[0] != 880 || $image[1] != 660 ) {
+						$this->error[] = '<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot size should be 880x660, to account for HiDPI displays. Any 4:3 image size is acceptable, but 880x660 is preferred.', 'theme-check');
 					}
 				}
 			}
