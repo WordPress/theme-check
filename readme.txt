@@ -3,9 +3,9 @@ Contributors: pross, Otto42
 Author URI: http://www.pross.org.uk
 Plugin URL: http://www.pross.org.uk/plugins
 Requires at Least: 3.0
-Tested Up To: 3.5
+Tested Up To: 3.8
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20121211.1
+Stable tag: 20131212.1
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -54,9 +54,11 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
+= 20131212.1 =
+* Updated for 3.8
+* Most files have changed for better I18N support, so the language files were removed temporarily until translation can be redone.
 
 = 20121211.1 =
-
 * Updated for 3.5
 * Remove Paypal button.
 
