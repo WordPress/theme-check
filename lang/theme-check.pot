@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Theme Check 20131212.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/theme-check\n"
-"POT-Creation-Date: 2013-12-12 15:34:34+00:00\n"
+"POT-Creation-Date: 2013-12-12 17:58:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -351,7 +351,7 @@ msgid "No reference to post-thumbnails was found in the theme. If the theme has 
 msgstr ""
 
 #: checks/screenshot.php:21
-msgid "Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 640x480px."
+msgid "Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 880x660px."
 msgstr ""
 
 #: checks/screenshot.php:24
@@ -359,7 +359,7 @@ msgid "Screenshot dimensions are wrong! Ratio of width to height should be 4:3."
 msgstr ""
 
 #: checks/screenshot.php:27
-msgid "Screenshot size should be 600x450, to account for HiDPI displays. Any 4:3 image size is acceptable, but 600x450 is preferred."
+msgid "Screenshot size should be 880x660, to account for HiDPI displays. Any 4:3 image size is acceptable, but 880x660 is preferred."
 msgstr ""
 
 #: checks/screenshot.php:32
