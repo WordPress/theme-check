@@ -54,6 +54,9 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
+= 20131213.1 =
+* Corrected errors not being displayed by the plugin and it incorrectly giving a "pass" result to everything.
+
 = 20131212.1 =
 * Updated for 3.8
 * Most files have changed for better I18N support, so the language files were removed temporarily until translation can be redone.
