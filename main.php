@@ -100,7 +100,7 @@ function tc_intro() {
 	<h3><?php _e( 'Localization', 'theme-check' ); ?></h3>
 	<ul>
 	<li><a href="http://www.onedesigns.com/">Daniel Tara</a></li>
-	<li><a href="http://themeid.com/">Emil Uzelac</a></li>
+	<li><a href="http://index56.com/">Emil Uzelac</a></li>
 	</ul>
 	<h3><?php _e( 'Testers', 'theme-check' ); ?></h3>
 	<p><a href="http://make.wordpress.org/themes/"><?php _e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
