@@ -12,13 +12,16 @@ class Screenshot_Checks implements themecheck {
 		}
 
 		checkcount();
-		if ( in_array( 'screenshot.png', $filenames ) ) {
+
+		if ( in_array( 'screenshot.png', $filenames ) || in_array( 'screenshot.jpg', $filenames ) ) {
+
 			foreach ( $other_files as $other_key => $otherfile ) {
-				if ( basename( $other_key ) === 'screenshot.png' && preg_match( '/.*themes\/[^\/]*\/screenshot\.png/', $other_key ))  {
+
+				if ( ( basename( $other_key ) === 'screenshot.png' || basename( $other_key ) === 'screenshot.jpg' ) && preg_match( '/.*themes\/[^\/]*\/screenshot\.(png|jpg)/', $other_key ) )  {
 					// we have or screenshot!
 					$image = getimagesize( $other_key );
 					if ( $image[0] > 880 || $image[1] > 660 ) {
-						$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 880x660px.', 'theme-check'), $image[0], $image[1]);
+						$this->error[] = sprintf('<span class="tc-lead tc-recommended">'. __( 'RECOMMENDED','theme-check' ) . '</span>: ' . __( 'Screenshot is wrong size! Detected: <strong>%1$sx%2$spx</strong>. Maximum allowed size is 880x660px.', 'theme-check' ), $image[0], $image[1]);
 					}
 					if ( $image[1] / $image[0] != 0.75 ) {
 						$this->error[] = '<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot dimensions are wrong! Ratio of width to height should be 4:3.', 'theme-check');
@@ -29,7 +32,7 @@ class Screenshot_Checks implements themecheck {
 				}
 			}
 		} else {
-			$this->error[] = '<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('No screenshot detected! Please include a screenshot.png.', 'theme-check' );
+			$this->error[] = '<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('No screenshot detected! Please include a screenshot.png or screenshot.jpg.', 'theme-check' );
 			$ret = false;
 		}
 		return $ret;
