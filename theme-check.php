@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Theme Check
-Plugin URI: http://pross.org.uk/plugins
+Plugin URI: http://ottopress.com/wordpress-plugins/theme-check/
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 Author: Pross, Otto42
-Author URI: http://pross.org.uk
-Version: 20131213.1
+Author URI: http://ottopress.com
+Version: 20140911.1
 Text Domain: theme-check
 */
 
