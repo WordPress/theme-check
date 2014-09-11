@@ -1,4 +1,4 @@
-=== Theme-Check ===
+=== Theme Check ===
 Contributors: pross, Otto42
 Author URI: http://ottopress.com/
 Plugin URL: http://ottopress.com/wordpress-plugins/theme-check/
