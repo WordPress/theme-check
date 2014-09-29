@@ -1,11 +1,11 @@
 === Theme Check ===
-Contributors: pross, Otto42
+Contributors: Otto42, pross
 Author URI: http://ottopress.com/
 Plugin URL: http://ottopress.com/wordpress-plugins/theme-check/
 Requires at Least: 3.0
 Tested Up To: 4.0
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20131213.1
+Stable tag: 20140929.1
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 

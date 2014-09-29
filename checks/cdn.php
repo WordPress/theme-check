@@ -29,8 +29,8 @@ class CDNCheck implements themecheck {
 
 		foreach( $cdn_list as $cdn_slug => $cdn_url ) {
 			if ( false !== strpos( $php_code, $cdn_url ) ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __('REQUIRED','theme-check') . '</span>: ' . sprintf( __( 'Found the URL of a CDN in the code: %s. You cannot load CSS or Javascript resources from a CDN, please bundle them with the theme.', 'theme-check' ), '<code>' . esc_html( $cdn_url ) . '</code>' );
-				$ret = false;
+				$this->error[] = '<span class="tc-lead tc-recommended">' . __('RECOMMENDED','theme-check') . '</span>: ' . sprintf( __( 'Found the URL of a CDN in the code: %s. You should not load CSS or Javascript resources from a CDN, please bundle them with the theme.', 'theme-check' ), '<code>' . esc_html( $cdn_url ) . '</code>' );
+				//$ret = false;
 			}
 		}
 
