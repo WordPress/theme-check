@@ -223,17 +223,17 @@ function get_theme_data_from_contents( $theme_data ) {
 	else
 		$template = '';
 
-	if ( preg_match( '|^[ \t\/*#@]*Version:(.*)|i', $theme_data, $version ) )
+	if ( preg_match( '|^[ \t\/*#@]*Version:(.*)|mi', $theme_data, $version ) )
 		$version = wp_kses( trim( $version[1] ), $themes_allowed_tags );
 	else
 		$version = '';
 
-	if ( preg_match('|^[ \t\/*#@]*Status:(.*)|i', $theme_data, $status) )
+	if ( preg_match('|^[ \t\/*#@]*Status:(.*)|mi', $theme_data, $status) )
 		$status = wp_kses( trim( $status[1] ), $themes_allowed_tags );
 	else
 		$status = 'publish';
 
-	if ( preg_match('|^[ \t\/*#@]*Tags:(.*)|i', $theme_data, $tags) )
+	if ( preg_match('|^[ \t\/*#@]*Tags:(.*)|mi', $theme_data, $tags) )
 		$tags = array_map( 'trim', explode( ',', wp_kses( trim( $tags[1] ), array() ) ) );
 	else
 		$tags = array();
