@@ -1,13 +1,11 @@
 <?php
-if ( !(defined('WP_CLI') && WP_CLI && class_exists('Theme_Command')) ) 	 
-
 if ( !function_exists( 'get_plugins' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
 require_once dirname(__FILE__).'/checkbase.php';
 
-class Theme_Check_Commands extends Theme_Command {
+class Theme_Check_Commands extends WP_CLI_Command {
 	/**
 	 * Theme check.
 	 *
@@ -16,24 +14,22 @@ class Theme_Check_Commands extends Theme_Command {
 	 * [<theme>]
 	 * : Theme name. Default: current theme
 	 *
-	 * ## EXAMPLES
-	 *
-	 * wp theme check twentyfourteen
-	 *
 	 * [--format=<format>]
 	 * : Accepted values: text, json. Default: text
 	 *
 	 * [--output=<output>]
 	 * : Accepted values: stdout, stderr. Default: stdout
 	 *
-	 * @subcommand check
+	 * ## EXAMPLES
+	 *
+	 * wp theme-check twentyfourteen
 	 */
-	function check($args, $assoc_args) {
+	function __invoke($args, $assoc_args) {
 		// theme exists ?
 		$theme = isset($args[0]) ? $args[0] : get_stylesheet();
 		if ( empty($theme) || !wp_get_theme($theme)->exists() ) {
 	  		WP_CLI::error(sprintf('Theme not found "%s".', $theme));
-	  		exit( 1 );
+	  		exit;
 		}
 
 		global $themechecks, $checkcount, $data, $themename;
@@ -48,7 +44,7 @@ class Theme_Check_Commands extends Theme_Command {
 				WP_CLI::error( sprintf(
 					__('Parent theme <strong>%1$s</strong> not found! You have to have parent AND child-theme installed!', 'theme-check'),
 					$data[ 'Template' ] ) );
-				exit( 1 );
+				exit;
 			}
 			$parent_data = tc_get_theme_data( $parent . '/style.css' );
 			$themename = basename( $parent );
@@ -57,7 +53,7 @@ class Theme_Check_Commands extends Theme_Command {
 
 		if ( !$files ) {
 			WP_CLI::error(sprintf('Not found : theme [%s]', $theme));
-			exit( 1 );
+			exit;
 		}
 
 		$php = $css = $other = array();
@@ -142,4 +138,4 @@ class Theme_Check_Commands extends Theme_Command {
 		exit( count($errors) > 0 ? 1 : 0 );
 	}
 }
-WP_CLI::add_command('theme', 'Theme_Check_Commands');
+WP_CLI::add_command('theme-check', 'Theme_Check_Commands');
