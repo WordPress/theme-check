@@ -17,9 +17,6 @@ class Theme_Check_Commands extends WP_CLI_Command {
 	 * [--format=<format>]
 	 * : Accepted values: text, json. Default: text
 	 *
-	 * [--output=<output>]
-	 * : Accepted values: stdout, stderr. Default: stdout
-	 *
 	 * ## EXAMPLES
 	 *
 	 * wp theme-check twentyfourteen
@@ -99,40 +96,31 @@ class Theme_Check_Commands extends WP_CLI_Command {
 			}
 		}
 
-		$show_msg = function($text, $hundle = 'stdout'){
-			if ( $hundle !== 'stderr' ) {
-				echo $text;
-			} else {
-				fputs(STDERR, $text);
-			}
-		};
-
 		$format = strtolower(isset($assoc_args['format']) ? $assoc_args['format'] : 'text');
-		$output = strtolower(isset($assoc_args['output']) ? $assoc_args['output'] : 'stderr');
 		switch ($format) {
 		case 'json':
 			$errors = array('Meta' => (array)$data, 'Errors' => $error_counts);
-			$show_msg(json_encode($errors)."\n", $output);
+			echo json_encode($errors)."\n";
 			break;
 		
 		default:
-			$show_msg("*** Theme Information ***\n", $output);
+			echo "*** Theme Information ***\n";
 			foreach ( (array)$data as $key => $value ) {
-				$show_msg(sprintf( '[%s] : %s'."\n", $key, !is_array($value) ? $value : implode(',', $value) ), $output);
+				printf( '[%s] : %s'."\n", $key, !is_array($value) ? $value : implode(',', $value) );
 			}
 
-			$show_msg("\n*** Theme Errors ***\n", $output);
+			echo "\n*** Theme Errors ***\n";
 			foreach ( $error_counts as $kind => $value ) {
 				foreach ( $value as $msg ) {
-					$show_msg(sprintf('[%s] %s'."\n", $kind, trim(strip_tags($msg,'<a>')) ), $output);
+					printf('[%s] %s'."\n", $kind, trim(strip_tags($msg,'<a>')) );
 				}
 			}
 
-			$show_msg("\n*** Error Count ***\n", $output);
+			echo "\n*** Error Count ***\n";
 			foreach ( $error_counts as $key => $count ) {
-				$show_msg(sprintf('[%s]'."\t".'%d'."\n", $key, count($count)),$output);
+				printf('[%s]'."\t".'%d'."\n", $key, count($count));
 			}
-			$show_msg(sprintf('[Summary]'."\t".'%d'."\n", count($errors)),$output);
+			printf('[Summary]'."\t".'%d'."\n", count($errors));
 			break;
 		}
 		exit( count($errors) > 0 ? 1 : 0 );
