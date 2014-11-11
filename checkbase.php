@@ -305,7 +305,8 @@ function tc_get_theme_data( $theme_file ) {
 		'AuthorName' => $theme->display('Author', false, false),
 		'License'	=> $theme->display( 'License', false, false),
 		'License URI'	=> $theme->display( 'License URI', false, false),
-		'Template Version'	=> $theme->display( 'Template Version', false, false)
+		'Template Version'	=> $theme->display( 'Template Version', false, false),
+		'Text Domain' => $theme->display( 'Text Domain', false, false ),
 	);
 	return $theme_data;
 }
