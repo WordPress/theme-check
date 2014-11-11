@@ -38,37 +38,31 @@ class TextDomainCheck implements themecheck {
 			);
 		}
 
-		$checks = array(
-		'/[\s|\(]_[e|_]\s?\([^,|;]*\s?,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'theme-check'), $themename ),
-		'/[\s|\(]_x\s?\([^,]*\s?,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'theme-check'), $themename )
-		 );
-		foreach ( $php_files as $php_key => $phpfile ) {
-			foreach ( $checks as $key => $check ) {
+		$get_domain_regexs = array(
+			'/[\s\(;]_[_e]\s?\(\s?[\'"][^\'"]*[\'"]\s?,\s?[\'"]([^\'"]*)[\'"]\s?\)/',
+			'/[\s\(]_x\s?\(\s?[\'"][^\'"]*[\'"]\s?,\s?[\'"][^\'"]*[\'"]\s?,\s?[\'"]([^\'"]*)[\'"]\s?\)/',
+			'/[\s\(]_n\s?\(\s?[\'"][^\'"]*[\'"]\s?,\s?[\'"][^\'"]*[\'"]\s?,\s?[$a-z\(\)0-9]*\s?,\s?[\'"]([^\'"]*)[\'"]\s?\)/',
+			'/[\s\(]_nx\s?\(\s?[\'"][^\'"]*[\'"]\s?,\s?[\'"][^\'"]*[\'"]\s?,\s?[$a-z\(\)0-9]*\s?,\s?[\'"][^\'"]*[\'"]\s?,\s?[\'"]([^\'"]*)[\'"]\s?\)/',
+		);
+
+		foreach ( $php_files as $file_path => $file_contents ) {
+			$file_name = basename( $file_path );
+			foreach ( $get_domain_regexs as $regex ) {
 				checkcount();
-				if ( preg_match_all( $key, $phpfile, $matches ) ) {
-					foreach ($matches[0] as $count => $domaincheck) {
-						if ( preg_match( '/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $domaincheck ) )
-							unset( $matches[1][$count] ); //filter out false positives
-					}
-					$filename = tc_filename( $php_key );
-					$count = 0;
-					while ( isset( $matches[1][$count] ) ) {
-						if ( $matches[1][$count] !== $themename ) {
-							$error = tc_grep( $matches[0][$count], $php_key );
-							if ( $matches[1][$count] === 'twentyten' || $matches[1][$count] === 'twentyeleven' ):
-								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. The %2s text domain is being used!%3$s', 'theme-check' ), $filename, $matches[1][$count], $error );
-							else:
-							if ( defined( 'TC_TEST' ) && strpos( strtolower( $themename ), $matches[1][$count] ) === false ) {
-								$error = tc_grep( $matches[0][$count], $php_key );
-								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. %2$s You are using: <strong>%3s</strong>%4$s', 'theme-check' ), $filename, $check, $matches[1][$count], $error );
-							}
-							endif;
+				if ( preg_match_all( $regex, $file_contents, $matches, PREG_SET_ORDER ) ) {
+					foreach ( $matches as $match ){
+						if ( strtolower( $data['Text Domain'] ) !== strtolower( $match[1] )
+						  && strtolower( $themename ) !== strtolower( $match[1] )
+						) {
+							$grep = tc_grep( $match[0], $file_path );
+							$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. You are using: <strong>%2$s</strong>. %3$s', 'theme-check' ), $file_name, $match[1], $grep );
+
 						}
-					$count++;
-					} //end while
+					}
 				}
 			}
 		}
+
 		return $ret;
 	}
 
