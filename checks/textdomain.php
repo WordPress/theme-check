@@ -30,6 +30,14 @@ class TextDomainCheck implements themecheck {
 			}
 		}
 
+		// Check if we have a textdomain in style.css.
+		if ( empty( $data['Text Domain'] ) ){
+			$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>%s</span> %s',
+				__( 'RECOMMENDED', 'theme-check' ),
+				__( 'Text domain is not defined in style.css.', 'theme-check' )
+			);
+		}
+
 		$checks = array(
 		'/[\s|\(]_[e|_]\s?\([^,|;]*\s?,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'theme-check'), $themename ),
 		'/[\s|\(]_x\s?\([^,]*\s?,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'theme-check'), $themename )
