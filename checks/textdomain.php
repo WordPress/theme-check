@@ -63,6 +63,22 @@ class TextDomainCheck implements themecheck {
 			}
 		}
 
+		$domains = array();
+		$php = implode( ' ', $php_files );
+		foreach ( $get_domain_regexs as $regex ) {
+			if ( preg_match_all( $regex, $php, $matches, PREG_SET_ORDER ) ) {
+				foreach ( $matches as $match ){
+					if ( ! empty( $match[1] ) ) {
+						$domains[] = $match[1];
+					}
+				}
+			}
+		}
+		$domains = array_unique( $domains );
+		if ( count( $domains ) > 2 ){
+			$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'You should have 1 text domain for your theme, with an optional second for a framework. This theme is using %1$s: <strong>%2$s</strong>.', 'theme-check' ), count( $domains ), implode( ', ', $domains ) );
+		}
+
 		// If we don't have the tokenizer, just return this check.
 		if ( ! function_exists( 'token_get_all' ) ) {
 			return $ret;
