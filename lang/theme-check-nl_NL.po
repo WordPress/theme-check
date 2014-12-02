@@ -252,7 +252,7 @@ msgstr "In het thema werd geen verwijzing naar <strong>add_theme_support( \"cust
 
 #: checks/customs.php:18
 msgid "No reference to <strong>add_theme_support( \"custom-background\", $args )</strong> was found in the theme. If the theme uses background images or solid colors for the background, then it is recommended that the theme implement this functionality."
-msgstr "In het thema werd geen verwijzing naar <strong>add_theme_support( \"custom-header\", $args )</strong> gevonden. Als het thema een afbeelding in de header plaats is het aanbevolen deze functie wel te gebruiken."
+msgstr "In het thema werd geen verwijzing naar <strong>add_theme_support( \"custom-background\", $args )</strong> gevonden. Als het thema een afbeelding of vaste kleur voor de achtergrond gebruikt is het aanbevolen deze functie wel te gebruiken."
 
 #: checks/dep_recommend.php:60
 #: checks/deprecated.php:189
