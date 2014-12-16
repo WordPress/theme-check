@@ -11,7 +11,7 @@ class Comment_Reply implements themecheck {
 
 		if ( ! preg_match( '/wp_enqueue_script\(\s?("|\')comment-reply("|\')/i', $php ) ) {
 			if ( ! preg_match( '/comment-reply/', $php ) ) {
-				$check = __( 'See: <a href="http://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display">Migrating Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?&gt;</pre>', 'theme-check' );
+				$check = __( 'See: <a href="https://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display">Migrating Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?&gt;</pre>', 'theme-check' );
 				$this->error[] = sprintf('<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Could not find the <strong>comment-reply</strong> script enqueued. %1$s', 'theme-check'), $check);
 				$ret = false;
 			} else {
