@@ -54,6 +54,9 @@ class ThemeCheckMain {
 
 		if ( isset( $_POST[ 'themename' ] ) ) {
 			if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
+			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
+				@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
+			}
 			check_main( $_POST[ 'themename' ] );
 		}
 		echo '</div> <!-- .theme-check-->';
