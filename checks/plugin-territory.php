@@ -2,7 +2,7 @@
 /**
  * Checks for Plugin Territory Guidelines.
  *
- * See http://make.wordpress.org/themes/guidelines/guidelines-plugin-territory/
+ * See https://make.wordpress.org/themes/guidelines/guidelines-plugin-territory/
  */
 
 class Plugin_Territory implements themecheck {
