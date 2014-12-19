@@ -5,7 +5,7 @@
  * Is there a call to wp_title()?
  * There can't be any hardcoded text in the <title> tag.
  *
- * See: http://make.wordpress.org/themes/guidelines/guidelines-theme-check/
+ * See: https://make.wordpress.org/themes/guidelines/guidelines-theme-check/
  */
 class Title_Checks implements themecheck {
     protected $error = array();
