@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Theme Check package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Theme Check 20140929.1\n"
+"Project-Id-Version: Theme Check 20141222.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/theme-check\n"
-"POT-Creation-Date: 2014-09-29 21:22:59+00:00\n"
+"POT-Creation-Date: 2014-12-22 20:18:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: checks/admin_menu.php:13 checks/admin_menu.php:14
 msgid ""
 "User levels were deprecated in <strong>2.0</strong>. Please see <a href="
-"\"http://codex.wordpress.org/Roles_and_Capabilities"
+"\"https://codex.wordpress.org/Roles_and_Capabilities"
 "\">Roles_and_Capabilities</a>"
 msgstr ""
 
@@ -50,9 +50,9 @@ msgstr ""
 #: checks/customizer.php:31 checks/deprecated.php:253
 #: checks/directories.php:27 checks/gravatar.php:15
 #: checks/more_deprecated.php:52 checks/plugin-territory.php:24
-#: checks/post-formats.php:27 checks/postsnav.php:16 checks/required.php:22
+#: checks/post-formats.php:27 checks/postsnav.php:19 checks/required.php:22
 #: checks/searchform.php:16 checks/style_needed.php:30 checks/tags.php:13
-#: checks/title.php:22 checks/title.php:31 checks/title.php:46
+#: checks/title.php:29 checks/title.php:38 checks/title.php:53
 #: checks/widgets.php:21 checks/widgets.php:26 checks/widgets.php:34
 msgid "REQUIRED"
 msgstr ""
@@ -109,7 +109,7 @@ msgstr ""
 
 #: checks/basic.php:14
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/HTML_to_XHTML\">http://codex."
+"See: <a href=\"https://codex.wordpress.org/HTML_to_XHTML\">https://codex."
 "wordpress.org/HTML_to_XHTML</a><pre>&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD "
 "XHTML 1.0 Strict//EN\"<br />\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict."
 "dtd\"?&gt;</pre>"
@@ -117,19 +117,19 @@ msgstr ""
 
 #: checks/basic.php:15
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Function_Reference/wp_footer"
+"See: <a href=\"https://codex.wordpress.org/Function_Reference/wp_footer"
 "\">wp_footer</a><pre> &lt;?php wp_footer(); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:16
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Function_Reference/wp_head"
+"See: <a href=\"https://codex.wordpress.org/Function_Reference/wp_head"
 "\">wp_head</a><pre> &lt;?php wp_head(); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:17
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Function_Reference/"
+"See: <a href=\"https://codex.wordpress.org/Function_Reference/"
 "language_attributes\">language_attributes</a><pre>&lt;html &lt;?php "
 "language_attributes(); ?&gt;</pre>"
 msgstr ""
@@ -142,45 +142,45 @@ msgstr ""
 
 #: checks/basic.php:19
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Function_Reference/"
+"See: <a href=\"https://codex.wordpress.org/Function_Reference/"
 "add_theme_support\">add_theme_support</a><pre> &lt;?php add_theme_support"
 "( $feature ); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:20
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Template_Tags/comments_template"
+"See: <a href=\"https://codex.wordpress.org/Template_Tags/comments_template"
 "\">comments_template</a><pre> &lt;?php comments_template( $file, "
 "$separate_comments ); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:21
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Template_Tags/wp_list_comments"
+"See: <a href=\"https://codex.wordpress.org/Template_Tags/wp_list_comments"
 "\">wp_list_comments</a><pre> &lt;?php wp_list_comments( $args ); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:22
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Template_Tags/comment_form"
+"See: <a href=\"https://codex.wordpress.org/Template_Tags/comment_form"
 "\">comment_form</a><pre> &lt;?php comment_form(); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:23
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Template_Tags/body_class"
+"See: <a href=\"https://codex.wordpress.org/Template_Tags/body_class"
 "\">body_class</a><pre> &lt;?php body_class( $class ); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:24
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Function_Reference/wp_link_pages"
+"See: <a href=\"https://codex.wordpress.org/Function_Reference/wp_link_pages"
 "\">wp_link_pages</a><pre> &lt;?php wp_link_pages( $args ); ?&gt;</pre>"
 msgstr ""
 
 #: checks/basic.php:25
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/Template_Tags/post_class"
+"See: <a href=\"https://codex.wordpress.org/Template_Tags/post_class"
 "\">post_class</a><pre> &lt;div id=\"post-&lt;?php the_ID(); ?&gt;\" &lt;?php "
 "post_class(); ?&gt;&gt;</pre>"
 msgstr ""
@@ -212,7 +212,7 @@ msgstr ""
 #: checks/screenshot.php:27 checks/screenshot.php:30
 #: checks/style_suggested.php:20 checks/style_tags.php:16
 #: checks/suggested.php:34 checks/textdomain.php:30 checks/textdomain.php:55
-#: checks/textdomain.php:59 checks/widgets.php:16
+#: checks/textdomain.php:59 checks/title.php:20 checks/widgets.php:16
 msgid "RECOMMENDED"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgstr ""
 
 #: checks/comment_reply.php:14
 msgid ""
-"See: <a href=\"http://codex.wordpress.org/"
+"See: <a href=\"https://codex.wordpress.org/"
 "Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display\">Migrating "
 "Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if "
 "( is_singular() ) wp_enqueue_script( \"comment-reply\" ); ?&gt;</pre>"
@@ -363,7 +363,7 @@ msgstr ""
 
 #: checks/filenames.php:36
 msgid ""
-"Please see <a href=\"http://codex.wordpress.org/"
+"Please see <a href=\"https://codex.wordpress.org/"
 "Theme_Review#Theme_Documentation\">Theme_Documentation</a> for more "
 "information."
 msgstr ""
@@ -470,11 +470,13 @@ msgid ""
 "in the CSS was detected."
 msgstr ""
 
-#: checks/postsnav.php:16
+#: checks/postsnav.php:19
 msgid ""
 "The theme doesn't have post pagination code in it. Use <strong>posts_nav_link"
-"()</strong> or <strong>paginate_links()</strong> or <strong>next_posts_link()"
-"</strong> and <strong>previous_posts_link()</strong> to add post pagination."
+"()</strong> or <strong>paginate_links()</strong> or "
+"<strong>the_posts_pagination()</strong> or or <strong>the_posts_navigation()"
+"</strong> or <strong>next_posts_link()</strong> and "
+"<strong>previous_posts_link()</strong> to add post pagination."
 msgstr ""
 
 #: checks/postthumb.php:15
@@ -639,19 +641,26 @@ msgid ""
 "Consider get_option( 'date_format' ) instead."
 msgstr ""
 
-#: checks/title.php:22
+#: checks/title.php:20
+msgid ""
+"No reference to <strong>add_theme_support( \"title-tag\" )</strong> was "
+"found in the theme. It is recommended that the theme implement this "
+"functionality for WordPress 4.1 and above."
+msgstr ""
+
+#: checks/title.php:29
 msgid ""
 "The theme needs to have <strong>&lt;title&gt;</strong> tags, ideally in the "
 "<strong>header.php</strong> file."
 msgstr ""
 
-#: checks/title.php:31
+#: checks/title.php:38
 msgid ""
 "The theme needs to have a call to <strong>wp_title()</strong>, ideally in "
 "the <strong>header.php</strong> file."
 msgstr ""
 
-#: checks/title.php:46
+#: checks/title.php:53
 msgid ""
 "The <strong>&lt;title&gt;</strong> tags can only contain a call to "
 "<strong>wp_title()</strong>. Use the  <strong>wp_title filter</strong> to "
@@ -660,14 +669,14 @@ msgstr ""
 
 #: checks/widgets.php:16
 msgid ""
-"This theme contains no sidebars/widget areas. See <a href='http://codex."
+"This theme contains no sidebars/widget areas. See <a href='https://codex."
 "wordpress.org/Widgets_API'>Widgets API</a>"
 msgstr ""
 
 #: checks/widgets.php:21
 msgid ""
 "The theme appears to use <strong>register_sidebar()</strong> but no "
-"<strong>dynamic_sidebar()</strong> was found. See: <a href='http://codex."
+"<strong>dynamic_sidebar()</strong> was found. See: <a href='https://codex."
 "wordpress.org/Function_Reference/dynamic_sidebar'>dynamic_sidebar</a><pre> "
 "&lt;?php dynamic_sidebar( $index ); ?&gt;</pre>"
 msgstr ""
@@ -675,7 +684,7 @@ msgstr ""
 #: checks/widgets.php:26
 msgid ""
 "The theme appears to use <strong>dynamic_sidebars()</strong> but no "
-"<strong>register_sidebar()</strong> was found. See: <a href='http://codex."
+"<strong>register_sidebar()</strong> was found. See: <a href='https://codex."
 "wordpress.org/Function_Reference/register_sidebar'>register_sidebar</a><pre> "
 "&lt;?php register_sidebar( $args ); ?&gt;</pre>"
 msgstr ""
@@ -769,7 +778,7 @@ msgid "License"
 msgstr ""
 
 #: main.php:53
-msgid "LicenseURI"
+msgid "License URI"
 msgstr ""
 
 #: main.php:54
