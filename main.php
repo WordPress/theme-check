@@ -60,7 +60,7 @@ function check_main( $theme ) {
 		}
 			echo '<p>' . sprintf(__( 'This is a child theme. The parent theme is: <strong>%1$s</strong>. These files have been included automatically!', 'theme-check'), $data[ 'Template' ] ) . '</p>';
 			if ( empty( $data['Template Version'] ) ) {
-				echo '<p>' . __('Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check') . '</p>';
+				echo '<p>' . __('Child theme does not have the <strong>Template Version:</strong> tag in style.css.', 'theme-check') . '</p>';
 			} else {
 				echo ( $data['Template Version'] < $parent_data['Version'] ) ? '<p>' . sprintf(__('Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check'), $data['Template Version'], $parent_data['Title'], $parent_data['Title'], $parent_data['Version'] ) . '</p>' : '';
 			}
