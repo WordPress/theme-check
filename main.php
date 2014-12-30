@@ -109,7 +109,7 @@ function tc_intro() {
 
 function tc_success() {
 	?>
-	<div class="tc-success"><p><?php _e( 'Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.', 'theme-check' ); ?></p>
+	<div class="tc-success"><p><?php _e( 'Now your theme has passed the basic tests. You need to check it properly using the test data before you upload to the WordPress Themes Directory.', 'theme-check' ); ?></p>
 	<p><?php _e( 'Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
 	<h3><?php _e( 'Codex Links', 'theme-check' ); ?></h3>
 	<ul>
