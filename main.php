@@ -74,10 +74,10 @@ function check_main( $theme ) {
 		if ( !$success ) {
 			echo '<h2>' . sprintf(__('One or more errors were found for %1$s.', 'theme-check'), $data[ 'Title' ] ) . '</h2>';
 		} else {
-			echo '<h2>' . sprintf(__('%1$s passed the tests', 'theme-check'), $data[ 'Title' ] ) . '</h2>';
+			echo '<h2>' . sprintf(__('%1$s passed the tests.', 'theme-check'), $data[ 'Title' ] ) . '</h2>';
 			tc_success();
 		}
-		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">' . __('WARNING','theme-check') . '</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
+		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">' . __('WARNING','theme-check') . '</span>: ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="https://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
 		echo $results;
@@ -92,10 +92,10 @@ function tc_intro() {
 	<p><?php _e( "The theme check plugin is an easy way to test your theme and make sure it's up to spec with the latest theme review standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.", 'theme-check' ); ?></p>
 	<h2><?php _e( 'Contact', 'theme-check' ); ?></h2>
 	<p><?php printf( __( 'Theme-Check is maintained by %1s and %2s.', 'theme-check' ),
-		'<a href="http://profiles.wordpress.org/users/pross/">Pross</a>',
-		'<a href="http://profiles.wordpress.org/users/otto42/">Otto42</a>'
+		'<a href="https://profiles.wordpress.org/users/pross/">Pross</a>',
+		'<a href="https://profiles.wordpress.org/users/otto42/">Otto42</a>'
 		); ?></p>
-	<p><?php _e( 'If you have found a bug or would like to make a suggestion or contribution why not join the <a href="http://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a> or leave a post on the <a href="http://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.', 'theme-check' ); ?></p>
+	<p><?php _e( 'If you have found a bug or would like to make a suggestion or contribution why not join the <a href="https://wordpress.org/extend/themes/contact/">theme-reviewers mailing list</a> or leave a post on the <a href="https://wordpress.org/tags/theme-check?forum_id=10">WordPress forums</a>.', 'theme-check' ); ?></p>
 	<h2><?php _e( 'Contributors', 'theme-check' ); ?></h2>
 	<h3><?php _e( 'Localization', 'theme-check' ); ?></h3>
 	<ul>
@@ -103,19 +103,19 @@ function tc_intro() {
 	<li><a href="http://index56.com/">Emil Uzelac</a></li>
 	</ul>
 	<h3><?php _e( 'Testers', 'theme-check' ); ?></h3>
-	<p><a href="http://make.wordpress.org/themes/"><?php _e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
+	<p><a href="https://make.wordpress.org/themes/"><?php _e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
 	<?php
 }
 
 function tc_success() {
 	?>
 	<div class="tc-success"><p><?php _e( 'Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.', 'theme-check' ); ?></p>
-	<p><?php _e( 'Make sure to review the guidelines at <a href="http://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
+	<p><?php _e( 'Make sure to review the guidelines at <a href="https://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
 	<h3><?php _e( 'Codex Links', 'theme-check' ); ?></h3>
 	<ul>
-	<li><a href="http://codex.wordpress.org/Theme_Development"><?php _e('Theme Development', 'theme-check' ); ?></a></li>
-	<li><a href="http://wordpress.org/support/forum/5"><?php _e('Themes and Templates forum', 'theme-check' ); ?></a></li>
-	<li><a href="http://codex.wordpress.org/Theme_Unit_Test"><?php _e('Theme Unit Tests', 'theme-check' ); ?></a></li>
+	<li><a href="https://codex.wordpress.org/Theme_Development"><?php _e('Theme Development', 'theme-check' ); ?></a></li>
+	<li><a href="https://wordpress.org/support/forum/5"><?php _e('Themes and Templates forum', 'theme-check' ); ?></a></li>
+	<li><a href="https://codex.wordpress.org/Theme_Unit_Test"><?php _e('Theme Unit Tests', 'theme-check' ); ?></a></li>
 	</ul></div>
 	<?php
 }
