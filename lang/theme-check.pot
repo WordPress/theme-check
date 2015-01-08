@@ -929,7 +929,7 @@ msgid "Theme Check"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://ottopress.com/wordpress-plugins/theme-check/"
+msgid "https://wordpress.org/plugins/theme-check/"
 msgstr ""
 
 #. Description of the plugin/theme

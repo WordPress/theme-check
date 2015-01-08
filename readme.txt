@@ -1,7 +1,7 @@
 === Theme Check ===
 Contributors: Otto42, pross
 Author URI: http://ottopress.com/
-Plugin URL: http://ottopress.com/wordpress-plugins/theme-check/
+Plugin URL: https://wordpress.org/plugins/theme-check/
 Requires at Least: 3.7
 Tested Up To: 4.1
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
