@@ -4,13 +4,11 @@ class Style_Tags implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 
+		global $data;
+
 		checkcount();
 		$ret = true;
 		$filenames = array();
-
-		foreach( $css_files as $cssfile => $content ) {
-			if ( basename( $cssfile ) === 'style.css' ) $data = get_theme_data_from_contents( $content );
-		}
 
 		if ( !$data[ 'Tags' ] ) {
 			$this->error[] = '<span class="tc-lead tc-recommended">' . __('RECOMMENDED','theme-check') . '</span>: ' . __( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' );
