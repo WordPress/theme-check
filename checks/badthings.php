@@ -7,14 +7,14 @@ class Bad_Checks implements themecheck {
 
 		$checks = array(
 			'/(?<![_|a-z0-9|\.])eval\s?\(/i' => __( 'eval() is not allowed.', 'theme-check' ),
-			'/[^a-z0-9](?<!_)(popen|proc_open|[^_]exec|shell_exec|system|passthru)\(/' => __( 'PHP system calls are often disabled by server admins and should not be in themes', 'theme-check' ),
-			'/\s?ini_set\(/' => __( 'Themes should not change server PHP settings', 'theme-check' ),
-			'/base64_decode/' => __( 'base64_decode() is not allowed', 'theme-check' ),
-			'/base64_encode/' => __( 'base64_encode() is not allowed', 'theme-check' ),
-			'/uudecode/ims' => __( 'uudecode() is not allowed', 'theme-check' ),
-			'/str_rot13/ims' => __( 'str_rot13() is not allowed', 'theme-check' ),
-			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
-			'/pub-[0-9]{16}/i' => __( 'Google advertising code detected', 'theme-check' )
+			'/[^a-z0-9](?<!_)(popen|proc_open|[^_]exec|shell_exec|system|passthru)\(/' => __( 'PHP system calls are often disabled by server admins and should not be in themes.', 'theme-check' ),
+			'/\s?ini_set\(/' => __( 'Themes should not change server PHP settings.', 'theme-check' ),
+			'/base64_decode/' => __( 'base64_decode() is not allowed.', 'theme-check' ),
+			'/base64_encode/' => __( 'base64_encode() is not allowed.', 'theme-check' ),
+			'/uudecode/ims' => __( 'uudecode() is not allowed.', 'theme-check' ),
+			'/str_rot13/ims' => __( 'str_rot13() is not allowed.', 'theme-check' ),
+			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected.', 'theme-check' ),
+			'/pub-[0-9]{16}/i' => __( 'Google advertising code detected.', 'theme-check' )
 			);
 
 		$grep = '';
