@@ -7,6 +7,7 @@ Author: Pross, Otto42
 Author URI: http://ottopress.com
 Version: 20141222.1
 Text Domain: theme-check
+Domain Path: /lang
 */
 
 class ThemeCheckMain {
@@ -16,7 +17,7 @@ class ThemeCheckMain {
 	}
 
 	function tc_i18n() {
-		load_plugin_textdomain( 'theme-check', false, 'theme-check/lang' );
+		load_plugin_textdomain( 'theme-check', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/'  );
 	}
 
 	function load_styles() {
