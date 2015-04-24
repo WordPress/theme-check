@@ -30,7 +30,7 @@ class AdminMenu implements themecheck {
 //check for add_admin_page
 
 		$checks = array(
-			'/([^_]add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|plugins|users|management|options)_page\()/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'theme-check' )
+			'/([^_]add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|plugins|users|management|options)_page)/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'theme-check' )
 			);
 
 
