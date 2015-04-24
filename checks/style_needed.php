@@ -21,7 +21,7 @@ class Style_Needed implements themecheck {
 			'\.aligncenter' => __( '<strong>.aligncenter</strong> css class is needed in your theme css.', 'theme-check' ),
 			'\.wp-caption' => __( '<strong>.wp-caption</strong> css class is needed in your theme css.', 'theme-check' ),
 			'\.wp-caption-text' => __( '<strong>.wp-caption-text</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is needed in your theme css.', 'theme-check' )
+			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is needed in your theme css.', 'theme-check' ),
 			'\.screen-reader-text' => __( '<strong>.screen-reader-text</strong> css class is needed in your theme css. See See: <a href="http://codex.wordpress.org/CSS#WordPress_Generated_Classes">the Codex</a> for an example implementation.', 'theme-check' )
 		);
 
