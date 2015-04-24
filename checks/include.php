@@ -7,7 +7,7 @@ class IncludeCheck implements themecheck {
 
 		$ret = true;
 
-		$checks = array( '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?\(/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' ) );
+		$checks = array( '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' ) );
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
