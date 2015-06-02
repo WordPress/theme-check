@@ -30,7 +30,7 @@ class ThemeCheckMain {
 	}
 
 	function tc_add_headers( $extra_headers ) {
-		$extra_headers = array( 'License', 'License URI', 'Template Version' );
+		$extra_headers = array( 'License', 'License URI', 'Template Version', 'Text Domain' );
 		return $extra_headers;
 	}
 
