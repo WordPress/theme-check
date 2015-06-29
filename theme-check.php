@@ -7,7 +7,6 @@ Author: Pross, Otto42
 Author URI: http://ottopress.com
 Version: 20141222.1
 Text Domain: theme-check
-Domain Path: /lang
 */
 
 class ThemeCheckMain {
@@ -17,16 +16,16 @@ class ThemeCheckMain {
 	}
 
 	function tc_i18n() {
-		load_plugin_textdomain( 'theme-check', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/'  );
+		load_plugin_textdomain( 'theme-check', false, 'theme-check/lang' );
 	}
 
 	function load_styles() {
-		wp_enqueue_style('style', plugins_url( 'assets/style.css', __FILE__ ), null, null, 'screen');
+		wp_enqueue_style( 'style', plugins_url( 'assets/style.css', __FILE__ ), null, null, 'screen' );
 	}
 
 	function themecheck_add_page() {
 		$page = add_theme_page( 'Theme Check', 'Theme Check', 'manage_options', 'themecheck', array( $this, 'themecheck_do_page' ) );
-		add_action('admin_print_styles-' . $page, array( $this, 'load_styles' ) );
+		add_action( 'admin_print_styles-' . $page, array( $this, 'load_styles' ) );
 	}
 
 	function tc_add_headers( $extra_headers ) {
@@ -35,8 +34,8 @@ class ThemeCheckMain {
 	}
 
 	function themecheck_do_page() {
-		if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.', 'theme-check' ) );
+		if ( ! current_user_can( 'manage_options' ) )  {
+		  wp_die( __( 'You do not have sufficient permissions to access this page.', 'theme-check' ) );
 		}
 
 		add_filter( 'extra_theme_headers', array( $this, 'tc_add_headers' ) );
@@ -47,15 +46,16 @@ class ThemeCheckMain {
 		echo '<div id="theme-check" class="wrap">';
 		echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
 		echo '<div class="theme-check">';
-			tc_form();
-		if ( !isset( $_POST[ 'themename' ] ) )  {
+
+		tc_form();
+
+		if ( ! isset( $_POST[ 'themename' ] ) )  {
 			tc_intro();
-
-		}
-
-		if ( isset( $_POST[ 'themename' ] ) ) {
-			if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
-			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
+		} else {
+			if ( isset( $_POST[ 'trac' ] ) ) {
+				define( 'TC_TRAC', true );
+			}
+			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) {
 				@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
 			}
 			check_main( $_POST[ 'themename' ] );
