@@ -5,6 +5,7 @@ function check_main( $theme ) {
 	$theme = get_theme_root( $theme ) . "/$theme";
 	$files = listdir( $theme );
 	$data = tc_get_theme_data( $theme . '/style.css' );
+
 	if ( $data['Template'] ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
 		$parent = get_theme_root( $data['Template'] ) . '/' . $data['Template'];
@@ -42,23 +43,23 @@ function check_main( $theme ) {
 			echo '<br /><div style="text-align:center">' . $image[0] . 'x' . $image[1] . ' ' . round( filesize( $theme . '/screenshot.png' ) / 1024 ) . 'k</div></div>';
 		}
 
-		echo ( ! empty( $data['Title'] ) ) ? '<p><label>' . __( 'Title', 'theme-check' ) . '</label><span class="info">' . $data['Title'] . '</span></p>' : '';
-		echo ( ! empty( $data['Version'] ) ) ? '<p><label>' . __( 'Version', 'theme-check' ) . '</label><span class="info">' . $data['Version'] . '</span></p>' : '';
-		echo ( ! empty( $data['AuthorName'] ) ) ? '<p><label>' . __( 'Author', 'theme-check' ) . '</label><span class="info">' . $data['AuthorName'] . '</span></p>' : '';
-		echo ( ! empty( $data['AuthorURI'] ) ) ? '<p><label>' . __( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . $data['AuthorURI'] . '">' . $data['AuthorURI'] . '</a>' . '</span></p>' : '';
-		echo ( ! empty( $data['URI'] ) ) ? '<p><label>' . __( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . $data['URI'] . '">' . $data['URI'] . '</a>' . '</span></p>' : '';
-		echo ( ! empty( $data['License'] ) ) ? '<p><label>' . __( 'License', 'theme-check' ) . '</label><span class="info">' . $data['License'] . '</span></p>' : '';
-		echo ( ! empty( $data['License URI'] ) ) ? '<p><label>' . __( 'License URI', 'theme-check' ) . '</label><span class="info">' . $data['License URI'] . '</span></p>' : '';
-		echo ( ! empty( $data['Tags'] ) ) ? '<p><label>' . __( 'Tags', 'theme-check' ) . '</label><span class="info">' . implode( $data['Tags'], ', ' ) . '</span></p>' : '';
-		echo ( ! empty( $data['Description'] ) ) ? '<p><label>' . __( 'Description', 'theme-check' ) . '</label><span class="info">' . $data['Description'] . '</span></p>' : '';
+		echo ( empty( $data['Title'] ) )       ? '' : '<p><label>' . __( 'Title', 'theme-check' )       . '</label><span class="info">' . $data['Title'] . '</span></p>';
+		echo ( empty( $data['Version'] ) )     ? '' : '<p><label>' . __( 'Version', 'theme-check' )     . '</label><span class="info">' . $data['Version'] . '</span></p>';
+		echo ( empty( $data['AuthorName'] ) )  ? '' : '<p><label>' . __( 'Author', 'theme-check' )      . '</label><span class="info">' . $data['AuthorName'] . '</span></p>';
+		echo ( empty( $data['AuthorURI'] ) )   ? '' : '<p><label>' . __( 'Author URI', 'theme-check' )  . '</label><span class="info"><a href="' . $data['AuthorURI'] . '">' . $data['AuthorURI'] . '</a>' . '</span></p>';
+		echo ( empty( $data['URI'] ) )         ? '' : '<p><label>' . __( 'Theme URI', 'theme-check' )   . '</label><span class="info"><a href="' . $data['URI'] . '">' . $data['URI'] . '</a>' . '</span></p>';
+		echo ( empty( $data['License'] ) )     ? '' : '<p><label>' . __( 'License', 'theme-check' )     . '</label><span class="info">' . $data['License'] . '</span></p>';
+		echo ( empty( $data['License URI'] ) ) ? '' : '<p><label>' . __( 'License URI', 'theme-check' ) . '</label><span class="info">' . $data['License URI'] . '</span></p>';
+		echo ( empty( $data['Tags'] ) )        ? '' : '<p><label>' . __( 'Tags', 'theme-check' )        . '</label><span class="info">' . implode( $data['Tags'], ', ' ) . '</span></p>';
+		echo ( empty( $data['Description'] ) ) ? '' : '<p><label>' . __( 'Description', 'theme-check' ) . '</label><span class="info">' . $data['Description'] . '</span></p>';
 
 		if ( $data['Template'] ) {
 			if ( $data['Template Version'] > $parent_data['Version'] ) {
-				echo '<p>' . sprintf( __('This child theme requires at least version <strong>%1$s</strong> of theme <strong>%2$s</strong> to be installed. You only have <strong>%3$s</strong> please update the parent theme.', 'theme-check' ), $data['Template Version'], $parent_data['Title'], $parent_data['Version'] ) . '</p>';
+				echo '<p>' . sprintf( __( 'This child theme requires at least version <strong>%1$s</strong> of theme <strong>%2$s</strong> to be installed. You only have <strong>%3$s</strong> please update the parent theme.', 'theme-check' ), $data['Template Version'], $parent_data['Title'], $parent_data['Version'] ) . '</p>';
 			}
 			echo '<p>' . sprintf( __( 'This is a child theme. The parent theme is: <strong>%1$s</strong>. These files have been included automatically!', 'theme-check' ), $data['Template'] ) . '</p>';
 			if ( empty( $data['Template Version'] ) ) {
-				echo '<p>' . __('Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
+				echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
 			} else {
 				echo ( $data['Template Version'] < $parent_data['Version'] ) ? '<p>' . sprintf( __( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ), $data['Template Version'], $parent_data['Title'], $parent_data['Title'], $parent_data['Version'] ) . '</p>' : '';
 			}
@@ -75,7 +76,7 @@ function check_main( $theme ) {
 			echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), $data['Title'] ) . '</h2>';
 			tc_success();
 		}
-		if ( ! defined( 'WP_DEBUG' ) || WP_DEBUG === false ) {
+		if ( ! defined( 'WP_DEBUG' ) || false === WP_DEBUG ) {
 			echo '<div class="updated"><span class="tc-fail">' . __( 'WARNING', 'theme-check' ) . '</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="http://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
 		}
 		echo '<div class="tc-box">';

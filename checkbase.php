@@ -8,8 +8,7 @@ global $checkcount;
 $checkcount = 0;
 
 // interface that all checks should implement
-interface themecheck
-{
+interface themecheck {
 	// should return true for good/okay/acceptable, false for bad/not-okay/unacceptable
 	public function check( $php_files, $css_files, $other_files );
 
@@ -55,7 +54,7 @@ function display_themechecks() {
 			if ( defined( 'TC_TRAC' ) ) {
 				$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '* ' . tc_trac( $e ) . "\r\n";
 			} else {
-			  $results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '<li>' . tc_trac( $e ) . '</li>';
+				$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '<li>' . tc_trac( $e ) . '</li>';
 			}
 		}
 	}
@@ -85,12 +84,11 @@ function tc_grep( $error, $file ) {
 	$bad_lines = '';
 	foreach ( $lines as $this_line )	{
 		if ( stristr ( $this_line, $error ) ) {
-			$error = str_replace( '"', "'", $error );
+			$error = ltrim( str_replace( '"', "'", $error ) );
 			$this_line = str_replace( '"', "'", $this_line );
-			$error = ltrim( $error );
 			$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
 			$pre = ltrim( htmlspecialchars( $pre ) );
-			$bad_lines .= '<pre class="tc-grep">' . __( 'Line ', 'theme-check' ) . ( $line_index+1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
+			$bad_lines .= '<pre class="tc-grep">' . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
 		}
 		$line_index++;
 	}
@@ -104,9 +102,8 @@ function tc_preg( $preg, $file ) {
 	$error = '';
 	foreach( $lines as $this_line ) {
 		if ( preg_match( $preg, $this_line, $matches ) ) {
-			$error = $matches[0];
+			$error = ltrim( $matches[0] );
 			$this_line = str_replace( '"', "'", $this_line );
-			$error = ltrim( $error );
 			$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
 			$pre = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= '<pre class="tc-grep">' . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
@@ -129,8 +126,7 @@ function tc_strxchr( $haystack, $needle, $l_inclusive = 0, $r_inclusive = 0 ){
 	} else {
 		if ( strrchr( $haystack, $needle ) ) {
 			return array( '', substr( strrchr( $haystack, $needle ), $r_inclusive ) );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -161,7 +157,7 @@ function listdir( $dir ) {
 	$iterator = new RecursiveIteratorIterator( $dir_iterator, RecursiveIteratorIterator::SELF_FIRST );
 
 	foreach ( $iterator as $file ) {
-    	array_push( $files, $file->getPathname() );
+		array_push( $files, $file->getPathname() );
 	}
 	return $files;
 }
@@ -204,7 +200,8 @@ function tc_print_r( $data ) {
 function get_theme_data_from_contents( $theme_data ) {
 	$themes_allowed_tags = array(
 		'a'       => array(
-			'href' => array(),'title' => array()
+			'href'  => array(),
+			'title' => array()
 		),
 		'abbr'    => array(
 			'title' => array()
@@ -262,13 +259,24 @@ function get_theme_data_from_contents( $theme_data ) {
 		if ( empty( $author_uri ) ) {
 			$author = wp_kses( trim( $author_name[1] ), $themes_allowed_tags );
 		} else {
-			$author = sprintf( '<a href="%1$s" title="%2$s">%3$s</a>', $author_uri, __( 'Visit author homepage' ), wp_kses( trim( $author_name[1] ), $themes_allowed_tags ) );
+			$author = sprintf( '<a href="%1$s" title="%2$s">%3$s</a>', $author_uri, __( 'Visit author homepage', 'theme-check' ), wp_kses( trim( $author_name[1] ), $themes_allowed_tags ) );
 		}
 	} else {
 		$author = __( 'Anonymous', 'theme-check' );
 	}
 
-	return array( 'Name' => $theme, 'Title' => $theme, 'URI' => $theme_uri, 'Description' => $description, 'Author' => $author, 'Author_URI' => $author_uri, 'Version' => $version, 'Template' => $template, 'Status' => $status, 'Tags' => $tags );
+	return array(
+		'Name'        => $theme,
+		'Title'       => $theme,
+		'URI'         => $theme_uri,
+		'Description' => $description,
+		'Author'      => $author,
+		'Author_URI'  => $author_uri,
+		'Version'     => $version,
+		'Template'    => $template,
+		'Status'      => $status,
+		'Tags'        => $tags
+	);
 }
 
 /*
