@@ -52,11 +52,11 @@ class TextDomainCheck implements themecheck {
 						if ( $matches[1][$count] !== $themename ) {
 							$error = tc_grep( $matches[0][$count], $php_key );
 							if ( $matches[1][$count] === 'twentyten' || $matches[1][$count] === 'twentyeleven' ):
-								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. The %2s text domain is being used!%3$s', 'theme-check' ), $filename, $matches[1][$count], $error );
+								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. The %2$s text domain is being used!%3$s', 'theme-check' ), $filename, $matches[1][$count], $error );
 							else:
 							if ( defined( 'TC_TEST' ) && strpos( strtolower( $themename ), $matches[1][$count] ) === false ) {
 								$error = tc_grep( $matches[0][$count], $php_key );
-								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. %2$s You are using: <strong>%3s</strong>%4$s', 'theme-check' ), $filename, $check, $matches[1][$count], $error );
+								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. %2$s You are using: <strong>%3$s</strong>%4$s', 'theme-check' ), $filename, $check, $matches[1][$count], $error );
 							}
 							endif;
 						}
