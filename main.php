@@ -89,13 +89,14 @@ function check_main( $theme ) {
 function tc_intro() {
 ?>
 	<h2><?php _e( 'About', 'theme-check' ); ?></h2>
-	<p><?php _e( "The theme check plugin is an easy way to test your theme and make sure it's up to spec with the latest theme review standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.", 'theme-check' ); ?></p>
+	<p><?php _e( "The Theme Check plugin is an easy way to test your theme and make sure it's up to date with the latest theme review standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.", 'theme-check' ); ?></p>
 	<h2><?php _e( 'Contact', 'theme-check' ); ?></h2>
-	<p><?php printf( __( 'Theme-Check is maintained by %1$s and %2$s.', 'theme-check' ),
+	<p><?php printf( __( 'Theme Check is maintained by %1$s and %2$s.', 'theme-check' ),
 		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
 		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
 		); ?></p>
 	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the theme review team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/') ; ?></p>
+	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/Otto42/theme-check'); ?></p>
 	<h3><?php _e( 'Testers', 'theme-check' ); ?></h3>
 	<p><a href="https://make.wordpress.org/themes/"><?php _e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
 	<?php
@@ -130,6 +131,6 @@ function tc_form() {
 	echo '</select>';
 	echo '<input class="button" type="submit" value="' . __( 'Check it!', 'theme-check' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) echo ' <input name="trac" type="checkbox" /> ' . __( 'Output in Trac format.', 'theme-check' );
-	echo ' <input name="s_info" type="checkbox" /> ' . __( 'Suppress INFO.', 'theme-check' );
+	echo '<input name="s_info" type="checkbox" /> ' . __( 'Suppress INFO.', 'theme-check' );
 	echo '</form>';
 }
