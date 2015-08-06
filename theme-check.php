@@ -47,7 +47,7 @@ class ThemeCheckMain {
 		include 'main.php';
 
 		echo '<div id="theme-check" class="wrap">';
-		echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
+		echo '<div id="icon-themes" class="icon32"><br /></div><h1>Theme-Check</h1>';
 		echo '<div class="theme-check">';
 			tc_form();
 		if ( !isset( $_POST[ 'themename' ] ) )  {
@@ -57,7 +57,7 @@ class ThemeCheckMain {
 
 		if ( isset( $_POST[ 'themename' ] ) ) {
 			if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
-			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
+			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) {
 				@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
 			}
 			check_main( $_POST[ 'themename' ] );
