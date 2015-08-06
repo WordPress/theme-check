@@ -5,9 +5,11 @@ Plugin URI: http://ottopress.com/wordpress-plugins/theme-check/
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 Author: Pross, Otto42
 Author URI: http://ottopress.com
-Version: 20141222.1
+Version: 20150806.1
 Text Domain: theme-check
 Domain Path: /lang
+License: GPLv2
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 class ThemeCheckMain {
