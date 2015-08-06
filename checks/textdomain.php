@@ -1,70 +1,127 @@
 <?php
-
 class TextDomainCheck implements themecheck {
 	protected $error = array();
 
+	// rules come from WordPress core tool makepot.php, modified by me to have domain info
+	var $rules = array(
+		'_' => array('string', 'domain'),
+		'__' => array('string', 'domain'),
+		'_e' => array('string', 'domain'),
+		'_c' => array('string', 'domain'),
+		'_n' => array('singular', 'plural', 'domain'),
+		'_n_noop' => array('singular', 'plural', 'domain'),
+		'_nc' => array('singular', 'plural', null, 'domain'),
+		'__ngettext' => array('singular', 'plural', 'domain'),
+		'__ngettext_noop' => array('singular', 'plural', 'domain'),
+		'_x' => array('string', 'context', 'domain'),
+		'_ex' => array('string', 'context', 'domain'),
+		'_nx' => array('singular', 'plural', null, 'context', 'domain'),
+		'_nx_noop' => array('singular', 'plural', 'context', 'domain'),
+		'_n_js' => array('singular', 'plural', 'domain'),
+		'_nx_js' => array('singular', 'plural', 'context', 'domain'),
+		'esc_attr__' => array('string', 'domain'),
+		'esc_html__' => array('string', 'domain'),
+		'esc_attr_e' => array('string', 'domain'),
+		'esc_html_e' => array('string', 'domain'),
+		'esc_attr_x' => array('string', 'context', 'domain'),
+		'esc_html_x' => array('string', 'context', 'domain'),
+		'comments_number_link' => array('string', 'singular', 'plural', 'domain'),
+	);
+	
+	// core names their themes differently
+	var $exceptions = array( 'twentyten',  'twentyeleven',  'twentytwelve',  'twentythirteen',  'twentyfourteen',  'twentyfifteen',  'twentysixteen',  'twentyseventeen',  'twentyeighteen',  'twentynineteen',  'twentytwenty'  );
+
 	function check( $php_files, $css_files, $other_files ) {
 		global $data, $themename;
+		
+		// ignore core themes for this one check
+		if ( !in_array($themename, $this->exceptions) ) {
+			$correct_domain = sanitize_title_with_dashes($data['Name']);
+			if ( $themename != $correct_domain ) {
+				$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
+					. sprintf ( __( "Your theme appears to be in the wrong directory for the theme name. The directory name must match the slug of the theme. This theme's correct slug and text-domain is <strong>%s</strong>.", 'theme-check' ), $correct_domain );
+			}
+		}
+		
+		
 		$ret = true;
 		$error = '';
 		checkcount();
-		if ( $data['Name'] === 'Twenty Ten' || $data['Name'] === 'Twenty Eleven')
-			return $ret;
 
-		$checks = array(
-		'/[\s|\(|;]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/' => __( 'You have not included a text domain!', 'theme-check' )
-		 );
-
-		foreach ( $php_files as $php_key => $phpfile ) {
-			$error = '';
-			foreach ( $checks as $key => $check ) {
-				checkcount();
-				if ( preg_match_all( $key, $phpfile, $matches ) || preg_match_all( '/[\s|\(]_x\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?,\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $phpfile, $matches )) {
-
-					$filename = tc_filename( $php_key );
-					foreach ($matches[0] as $match ) {
-						$grep = tc_grep( ltrim( $match ), $php_key );
-						preg_match( '/[^\s]*\s[0-9]+/', $grep, $line);
-						$error .= ( !strpos( $error, $line[0] ) ) ? $grep : '';
-					}
-				$this->error[] = sprintf( "<span class='tc-lead tc-recommended'>" . __( 'RECOMMENDED', 'theme-check' ) . '</span>: ' .
-					/* translators: 1: filename 2: error message 3: grep results */
-					__( 'Text domain problems in <strong>%1$s</strong>. %2$s %3$s ', 'theme-check' ), $filename, $check, $error );
-				}
-			}
+		// make sure the tokenizer is available
+		if ( !function_exists( 'token_get_all' ) ) {
+			return true;
 		}
 
-		$checks = array(
-		'/[\s|\(]_[e|_]\s?\([^,|;]*\s?,\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'theme-check'), $themename ),
-		'/[\s|\(]_x\s?\([^,]*\s?,\s[^\'|"]*[\'|"][^\'|"]*[\'|"],\s?[\'|"]([^\'|"]*)[\'|"]\s?\)/' => sprintf(__('Text domain should match theme slug: <strong>%1$s</strong>', 'theme-check'), $themename )
-		 );
+		$funcs = array_keys($this->rules);
+		
 		foreach ( $php_files as $php_key => $phpfile ) {
-			foreach ( $checks as $key => $check ) {
-				checkcount();
-				if ( preg_match_all( $key, $phpfile, $matches ) ) {
-					foreach ($matches[0] as $count => $domaincheck) {
-						if ( preg_match( '/[\s|\(]_[e|_]\s?\(\s?[\'|"][^\'|"]*[\'|"]\s?\)/', $domaincheck ) )
-							unset( $matches[1][$count] ); //filter out false positives
-					}
-					$filename = tc_filename( $php_key );
-					$count = 0;
-					while ( isset( $matches[1][$count] ) ) {
-						if ( $matches[1][$count] !== $themename ) {
-							$error = tc_grep( $matches[0][$count], $php_key );
-							if ( $matches[1][$count] === 'twentyten' || $matches[1][$count] === 'twentyeleven' ):
-								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. The %2$s text domain is being used!%3$s', 'theme-check' ), $filename, $matches[1][$count], $error );
-							else:
-							if ( defined( 'TC_TEST' ) && strpos( strtolower( $themename ), $matches[1][$count] ) === false ) {
-								$error = tc_grep( $matches[0][$count], $php_key );
-								$this->error[] = sprintf( '<span class=\'tc-lead tc-recommended\'>' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: '. __( 'Text domain problems in <strong>%1$s</strong>. %2$s You are using: <strong>%3$s</strong>%4$s', 'theme-check' ), $filename, $check, $matches[1][$count], $error );
+			$error='';
+			
+			// tokenize the file
+			$tokens = token_get_all($phpfile);
+			
+			$in_func = false;
+			$args_started = false;
+			$parens_balance = 0;
+			$found_domain = false;
+
+			foreach($tokens as $token) {
+				$string_success = false;
+				
+				if (is_array($token)) {
+					list($id, $text) = $token;
+					if (T_STRING == $id && in_array($text, $funcs)) {
+						$in_func = true;
+						$func = $text;
+						$parens_balance = 0;
+						$args_started = false;
+						$found_domain = false;
+					} elseif (T_CONSTANT_ENCAPSED_STRING == $id) {
+						if ($in_func && $args_started) {
+							if ($this->rules[$func][$args_count] == 'domain') {
+								$domains[] = $text;
+								$found_domain=true;
 							}
-							endif;
+							$args_count++;
 						}
-					$count++;
-					} //end while
+					}
+					$token = $text;
+				} elseif ('(' == $token){
+					$args_started = true;
+					$args_count = 0;
+					++$parens_balance;
+				} elseif (')' == $token) {
+					--$parens_balance;
+					if ($in_func && 0 == $parens_balance) {
+						$token = $found_domain? ')' : ", '$domain')";
+						$in_func = false;
+						$func='';
+						$args_started = false;
+						$found_domain = false;
+					}
 				}
 			}
 		}
+		
+		$domains = array_unique($domains);
+		$domainlist = implode( ',', $domains );
+		$domainscount = count($domains);
+		
+		if ( $domainscount > 1 ) {
+			$ret = false;
+			$this->error[] = '<span class="tc-lead tc-error">' . __( 'ERROR', 'theme-check' ) . '</span>: ' 
+			. __( 'More than one text-domain is being used in this theme. This means the theme will not be compatible with WordPress.org language packs.', 'theme-check' )
+			. '<br>'
+			. sprintf( __( "The domains found are <strong>%s</strong>", 'theme-check'), $domainlist );
+		} else {
+			$this->error[] = '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' 
+			. __( "Only one text-domain is being used in this theme. Make sure it matches the theme's slug correctly so that the theme will be compatible with WordPress.org language packs.", 'theme-check' )
+			. '<br>'
+			. sprintf( __( "The domain found is <strong>%s</strong>", 'theme-check'), $domainlist );
+			
+		}
+		
 		return $ret;
 	}
 
