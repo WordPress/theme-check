@@ -46,9 +46,11 @@ class ThemeCheckMain {
 		include 'checkbase.php';
 		include 'main.php';
 
-		echo '<div id="theme-check" class="wrap">';
-		echo '<div id="icon-themes" class="icon32"><br /></div><h2>Theme-Check</h2>';
-		echo '<div class="theme-check">';
+		?>
+		<div id="theme-check" class="wrap">
+		<h1><?php _ex( 'Theme Check', 'title of the main page', 'theme-check' ); ?></h1>
+		<div class="theme-check">
+		<?php
 			tc_form();
 		if ( !isset( $_POST[ 'themename' ] ) )  {
 			tc_intro();
@@ -62,8 +64,10 @@ class ThemeCheckMain {
 			}
 			check_main( $_POST[ 'themename' ] );
 		}
-		echo '</div> <!-- .theme-check-->';
-		echo '</div>';
+		?>
+		</div> <!-- .theme-check-->
+		</div>
+		<?php
 	}
 }
 new ThemeCheckMain;
