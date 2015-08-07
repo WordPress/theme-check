@@ -32,7 +32,7 @@ class File_Checks implements themecheck {
 				'__MACOSX'				=> __( 'OSX system file', 'theme-check' )
 				);
 
-		$musthave = array( 'index.php', 'comments.php', 'style.css' );
+		$musthave = array( 'index.php', 'style.css' );
 		$rechave = array( 'readme.txt' => __( 'Please see <a href="https://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'theme-check' ) );
 
 		checkcount();
