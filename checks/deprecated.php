@@ -227,7 +227,7 @@ class Deprecated implements themecheck {
 				checkcount();
 				$key = key( $check );
 				$alt = $check[ $key ];
-				if ( preg_match( '/[\s?]' . $key . '\(/', $phpfile, $matches ) ) {
+				if ( preg_match( '/(?<!function)[\s?]' . $key . '\s?\(/', $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
 					$error = ltrim( rtrim( $matches[0], '(' ) );
 					$version = $check[0];
