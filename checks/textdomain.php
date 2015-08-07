@@ -10,12 +10,12 @@ class TextDomainCheck implements themecheck {
 		'_c' => array('string', 'domain'),
 		'_n' => array('singular', 'plural', 'domain'),
 		'_n_noop' => array('singular', 'plural', 'domain'),
-		'_nc' => array('singular', 'plural', null, 'domain'),
+		'_nc' => array('singular', 'plural', 'domain'),
 		'__ngettext' => array('singular', 'plural', 'domain'),
 		'__ngettext_noop' => array('singular', 'plural', 'domain'),
 		'_x' => array('string', 'context', 'domain'),
 		'_ex' => array('string', 'context', 'domain'),
-		'_nx' => array('singular', 'plural', null, 'context', 'domain'),
+		'_nx' => array('singular', 'plural', 'context', 'domain'),
 		'_nx_noop' => array('singular', 'plural', 'context', 'domain'),
 		'_n_js' => array('singular', 'plural', 'domain'),
 		'_nx_js' => array('singular', 'plural', 'context', 'domain'),
@@ -83,18 +83,28 @@ class TextDomainCheck implements themecheck {
 								$domains[] = $text;
 								$found_domain=true;
 							}
-							$args_count++;
+							if ($parens_balance == 1) {
+								$args_count++;
+								$args[] = $text;
+							}
 						}
 					}
 					$token = $text;
 				} elseif ('(' == $token){
-					$args_started = true;
-					$args_count = 0;
+					if ($parens_balance == 0) {
+						$args=array();
+						$args_started = true;
+						$args_count = 0;
+					}
 					++$parens_balance;
 				} elseif (')' == $token) {
 					--$parens_balance;
 					if ($in_func && 0 == $parens_balance) {
-						$token = $found_domain? ')' : ", '$domain')";
+						if (!$found_domain) {
+							$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
+							. sprintf ( __( 'Found a translation function that is missing a text-domain. Function <strong>%1$s</strong>, with the arguments <strong>%2$s</strong>', 'theme-check' ), 
+							$func, implode(',',$args) );
+						}
 						$in_func = false;
 						$func='';
 						$args_started = false;
