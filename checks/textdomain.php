@@ -80,6 +80,8 @@ class TextDomainCheck implements themecheck {
 					} elseif (T_CONSTANT_ENCAPSED_STRING == $id) {
 						if ($in_func && $args_started) {
 							if ($this->rules[$func][$args_count] == 'domain') {
+								// strip quotes from the domain, avoids 'domain' and "domain" not being recognized as the same
+								$text = str_replace(array('"', "'"), '', $text);
 								$domains[] = $text;
 								$found_domain=true;
 							}
