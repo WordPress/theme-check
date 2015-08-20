@@ -55,6 +55,8 @@ class TextDomainCheck implements themecheck {
 
 		$funcs = array_keys($this->rules);
 		
+		$domains = array();
+		
 		foreach ( $php_files as $php_key => $phpfile ) {
 			$error='';
 			
