@@ -31,7 +31,7 @@ class AdminMenu implements themecheck {
 // Note to TGMPA: Stop trying to bypass theme check. 
 
 		$checks = array(
-			'/(?<!function)[^_>:](add_[^();]*?_page)/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'theme-check' )
+			'/(?<!function)[^_>:](add_[^\'",();]+?_page)/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'theme-check' )
 			);
 
 
