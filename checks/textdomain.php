@@ -107,7 +107,7 @@ class TextDomainCheck implements themecheck {
 						if (!$found_domain) {
 							$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
 							. sprintf ( __( 'Found a translation function that is missing a text-domain. Function <strong>%1$s</strong>, with the arguments <strong>%2$s</strong>', 'theme-check' ), 
-							$func, implode(',',$args) );
+							$func, implode(', ',$args) );
 						}
 						$in_func = false;
 						$func='';
@@ -119,7 +119,7 @@ class TextDomainCheck implements themecheck {
 		}
 		
 		$domains = array_unique($domains);
-		$domainlist = implode( ',', $domains );
+		$domainlist = implode( ', ', $domains );
 		$domainscount = count($domains);
 		
 		if ( $domainscount > 1 ) {
