@@ -18,19 +18,20 @@ class File_Checks implements themecheck {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 		$blacklist = array(
-				'thumbs.db'				=> __( 'Windows thumbnail store', 'theme-check' ),
-				'desktop.ini'			=> __( 'windows system file', 'theme-check' ),
-				'project.properties'	=> __( 'NetBeans Project File', 'theme-check' ),
-				'project.xml'			=> __( 'NetBeans Project File', 'theme-check' ),
-				'\.kpf'					=> __( 'Komodo Project File', 'theme-check' ),
-				'^\.+[a-zA-Z0-9]'		=> __( 'Hidden Files or Folders', 'theme-check' ),
-				'php.ini'				=> __( 'PHP server settings file', 'theme-check' ),
-				'dwsync.xml'			=> __( 'Dreamweaver project file', 'theme-check' ),
-				'error_log'				=> __( 'PHP error log', 'theme-check' ),
-				'web.config'			=> __( 'Server settings file', 'theme-check' ),
-				'\.sql'					=> __( 'SQL dump file', 'theme-check' ),
-				'__MACOSX'				=> __( 'OSX system file', 'theme-check' )
-				);
+				'thumbs\.db'            => __( 'Windows thumbnail store', 'theme-check' ),
+				'desktop\.ini'          => __( 'windows system file', 'theme-check' ),
+				'project\.properties'   => __( 'NetBeans Project File', 'theme-check' ),
+				'project\.xml'          => __( 'NetBeans Project File', 'theme-check' ),
+				'\.kpf'                 => __( 'Komodo Project File', 'theme-check' ),
+				'^\.+[a-zA-Z0-9]'       => __( 'Hidden Files or Folders', 'theme-check' ),
+				'php\.ini'              => __( 'PHP server settings file', 'theme-check' ),
+				'dwsync\.xml'           => __( 'Dreamweaver project file', 'theme-check' ),
+				'error_log'             => __( 'PHP error log', 'theme-check' ),
+				'web\.config'           => __( 'Server settings file', 'theme-check' ),
+				'\.sql'                 => __( 'SQL dump file', 'theme-check' ),
+				'__MACOSX'              => __( 'OSX system file', 'theme-check' ),
+				'node_modules'          => __( 'Node developer files', 'theme-check' ),
+		);
 
 		$musthave = array( 'index.php', 'style.css' );
 		$rechave = array( 'readme.txt' => __( 'Please see <a href="https://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'theme-check' ) );

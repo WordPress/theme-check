@@ -19,13 +19,21 @@ function check_main( $theme ) {
 
 	if ( $files ) {
 		foreach( $files as $key => $filename ) {
+			// Ignore . and .. files.
+			// Don't scan into node_modules or .sass-cache
+			if ( ( basename( $filename ) == '..' )
+			  || ( basename( $filename ) == '.' )
+			  || preg_match( '/node_modules\/.+/i', $filename )
+			  || preg_match( '/\.sass-cache\/.+/i', $filename )
+			){
+				continue;
+			}
+
 			if ( substr( $filename, -4 ) == '.php' ) {
 				$php[$filename] = php_strip_whitespace( $filename );
-			}
-			else if ( substr( $filename, -4 ) == '.css' ) {
+			} else if ( substr( $filename, -4 ) == '.css' ) {
 				$css[$filename] = file_get_contents( $filename );
-			}
-			else {
+			} else {
 				$other[$filename] = ( ! is_dir($filename) ) ? file_get_contents( $filename ) : '';
 			}
 		}
