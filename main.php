@@ -9,7 +9,7 @@ function check_main( $theme ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
 		$parent = get_theme_root( $data[ 'Template' ] ) . '/' . $data['Template'];
 		if ( ! tc_get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
-			echo '<h2>' . sprintf(__('Parent theme <strong>%1$s</strong> not found! You have to have parent AND child-theme installed!', 'theme-check'), $data[ 'Template' ] ) . '</h2>';
+			echo '<h2>' . sprintf(__('Parent theme %1$s not found! You have to have parent AND child-theme installed!', 'theme-check'), '<strong>' . $data[ 'Template' ] . '</strong>' ) . '</h2>';
 			return;
 		}
 		$parent_data = tc_get_theme_data( $parent . '/style.css' );
@@ -56,9 +56,17 @@ function check_main( $theme ) {
 
 		if ( $data[ 'Template' ] ) {
 		if ( $data['Template Version'] > $parent_data['Version'] ) {
-			echo '<p>' . sprintf(__('This child theme requires at least version <strong>%1$s</strong> of theme <strong>%2$s</strong> to be installed. You only have <strong>%3$s</strong> please update the parent theme.', 'theme-check'), $data['Template Version'], $parent_data['Title'], $parent_data['Version'] ) . '</p>';
+			echo '<p>' . sprintf(
+				__('This child theme requires at least version %1$s of theme %2$s to be installed. You only have %3$s please update the parent theme.', 'theme-check'),
+				'<strong>' . $data['Template Version'] . '</strong>',
+				'<strong>' . $parent_data['Title'] . '</strong>',
+				'<strong>' . $parent_data['Version'] . '</strong>'
+			) . '</p>';
 		}
-			echo '<p>' . sprintf(__( 'This is a child theme. The parent theme is: <strong>%1$s</strong>. These files have been included automatically!', 'theme-check'), $data[ 'Template' ] ) . '</p>';
+			echo '<p>' . sprintf(
+				__( 'This is a child theme. The parent theme is: %s. These files have been included automatically!', 'theme-check'),
+				'<strong>' . $data[ 'Template' ] . '</strong>'
+			) . '</p>';
 			if ( empty( $data['Template Version'] ) ) {
 				echo '<p>' . __('Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check') . '</p>';
 			} else {
@@ -69,7 +77,13 @@ function check_main( $theme ) {
 
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
-		echo '<p>' . sprintf(__(' Running <strong>%1$s</strong> tests against <strong>%2$s</strong> using Guidelines Version: <strong>%3$s</strong> Plugin revision: <strong>%4$s</strong>', 'theme-check'), $checkcount, $data[ 'Title' ], $version[0], $version[1] ) . '</p>';
+		echo '<p>' . sprintf(
+			__(' Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check'),
+			'<strong>' . $checkcount . '</strong>',
+			'<strong>' . $data[ 'Title' ] . '</strong>',
+			'<strong>' . $version[0] . '</strong>',
+			'<strong>' . $version[1] . '</strong>'
+		) . '</p>';
 		$results = display_themechecks();
 		if ( !$success ) {
 			echo '<h2>' . sprintf(__('One or more errors were found for %1$s.', 'theme-check'), $data[ 'Title' ] ) . '</h2>';
