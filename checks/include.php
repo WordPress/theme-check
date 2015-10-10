@@ -16,7 +16,7 @@ class IncludeCheck implements themecheck {
 					$filename = tc_filename( $php_key );
 					$error = '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?\(/';
 					$grep = tc_preg( $error, $php_key );
-					if ( basename($filename) !== 'functions.php' ) $this->error[] = sprintf ( '<span class="tc-lead tc-info">'.__('INFO','theme-check').'</span>: '.__('<strong>%1$s</strong> %2$s %3$s', 'theme-check' ), $filename, $check, $grep );
+					if ( basename($filename) !== 'functions.php' ) $this->error[] = sprintf ( '<span class="tc-lead tc-info">'.__('INFO','theme-check').'</span>: '.__('%1$s %2$s %3$s', 'theme-check' ), '<strong>' . $filename . '</strong>', $check, $grep );
 				}
 			}
 

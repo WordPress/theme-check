@@ -31,7 +31,7 @@ class Basic_Checks implements themecheck {
 				if ( $key === 'add_theme_support\s*\(\s?("|\')automatic-feed-links("|\')\s?\)' ) $key = __( 'add_theme_support( \'automatic-feed-links\' )', 'theme-check');
 				if ( $key === 'body_class\s*\(' ) $key = __( 'body_class call in body tag', 'theme-check');
 				$key = str_replace( '\s*\(', '', $key );
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Could not find <strong>%1$s</strong>. %2$s', 'theme-check' ), $key, $check );
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Could not find %1$s. %2$s', 'theme-check' ), '<strong>' . $key . '</strong>', $check );
 				$ret = false;
 			}
 		}

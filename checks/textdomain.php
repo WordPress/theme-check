@@ -39,7 +39,7 @@ class TextDomainCheck implements themecheck {
 			$correct_domain = sanitize_title_with_dashes($data['Name']);
 			if ( $themename != $correct_domain ) {
 				$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
-					. sprintf ( __( "Your theme appears to be in the wrong directory for the theme name. The directory name must match the slug of the theme. This theme's correct slug and text-domain is <strong>%s</strong>.", 'theme-check' ), $correct_domain );
+					. sprintf ( __( "Your theme appears to be in the wrong directory for the theme name. The directory name must match the slug of the theme. This theme's correct slug and text-domain is %s.", 'theme-check' ), '<strong>' . $correct_domain . '</strong>' );
 			}
 		}
 		
@@ -86,8 +86,11 @@ class TextDomainCheck implements themecheck {
 								$new_args = $args;
 								$new_args[] = $text;
 								$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
-								. sprintf ( __( 'Found a translation function that has an incorrect number of arguments. Function <strong>%1$s</strong>, with the arguments <strong>%2$s</strong>', 'theme-check' ), 
-								$func, implode(', ',$new_args) );
+								. sprintf (
+									__( 'Found a translation function that has an incorrect number of arguments. Function %1$s, with the arguments %2$s', 'theme-check' ), 
+									'<strong>' . $func . '</strong>',
+									'<strong>' . implode(', ',$new_args) . '</strong>'
+								);
 							} else if ($this->rules[$func][$args_count] == 'domain') {
 								// strip quotes from the domain, avoids 'domain' and "domain" not being recognized as the same
 								$text = str_replace(array('"', "'"), '', $text);
@@ -113,8 +116,11 @@ class TextDomainCheck implements themecheck {
 					if ($in_func && 0 == $parens_balance) {
 						if (!$found_domain) {
 							$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
-							. sprintf ( __( 'Found a translation function that is missing a text-domain. Function <strong>%1$s</strong>, with the arguments <strong>%2$s</strong>', 'theme-check' ), 
-							$func, implode(', ',$args) );
+							. sprintf (
+								__( 'Found a translation function that is missing a text-domain. Function %1$s, with the arguments %2$s', 'theme-check' ), 
+								'<strong>' . $func . '</strong>', 
+								'<strong>' . implode(', ',$args) . '</strong>'
+							);
 						}
 						$in_func = false;
 						$func='';
@@ -133,12 +139,12 @@ class TextDomainCheck implements themecheck {
 			$this->error[] = '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' 
 			. __( 'More than one text-domain is being used in this theme. This means the theme will not be compatible with WordPress.org language packs.', 'theme-check' )
 			. '<br>'
-			. sprintf( __( "The domains found are <strong>%s</strong>", 'theme-check'), $domainlist );
+			. sprintf( __( 'The domains found are %s', 'theme-check'), '<strong>' . $domainlist . '</strong>' );
 		} else {
 			$this->error[] = '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' 
 			. __( "Only one text-domain is being used in this theme. Make sure it matches the theme's slug correctly so that the theme will be compatible with WordPress.org language packs.", 'theme-check' )
 			. '<br>'
-			. sprintf( __( "The domain found is <strong>%s</strong>", 'theme-check'), $domainlist );
+			. sprintf( __( 'The domain found is %s', 'theme-check'), '<strong>' . $domainlist . '</strong>' );
 			
 		}
 		

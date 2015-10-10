@@ -24,7 +24,7 @@ class Style_Tags implements themecheck {
 				if ( in_array( strtolower( $tag ), array("flexible-width","fixed-width") ) ) {
 					$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . __( 'The flexible-width and fixed-width tags changed to fluid-layout and fixed-layout tags in WordPress 3.8. Additionally, the responsive-layout tag was added. Please change to using one of the new tags.', 'theme-check' );
 				} else {
-					$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . sprintf(__('Found wrong tag, remove <strong>%1$s</strong> from your style.css header.', 'theme-check'), $tag);
+					$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . sprintf( __('Found wrong tag, remove %s from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
 					$ret = false;
 				}
 			}
