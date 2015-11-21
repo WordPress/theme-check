@@ -4,7 +4,6 @@ class TextDomainCheck implements themecheck {
 
 	// rules come from WordPress core tool makepot.php, modified by me to have domain info
 	var $rules = array(
-		'_' => array('string', 'domain'),
 		'__' => array('string', 'domain'),
 		'_e' => array('string', 'domain'),
 		'_c' => array('string', 'domain'),
