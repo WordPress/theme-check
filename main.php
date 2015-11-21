@@ -19,10 +19,10 @@ function check_main( $theme ) {
 
 	if ( $files ) {
 		foreach( $files as $key => $filename ) {
-			if ( substr( $filename, -4 ) == '.php' ) {
+			if ( substr( $filename, -4 ) == '.php' && ! is_dir( $filename ) ) {
 				$php[$filename] = php_strip_whitespace( $filename );
 			}
-			else if ( substr( $filename, -4 ) == '.css' ) {
+			else if ( substr( $filename, -4 ) == '.css' && ! is_dir( $filename ) ) {
 				$css[$filename] = file_get_contents( $filename );
 			}
 			else {
