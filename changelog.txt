@@ -1,0 +1,120 @@
+= 20140929.1 =
+* Added new checks and updates from Frank Klein at Automattic. Thanks Frank!
+* Updated deprecated function listings
+* Customizer check: All add_settings must use sanitization callbacks, for security
+* Plugin territory checks: Themes must not register post types or taxonomies or add shortcodes for post content
+* Widgets: Calls to register_sidebar must be called from the widgets_init action hook
+* Title: <title> tags must exist and not have anything in them other than a call to wp_title()
+* CDN: Checks for use of common CDNs (recommended only)
+* Note: Changed plugin and author URIs due to old URIs being invalid. These may change again in the future, the URIs to my own site are temporarily only.
+
+= 20131213.1 =
+* Corrected errors not being displayed by the plugin and it incorrectly giving a "pass" result to everything.
+
+= 20131212.1 =
+* Updated for 3.8
+* Most files have changed for better I18N support, so the language files were removed temporarily until translation can be redone.
+
+= 20121211.1 =
+* Updated for 3.5
+* Remove Paypal button.
+
+= 20110805.1 =
+* TimThumb checks removed.
+* Proper i18n loading. Fixes http://bit.ly/ouD5Ke.
+* Screenshot now previewed in results, with filesize and dimensions.
+
+= 20110602.2 =
+* New file list functions hidden folders now detectable.
+* Better fopen checks.
+* TimThumb version bump
+
+= 20110602.1 =
+* DOS/UNIX line ending style checks are now a requirement for proper theme uploading.
+* Timthumb version bump
+* Several fixes reported by GaryJ
+* 3.2 deprecated functions added
+
+= 20110412.1 =
+* Fix regex's
+* Added check for latest footer injection hack.
+* Fix tags check to use new content function correctly
+* Sync of all changes made for wporg uploader theme-check.
+* Updated checks post 3.1. added screenshot check to svn.
+* Fix links check to not return a false failure in some cases
+* rm one of the checks that causes problems on wporg uploader (and which is also unnecessary)
+* Move unneeded functions out of checkbase into main.php.
+* Minor formatting changes only (spacing and such)
+* Add check for wp_link_pages() + fix eval() check
+
+= 20110219.2 =
+* Merged new UI props Gua Bob [1](http://guabob.com/) 
+* Last tested theme is always pre-selected in the themes list.
+* Fixed php error in admin_menu.php
+
+= 20110219.1 = 
+* See [commit log](https://github.com/Pross/theme-check/commits/) for changes.
+
+= 20110201.2 =
+* UI bug fixes [forum post](http://bit.ly/ff7amN) props Mamaduka.
+* Textdomain checks for twentyten and no domain.
+* Fix div not closing props Mamaduka.
+
+= 20110201.1 =
+* i18n working
+* sr_RS de_DE ro_RO langs props Daniel Tara and Emil Uzelac.
+* Child theme support added, checks made against parent AND child at runtime.
+* Trac formatting button added for reviewers.
+
+= 20101228.3 =
+* Last revision for 3.1 (hopefully)
+* Chips suggestion of checking for inclusion of searchform.php ( not
+perfect yet, need more examples to look for ).
+* add_theme_page is required, all others flagged and displayed with line
+numbers.
+* <?= detected properly, short tags outputted with line umbers.
+* Mostly internationalized, needs translations now.
+* Bug fixes.
+
+= 20101228.2 =
+* Added menu checking.
+* ThemeURI AuthourURI added to results.
+* Lots of small fixes.
+* Started translation.
+
+= 20101228.1 =
+* Fix embed_defaults filter check and stylesheet file data check.
+
+= 20101226.1 =
+* Whole system redesign to allow easier synching with WordPress.org uploader. Many other additions/subtractions/changes as well.
+* WordPress 3.1 guidelines added, to help theme authors ensure compatibility for upcoming release.
+
+= 20101110.7 =
+* Re-added malware.php checks for fopen and file_get_contents (INFO)
+* fixed a couple of undefined index errors.
+
+= 20101110.4_r2 =
+* Fixed Warning: Wrong parameter count for stristr()
+
+= 20101110.4_r1 =
+* Added `echo` to suggested.php
+
+= 20101110.4 =
+* Fixed deprecated function call to get_plugins()
+
+= 20101110.3 =
+* Fixed undefined index.
+
+= 20101110.2 =
+* Missing `<` in main.php
+* Added conditional checks for licence.txt OR Licence tags in style.css
+* UI improvements.
+
+= 20101110.1 =
+* Date fix!
+
+= 10112010_r1 =
+* Fixed hardcoded links check. Added FAQ
+
+= 10112010 =
+* First release.
