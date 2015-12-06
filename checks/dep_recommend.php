@@ -9,14 +9,21 @@ class Deprecated_Recommended implements themecheck {
 		$ret = true;
 
 		$checks = array(
-			array( 'rich_edit_exists' => '', '3.9'),
-			array( 'default_topic_count_text' => '', '3.9'),
-			array( 'format_to_post' => '', '3.9'),
-			array( 'get_current_site_name' => 'get_current_site()', '3.9'),
-			array( 'wpmu_current_site' => '', '3.9'),
-			array( 'get_all_category_ids' => 'get_terms()', '4.0' ),
-			array( 'like_escape' => 'wpdb::esc_like()', '4.0' ),
-			array( 'url_is_accessable_via_ssl' => '', '4.0' ),
+			array( 'preview_theme' => '', '4.3' ),
+			array( '_preview_theme_template_filter' => '', '4.3' ),
+			array( '_preview_theme_stylesheet_filter' => '', '4.3' ),
+			array( 'preview_theme_ob_filter' => '', '4.3' ),
+			array( 'preview_theme_ob_filter_callback' => '', '4.3' ),
+			array( 'wp_richedit_pre' => '', '4.3' ),
+			array( 'wp_htmledit_pre' => '', '4.3' ),
+			array( 'wp_ajax_wp_fullscreen_save_post' => '', '4.3' ),
+			
+			array( 'post_permalink' => 'get_permalink', '4.4'),
+			array( 'wp_get_http' => 'WP_Http', '4.4'),
+			array( 'force_ssl_login' => 'force_ssl_admin', '4.4'),
+			array( 'create_empty_blog' => '', '4.4'),
+			array( 'get_admin_users_for_domain' => '', '4.4'),
+			array( 'flush_widget_cache' => '', '4.4'),
 		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
