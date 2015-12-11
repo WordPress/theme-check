@@ -5,7 +5,7 @@ Plugin URL: http://ottopress.com/wordpress-plugins/theme-check/
 Requires at Least: 3.7
 Tested Up To: 4.3
 Tags: template, theme, check, checker, tool, wordpress, wordpress.org, upload, uploader, test, guideline, review
-Stable tag: 20150818.1
+Stable tag: 20151211.1
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
@@ -54,6 +54,10 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
+= 20151211.1 = 
+* Full sync with Github and all the changes that have happened there.
+* Release for 4.4 deprecated functions.
+
 = 20140929.1 =
 * Added new checks and updates from Frank Klein at Automattic. Thanks Frank!
 * Updated deprecated function listings
