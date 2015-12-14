@@ -23,7 +23,7 @@ class Deprecated_Recommended implements themecheck {
 			array( 'force_ssl_login' => 'force_ssl_admin', '4.4'),
 			array( 'create_empty_blog' => '', '4.4'),
 			array( 'get_admin_users_for_domain' => '', '4.4'),
-			array( 'flush_widget_cache' => '', '4.4'),
+			//array( 'flush_widget_cache' => '', '4.4'),
 		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
