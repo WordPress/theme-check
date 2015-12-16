@@ -21,6 +21,7 @@ function check_main( $theme ) {
 		foreach( $files as $key => $filename ) {
 			if ( substr( $filename, -4 ) == '.php' && ! is_dir( $filename ) ) {
 				$php[$filename] = file_get_contents( $filename );
+				$php[$filename] = tc_strip_comments( $php[$filename] );
 			}
 			else if ( substr( $filename, -4 ) == '.css' && ! is_dir( $filename ) ) {
 				$css[$filename] = file_get_contents( $filename );
@@ -98,6 +99,29 @@ function check_main( $theme ) {
 		echo '</ul></div>';
 	}
 }
+
+// strip comments from a PHP file in a way that will not change the underlying structure of the file
+function tc_strip_comments( $code ) {
+	$strip = array( T_COMMENT => true, T_DOC_COMMENT => true);
+	$newlines = array( "\n" => true, "\r" => true );
+	$tokens = token_get_all($code);
+	reset($tokens);
+	$return = '';
+	$token = current($tokens);
+	while( $token ) {
+		if( !is_array($token) ) {
+			$return.= $token;
+		} elseif( !isset( $strip[ $token[0] ] ) ) {
+			$return.= $token[1];
+		} else {
+			for( $i = 0, $token_length = strlen($token[1]); $i < $token_length; ++$i )
+			if( isset($newlines[ $token[1][$i] ]) )
+			$return.= $token[1][$i];
+		}
+		$token = next($tokens);
+	}
+	return $return;
+} 
 
 
 function tc_intro() {
