@@ -45,7 +45,8 @@ class Title_Checks implements themecheck {
 			// First looks ahead to see of there's <title>...</title>
 			// Then performs a negative look ahead for <title> wp_title(...); </title>
 			if ( preg_match( '/(?=<title>(.*)<\/title>)(?!<title>\s*<\?php\s*wp_title\([^\)]*\);\s*\?>\s*<\/title>)/s', $file_content ) ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . __( 'The <strong>&lt;title&gt;</strong> tags can only contain a call to <strong>wp_title()</strong>. Use the  <strong>wp_title filter</strong> to modify the output', 'theme-check' );
+				$link = sprintf('. [ %s ]', tc_filename($file_path));
+				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . __( 'The <strong>&lt;title&gt;</strong> tags can only contain a call to <strong>wp_title()</strong>. Use the  <strong>wp_title filter</strong> to modify the output', 'theme-check' ) . $link;
 				$ret = false;
 			}
 		}

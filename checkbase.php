@@ -7,6 +7,12 @@ $themechecks = array();
 global $checkcount;
 $checkcount = 0;
 
+// Get correct URL and path to wp-content
+global $content_url;
+global $content_dir;
+$content_url = untrailingslashit( dirname( dirname( get_stylesheet_directory_uri() ) ) );
+$content_dir = untrailingslashit( dirname( dirname( get_stylesheet_directory() ) ) );
+
 // interface that all checks should implement
 interface themecheck
 {
@@ -141,7 +147,18 @@ function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
 }
 
 function tc_filename( $file ) {
-	$filename = ( preg_match( '/themes\/[a-z0-9]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
+
+	global $content_dir;
+	global $content_url;
+
+	// Link to file
+	$path = str_replace( '\\', '/', $file );
+	$content_dir = str_replace( '\\', '/', $content_dir );
+	$url = str_replace( $content_dir, $content_url, $path );
+	$link = sprintf('<a href="%s" title="%s">%s</a>', esc_attr($url), esc_attr($path), basename($path));
+	$filename = $link;
+
+	//$filename = ( preg_match( '/themes\/[a-z0-9]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
 	return $filename;
 }
 
