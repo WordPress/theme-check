@@ -92,7 +92,7 @@ function check_main( $theme ) {
 			echo '<h2>' . sprintf(__('%1$s passed the tests', 'theme-check'), $data[ 'Title' ] ) . '</h2>';
 			tc_success();
 		}
-		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">' . __('WARNING','theme-check') . '</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="https://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
+		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">' . __('WARNING','theme-check') . '</span> ' . sprintf( __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="%s">debug enabled</a> before you upload!', 'theme-check' ), 'https://codex.wordpress.org/Editing_wp-config.php' ) . '</div>';
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
 		echo $results;
@@ -133,7 +133,7 @@ function tc_intro() {
 		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
 		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
 		); ?></p>
-	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the theme review team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/') ; ?></p>
+	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the theme review team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/'); ?></p>
 	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/Otto42/theme-check'); ?></p>
 	<h3><?php _e( 'Testers', 'theme-check' ); ?></h3>
 	<p><a href="https://make.wordpress.org/themes/"><?php _e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
@@ -143,7 +143,7 @@ function tc_intro() {
 function tc_success() {
 	?>
 	<div class="tc-success"><p><?php _e( 'Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.', 'theme-check' ); ?></p>
-	<p><?php _e( 'Make sure to review the guidelines at <a href="https://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
+	<p><?php printf( __( 'Make sure to review the guidelines at <a href="%s">Theme Review</a> before uploading a Theme.', 'theme-check' ), 'https://codex.wordpress.org/Theme_Review' ); ?></p>
 	<h3><?php _e( 'Codex Links', 'theme-check' ); ?></h3>
 	<ul>
 	<li><a href="https://codex.wordpress.org/Theme_Development"><?php _e('Theme Development', 'theme-check' ); ?></a></li>
