@@ -12,13 +12,14 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 class ThemeCheckMain {
+
 	function __construct() {
-		add_action( 'admin_init', array( $this, 'tc_i18n' ) );
+		add_action( 'admin_init', array( $this, 'themecheck_i18n' ) );
 		add_action( 'admin_menu', array( $this, 'themecheck_add_page' ) );
 	}
 
-	function tc_i18n() {
-		load_plugin_textdomain( 'theme-check', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/'  );
+	function themecheck_i18n() {
+		load_plugin_textdomain( 'theme-check' );
 	}
 
 	function load_styles() {
