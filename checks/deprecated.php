@@ -154,45 +154,22 @@ class Deprecated implements themecheck {
 			array( 'gd_edit_image_support' => 'wp_image_editor_supports', '3.5' ),
 			array( 'get_user_id_from_string' => 'get_user_by()', '3.6' ),
 			array( 'wp_convert_bytes_to_hr' => 'size_format()', '3.6' ),
-			array('_search_terms_tidy'  => '', '3.7' ),
-			array( 'get_blogaddress_by_domain' => '', '3.7' ),
-			array( 'rich_edit_exists' => '', '3.9' ),
-			array( 'default_topic_count_text' => '', '3.9' ),
-			array( 'format_to_post' => 'wpdb::prepare()', '3.9' ),
-			array( 'get_current_site_name' => 'get_current_site()', '3.9' ),
-			array( 'wpmu_current_site' => '', '3.9' ),
-			array( 'get_all_category_ids' => 'get_terms()', '4.0' ),
-			array( 'like_escape' => 'wpdb::esc_like()', '4.0' ),
-			array( 'url_is_accessable_via_ssl' => '', '4.0' ),
-			array( 'prepare_control' => '', '4.1' ),
-			array( 'add_tab' => '', '4.1' ),
-			array( 'remove_tab' => '', '4.1' ),
-			array( 'print_tab_image' => '', '4.1' ),
-			array( 'setup_widget_addition_previews' => 'customize_dynamic_setting_args', '4.2' ),
-			array( 'prepreview_added_sidebars_widgets' => 'customize_dynamic_setting_args', '4.2' ),
-			array( 'prepreview_added_widget_instance' => 'customize_dynamic_setting_args', '4.2' ),
-			array( 'remove_prepreview_filters' => 'customize_dynamic_setting_args', '4.2' ),
-			array( 'preview_theme' => '', '4.3' ),
-			array( '_preview_theme_template_filter' => '', '4.3' ),
-			array( '_preview_theme_stylesheet_filter' => '', '4.3' ),
-			array( 'preview_theme_ob_filter' => '', '4.3' ),
-			array( 'preview_theme_ob_filter_callback' => '', '4.3' ),
-			array( 'wp_richedit_pre' => '', '4.3' ),
-			array( 'wp_htmledit_pre' => '', '4.3' ),
-			// end wp-includes deprecated
 
-			// start wp-admin deprecated
 			array( 'tinymce_include' => 'wp_tiny_mce()', '2.1' ),
+			
 			array( 'documentation_link' => '', '2.5' ),
-			array( 'wp_shrink_dimensions' => 'wp_constrain_dimensions()','3.0' ),
+			
 			array( 'dropdown_categories' => 'wp_category_checklist()','2.6' ),
 			array( 'dropdown_link_categories' => 'wp_link_category_checklist()','2.6' ),
+			
 			array( 'wp_dropdown_cats' => 'wp_dropdown_categories()','3.0' ),
 			array( 'add_option_update_handler' => 'register_setting()','3.0' ),
 			array( 'remove_option_update_handler' => 'unregister_setting()','3.0' ),
 			array( 'codepress_get_lang' => '','3.0' ),
 			array( 'codepress_footer_js' => '','3.0' ),
 			array( 'use_codepress' => '','3.0' ),
+			array( 'wp_shrink_dimensions' => 'wp_constrain_dimensions()','3.0' ),
+			
 			array( 'get_author_user_ids' => '','3.1' ),
 			array( 'get_editable_authors' => '','3.1' ),
 			array( 'get_editable_user_ids' => '','3.1' ),
@@ -201,12 +178,14 @@ class Deprecated implements themecheck {
 			array( 'get_others_unpublished_posts' => '','3.1' ),
 			array( 'get_others_drafts' => '','3.1' ),
 			array( 'get_others_pending' => '', '3.1' ),
+			
 			array( 'wp_dashboard_quick_press()' => '', '3.2' ),
 			array( 'wp_tiny_mce' => 'wp_editor', '3.2' ),
 			array( 'wp_preload_dialogs' => 'wp_editor()', '3.2' ),
 			array( 'wp_print_editor_js' => 'wp_editor()', '3.2' ),
 			array( 'wp_quicktags' => 'wp_editor()', '3.2' ),
 			array( 'favorite_actions' => 'WP_Admin_Bar', '3.2' ),
+			
 			array( 'screen_layout' => '$current_screen->render_screen_layout()', '3.3' ),
 			array( 'screen_options' => '$current_screen->render_per_page_options()', '3.3' ),
 			array( 'screen_meta' => ' $current_screen->render_screen_meta()', '3.3' ),
@@ -219,19 +198,26 @@ class Deprecated implements themecheck {
 			array( 'type_url_form_video' => 'wp_media_insert_url_form( \'video\' )', '3.3' ),
 			array( 'type_url_form_file' => 'wp_media_insert_url_form( \'file\' )', '3.3' ),
 			array( 'add_contextual_help' => 'get_current_screen()->add_help_tab()', '3.3' ),
+			
 			array( 'get_allowed_themes' => 'wp_get_themes( array( \'allowed\' => true ) )', '3.4' ),
 			array( 'get_broken_themes' => 'wp_get_themes( array( \'errors\' => true )', '3.4' ),
 			array( 'current_theme_info' => 'wp_get_theme()', '3.4' ),
+			
 			array( '_insert_into_post_button' => '', '3.5' ),
 			array( '_media_button' => '', '3.5' ),
 			array( 'get_post_to_edit' => 'get_post()', '3.5' ),
 			array( 'get_default_page_to_edit' => 'get_default_post_to_edit()', '3.5' ),
 			array( 'wp_create_thumbnail' => 'image_resize()', '3.5' ),
+			
 			array( 'wp_nav_menu_locations_meta_box' => '', '3.6' ),
+			
 			array( 'the_attachment_links' => '', '3.7'),
 			array( 'wp_update_core' => 'new Core_Upgrader()', '3.7'),
 			array( 'wp_update_plugin' => 'new Plugin_Upgrader()', '3.7'),
 			array( 'wp_update_theme' => 'new Theme_Upgrader()', '3.7'),
+			array( '_search_terms_tidy'  => '', '3.7' ),
+			array( 'get_blogaddress_by_domain' => '', '3.7' ),
+			
 			array( 'get_screen_icon' => '', '3.8' ),
 			array( 'screen_icon' => '', '3.8' ),
 			array( 'wp_dashboard_incoming_links' => '', '3.8' ),
@@ -243,10 +229,31 @@ class Deprecated implements themecheck {
 			array( 'wp_dashboard_secondary' => '', '3.8' ),
 			array( 'wp_dashboard_secondary_control' =>  '', '3.8' ),
 			array( 'wp_dashboard_secondary_output' => '', '3.8' ),
+	
+			array( 'rich_edit_exists' => '', '3.9'),
+			array( 'default_topic_count_text' => '', '3.9'),
+			array( 'format_to_post' => '', '3.9'),
+			array( 'get_current_site_name' => 'get_current_site()', '3.9'),
+			array( 'wpmu_current_site' => '', '3.9'),
 			array( '_relocate_children' => '', '3.9' ),
-			array( 'wp_ajax_wp_fullscreen_save_post' => '', '4.3' ),
+
+			array( 'get_all_category_ids' => 'get_terms()', '4.0' ),
+			array( 'like_escape' => 'wpdb::esc_like()', '4.0' ),
+			array( 'url_is_accessable_via_ssl' => '', '4.0' ),
+			array( 'get_all_category_ids' => 'get_terms()', '4.0' ),
+			array( 'like_escape' => 'wpdb::esc_like()', '4.0' ),
+			array( 'url_is_accessable_via_ssl' => '', '4.0' ),
+
+			array( 'prepare_control' => '', '4.1' ),
+			array( 'add_tab' => '', '4.1' ),
+			array( 'remove_tab' => '', '4.1' ),
+			array( 'print_tab_image' => '', '4.1' ),
 			
-			// end wp-admin
+			array( 'setup_widget_addition_previews' => 'customize_dynamic_setting_args', '4.2' ),
+			array( 'prepreview_added_sidebars_widgets' => 'customize_dynamic_setting_args', '4.2' ),
+			array( 'prepreview_added_widget_instance' => 'customize_dynamic_setting_args', '4.2' ),
+			array( 'remove_prepreview_filters' => 'customize_dynamic_setting_args', '4.2' ),
+
 		);
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $alt => $check ) {

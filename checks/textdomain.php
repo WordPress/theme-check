@@ -4,7 +4,6 @@ class TextDomainCheck implements themecheck {
 
 	// rules come from WordPress core tool makepot.php, modified by me to have domain info
 	var $rules = array(
-		'_' => array('string', 'domain'),
 		'__' => array('string', 'domain'),
 		'_e' => array('string', 'domain'),
 		'_c' => array('string', 'domain'),
@@ -34,15 +33,15 @@ class TextDomainCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 		global $data, $themename;
 		
-		// ignore core themes for this one check
-		if ( !in_array($themename, $this->exceptions) ) {
+		// ignore core themes and uploads on w.org for this one check
+		if ( !in_array($themename, $this->exceptions) && !defined( 'WPORGPATH' ) ) {
 			$correct_domain = sanitize_title_with_dashes($data['Name']);
 			if ( $themename != $correct_domain ) {
 				$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' 
-					. sprintf ( __( "Your theme appears to be in the wrong directory for the theme name. The directory name must match the slug of the theme. This theme's correct slug and text-domain is %s.", 'theme-check' ), '<strong>' . $correct_domain . '</strong>' );
+					. sprintf ( __( "Your theme appears to be in the wrong directory for the theme name. The directory name must match the slug of the theme. This theme's correct slug and text-domain is %s.", 'theme-check' ), '<strong>' . $correct_domain . '</strong>' ).
+					'<br>'. __( '(If this is a child theme, you can ignore this error.)' , 'theme-check' );
 			}
 		}
-		
 		
 		$ret = true;
 		$error = '';

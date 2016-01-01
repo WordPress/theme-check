@@ -30,7 +30,7 @@ class WidgetsCheck implements themecheck {
 		/**
 		 * There are widgets registered, is the widgets_init action present?
 		 */
-		if ( strpos( $php, 'register_sidebar' ) !== false && preg_match( '/add_action\(\s*("|\')widgets_init("|\')\s*,/', $php ) == false ) {
+		if ( strpos( $php, 'register_sidebar' ) !== false && preg_match( '/add_action\s*\(\s*("|\')widgets_init("|\')\s*,/', $php ) == false ) {
 			$this->error[] = "<span class='tc-lead tc-required'>" . __( "REQUIRED", 'theme-check') . '</span>: '. sprintf( __( "Sidebars need to be registered in a custom function hooked to the <strong>widgets_init</strong> action. See: %s.", "theme-check" ), '<a href="https://codex.wordpress.org/Function_Reference/register_sidebar">register_sidebar()</a>' );
 			$ret = false;
 		}
