@@ -26,7 +26,7 @@ class ThemeCheckMain {
 	}
 
 	function themecheck_add_page() {
-		$page = add_theme_page( 'Theme Check', 'Theme Check', 'manage_options', 'themecheck', array( $this, 'themecheck_do_page' ) );
+		$page = add_theme_page( __( 'Theme Check', 'theme-check' ), __( 'Theme Check', 'theme-check' ), 'manage_options', 'themecheck', array( $this, 'themecheck_do_page' ) );
 		add_action('admin_print_styles-' . $page, array( $this, 'load_styles' ) );
 	}
 
