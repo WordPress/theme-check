@@ -1,10 +1,11 @@
 <?php
-
+/**
+ * Checks for constants.
+ */
 class Constants implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
 
 		$checks = array(
@@ -12,7 +13,7 @@ class Constants implements themecheck {
 			'TEMPLATEPATH' => 'get_template_directory()',
 			'PLUGINDIR' => 'WP_PLUGIN_DIR',
 			'MUPLUGINDIR' => 'WPMU_PLUGIN_DIR'
-			);
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -25,6 +26,7 @@ class Constants implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 

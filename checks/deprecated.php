@@ -1,12 +1,13 @@
 <?php
-
+/**
+ * Checks for Deprecated.
+ */
 class Deprecated implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-		$grep = '';
-
 		$ret = true;
+		$grep = '';
 
 		$checks = array(
 			// start wp-includes deprecated
@@ -253,8 +254,8 @@ class Deprecated implements themecheck {
 			array( 'prepreview_added_sidebars_widgets' => 'customize_dynamic_setting_args', '4.2' ),
 			array( 'prepreview_added_widget_instance' => 'customize_dynamic_setting_args', '4.2' ),
 			array( 'remove_prepreview_filters' => 'customize_dynamic_setting_args', '4.2' ),
-
 		);
+
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $alt => $check ) {
 				checkcount();
@@ -289,6 +290,7 @@ class Deprecated implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 

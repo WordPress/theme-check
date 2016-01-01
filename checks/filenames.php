@@ -1,11 +1,12 @@
 <?php
+/**
+ * Checks for file names.
+ */
 class File_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
-
 		$filenames = array();
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -33,7 +34,7 @@ class File_Checks implements themecheck {
 				);
 
 		$musthave = array( 'index.php', 'style.css' );
-		$rechave = array( 'readme.txt' => __( 'Please see <a href="https://codex.wordpress.org/Theme_Review#Theme_Documentation">Theme_Documentation</a> for more information.', 'theme-check' ) );
+		$rechave = array( 'readme.txt' => sprintf( __( 'Please see <a href="%s">Theme_Documentation</a> for more information.', 'theme-check' ), 'https://codex.wordpress.org/Theme_Review#Theme_Documentation' );
 
 		checkcount();
 

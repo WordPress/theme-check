@@ -1,14 +1,11 @@
 <?php
-
 /**
  * Checks for resources being loaded from CDNs.
  */
-
 class CDNCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-
 		$ret = true;
 		$php_code = implode( ' ', $php_files );
 

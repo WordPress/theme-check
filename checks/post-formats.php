@@ -1,11 +1,12 @@
 <?php
-
+/**
+ * Checks for post formats.
+ */
 class PostFormatCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
-
 		$php = implode( ' ', $php_files );
 		$css = implode( ' ', $css_files );
 
@@ -13,7 +14,7 @@ class PostFormatCheck implements themecheck {
 
 		$checks = array(
 			'/add_theme_support\(\s?("|\')post-formats("|\')/m'
-			);
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $check ) {
@@ -30,6 +31,7 @@ class PostFormatCheck implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 

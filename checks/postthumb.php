@@ -1,14 +1,14 @@
 <?php
-
+/**
+ * Check for post thumbnail.
+ */
 class PostThumbnailCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
-
-		// combine all the php files into one string to make it easier to search
 		$php = implode( ' ', $php_files );
+
 		checkcount();
 
 		if ( strpos( $php, 'the_post_thumbnail' ) === false ) {

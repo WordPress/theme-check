@@ -1,11 +1,13 @@
 <?php
+/**
+ * Check for missing items in style.css.
+ */
 class Style_Needed implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
-		$css = implode( ' ', $css_files );
 		$ret = true;
+		$css = implode( ' ', $css_files );
 
 		$checks = array(
 			'[ \t\/*#]*Theme Name:' => __( '<strong>Theme name:</strong> is missing from your style.css header.', 'theme-check' ),
@@ -22,7 +24,7 @@ class Style_Needed implements themecheck {
 			'\.wp-caption' => __( '<strong>.wp-caption</strong> css class is needed in your theme css.', 'theme-check' ),
 			'\.wp-caption-text' => __( '<strong>.wp-caption-text</strong> css class is needed in your theme css.', 'theme-check' ),
 			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.screen-reader-text' => __( '<strong>.screen-reader-text</strong> css class is needed in your theme css. See See: <a href="http://codex.wordpress.org/CSS#WordPress_Generated_Classes">the Codex</a> for an example implementation.', 'theme-check' )
+			'\.screen-reader-text' => sprintf( __( '<strong>.screen-reader-text</strong> css class is needed in your theme css. See <a href="%s">the Codex</a> for an example implementation.', 'theme-check' ), 'https://codex.wordpress.org/CSS#WordPress_Generated_Classes' )
 		);
 
 		foreach ($checks as $key => $check) {

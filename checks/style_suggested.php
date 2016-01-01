@@ -1,19 +1,20 @@
 <?php
+/**
+ * Checks for missing suggested style headers.
+ */
 class Style_Suggested implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
-		// combine all the css files into one string to make it easier to search
+		$ret = true;
 		$css = implode( ' ', $css_files );
 
 		checkcount();
-		$ret = true;
 
 		$checks = array(
 			'[ \t\/*#]*Theme URI:' => 'Theme URI:',
 			'[ \t\/*#]*Author URI:' => 'Author URI:',
-			);
+		);
 
 		foreach ($checks as $key => $check) {
 			if ( !preg_match( '/' . $key . '/i', $css, $matches ) ) {

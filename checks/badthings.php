@@ -1,9 +1,13 @@
 <?php
+/**
+ * Check for not allowed.
+ */
 class Bad_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
+		$grep = '';
 
 		$checks = array(
 			'/(?<![_|a-z0-9|\.])eval\s?\(/i' => __( 'eval() is not allowed.', 'theme-check' ),
@@ -15,9 +19,7 @@ class Bad_Checks implements themecheck {
 			'/str_rot13/ims' => __( 'str_rot13() is not allowed', 'theme-check' ),
 			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
 			'/pub-[0-9]{16}/i' => __( 'Google advertising code detected', 'theme-check' )
-			);
-
-		$grep = '';
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -32,11 +34,10 @@ class Bad_Checks implements themecheck {
 			}
 		}
 
-
 		$checks = array(
 			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
 			'/pub-[0-9]{16}/' => __( 'Google advertising code detected', 'theme-check' )
-			);
+		);
 
 		foreach ( $other_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -50,8 +51,10 @@ class Bad_Checks implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
+
 	function getError() { return $this->error; }
 }
 $themechecks[] = new Bad_Checks;

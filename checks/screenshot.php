@@ -1,9 +1,11 @@
 <?php
+/**
+ * Check for screenshots.
+ */
 class Screenshot_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
 		$filenames = array();
 
@@ -35,6 +37,7 @@ class Screenshot_Checks implements themecheck {
 			$this->error[] = '<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('No screenshot detected! Please include a screenshot.png or screenshot.jpg.', 'theme-check' );
 			$ret = false;
 		}
+
 		return $ret;
 	}
 
