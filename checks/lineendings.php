@@ -1,4 +1,7 @@
 <?php
+/**
+ * Checks for line endings.
+ */
 class LineEndingsCheck implements themecheck {
 	protected $error = array();
 
@@ -39,5 +42,4 @@ class LineEndingsCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new LineEndingsCheck;

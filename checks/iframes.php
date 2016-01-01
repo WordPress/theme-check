@@ -1,4 +1,7 @@
 <?php
+/**
+ * Checks for iframes.
+ */
 class IframeCheck implements themecheck {
 	protected $error = array();
 
@@ -7,7 +10,7 @@ class IframeCheck implements themecheck {
 
 		$checks = array(
 			'/<(iframe)[^>]*>/' => __( 'iframes are sometimes used to load unwanted adverts and code on your site', 'theme-check' )
-			);
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -21,6 +24,7 @@ class IframeCheck implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 

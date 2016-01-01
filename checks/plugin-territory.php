@@ -4,7 +4,6 @@
  *
  * See http://make.wordpress.org/themes/guidelines/guidelines-plugin-territory/
  */
-
 class Plugin_Territory implements themecheck {
 	protected $error = array();
 

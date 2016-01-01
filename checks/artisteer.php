@@ -1,16 +1,16 @@
 <?php
-
+/**
+ * Check for not allowed artisteer auto-generated themes.
+ */
 class ArtisteerCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-
-		// combine all the php files into one string to make it easier to search
+		$ret = true;
 		$php = implode( ' ', $php_files );
 
 		checkcount();
 
-		$ret = true;
 		if (
 			strpos( $php, 'art_normalize_widget_style_tokens' ) !== false
 			|| strpos( $php, 'art_include_lib' ) !== false

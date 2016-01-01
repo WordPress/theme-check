@@ -1,14 +1,14 @@
 <?php
-
+/**
+ * Checks for widgets.
+ */
 class WidgetsCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
-
-		// combine all the php files into one string to make it easier to search
 		$php = implode( ' ', $php_files );
+
 		checkcount();
 
 		// no widgets registered or used...

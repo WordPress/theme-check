@@ -1,17 +1,19 @@
 <?php
-
-// check for various I18N errors
-
+/**
+ * Checks for i18n errors.
+ */
 class I18NCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 		$error = '';
+
 		checkcount();
 
 		// make sure the tokenizer is available
-		if ( !function_exists( 'token_get_all' ) ) return true;
+		if ( !function_exists( 'token_get_all' ) )
+			return true;
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			$error='';
@@ -59,7 +61,6 @@ class I18NCheck implements themecheck {
 					}
 				}
 			}
-
 
 		}
 		return $ret;

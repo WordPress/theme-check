@@ -1,11 +1,13 @@
 <?php
+/**
+ * Checks for comment reply.
+ */
 class Comment_Reply implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-
-		$php = implode( ' ', $php_files );
 		$ret = true;
+		$php = implode( ' ', $php_files );
 
 		checkcount();
 
@@ -18,10 +20,10 @@ class Comment_Reply implements themecheck {
 				$this->error[] = '<span class="tc-lead tc-info">'.__('INFO','theme-check').'</span>: '.__('Could not find the <strong>comment-reply</strong> script enqueued, however a reference to \'comment-reply\' was found. Make sure that the comment-reply script is being enqueued properly on singular pages.', 'theme-check');
 			}
 		}
+
 		return $ret;
 	}
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new Comment_Reply;

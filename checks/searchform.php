@@ -1,12 +1,17 @@
 <?php
-
+/**
+ * Check for search form.
+ */
 class SearchFormCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
-		$checks = array( '/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/' => __( 'Please use <strong>get_search_form()</strong> instead of including searchform.php directly.', 'theme-check' ) );
+
+		$checks = array(
+			'/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/' => __( 'Please use <strong>get_search_form()</strong> instead of including searchform.php directly.', 'theme-check' )
+		);
+
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ($checks as $key => $check) {
 				checkcount();
@@ -18,6 +23,7 @@ class SearchFormCheck implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 

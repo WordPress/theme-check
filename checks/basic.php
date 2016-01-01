@@ -1,14 +1,14 @@
 <?php
-
-// do some basic checks for strings
+/**
+ * Do some basic checks for strings.
+ */
 class Basic_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files) {
-
+		$ret = true;
 		$php = implode( ' ', $php_files );
 		$grep = '';
-		$ret = true;
 
 		$checks = array(
 			'DOCTYPE'                => sprintf( __( 'See: <a href="https://codex.wordpress.org/HTML_to_XHTML">https://codex.wordpress.org/HTML_to_XHTML</a><pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"<br />"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"?&gt;</pre>', 'theme-check' ), '' ),
@@ -23,7 +23,7 @@ class Basic_Checks implements themecheck {
 			'body_class\s*\('        => sprintf( __( 'See: <a href="%s">body_class</a><pre> &lt;?php body_class( $class ); ?&gt;</pre>', 'theme-check' ), 'https://codex.wordpress.org/Template_Tags/body_class' ),
 			'wp_link_pages\s*\('     => sprintf( __( 'See: <a href="%s">wp_link_pages</a><pre> &lt;?php wp_link_pages( $args ); ?&gt;</pre>', 'theme-check' ), 'https://codex.wordpress.org/Function_Reference/wp_link_pages' ),
 			'post_class\s*\('        => sprintf( __( 'See: <a href="%s">post_class</a><pre> &lt;div id="post-&lt;?php the_ID(); ?&gt;" &lt;?php post_class(); ?&gt;&gt;</pre>', 'theme-check' ), 'https://codex.wordpress.org/Template_Tags/post_class' )
-			);
+		);
 
 		foreach ($checks as $key => $check) {
 			checkcount();
@@ -41,5 +41,4 @@ class Basic_Checks implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new Basic_Checks;

@@ -1,12 +1,14 @@
 <?php
-// recommended deprecations checks... After some time, these will move into deprecated.php and become required.
+/**
+ * Recommended deprecations checks.
+ * After some time, these will move into deprecated.php and become required.
+ */
 class Deprecated_Recommended implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-		$grep = '';
-
 		$ret = true;
+		$grep = '';
 
 		$checks = array(
 			array( 'preview_theme' => '', '4.3' ),
@@ -59,6 +61,7 @@ class Deprecated_Recommended implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 

@@ -1,11 +1,12 @@
 <?php
+/**
+ * Checks for file names.
+ */
 class File_Checks implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
-
 		$filenames = array();
 
 		foreach ( $php_files as $php_key => $phpfile ) {

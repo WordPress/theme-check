@@ -1,4 +1,7 @@
 <?php
+/**
+ * Checks for textdomains.
+ */
 class TextDomainCheck implements themecheck {
 	protected $error = array();
 
@@ -42,7 +45,7 @@ class TextDomainCheck implements themecheck {
 					'<br>'. __( '(If this is a child theme, you can ignore this error.)' , 'theme-check' );
 			}
 		}
-		
+
 		$ret = true;
 		$error = '';
 		checkcount();

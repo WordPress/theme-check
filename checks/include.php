@@ -1,13 +1,16 @@
 <?php
-
+/**
+ * Checks for include files.
+ */
 class IncludeCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
 
-		$checks = array( '/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?[\'"\(]/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' ) );
+		$checks = array(
+			'/(?<![a-z0-9_])(?:requir|includ)e(?:_once)?\s?[\'"\(]/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' )
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -19,8 +22,8 @@ class IncludeCheck implements themecheck {
 					if ( basename($filename) !== 'functions.php' ) $this->error[] = sprintf ( '<span class="tc-lead tc-info">'.__('INFO','theme-check').'</span>: '.__('%1$s %2$s %3$s', 'theme-check' ), '<strong>' . $filename . '</strong>', $check, $grep );
 				}
 			}
-
 		}
+
 		return $ret;
 	}
 

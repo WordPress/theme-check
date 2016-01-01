@@ -1,9 +1,11 @@
 <?php
+/**
+ * Checks for PHP short tags.
+ */
 class PHPShortTagsCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -21,5 +23,4 @@ class PHPShortTagsCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new PHPShortTagsCheck;

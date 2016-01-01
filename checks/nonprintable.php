@@ -1,4 +1,7 @@
 <?php
+/**
+ * Check for non printable.
+ */
 class NonPrintableCheck implements themecheck {
 	protected $error = array();
 
@@ -6,7 +9,7 @@ class NonPrintableCheck implements themecheck {
 		$ret = true;
 
 		foreach ( $php_files as $name => $content ) {
-		checkcount();
+			checkcount();
 			// 09 = tab
 			// 0A = line feed
 			// 0D = new line
@@ -17,11 +20,9 @@ class NonPrintableCheck implements themecheck {
 			}
 		}
 
-		// return the pass/fail
 		return $ret;
 	}
 
 	function getError() { return $this->error; }
 }
-
 $themechecks[] = new NonPrintableCheck;

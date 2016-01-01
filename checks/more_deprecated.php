@@ -1,14 +1,11 @@
 <?php
-
 /**
  * Checks for the use of deprecated function parameters.
  */
-
 class More_Deprecated implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
 
 		$checks = array(

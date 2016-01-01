@@ -1,11 +1,13 @@
 <?php
+/**
+ * Check for missing items in style.css.
+ */
 class Style_Needed implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
-		$css = implode( ' ', $css_files );
 		$ret = true;
+		$css = implode( ' ', $css_files );
 
 		$checks = array(
 			'[ \t\/*#]*Theme Name:' => __( '<strong>Theme name:</strong> is missing from your style.css header.', 'theme-check' ),

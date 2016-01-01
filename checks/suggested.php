@@ -1,9 +1,11 @@
 <?php
+/**
+ * Suggest for better functions.
+ */
 class Suggested implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
 		$ret = true;
 
 		$checks = array(
@@ -21,7 +23,7 @@ class Suggested implements themecheck {
 		'/[\s|]bloginfo\(\s?("|\')template_url("|\')\s?\)/' => 'get_template_directory_uri()',
 		'/[\s|]bloginfo\(\s?("|\')text_direction("|\')\s?\)/' => 'is_rtl()',
 		'/[\s|]bloginfo\(\s?("|\')feed_url("|\')\s?\)/' => 'get_feed_link( \'feed\' ) (feed = rss, rss2, atom)',
-			);
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -35,6 +37,7 @@ class Suggested implements themecheck {
 				}
 			}
 		}
+
 		return $ret;
 	}
 
