@@ -8,8 +8,7 @@ global $checkcount;
 $checkcount = 0;
 
 // interface that all checks should implement
-interface themecheck
-{
+interface themecheck {
 	// should return true for good/okay/acceptable, false for bad/not-okay/unacceptable
 	public function check( $php_files, $css_files, $other_files );
 
@@ -49,25 +48,25 @@ function display_themechecks() {
 			}
 		}
 	}
+
 	if (!empty($errors)) {
 		rsort($errors);
 		foreach ($errors as $e) {
-
-		if ( defined( 'TC_TRAC' ) ) {
-			$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '* ' . tc_trac( $e ) . "\r\n";
-		} else {
-			$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '<li>' . tc_trac( $e ) . '</li>';
+			if ( defined( 'TC_TRAC' ) ) {
+				$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '* ' . tc_trac( $e ) . "\r\n";
+			} else {
+				$results .= ( isset( $_POST['s_info'] ) && preg_match( '/INFO/', $e ) ) ? '' : '<li>' . tc_trac( $e ) . '</li>';
 			}
 		}
 	}
 
 	if ( defined( 'TC_TRAC' ) ) {
-
 		if ( defined( 'TC_PRE' ) ) $results = TC_PRE . $results;
 		$results = '<textarea cols=140 rows=20>' . strip_tags( $results );
 		if ( defined( 'TC_POST' ) ) $results = $results . TC_POST;
 		$results .= '</textarea>';
 	}
+
 	return $results;
 }
 
@@ -89,8 +88,8 @@ function tc_grep( $error, $file ) {
 			$error = str_replace( '"', "'", $error );
 			$this_line = str_replace( '"', "'", $this_line );
 			$error = ltrim( $error );
-		$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
-		$pre = ltrim( htmlspecialchars( $pre ) );
+			$pre = ( FALSE !== ( $pos = strpos( $this_line, $error ) ) ? substr( $this_line, 0, $pos ) : FALSE );
+			$pre = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>". __("Line ", "theme-check") . ( $line_index+1 ) . ": " . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . "</pre>";
 		}
 		$line_index++;
@@ -165,7 +164,7 @@ function listdir( $dir ) {
 	$iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
 
 	foreach ($iterator as $file) {
-    	array_push( $files, $file->getPathname() );
+		array_push( $files, $file->getPathname() );
 	}
 	return $files;
 }
@@ -301,20 +300,20 @@ function tc_get_theme_data( $theme_file ) {
 	$theme = new WP_Theme( basename( dirname( $theme_file ) ), dirname( dirname( $theme_file ) ) );
 
 	$theme_data = array(
-		'Name' => $theme->get('Name'),
-		'URI' => $theme->display('ThemeURI', true, false),
-		'Description' => $theme->display('Description', true, false),
-		'Author' => $theme->display('Author', true, false),
-		'AuthorURI' => $theme->display('AuthorURI', true, false),
-		'Version' => $theme->get('Version'),
-		'Template' => $theme->get('Template'),
-		'Status' => $theme->get('Status'),
-		'Tags' => $theme->get('Tags'),
-		'Title' => $theme->get('Name'),
-		'AuthorName' => $theme->display('Author', false, false),
-		'License'	=> $theme->display( 'License', false, false),
-		'License URI'	=> $theme->display( 'License URI', false, false),
-		'Template Version'	=> $theme->display( 'Template Version', false, false)
+		'Name'             => $theme->get( 'Name' ),
+		'URI'              => $theme->display( 'ThemeURI', true, false ),
+		'Description'      => $theme->display( 'Description', true, false ),
+		'Author'           => $theme->display( 'Author', true, false ),
+		'AuthorURI'        => $theme->display( 'AuthorURI', true, false ),
+		'Version'          => $theme->get( 'Version' ),
+		'Template'         => $theme->get( 'Template' ),
+		'Status'           => $theme->get( 'Status' ),
+		'Tags'             => $theme->get( 'Tags' ),
+		'Title'            => $theme->get( 'Name' ),
+		'AuthorName'       => $theme->display( 'Author', false, false ),
+		'License'          => $theme->display( 'License', false, false ),
+		'License URI'      => $theme->display( 'License URI', false, false ),
+		'Template Version' => $theme->display( 'Template Version', false, false )
 	);
 	return $theme_data;
 }
