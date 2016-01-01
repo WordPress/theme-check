@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: Theme Check
-Plugin URI: http://ottopress.com/wordpress-plugins/theme-check/
+Plugin URI:  http://ottopress.com/wordpress-plugins/theme-check/
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
-Author: Otto42, pross
-Author URI: http://ottopress.com
-Version: 20151211.1
+Author:      Otto42, pross
+Author URI:  http://ottopress.com
+Version:     20151211.1
 Text Domain: theme-check
-License: GPLv2
+License:     GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
@@ -38,7 +38,7 @@ class ThemeCheckMain {
 
 	function themecheck_do_page() {
 		if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.', 'theme-check' ) );
+			wp_die( __( 'You do not have sufficient permissions to access this page.', 'theme-check' ) );
 		}
 
 		add_filter( 'extra_theme_headers', array( $this, 'tc_add_headers' ) );
@@ -50,21 +50,21 @@ class ThemeCheckMain {
 		<div id="theme-check" class="wrap">
 		<h1><?php _ex( 'Theme Check', 'title of the main page', 'theme-check' ); ?></h1>
 		<div class="theme-check">
-		<?php
+			<?php
 			tc_form();
-		if ( !isset( $_POST[ 'themename' ] ) )  {
-			tc_intro();
 
-		}
-
-		if ( isset( $_POST[ 'themename' ] ) ) {
-			if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
-			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
-				@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
+			if ( !isset( $_POST[ 'themename' ] ) )  {
+				tc_intro();
 			}
-			check_main( $_POST[ 'themename' ] );
-		}
-		?>
+
+			if ( isset( $_POST[ 'themename' ] ) ) {
+				if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
+				if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
+					@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
+				}
+				check_main( $_POST[ 'themename' ] );
+			}
+			?>
 		</div> <!-- .theme-check-->
 		</div>
 		<?php
