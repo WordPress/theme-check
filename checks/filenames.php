@@ -30,6 +30,7 @@ class File_Checks implements themecheck {
 				'web.config'			=> __( 'Server settings file', 'theme-check' ),
 				'\.sql'					=> __( 'SQL dump file', 'theme-check' ),
 				'__MACOSX'				=> __( 'OSX system file', 'theme-check' )
+				'\.lubith'				=> __( 'Lubith theme generator file', 'theme-check' )
 				);
 
 		$musthave = array( 'index.php', 'style.css' );
