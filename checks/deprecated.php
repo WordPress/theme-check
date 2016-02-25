@@ -257,32 +257,35 @@ class Deprecated implements themecheck {
 				checkcount();
 				$key = key( $check );
 				$alt = $check[ $key ];
-				if ( preg_match( '/(?<!function)[\s?]' . $key . '\s?\(/', $phpfile, $matches ) ) {
-					$filename = tc_filename( $php_key );
-					$error = ltrim( rtrim( $matches[0], '(' ) );
-					$version = $check[0];
-					$grep = tc_grep( $error, $php_key );
+				if (strpos($phpfile, $key) !== false) // optimization : strpos is faster than preg_match. Since the condition is rarely true, it's globally faster to use strpos as a filter before preg_match
+				{ 
+					if ( preg_match( '/(?<!function)[\s?]' . $key . '\s?\(/', $phpfile, $matches ) ) {
+						$filename = tc_filename( $php_key );
+						$error = ltrim( rtrim( $matches[0], '(' ) );
+						$version = $check[0];
+						$grep = tc_grep( $error, $php_key );
 
-					// Point out the deprecated function.
-					$error_msg = sprintf(
-						__( '%1$s found in the file %2$s. Deprecated since version %3$s.', 'theme-check' ),
-						'<strong>' . $error . '()</strong>',
-						'<strong>' . $filename . '</strong>',
-						'<strong>' . $version . '</strong>'
-					);
+						// Point out the deprecated function.
+						$error_msg = sprintf(
+							__( '%1$s found in the file %2$s. Deprecated since version %3$s.', 'theme-check' ),
+							'<strong>' . $error . '()</strong>',
+							'<strong>' . $filename . '</strong>',
+							'<strong>' . $version . '</strong>'
+						);
 
-					// Add alternative function when available.
-					if ( $alt ) {
-						$error_msg .= ' ' . sprintf( __( 'Use %s instead.', 'theme-check' ), '<strong>' . $alt . '</strong>' );
+						// Add alternative function when available.
+						if ( $alt ) {
+							$error_msg .= ' ' . sprintf( __( 'Use %s instead.', 'theme-check' ), '<strong>' . $alt . '</strong>' );
+						}
+
+						// Add the precise code match that was found.
+						$error_msg .= $grep;
+
+						// Add the finalized error message.
+						$this->error[] = '<span class="tc-lead tc-required">' . __('REQUIRED','theme-check') . '</span>: ' . $error_msg;
+
+						$ret = false;
 					}
-
-					// Add the precise code match that was found.
-					$error_msg .= $grep;
-
-					// Add the finalized error message.
-					$this->error[] = '<span class="tc-lead tc-required">' . __('REQUIRED','theme-check') . '</span>: ' . $error_msg;
-
-					$ret = false;
 				}
 			}
 		}
