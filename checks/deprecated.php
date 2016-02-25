@@ -240,8 +240,6 @@ class Deprecated implements themecheck {
 			array( 'get_all_category_ids' => 'get_terms()', '4.0' ),
 			array( 'like_escape' => 'wpdb::esc_like()', '4.0' ),
 			array( 'url_is_accessable_via_ssl' => '', '4.0' ),
-			array( 'get_all_category_ids' => 'get_terms()', '4.0' ),
-			array( 'url_is_accessable_via_ssl' => '', '4.0' ),
 
 			array( 'prepare_control' => '', '4.1' ),
 			array( 'add_tab' => '', '4.1' ),
