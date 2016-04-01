@@ -79,7 +79,7 @@ function check_main( $theme ) {
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
 		echo '<p>' . sprintf(
-			__(' Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check'),
+			__('Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check'),
 			'<strong>' . $checkcount . '</strong>',
 			'<strong>' . $data[ 'Title' ] . '</strong>',
 			'<strong>' . $version[0] . '</strong>',
