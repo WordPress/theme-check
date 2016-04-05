@@ -14,7 +14,7 @@ class CommentPaginationCheck implements themecheck {
 			strpos( $php, 'the_comments_pagination' ) === false &&
 		    (strpos( $php, 'next_comments_link' ) === false && strpos( $php, 'previous_comments_link' ) === false ) ) {
 
-			$this->error[] = '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('The theme doesn\'t have comment pagination code in it. Use <strong>paginate_comments_links()</strong> or <strong>the_comments_navigation</strong> or <strong>the_comments_pagination</strong> or <strong>next_comments_link()</strong> and <strong>previous_comments_link()</strong> to add comment pagination.', 'theme-check' );
+			$this->error[] = '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.sprintf( __('The theme doesn\'t have comment pagination code in it. Use %1$s or %2$s or %3$s or %4$s and %5$s to add comment pagination.', 'theme-check' ), '<strong>paginate_comments_links()</strong>', '<strong>the_comments_navigation</strong>', '<strong>the_comments_pagination</strong>', '<strong>next_comments_link()</strong>', '<strong>previous_comments_link()</strong>' );
 			$ret = false;
 		}
 
