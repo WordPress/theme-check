@@ -268,9 +268,11 @@ class Deprecated implements themecheck {
 
 					// Point out the deprecated function.
 					$error_msg = sprintf(
-						__( '%1$s found in the file %2$s. Deprecated since version %3$s.', 'theme-check' ),
+						__( '%1$s was found in the file %2$s.', 'theme-check' ),
 						'<strong>' . $error . '()</strong>',
-						'<strong>' . $filename . '</strong>',
+						'<strong>' . $filename . '</strong>')
+					. ' ' . sprintf(
+						__( 'Deprecated since version %s.', 'theme-check' ),
 						'<strong>' . $version . '</strong>'
 					);
 

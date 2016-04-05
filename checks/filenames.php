@@ -19,7 +19,7 @@ class File_Checks implements themecheck {
 		}
 		$blacklist = array(
 				'thumbs.db'				=> __( 'Windows thumbnail store', 'theme-check' ),
-				'desktop.ini'			=> __( 'windows system file', 'theme-check' ),
+				'desktop.ini'			=> __( 'Windows system file', 'theme-check' ),
 				'project.properties'	=> __( 'NetBeans Project File', 'theme-check' ),
 				'project.xml'			=> __( 'NetBeans Project File', 'theme-check' ),
 				'\.kpf'					=> __( 'Komodo Project File', 'theme-check' ),
@@ -55,7 +55,7 @@ class File_Checks implements themecheck {
 
 		foreach( $rechave as $file => $reason ) {
 			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Could not find the file %1$s in the theme. %2$s', 'theme-check'), '<strong>' . $file . '</strong>', $reason );
+				$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Could not find the file %s in the theme.', 'theme-check'), '<strong>' . $file . '</strong>' ) . $reason ;
 			}
 		}
 
