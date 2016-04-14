@@ -254,6 +254,16 @@ class Deprecated implements themecheck {
 			array( 'prepreview_added_widget_instance' => 'customize_dynamic_setting_args', '4.2' ),
 			array( 'remove_prepreview_filters' => 'customize_dynamic_setting_args', '4.2' ),
 
+			array( 'wp_get_http' => 'WP_Http', '4.4' ),
+
+			array( 'is_comments_popup' => '', '4.5' ),
+			array( 'add_object_page' => 'add_menu_page', '4.5' ),
+			array( 'add_utility_page' => 'add_menu_page', '4.5' ),
+			array( 'get_comments_popup_template' => '', '4.5' ),
+			array( 'comments_popup_script' => '', '4.5' ),
+			array( 'popuplinks' => '', '4.5' ),
+			array( 'get_currentuserinfo' => 'wp_get_current_user', '4.5' ),
+
 		);
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $alt => $check ) {
