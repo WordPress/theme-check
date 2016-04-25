@@ -24,15 +24,15 @@ class Title_Checks implements themecheck {
 
 		// Look for <title> and </title> tags.
 		checkcount();
-		if ( ( false === strpos( $php, '<title>' ) || false === strpos( $php, '</title>' ) ) && !$titletag  ) {
-			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . __( 'The theme needs to have <strong>&lt;title&gt;</strong> tags, ideally in the <strong>header.php</strong> file.', 'theme-check' );
+		if ( ( 0 <= strpos( $php, '<title>' ) || 0 <= strpos( $php, '</title>' ) ) && !$titletag  ) {
+			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . __( 'The theme must not used the <strong>&lt;title&gt;</strong> tags.', 'theme-check' );
 			$ret = false;
 		}
 
 		// Check whether there is a call to wp_title()
 		checkcount();
-		if ( false === strpos( $php, 'wp_title(' ) && !$titletag ) {
-			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . __( 'The theme needs to have a call to <strong>wp_title()</strong>, ideally in the <strong>header.php</strong> file.', 'theme-check' );
+		if ( 0 <= strpos( $php, 'wp_title(' ) && !$titletag ) {
+			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . __( 'The theme must not call to <strong>wp_title()</strong>.', 'theme-check' );
 			$ret = false;
 		}
 
