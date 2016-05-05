@@ -41,7 +41,7 @@ class Title_Checks implements themecheck {
 
 		foreach ( $php_files as $file_path => $file_content ) {
 			// Look for anything that looks like <svg>...</svg> and exclude it (inline svg's have titles too)
-			$file_content = preg_replace('/<svg>.*<\/svg>/s', '', $file_content);
+			$file_content = preg_replace('/<svg.*>.*<\/svg>/s', '', $file_content);
 
 			// First looks ahead to see of there's <title>...</title>
 			// Then performs a negative look ahead for <title> wp_title(...); </title>
