@@ -6,14 +6,8 @@ class IncludedPlugins implements themecheck {
 		$ret = true;
 
 		$filenames = array();
-
-		foreach ( $php_files as $php_key => $phpfile ) {
-			array_push( $filenames, strtolower( basename( $php_key ) ) );
-		}
+		
 		foreach ( $other_files as $php_key => $phpfile ) {
-			array_push( $filenames, strtolower( basename( $php_key ) ) );
-		}
-		foreach ( $css_files as $php_key => $phpfile ) {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 
