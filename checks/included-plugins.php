@@ -6,9 +6,9 @@ class IncludedPlugins implements themecheck {
 		$ret = true;
 
 		$filenames = array();
-		
-		foreach ( $other_files as $php_key => $phpfile ) {
-			array_push( $filenames, strtolower( basename( $php_key ) ) );
+
+		foreach ( $other_files as $other_key => $otherfile ) {
+			array_push( $filenames, strtolower( basename( $other_key ) ) );
 		}
 
 		$blacklist = array(
