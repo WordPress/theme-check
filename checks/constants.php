@@ -24,7 +24,7 @@ class Constants implements themecheck {
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
-				if ( preg_match( '/[\s|\'|\"]' . $key . '/', $phpfile, $matches ) ) {
+				if ( preg_match( '/[\s|\'|\"]' . $key . '(?:\'|"|;|\s)/', $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
 					$error = ltrim( rtrim( $matches[0], '(' ), '\'"' );
 					$grep = tc_grep( $error, $php_key );
