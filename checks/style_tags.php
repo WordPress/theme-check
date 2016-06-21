@@ -25,8 +25,8 @@ class Style_Tags implements themecheck {
 				$this->error[] = '<span class="tc-lead tc-info">'. __('INFO','theme-check'). '</span>: ' . __( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.','theme-check' ) . ' ' . __('See <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' );
 			}
                         
-                        if ( strpos( strtolower( $tag ), "translation-ready") !== true ) {
-				$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . sprintf( __('The tag translation-ready tag is required, please add it in your style.css header', 'theme-check'), '<strong>' . $tag . '</strong>' );
+                       if ( strpos( strtolower( $tag ), "translation-ready") !== true ) {
+				$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . __('The tag <strong> translation-ready </strong> is required, please add it in your style.css header.', 'theme-check');
 			}
 
 			if ( ! in_array( strtolower( $tag ), $allowed_tags ) ) {
