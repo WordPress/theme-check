@@ -1,15 +1,13 @@
 <?php
 class PHPShortTagsCheck implements themecheck {
 
-	const ALLOW_SHORT_ECHO = true;
-
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
-		$regex = (self::ALLOW_SHORT_ECHO) ? '/<\?(?!php|xml|=)/i' : '/<\?(\=?)(?!php|xml)/i';
+		$regex = '/<\?(?!php|xml|=)/i';
 		foreach ( $php_files as $php_key => $phpfile ) {
 			checkcount();
 			if ( preg_match( $regex, $phpfile ) ) {
