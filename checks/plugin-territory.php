@@ -27,9 +27,9 @@ class Plugin_Territory implements themecheck {
 		}
 
 		// Shortcodes can't be used in the post content, so warn about them.
-		if ( false !== strpos( $php, 'add_shortcode' ) ) {
+		if ( false !== strpos( $php, 'add_shortcode(' ) ) {
 			checkcount();
-			$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ), '<strong>add_shortcode()</strong>' ) ;
+			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ), '<strong>add_shortcode()</strong>' ) ;
 			$ret = false;
 		}
 
