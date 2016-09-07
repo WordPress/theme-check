@@ -44,13 +44,11 @@ class Style_Tags implements themecheck {
 			
 		}
 		
-		
 		if ( $subject_tags_count > 3 ) {
 			$this->error[] = '<span class="tc-lead tc-required">'. __('REQUIRED','theme-check'). '</span>: ' . sprintf( __('A maximum of 3 subject tags are allowed. The theme has %1$u subjects tags ( %2$s ). Please remove the subject tags, which do not directly apply to the theme.', 'theme-check'), $subject_tags_count, '<strong>' . rtrim( $subject_tags_name, ', ' ) . '</strong>' ) . ' ' . '<a target="_blank" href="https://make.wordpress.org/themes/handbook/review/required/theme-tags/">' . __( 'See Theme Tags', 'theme-check' ) . '</a>';
 			$ret = false;
 		}
 		
-
 		return $ret;
 	}
 
