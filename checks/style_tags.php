@@ -36,7 +36,7 @@ class Style_Tags implements themecheck {
 
 			if ( in_array( strtolower( $tag ), $allowed_tags ) ) {
 				if ( count( array_keys ($data[ 'Tags' ], $tag ) ) > 1) {
-					$this->error[] = '<span class="tc-lead tc-warning">'. __('REQUIRED','theme-check'). '</span>: ' . sprintf( __('The tag %s is being used more than once, please remove it from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
+					$this->error[] = '<span class="tc-lead tc-required">'. __('REQUIRED','theme-check'). '</span>: ' . sprintf( __('The tag %s is being used more than once, please remove it from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
 					$ret = false;
 				}
 			}
