@@ -29,6 +29,17 @@ class Screenshot_Checks implements themecheck {
 					if ( $image[0] != 1200 || $image[1] != 900 ) {
 						$this->error[] = '<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Screenshot size should be 1200x900, to account for HiDPI displays. Any 4:3 image size is acceptable, but 1200x900 is preferred.', 'theme-check');
 					}
+					
+					// check mime type
+					$finfo = finfo_open(FILEINFO_MIME_TYPE);
+					$mimetype = strtolower(finfo_file($finfo, $other_key));
+					finfo_close($finfo);
+					if ( pathinfo($other_key, PATHINFO_EXTENSION) == 'png' && $mimetype != "image/png" )  {
+						$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('Bad screenshot file ! File <strong>%1$s</strong> is not an actual PNG file. Detected type was : <strong>&quot;%2$s&quot;</strong>.', 'theme-check'), '<strong>'.basename( $other_key ).'</strong>', '<strong>'.$mimetype.'</strong>' );
+					}
+					if ( pathinfo($other_key, PATHINFO_EXTENSION) != 'jpg' && $mimetype != "image/jpeg" )  {
+						$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('Bad screenshot file ! File <strong>%1$s</strong> is not an actual JPG file. Detected type was : <strong>&quot;%2$s&quot;</strong>.', 'theme-check'), '<strong>'.basename( $other_key ).'</strong>', '<strong>'.$mimetype.'</strong>' );
+					}
 				}
 			}
 		} else {
