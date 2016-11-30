@@ -25,7 +25,7 @@ class Style_Tags implements themecheck {
 		foreach( $data[ 'Tags' ] as $tag ) {
 
 			if ( strpos( strtolower( $tag ), "accessibility-ready") !== false ) {
-				$this->error[] = '<span class="tc-lead tc-info">'. __('INFO','theme-check'). '</span>: ' . __( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.','theme-check' ) . ' ' . __('See <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' );
+				$this->error[] = '<span class="tc-lead tc-info">'. __('INFO','theme-check'). '</span>: ' . __( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.','theme-check' ) . ' ' . __('See: <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' );
 			}
 
 			if ( ! in_array( strtolower( $tag ), $allowed_tags ) ) {
