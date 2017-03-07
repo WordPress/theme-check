@@ -61,7 +61,7 @@ class ThemeCheckMain {
 			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
 				@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
 			}
-			check_main( $_POST[ 'themename' ] );
+			check_main( wp_get_theme( $_POST[ 'themename' ] ) );
 		}
 		?>
 		</div> <!-- .theme-check-->

@@ -2,7 +2,7 @@
 function check_main( $theme ) {
 	global $themechecks, $data, $themename;
 	$themename = $theme;
-	$theme = get_theme_root( $theme ) . "/$theme";
+	$theme = get_theme_root( $theme ) . "/{$theme->stylesheet}";
 	$files = listdir( $theme );
 	$data = tc_get_theme_data( $theme . '/style.css' );
 	if ( $data[ 'Template' ] ) {
