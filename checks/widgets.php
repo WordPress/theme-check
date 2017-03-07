@@ -13,7 +13,7 @@ class WidgetsCheck implements themecheck {
 
 		// no widgets registered or used...
 		if ( strpos( $php, 'register_sidebar' ) === false && strpos( $php, 'dynamic_sidebar' ) === false ) {
-			$this->error[] = "<span class='tc-lead tc-recommended'>" . __( "RECOMMENDED", 'theme-check') . '</span>: '. __( "This theme contains no sidebars/widget areas. See <a href='https://codex.wordpress.org/Widgets_API'>Widgets API</a>", "theme-check" );
+			$this->error[] = "<span class='tc-lead tc-recommended'>" . __( "RECOMMENDED", 'theme-check') . '</span>: '. __( "This theme contains no sidebars/widget areas. See: <a href='https://codex.wordpress.org/Widgets_API'>Widgets API</a>", "theme-check" );
 			$ret = true;
 		}
 
