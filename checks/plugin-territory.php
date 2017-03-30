@@ -20,7 +20,7 @@ class Plugin_Territory implements themecheck {
 
 		foreach ( $forbidden_functions as $function ) {
 			checkcount();
-			if ( preg_match( '/[\s?]' . $function . '\(/', $php ) ) {
+			if ( preg_match( '/[\s?]' . $function . '\s?\(/', $php ) ) {
 				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %s function, which is plugin-territory functionality.', 'theme-check' ), '<strong>' . esc_html( $function ) . '()</strong>' ) ;
 				$ret = false;
 			}
@@ -35,7 +35,7 @@ class Plugin_Territory implements themecheck {
 
 		return $ret;
 	}
-	
+
 	function getError() { return $this->error; }
 }
 $themechecks[] = new Plugin_Territory;
