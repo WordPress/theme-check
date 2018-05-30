@@ -9,7 +9,7 @@ class TagCheck implements themecheck {
 		$php = implode( ' ', $php_files );
 		checkcount();
 		$ret = true;
-		if ( strpos( $php, 'the_tags' ) === false && strpos( $php, 'get_the_tag_list' ) === false && strpos( $php, 'get_the_term_list' ) === false ) {
+		if ( strpos( $php, 'the_tags' ) === false && strpos( $php, 'the_taxonomies' ) === false && strpos( $php, 'get_the_tag_list' ) === false && strpos( $php, 'get_the_term_list' ) === false ) {
 			$this->error[] = "<span class='tc-lead tc-required'>" . __( 'REQUIRED', 'theme-check' ) . '</span>: '. __( "This theme doesn't seem to display tags. Modify it to display tags in appropriate locations.", "theme-check" );
 			$ret = false;
 		}
