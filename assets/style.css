@@ -75,3 +75,6 @@ form {
 	margin-left:100px;
 	display:block;
 }
+.theme-check input[name="s_info"] {
+    margin-left: 0.5em;
+}
