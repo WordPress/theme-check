@@ -133,7 +133,7 @@ class TextDomainCheck implements themecheck {
 				'<br>'. __( '(If this is a child theme, you can ignore this error.)' , 'theme-check' );
 			} elseif ( ! in_array( $correct_domain, $domains ) ) {
 				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' 
-				. sprintf ( __( "This theme text domain does not match the theme's slug. The text domain used: %s", 'theme-check' ), '<strong>' . $domainlist . '</strong>' )
+				. sprintf ( __( "This theme text domain does not match the theme's slug. The text domain used: %s", 'theme-check' ), '<strong>. ' . $domainlist . '</strong>' )
 				. sprintf ( __( "This theme's correct slug and text-domain is %s.", 'theme-check' ), '<strong>' . $correct_domain . '</strong>' );
 				$ret = false;
 			}
