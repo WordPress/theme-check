@@ -2,8 +2,11 @@
 	padding:20px 0;
 	border-top:1px solid #dfdfdf;
 }
-.tc-warning, .tc-required, .tc-fail {
+.tc-required, .tc-fail {
 	color:red;
+}
+.tc-warning {
+	color: orange;
 }
 .tc-recommended, .tc-pass {
 	color: green;
