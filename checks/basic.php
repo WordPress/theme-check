@@ -14,6 +14,7 @@ class Basic_Checks implements themecheck {
 			'DOCTYPE' => __( 'See: <a href="https://codex.wordpress.org/HTML_to_XHTML">https://codex.wordpress.org/HTML_to_XHTML</a><pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"<br />"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"?&gt;</pre>', 'theme-check' ),
 			'wp_footer\s*\(' => __( 'See: <a href="https://codex.wordpress.org/Function_Reference/wp_footer">wp_footer</a><pre> &lt;?php wp_footer(); ?&gt;</pre>', 'theme-check' ),
 			'wp_head\s*\(' => __( 'See: <a href="https://codex.wordpress.org/Function_Reference/wp_head">wp_head</a><pre> &lt;?php wp_head(); ?&gt;</pre>', 'theme-check' ),
+			'(wp_body_open\s*\()|(do_action\s*\(\s*["\']wp_body_open)' => __( 'See: <a href="https://codex.wordpress.org/Function_Reference/wp_body_open">wp_body_open</a><pre> &lt;?php wp_body_open(); ?&gt;</pre>', 'theme-check' ),
 			'language_attributes' => __( 'See: <a href="https://codex.wordpress.org/Function_Reference/language_attributes">language_attributes</a><pre>&lt;html &lt;?php language_attributes(); ?&gt;</pre>', 'theme-check' ),
 			'charset' => __( 'There must be a charset defined in the Content-Type or the meta charset tag in the head.', 'theme-check' ),
 			'add_theme_support\s*\(\s?("|\')automatic-feed-links("|\')\s?\)' => __( 'See: <a href="https://codex.wordpress.org/Function_Reference/add_theme_support">add_theme_support</a><pre> &lt;?php add_theme_support( $feature ); ?&gt;</pre>', 'theme-check' ),
@@ -30,6 +31,7 @@ class Basic_Checks implements themecheck {
 			if ( !preg_match( '/' . $key . '/i', $php ) ) {
 				if ( $key === 'add_theme_support\s*\(\s?("|\')automatic-feed-links("|\')\s?\)' ) $key = __( 'add_theme_support( \'automatic-feed-links\' )', 'theme-check');
 				if ( $key === 'body_class\s*\(' ) $key = __( 'body_class call in body tag', 'theme-check');
+				if ( $key === '(wp_body_open\s*\()|(do_action\s*\(\s*["\']wp_body_open)' ) $key = __( 'wp_body_open action or function call at the very top of the body just after the opening body tag', 'theme-check');
 				$key = str_replace( '\s*\(', '', $key );
 				$this->error[] = sprintf( '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Could not find %1$s. %2$s', 'theme-check' ), '<strong>' . $key . '</strong>', $check );
 				$ret = false;
