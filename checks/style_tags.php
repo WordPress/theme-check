@@ -17,7 +17,7 @@ class Style_Tags implements themecheck {
 			return $ret;
 		}
 		$deprecated_tags = array("flexible-width","fixed-width","black","blue","brown","gray","green","orange","pink","purple","red","silver","tan","white","yellow","dark","light","fixed-layout","fluid-layout","responsive-layout","blavatar","holiday","photoblogging","seasonal");
-		$allowed_tags = array('grid-layout',"one-column","two-columns","three-columns","four-columns","left-sidebar","right-sidebar","flexible-header",'footer-widgets',"accessibility-ready","buddypress","custom-background","custom-colors","custom-header","custom-menu","custom-logo","editor-style","featured-image-header","featured-images","front-page-post-form","full-width-template","microformats","post-formats","rtl-language-support","sticky-post","theme-options","threaded-comments","translation-ready",'blog','e-commerce','education','entertainment','food-and-drink','holiday','news','photography','portfolio');
+		$allowed_tags = array('grid-layout',"one-column","two-columns","three-columns","four-columns","left-sidebar","right-sidebar","wide-blocks","flexible-header",'footer-widgets',"accessibility-ready","block-styles","buddypress","custom-background","custom-colors","custom-header","custom-menu","custom-logo","editor-style","featured-image-header","featured-images","front-page-post-form","full-width-template","microformats","post-formats","rtl-language-support","sticky-post","theme-options","threaded-comments","translation-ready",'blog','e-commerce','education','entertainment','food-and-drink','holiday','news','photography','portfolio');
 		$subject_tags = array('blog','e-commerce','education','entertainment','food-and-drink','holiday','news','photography','portfolio');
 		$subject_tags_count = 0;
 		$subject_tags_name = "";
@@ -36,7 +36,7 @@ class Style_Tags implements themecheck {
 					$ret = false;
 				}
 			}
-			
+
 			if ( in_array( strtolower( $tag ), $subject_tags ) ) {
 				$subject_tags_name .= strtolower( $tag ) . ', ';
 				$subject_tags_count++;
@@ -48,14 +48,14 @@ class Style_Tags implements themecheck {
 					$ret = false;
 				}
 			}
-			
+
 		}
-		
+
 		if ( $subject_tags_count > 3 ) {
 			$this->error[] = '<span class="tc-lead tc-required">'. __('REQUIRED','theme-check'). '</span>: ' . sprintf( __('A maximum of 3 subject tags are allowed. The theme has %1$u subjects tags ( %2$s ). Please remove the subject tags, which do not directly apply to the theme.', 'theme-check'), $subject_tags_count, '<strong>' . rtrim( $subject_tags_name, ', ' ) . '</strong>' ) . ' ' . '<a target="_blank" href="https://make.wordpress.org/themes/handbook/review/required/theme-tags/">' . __( 'See Theme Tags', 'theme-check' ) . '</a>';
 			$ret = false;
 		}
-		
+
 		return $ret;
 	}
 
