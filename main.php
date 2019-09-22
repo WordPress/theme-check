@@ -121,7 +121,7 @@ function tc_strip_comments( $code ) {
 		$token = next($tokens);
 	}
 	return $return;
-} 
+}
 
 
 function tc_intro() {
@@ -170,5 +170,6 @@ function tc_form() {
 	echo '<input class="button" type="submit" value="' . __( 'Check it!', 'theme-check' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) echo ' <input name="trac" type="checkbox" /> ' . __( 'Output in Trac format.', 'theme-check' );
 	echo '<input name="s_info" type="checkbox" /> ' . __( 'Suppress INFO.', 'theme-check' );
+	wp_nonce_field( 'themecheck-nonce' );
 	echo '</form>';
 }
