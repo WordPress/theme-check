@@ -20,6 +20,7 @@ class CDNCheck implements themecheck {
 			'bootstrap-maxcdn'      => 'maxcdn.bootstrapcdn.com',
 			'bootstrap-netdna'      => 'netdna.bootstrapcdn.com',
 			'bootstrap-stackpath'   => 'stackpath.bootstrapcdn.com',
+			'fontawesome'           => 'kit.fontawesome.com',
 			'googlecode'            => 'googlecode.com/svn/',
 			'oss.maxcdn'            => 'oss.maxcdn.com',
 			'jquery'                => 'code.jquery.com/jquery-',
