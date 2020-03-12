@@ -52,7 +52,7 @@ function check_main( $theme ) {
 		echo ( !empty( $data[ 'URI' ] ) ) ? '<p><label>' . __( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</span></p>' : '';
 		echo ( !empty( $data[ 'License' ] ) ) ? '<p><label>' . __( 'License', 'theme-check' ) . '</label><span class="info">' . $data[ 'License' ] . '</span></p>' : '';
 		echo ( !empty( $data[ 'License URI' ] ) ) ? '<p><label>' . __( 'License URI', 'theme-check' ) . '</label><span class="info">' . $data[ 'License URI' ] . '</span></p>' : '';
-		echo ( !empty( $data[ 'Tags' ] ) ) ? '<p><label>' . __( 'Tags', 'theme-check' ) . '</label><span class="info">' . implode( $data[ 'Tags' ], ', ') . '</span></p>' : '';
+		echo ( !empty( $data[ 'Tags' ] ) ) ? '<p><label>' . __( 'Tags', 'theme-check' ) . '</label><span class="info">' . implode( ', ', $data[ 'Tags' ] ) . '</span></p>' : '';
 		echo ( !empty( $data[ 'Description' ] ) ) ? '<p><label>' . __( 'Description', 'theme-check' ) . '</label><span class="info">' . $data[ 'Description' ] . '</span></p>' : '';
 
 		if ( $data[ 'Template' ] ) {
