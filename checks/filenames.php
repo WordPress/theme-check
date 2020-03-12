@@ -40,7 +40,7 @@ class File_Checks implements themecheck {
 
 		foreach( $blacklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error = implode( array_unique( $filename ), ' ' );
+				$error = implode( ' ', array_unique( $filename ) );
 				$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('%1$s %2$s found.', 'theme-check'), '<strong>' . $error . '</strong>', $reason) ;
 				$ret = false;
 			}
