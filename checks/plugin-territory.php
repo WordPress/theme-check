@@ -16,6 +16,7 @@ class Plugin_Territory implements themecheck {
 		$forbidden_functions = array(
 			'register_post_type',
 			'register_taxonomy',
+			'wp_add_dashboard_widget'
 		);
 
 		foreach ( $forbidden_functions as $function ) {
