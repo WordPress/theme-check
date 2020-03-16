@@ -34,6 +34,28 @@ class Plugin_Territory implements themecheck {
 			$ret = false;
 		}
 
+		// Hooks (actions & filters) that are required to be removed from the theme.
+		$forbidden_hooks = array(
+			'filter' => array(
+				'mime_types',
+				'upload_mimes',
+				'user_contactmethods'
+			),
+			'action' => array(
+				'wp_dashboard_setup'
+			)
+		);
+
+		foreach ( $forbidden_hooks as $type => $hooks ) {
+			foreach ( $hooks as $hook ) {
+				checkcount();
+				if ( preg_match( '/[\s?]add_' . $type . '\s*\(\s*([\'"])' . $hook . '([\'"])\s*,/', $php ) ) {
+					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %1$s %2$s, which is plugin-territory functionality.', 'theme-check' ), '<strong>' . esc_html( $hook ) . '</strong>', esc_html( $type ) );
+					$ret = false;
+				}
+			}
+		}
+
 		return $ret;
 	}
 
