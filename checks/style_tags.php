@@ -49,7 +49,6 @@ class Style_Tags implements themecheck {
 								$ret = false;
 							}
 						}
-
 					}
 
 					if ( $subject_tags_count > 3 ) {

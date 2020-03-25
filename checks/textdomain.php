@@ -140,7 +140,7 @@ class TextDomainCheck implements themecheck {
 		}
 
 		if ( $domainscount > 1 ) {
-			$this->error[] = '<span class="tc-lead tc-warning">' . __( 'Warning', 'theme-check' ) . '</span>: '
+			$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: '
 			. __( 'More than one text-domain is being used in this theme. This means the theme will not be compatible with WordPress.org language packs.', 'theme-check' )
 			. '<br>'
 			. sprintf( __( 'The domains found are %s', 'theme-check'), '<strong>' . $domainlist . '</strong>' );

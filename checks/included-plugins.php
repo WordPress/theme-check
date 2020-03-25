@@ -19,7 +19,7 @@ class IncludedPlugins implements themecheck {
 
 		foreach ( $blacklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error = implode( array_unique( $filename ), ' ' );
+				$error = implode( ' ', array_unique( $filename ) );
 				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED','theme-check' ) . '</span>: ' . __( '<strong>Zip file found.</strong> Plugins are not allowed in themes. The zip file found was <em>%s</em>.', 'theme-check' ), $error );
 				$ret = false;
 			}
