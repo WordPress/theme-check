@@ -3,7 +3,6 @@
  * Check for prohibited words and theme names.
  */
 
-
 class ThemeNameCheck implements themecheck {
 	protected $error = array();
 
@@ -12,18 +11,12 @@ class ThemeNameCheck implements themecheck {
 		checkcount();
 		$ret = true;
 		global $themename;
+		global $data;
 
-		/* Get the author name from style.css. */
-		foreach ( $css_files as $cssfile => $content ) {
-			if ( basename( $cssfile ) === 'style.css' ) {
-				$data = get_theme_data_from_contents( $content );
-			}
-		}
-
-		/* Remove the link added by get_theme_data_from_contents */
+		/* Remove the link added by get_theme_data_from_contents. */
 		$author = wp_strip_all_tags( $data['Author'] );
 
-		/* If the author is not the WordPress team, check for prohibited names */
+		/* If the author is not the WordPress team, check for prohibited names. */
 		if ( 'the WordPress team' !== $author ) {
 
 			$blacklist = array( 'twentyten', 'twentyeleven', 'twentytwelve', 'twentythirteen', 'twentyfourteen', 'twentyfifteen',
