@@ -21,7 +21,6 @@ class NonGPLCheck implements themecheck {
 			'freepik'             => 'https://www.freepikcompany.com/legal',
 			'flaticon'            => 'https://www.freepikcompany.com/legal',
 			'pikwizard'           => 'https://pikwizard.com/standard-license',
-			'pikwizard'           => 'https://pikwizard.com/standard-license',
 			'stock.adobe'         => 'https://stock.adobe.com/license-terms',
 			'elements.envato'     => 'https://elements.envato.com/license-terms',
 		);
