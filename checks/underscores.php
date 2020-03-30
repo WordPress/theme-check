@@ -35,13 +35,12 @@ class UnderscoresCheck implements themecheck {
 		}
 
 		/**
-		 * There is a big risk for false positives here. Instead, this could be limited to footer.php,
-		 * since we are looking for clones of underscores.
+		 * This check is limited to footer.php, since we are looking for clones of underscores.
 		 */
 		checkcount();
 		foreach ( $php_files as $file_path => $file_content ) {
 			$filename = tc_filename( $file_path );
-			if ( preg_match( '/Underscores.me/', $file_content) ) {
+			if ( $filename == 'footer.php' && preg_match( '/Underscores.me/', $file_content) ) {
 				$error = '/Underscores.me/';
 				$grep = tc_preg( $error, $file_path );
 				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a copy of Underscores. See %1$s. Update the files for your own theme.', 'theme-check' ),
