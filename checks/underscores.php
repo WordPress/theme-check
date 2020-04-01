@@ -25,12 +25,12 @@ class UnderscoresCheck implements themecheck {
 		checkcount();
 		foreach ( $other_files as $file_path => $file_content ) {
 			$filename = tc_filename( $file_path );
-			if ( preg_match( "/Hi. I'm a starter theme called `_s`, or `underscores`, if you like./", $file_content) ) {
-				$error = "/Hi. I'm a starter theme called `_s`, or `underscores`, if you like./";
-				$grep = tc_preg( $error, $file_path );
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a copy of Underscores. See %1$s. Update the files for your own theme.', 'theme-check' ),
+			if ( preg_match( "/Hi. I'm a starter theme called `_s`, or `underscores`, if you like./", $file_content ) || preg_match( "/Hi. I'm a starter theme called <code>_s<\/code>, or <em>underscores<\/em>, if/", $file_content ) ) {
+				$error         = "/Hi. I'm a starter theme called/";
+				$grep          = tc_preg( $error, $file_path );
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a copy of Underscores. See %1$s. <a href="https://github.com/Automattic/_s" target="_new">Learn how to update the files for your own theme.</a>', 'theme-check' ),
 				'<strong>' . $filename . '</strong>' ) . $grep;
-				$ret = false;
+				$ret           = false;
 			}
 		}
 
@@ -40,12 +40,12 @@ class UnderscoresCheck implements themecheck {
 		checkcount();
 		foreach ( $php_files as $file_path => $file_content ) {
 			$filename = tc_filename( $file_path );
-			if ( $filename == 'footer.php' && preg_match( '/Underscores.me/', $file_content) ) {
-				$error = '/Underscores.me/';
-				$grep = tc_preg( $error, $file_path );
+			if ( 'footer.php' === $filename && preg_match( '/Underscores.me/', $file_content ) ) {
+				$error         = '/Underscores.me/';
+				$grep          = tc_preg( $error, $file_path );
 				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a copy of Underscores. See %1$s. Update the files for your own theme.', 'theme-check' ),
 				'<strong>' . $filename . '</strong>' ) . $grep;
-				$ret = false;
+				$ret           = false;
 			}
 		}
 
@@ -54,4 +54,4 @@ class UnderscoresCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-$themechecks[] = new UnderscoresCheck;
+$themechecks[] = new UnderscoresCheck();
