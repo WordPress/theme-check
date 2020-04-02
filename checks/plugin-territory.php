@@ -51,9 +51,16 @@ class Plugin_Territory implements themecheck {
 				checkcount();
 				if ( preg_match( '/[\s?]add_' . $type . '\s*\(\s*([\'"])' . $hook . '([\'"])\s*,/', $php ) ) {
 					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %1$s %2$s, which is plugin-territory functionality.', 'theme-check' ), '<strong>' . esc_html( $hook ) . '</strong>', esc_html( $type ) );
-					$ret = false;
+					$ret           = false;
 				}
 			}
+		}
+
+		// Removal of some actions and filters are not allowed, this can be extended later when we have a larger list.
+		if ( preg_match( "/remove_action\(.*(\"|')wp_head(\"|').*\);/", $php ) ) {
+			checkcount();
+			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses the %s function. Themes are not allowed to remove non-presentational hooks.', 'theme-check' ), '<strong>remove_action(‘wp_head’, ‘ ’)</strong>' );
+			$ret           = false;
 		}
 
 		return $ret;
@@ -61,4 +68,5 @@ class Plugin_Territory implements themecheck {
 
 	function getError() { return $this->error; }
 }
-$themechecks[] = new Plugin_Territory;
+
+$themechecks[] = new Plugin_Territory();
