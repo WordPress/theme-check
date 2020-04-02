@@ -34,10 +34,10 @@ class File_Checks implements themecheck {
 			'\.sql'              => __( 'SQL dump file', 'theme-check' ),
 			'__MACOSX'           => __( 'OSX system file', 'theme-check' ),
 			'\.lubith'           => __( 'Lubith theme generator file', 'theme-check' ),
-			'.wie'               => __( 'Widget import file', 'theme-check' ),
-			'.dat'               => __( 'Customizer import file', 'theme-check' ),
+			'\.wie'               => __( 'Widget import file', 'theme-check' ),
+			'\.dat'               => __( 'Customizer import file', 'theme-check' ),
 			'phpcs.xml.dist'     => __( 'PHPCS file', 'theme-check' ),
-			'.xml'               => __( 'XML file', 'theme-check' ),
+			'\.xml'               => __( 'XML file', 'theme-check' ),
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
