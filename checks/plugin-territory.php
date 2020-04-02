@@ -2,7 +2,7 @@
 /**
  * Checks for Plugin Territory Guidelines.
  *
- * See http://make.wordpress.org/themes/guidelines/guidelines-plugin-territory/
+ * See https://make.wordpress.org/themes/handbook/review/required/#presentation-vs-functionality
  */
 
 class Plugin_Territory implements themecheck {
@@ -16,6 +16,7 @@ class Plugin_Territory implements themecheck {
 		$forbidden_functions = array(
 			'register_post_type',
 			'register_taxonomy',
+			'wp_add_dashboard_widget'
 		);
 
 		foreach ( $forbidden_functions as $function ) {
@@ -27,10 +28,32 @@ class Plugin_Territory implements themecheck {
 		}
 
 		// Shortcodes can't be used in the post content, so warn about them.
-		if ( false !== strpos( $php, 'add_shortcode' ) ) {
+		if ( false !== strpos( $php, 'add_shortcode(' ) ) {
 			checkcount();
-			$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ), '<strong>add_shortcode()</strong>' ) ;
+			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ), '<strong>add_shortcode()</strong>' ) ;
 			$ret = false;
+		}
+
+		// Hooks (actions & filters) that are required to be removed from the theme.
+		$forbidden_hooks = array(
+			'filter' => array(
+				'mime_types',
+				'upload_mimes',
+				'user_contactmethods'
+			),
+			'action' => array(
+				'wp_dashboard_setup'
+			)
+		);
+
+		foreach ( $forbidden_hooks as $type => $hooks ) {
+			foreach ( $hooks as $hook ) {
+				checkcount();
+				if ( preg_match( '/[\s?]add_' . $type . '\s*\(\s*([\'"])' . $hook . '([\'"])\s*,/', $php ) ) {
+					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( 'The theme uses the %1$s %2$s, which is plugin-territory functionality.', 'theme-check' ), '<strong>' . esc_html( $hook ) . '</strong>', esc_html( $type ) );
+					$ret = false;
+				}
+			}
 		}
 
 		return $ret;

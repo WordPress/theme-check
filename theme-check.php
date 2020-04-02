@@ -5,7 +5,7 @@ Plugin URI: http://ottopress.com/wordpress-plugins/theme-check/
 Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 Author: Otto42, pross
 Author URI: http://ottopress.com
-Version: 20160523.1
+Version: 20190801.1
 Text Domain: theme-check
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -57,8 +57,9 @@ class ThemeCheckMain {
 		}
 
 		if ( isset( $_POST[ 'themename' ] ) ) {
+			check_admin_referer( 'themecheck-nonce' );
 			if ( isset( $_POST[ 'trac' ] ) ) define( 'TC_TRAC', true );
-			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) { 
+			if ( defined( 'WP_MAX_MEMORY_LIMIT' ) ) {
 				@ini_set( 'memory_limit', WP_MAX_MEMORY_LIMIT );
 			}
 			check_main( $_POST[ 'themename' ] );

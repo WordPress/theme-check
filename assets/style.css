@@ -2,8 +2,11 @@
 	padding:20px 0;
 	border-top:1px solid #dfdfdf;
 }
-.tc-warning, .tc-required, .tc-fail {
+.tc-required, .tc-fail {
 	color:red;
+}
+.tc-warning {
+	color: orange;
 }
 .tc-recommended, .tc-pass {
 	color: green;
@@ -23,10 +26,10 @@ pre {
 	border:1px solid #d1eecc;
 }
 form {
-	margin:20px auto;
+	margin: 1.5em auto;
 }
 .theme-check {
-	margin:20px auto;
+	margin: 1em auto;
 	border:1px solid #dfdfdf;
 	-moz-border-radius:5px;
 	-khtml-border-radius:5px;
@@ -34,8 +37,8 @@ form {
 	border-radius:5px;
 }
 .theme-check h2 {
-	margin:0 0 20px 0;
-	padding:0 20px;
+	margin: 0 0 1em 0;
+	padding: 1em;
 	background:#dfdfdf url("gray-grad.png") repeat-x left top;
 	font-size:20px;
 	border-bottom:1px solid #ccc;
@@ -44,7 +47,7 @@ form {
 	padding:5px 20px;
 }
 .theme-check form {
-	margin-left:20px;
+	margin-left: 1.5em;
 }
 .theme-check ul {
 	margin-left:20px;
@@ -57,9 +60,9 @@ form {
 	margin-bottom:10px;
 }
 .theme-info {
-	padding:10px;
+	padding: 1em;
 	border:1px solid #dfdfdf;
-	margin:10px 20px 0 20px;
+	margin: 1em 1em 0 1em;
 }
 .theme-info p {
 	padding:0;
@@ -74,4 +77,7 @@ form {
 .theme-info span.info {
 	margin-left:100px;
 	display:block;
+}
+.theme-check input[name="s_info"] {
+    margin-left: 0.5em;
 }

@@ -254,7 +254,13 @@ class Deprecated implements themecheck {
 			array( 'prepreview_added_widget_instance' => 'customize_dynamic_setting_args', '4.2' ),
 			array( 'remove_prepreview_filters' => 'customize_dynamic_setting_args', '4.2' ),
 
+			array( 'wp_htmledit_pre' => 'format_for_editor', '4.3' ),
+			array( 'wp_richedit_pre' => 'format_for_editor', '4.3' ),
+			array( 'preview_theme' => '', '4.3' ),
+
 			array( 'wp_get_http' => 'WP_Http', '4.4' ),
+			array( 'post_permalink' => 'get_permalink', '4.4' ),
+			array( 'force_ssl_login' => 'force_ssl_admin', '4.4' ),
 
 			array( 'is_comments_popup' => '', '4.5' ),
 			array( 'add_object_page' => 'add_menu_page', '4.5' ),
@@ -263,6 +269,38 @@ class Deprecated implements themecheck {
 			array( 'comments_popup_script' => '', '4.5' ),
 			array( 'popuplinks' => '', '4.5' ),
 			array( 'get_currentuserinfo' => 'wp_get_current_user', '4.5' ),
+
+			array( 'wp_embed_handler_googlevideo' => '', '4.6' ),
+			array( 'wp_get_sites' => 'get_sites', '4.6' ),
+			array( 'post_form_autocomplete_off' => '', '4.6' ),
+			
+			array( 'wp_die_handler' => '', '4.7' ),
+			array( 'wp_redirect_status' => '', '4.7' ),
+			array( 'customize_preview_override_404_status' => '', '4.7' ),
+			array( 'customize_preview_base' => '', '4.7' ),
+			array( 'customize_preview_html5' => '', '4.7' ),
+			array( 'customize_preview_signature' => '', '4.7' ),
+			array( 'remove_preview_signature' => '', '4.7' ),
+			array( '_cmp_priority' => 'wp_list_sort', '4.7' ),
+			array( 'reinit' => 'WP_Roles::for_site()', '4.7' ),
+			array( 'get_paged_template' => '', '4.7' ),
+			array( 'wp_kses_js_entities' => '', '4.7' ),
+			array( 'wp_get_network' => 'get_network()', '4.7' ),
+			array( '_sort_menus_by_orderby' => 'wp_list_sort', '4.7' ),
+
+			array( 'wp_dashboard_plugins_output' => '', '4.8' ),
+
+			array( '_init' => 'WP_Roles::for_site()', '4.9' ),
+			array( '_init_caps' => 'WP_User::for_site()', '4.9' ),
+			array( 'for_blog' => 'WP_User::for_site()', '4.9' ),
+			array( 'get_shortcut_link' => '', '4.9' ),
+			array( 'wp_ajax_press_this_save_post' => '', '4.9' ),
+			array( 'wp_ajax_press_this_add_category' => '', '4.9' ),
+			array( 'is_user_option_local' => '', '4.9' ),
+			array( 'maybe_log_events_response' => '', '4.9' ),
+
+			array( 'insert_blog' => 'wp_insert_site()', '5.1' ),
+			array( 'install_blog' => '', '5.1' ),
 
 		);
 		foreach ( $php_files as $php_key => $phpfile ) {

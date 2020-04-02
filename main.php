@@ -52,7 +52,7 @@ function check_main( $theme ) {
 		echo ( !empty( $data[ 'URI' ] ) ) ? '<p><label>' . __( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . $data[ 'URI' ] . '">' . $data[ 'URI' ] . '</a>' . '</span></p>' : '';
 		echo ( !empty( $data[ 'License' ] ) ) ? '<p><label>' . __( 'License', 'theme-check' ) . '</label><span class="info">' . $data[ 'License' ] . '</span></p>' : '';
 		echo ( !empty( $data[ 'License URI' ] ) ) ? '<p><label>' . __( 'License URI', 'theme-check' ) . '</label><span class="info">' . $data[ 'License URI' ] . '</span></p>' : '';
-		echo ( !empty( $data[ 'Tags' ] ) ) ? '<p><label>' . __( 'Tags', 'theme-check' ) . '</label><span class="info">' . implode( $data[ 'Tags' ], ', ') . '</span></p>' : '';
+		echo ( !empty( $data[ 'Tags' ] ) ) ? '<p><label>' . __( 'Tags', 'theme-check' ) . '</label><span class="info">' . implode( ', ', $data[ 'Tags' ] ) . '</span></p>' : '';
 		echo ( !empty( $data[ 'Description' ] ) ) ? '<p><label>' . __( 'Description', 'theme-check' ) . '</label><span class="info">' . $data[ 'Description' ] . '</span></p>' : '';
 
 		if ( $data[ 'Template' ] ) {
@@ -92,7 +92,7 @@ function check_main( $theme ) {
 			echo '<h2>' . sprintf(__('%1$s passed the tests', 'theme-check'), $data[ 'Title' ] ) . '</h2>';
 			tc_success();
 		}
-		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">' . __('WARNING','theme-check') . '</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="https://codex.wordpress.org/Editing_wp-config.php">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
+		if ( !defined( 'WP_DEBUG' ) || WP_DEBUG == false ) echo '<div class="updated"><span class="tc-fail">' . __('WARNING','theme-check') . '</span> ' . __( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="https://wordpress.org/support/article/editing-wp-config-php/">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
 		echo $results;
@@ -121,7 +121,7 @@ function tc_strip_comments( $code ) {
 		$token = next($tokens);
 	}
 	return $return;
-} 
+}
 
 
 function tc_intro() {
@@ -142,13 +142,13 @@ function tc_intro() {
 
 function tc_success() {
 	?>
-	<div class="tc-success"><p><?php _e( 'Now your theme has passed the basic tests you need to check it properly using the test data before you upload to the WordPress Themes Directory.', 'theme-check' ); ?></p>
-	<p><?php _e( 'Make sure to review the guidelines at <a href="https://codex.wordpress.org/Theme_Review">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
-	<h3><?php _e( 'Codex Links', 'theme-check' ); ?></h3>
+	<div class="tc-success"><p><?php _e( 'Now that your theme has passed the basic tests you need to check it properly using the test data before you upload it to the WordPress Themes Directory.', 'theme-check' ); ?></p>
+	<p><?php _e( 'Make sure to review the guidelines at <a href="https://make.wordpress.org/themes/handbook/review/required/">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
+	<h3><?php _e( 'Useful Links', 'theme-check' ); ?></h3>
 	<ul>
-	<li><a href="https://codex.wordpress.org/Theme_Development"><?php _e('Theme Development', 'theme-check' ); ?></a></li>
-	<li><a href="https://wordpress.org/support/forum/5"><?php _e('Themes and Templates forum', 'theme-check' ); ?></a></li>
-	<li><a href="https://codex.wordpress.org/Theme_Unit_Test"><?php _e('Theme Unit Tests', 'theme-check' ); ?></a></li>
+	<li><a href="https://developer.wordpress.org/themes/"><?php _e( 'Theme Handbook', 'theme-check' ); ?></a></li>
+	<li><a href="https://wordpress.org/support/forum/wp-advanced/"><?php _e( 'Developing with WordPress Forum', 'theme-check' ); ?></a></li>
+	<li><a href="https://github.com/WPTRT/theme-unit-test"><?php _e( 'Theme Unit Tests', 'theme-check' ); ?></a></li>
 	</ul></div>
 	<?php
 }
@@ -170,5 +170,6 @@ function tc_form() {
 	echo '<input class="button" type="submit" value="' . __( 'Check it!', 'theme-check' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) echo ' <input name="trac" type="checkbox" /> ' . __( 'Output in Trac format.', 'theme-check' );
 	echo '<input name="s_info" type="checkbox" /> ' . __( 'Suppress INFO.', 'theme-check' );
+	wp_nonce_field( 'themecheck-nonce' );
 	echo '</form>';
 }
