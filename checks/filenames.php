@@ -17,45 +17,53 @@ class File_Checks implements themecheck {
 		foreach ( $css_files as $php_key => $phpfile ) {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
+
+		$whitelist = 'wpml-config.xml';
+
 		$blacklist = array(
-				'thumbs.db'				=> __( 'Windows thumbnail store', 'theme-check' ),
-				'desktop.ini'			=> __( 'windows system file', 'theme-check' ),
-				'project.properties'	=> __( 'NetBeans Project File', 'theme-check' ),
-				'project.xml'			=> __( 'NetBeans Project File', 'theme-check' ),
-				'\.kpf'					=> __( 'Komodo Project File', 'theme-check' ),
-				'^\.+[a-zA-Z0-9]'		=> __( 'Hidden Files or Folders', 'theme-check' ),
-				'php.ini'				=> __( 'PHP server settings file', 'theme-check' ),
-				'dwsync.xml'			=> __( 'Dreamweaver project file', 'theme-check' ),
-				'error_log'				=> __( 'PHP error log', 'theme-check' ),
-				'web.config'			=> __( 'Server settings file', 'theme-check' ),
-				'\.sql'					=> __( 'SQL dump file', 'theme-check' ),
-				'__MACOSX'				=> __( 'OSX system file', 'theme-check' ),
-				'\.lubith'				=> __( 'Lubith theme generator file', 'theme-check' ),
-				);
+			'thumbs.db'          => __( 'Windows thumbnail store', 'theme-check' ),
+			'desktop.ini'        => __( 'windows system file', 'theme-check' ),
+			'project.properties' => __( 'NetBeans Project File', 'theme-check' ),
+			'project.xml'        => __( 'NetBeans Project File', 'theme-check' ),
+			'\.kpf'              => __( 'Komodo Project File', 'theme-check' ),
+			'^\.+[a-zA-Z0-9]'    => __( 'Hidden Files or Folders', 'theme-check' ),
+			'php.ini'            => __( 'PHP server settings file', 'theme-check' ),
+			'dwsync.xml'         => __( 'Dreamweaver project file', 'theme-check' ),
+			'error_log'          => __( 'PHP error log', 'theme-check' ),
+			'web.config'         => __( 'Server settings file', 'theme-check' ),
+			'\.sql'              => __( 'SQL dump file', 'theme-check' ),
+			'__MACOSX'           => __( 'OSX system file', 'theme-check' ),
+			'\.lubith'           => __( 'Lubith theme generator file', 'theme-check' ),
+			'.wie'               => __( 'Widget import file', 'theme-check' ),
+			'.dat'               => __( 'Customizer import file', 'theme-check' ),
+			'phpcs.xml.dist'     => __( 'PHPCS file', 'theme-check' ),
+			'.xml'               => __( 'XML file', 'theme-check' ),
+		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
-		$rechave = array();
+		$rechave  = array();
 
 		checkcount();
 
-		foreach( $blacklist as $file => $reason ) {
-			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error = implode( ' ', array_unique( $filename ) );
-				$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__('WARNING','theme-check').'</span>: '.__('%1$s %2$s found.', 'theme-check'), '<strong>' . $error . '</strong>', $reason) ;
-				$ret = false;
+		foreach ( $blacklist as $file => $reason ) {
+			if ( $filename     = preg_grep( '/' . $file . '/', $filenames ) ) {
+				$error         = implode( ' ', array_unique( $filename ) );
+				$error         = preg_replace( '/' . $whitelist . '/', '', $error );
+				$this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
+				$ret           = false;
 			}
 		}
 
-		foreach( $musthave as $file ) {
-			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf('<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Could not find the file %s in the theme.', 'theme-check'), '<strong>' . $file . '</strong>' );
-				$ret = false;
+		foreach ( $musthave as $file ) {
+			if ( ! in_array( $file, $filenames ) ) {
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Could not find the file %s in the theme.', 'theme-check' ), '<strong>' . $file . '</strong>' );
+				$ret           = false;
 			}
 		}
 
-		foreach( $rechave as $file => $reason ) {
-			if ( !in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf('<span class="tc-lead tc-recommended">'.__('RECOMMENDED','theme-check').'</span>: '.__('Could not find the file %1$s in the theme. %2$s', 'theme-check'), '<strong>' . $file . '</strong>', $reason );
+		foreach ( $rechave as $file => $reason ) {
+			if ( ! in_array( $file, $filenames ) ) {
+				$this->error[] = sprintf( '<span class="tc-lead tc-recommended">' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: ' . __( 'Could not find the file %1$s in the theme. %2$s', 'theme-check' ), '<strong>' . $file . '</strong>', $reason );
 			}
 		}
 
@@ -64,4 +72,5 @@ class File_Checks implements themecheck {
 
 	function getError() { return $this->error; }
 }
-$themechecks[] = new File_Checks;
+
+$themechecks[] = new File_Checks();
