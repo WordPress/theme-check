@@ -12,7 +12,7 @@ class Basic_Checks implements themecheck {
 
 		$checks = array(
 			'DOCTYPE' => __( 'See: <a href="https://codex.wordpress.org/HTML_to_XHTML">https://codex.wordpress.org/HTML_to_XHTML</a><pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"<br />"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"?&gt;</pre>', 'theme-check' ),
-			'(wp_body_open\s*\()|(do_action\s*\(\s*["\']wp_body_open)' => __( 'See: <a href="https://codex.wordpress.org/Function_Reference/wp_body_open">wp_body_open</a><pre> &lt;?php wp_body_open(); ?&gt;</pre>', 'theme-check' ),
+			'(wp_body_open\s*\()|(do_action\s*\(\s*["\']wp_body_open)' => __( 'See: <a href="https://developer.wordpress.org/reference/functions/wp_body_open/">wp_body_open</a><pre> &lt;?php wp_body_open(); ?&gt;</pre>', 'theme-check' ),
 			'wp_footer\s*\(' => __( 'See: <a href="https://developer.wordpress.org/reference/functions/wp_footer/">wp_footer</a><pre> &lt;?php wp_footer(); ?&gt;</pre>', 'theme-check' ),
 			'wp_head\s*\(' => __( 'See: <a href="https://developer.wordpress.org/reference/functions/wp_head/">wp_head</a><pre> &lt;?php wp_head(); ?&gt;</pre>', 'theme-check' ),
 			'language_attributes' => __( 'See: <a href="https://developer.wordpress.org/reference/functions/language_attributes/">language_attributes</a><pre>&lt;html &lt;?php language_attributes(); ?&gt;</pre>', 'theme-check' ),
