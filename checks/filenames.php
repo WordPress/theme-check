@@ -36,9 +36,13 @@ class File_Checks implements themecheck {
 			'\.lubith'           => __( 'Lubith theme generator file', 'theme-check' ),
 			'\.wie'              => __( 'Widget import file', 'theme-check' ),
 			'\.dat'              => __( 'Customizer import file', 'theme-check' ),
-			'phpcs.xml.dist'     => __( 'PHPCS file', 'theme-check' ),
+			'phpcs\.xml\.dist'   => __( 'PHPCS file', 'theme-check' ),
+			'phpcs\.xml'         => __( 'PHPCS file', 'theme-check' ),
 			'\.xml'              => __( 'XML file', 'theme-check' ),
 			'\.sh'               => __( 'Shell script file', 'theme-check' ),
+			'postcss.config.js'  => __( 'PostCSS config file', 'theme-check' ),
+			'\.editorconfig.'    => __( 'Editor config file', 'theme-check' ),
+			'\.stylelintrc.json' => __( 'Stylelint config file', 'theme-check' ),
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
@@ -51,7 +55,6 @@ class File_Checks implements themecheck {
 				$error         = implode( ' ', array_unique( $filename ) );
 				$error         = preg_replace( '/' . $whitelist . '/', '', $error );
 				$this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
-				$ret           = false;
 			}
 		}
 
