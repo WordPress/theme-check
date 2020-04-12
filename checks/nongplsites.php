@@ -23,6 +23,7 @@ class NonGPLCheck implements themecheck {
 			'pikwizard'           => 'https://pikwizard.com/standard-license',
 			'stock.adobe'         => 'https://stock.adobe.com/license-terms',
 			'elements.envato'     => 'https://elements.envato.com/license-terms',
+			'undraw'              => 'https://undraw.co/licenses',
 		);
 
 		foreach ( $link_list as $link_slug => $link_url ) {
@@ -33,7 +34,6 @@ class NonGPLCheck implements themecheck {
 					'<code>' . esc_html( $link_slug ) . '</code>'
 				)
 					. ' <a href="' . esc_url( $link_url ) . '" target="_blank">' . __( 'View license (opens in a new window).', 'theme-check' ) . '</a>';
-				$ret = false;
 			}
 		}
 
