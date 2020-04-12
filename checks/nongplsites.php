@@ -23,7 +23,7 @@ class NonGPLCheck implements themecheck {
 			'pikwizard'           => 'https://pikwizard.com/standard-license',
 			'stock.adobe'         => 'https://stock.adobe.com/license-terms',
 			'elements.envato'     => 'https://elements.envato.com/license-terms',
-			'undraw'              => 'https://undraw.co/licenses',
+			'undraw.co'           => 'https://undraw.co/licenses',
 		);
 
 		foreach ( $link_list as $link_slug => $link_url ) {
