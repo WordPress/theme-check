@@ -44,6 +44,7 @@ class File_Checks implements themecheck {
 			'\.editorconfig.'    => __( 'Editor config file', 'theme-check' ),
 			'\.stylelintrc.json' => __( 'Stylelint config file', 'theme-check' ),
 			'\.map'              => __( 'Map file', 'theme-check' ),
+			'\.eslintrc'         => __( 'ES lint config file', 'theme-check' ),
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
