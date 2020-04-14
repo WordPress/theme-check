@@ -40,7 +40,7 @@ class File_Checks implements themecheck {
 			'phpcs\.xml'         => __( 'PHPCS file', 'theme-check' ),
 			'\.xml'              => __( 'XML file', 'theme-check' ),
 			'\.sh'               => __( 'Shell script file', 'theme-check' ),
-			'postcss.config.js'  => __( 'PostCSS config file', 'theme-check' ),
+			'postcss\.config\.js'  => __( 'PostCSS config file', 'theme-check' ),
 			'\.editorconfig.'    => __( 'Editor config file', 'theme-check' ),
 			'\.stylelintrc.json' => __( 'Stylelint config file', 'theme-check' ),
 			'\.map'              => __( 'Map file', 'theme-check' ),
