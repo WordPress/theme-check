@@ -28,7 +28,7 @@ class File_Checks implements themecheck {
 			'\.kpf'              => __( 'Komodo Project File', 'theme-check' ),
 			'^\.+[a-zA-Z0-9]'    => __( 'Hidden Files or Folders', 'theme-check' ),
 			'php\.ini'            => __( 'PHP server settings file', 'theme-check' ),
-			'dwsync.xml'         => __( 'Dreamweaver project file', 'theme-check' ),
+			'dwsync\.xml'         => __( 'Dreamweaver project file', 'theme-check' ),
 			'error_log'          => __( 'PHP error log', 'theme-check' ),
 			'web\.config'         => __( 'Server settings file', 'theme-check' ),
 			'\.sql'              => __( 'SQL dump file', 'theme-check' ),
