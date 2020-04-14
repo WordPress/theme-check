@@ -21,7 +21,7 @@ class File_Checks implements themecheck {
 		$whitelist = 'wpml-config.xml';
 
 		$blacklist = array(
-			'thumbs.db'          => __( 'Windows thumbnail store', 'theme-check' ),
+			'thumbs\.db'          => __( 'Windows thumbnail store', 'theme-check' ),
 			'desktop.ini'        => __( 'windows system file', 'theme-check' ),
 			'project.properties' => __( 'NetBeans Project File', 'theme-check' ),
 			'project.xml'        => __( 'NetBeans Project File', 'theme-check' ),
