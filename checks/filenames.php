@@ -23,7 +23,7 @@ class File_Checks implements themecheck {
 		$blacklist = array(
 			'thumbs\.db'          => __( 'Windows thumbnail store', 'theme-check' ),
 			'desktop\.ini'        => __( 'windows system file', 'theme-check' ),
-			'project.properties' => __( 'NetBeans Project File', 'theme-check' ),
+			'project\.properties' => __( 'NetBeans Project File', 'theme-check' ),
 			'project.xml'        => __( 'NetBeans Project File', 'theme-check' ),
 			'\.kpf'              => __( 'Komodo Project File', 'theme-check' ),
 			'^\.+[a-zA-Z0-9]'    => __( 'Hidden Files or Folders', 'theme-check' ),
