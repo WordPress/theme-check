@@ -39,7 +39,7 @@ class NavMenuCheck implements themecheck {
 					$name          = explode( ')', $menu_args[0] );
 					$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . sprintf( __( 'A menu without a theme_location was found in %1$s. %2$s is used inside wp_nav_menu(). You must manually check if the theme_location is included.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>',
-						'<strong>' . $name[0] . '</strong>'
+						'<code>' . $name[0] . '</code>'
 					);
 					$name_check    = true;
 				} else {
