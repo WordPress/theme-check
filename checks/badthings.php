@@ -26,7 +26,7 @@ class Bad_Checks implements themecheck {
 					$filename = tc_filename( $php_key );
 					$error = ltrim( trim( $matches[0], '(' ) );
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = sprintf('<span class="tc-lead tc-warning">'. __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'Found %1$s in the file %2$s. %3$s. %4$s', 'theme-check' ), '<strong>' . $error . '</strong>', '<strong>' . $filename . '</strong>', $check, $grep );
+					$this->error[] = sprintf('<span class="tc-lead tc-required">'. __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found %1$s in the file %2$s. %3$s. %4$s', 'theme-check' ), '<strong>' . $error . '</strong>', '<strong>' . $filename . '</strong>', $check, $grep );
 					$ret = false;
 				}
 			}
@@ -45,7 +45,7 @@ class Bad_Checks implements themecheck {
 					$filename = tc_filename( $php_key );
 					$error = ltrim( rtrim( $matches[0],'(' ) );
 					$grep = tc_grep( $error, $php_key );
-					$this->error[] = sprintf(__('<span class="tc-lead tc-warning">WARNING</span>: Found <strong>%1$s</strong> in the file <strong>%2$s</strong>. %3$s.%4$s', 'theme-check'), $error, $filename, $check, $grep);
+					$this->error[] = sprintf(__('<span class="tc-lead tc-required">REQUIRED</span>: Found <strong>%1$s</strong> in the file <strong>%2$s</strong>. %3$s.%4$s', 'theme-check'), $error, $filename, $check, $grep);
 					$ret = false;
 				}
 			}
