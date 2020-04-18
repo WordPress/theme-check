@@ -25,26 +25,26 @@ class File_Checks implements themecheck {
 			'desktop\.ini'        => __( 'windows system file', 'theme-check' ),
 			'project\.properties' => __( 'NetBeans Project File', 'theme-check' ),
 			'project\.xml'        => __( 'NetBeans Project File', 'theme-check' ),
-			'\.kpf'              => __( 'Komodo Project File', 'theme-check' ),
-			'^\.+[a-zA-Z0-9]'    => __( 'Hidden Files or Folders', 'theme-check' ),
+			'\.kpf'               => __( 'Komodo Project File', 'theme-check' ),
+			'^\.+[a-zA-Z0-9]'     => __( 'Hidden Files or Folders', 'theme-check' ),
 			'php\.ini'            => __( 'PHP server settings file', 'theme-check' ),
 			'dwsync\.xml'         => __( 'Dreamweaver project file', 'theme-check' ),
-			'error_log'          => __( 'PHP error log', 'theme-check' ),
+			'error_log'           => __( 'PHP error log', 'theme-check' ),
 			'web\.config'         => __( 'Server settings file', 'theme-check' ),
-			'\.sql'              => __( 'SQL dump file', 'theme-check' ),
-			'__MACOSX'           => __( 'OSX system file', 'theme-check' ),
-			'\.lubith'           => __( 'Lubith theme generator file', 'theme-check' ),
-			'\.wie'              => __( 'Widget import file', 'theme-check' ),
-			'\.dat'              => __( 'Customizer import file', 'theme-check' ),
-			'phpcs\.xml\.dist'   => __( 'PHPCS file', 'theme-check' ),
-			'phpcs\.xml'         => __( 'PHPCS file', 'theme-check' ),
-			'\.xml'              => __( 'XML file', 'theme-check' ),
-			'\.sh'               => __( 'Shell script file', 'theme-check' ),
-			'postcss\.config\.js'  => __( 'PostCSS config file', 'theme-check' ),
-			'\.editorconfig.'    => __( 'Editor config file', 'theme-check' ),
+			'\.sql'               => __( 'SQL dump file', 'theme-check' ),
+			'__MACOSX'            => __( 'OSX system file', 'theme-check' ),
+			'\.lubith'            => __( 'Lubith theme generator file', 'theme-check' ),
+			'\.wie'               => __( 'Widget import file', 'theme-check' ),
+			'\.dat'               => __( 'Customizer import file', 'theme-check' ),
+			'phpcs\.xml\.dist'    => __( 'PHPCS file', 'theme-check' ),
+			'phpcs\.xml'          => __( 'PHPCS file', 'theme-check' ),
+			'\.xml'               => __( 'XML file', 'theme-check' ),
+			'\.sh'                => __( 'Shell script file', 'theme-check' ),
+			'postcss\.config\.js' => __( 'PostCSS config file', 'theme-check' ),
+			'\.editorconfig.'     => __( 'Editor config file', 'theme-check' ),
 			'\.stylelintrc\.json' => __( 'Stylelint config file', 'theme-check' ),
-			'\.map'              => __( 'Map file', 'theme-check' ),
-			'\.eslintrc'         => __( 'ES lint config file', 'theme-check' ),
+			'\.map'               => __( 'Map file', 'theme-check' ),
+			'\.eslintrc'          => __( 'ES lint config file', 'theme-check' ),
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
@@ -55,8 +55,11 @@ class File_Checks implements themecheck {
 		foreach ( $blacklist as $file => $reason ) {
 			if ( $filename     = preg_grep( '/' . $file . '/', $filenames ) ) {
 				$error         = implode( ' ', array_unique( $filename ) );
-				$error         = preg_replace( '/' . $whitelist . '/', '', $error );
-				$this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
+				if ( $error === $whitelist ) {
+					continue;
+				}
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
+				$ret           = false;
 			}
 		}
 
