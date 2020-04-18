@@ -30,7 +30,7 @@ class GeneratedCheck implements themecheck {
 			//wpthemegenerator
 			|| strpos ( $php, "wptg_") !== false
 		) {
-			$this->error[] = "<span class='tc-lead tc-warning'>" . __('WARNING', 'theme-check' ). "</span>: " . __( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'theme-check' );
+			$this->error[] = "<span class='tc-lead tc-required'>" . __('REQUIRED', 'theme-check' ). "</span>: " . __( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'theme-check' );
 			$ret = false;
 		}
 
