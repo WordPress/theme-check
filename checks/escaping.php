@@ -10,8 +10,6 @@ class EscapingCheck implements themecheck {
 
 		$ret = true;
 
-		$php_files = array_merge( $php_files, $other_files );
-
 		$checks = array(
 			'/echo get_theme_mod/'              => __( 'Theme options must be escaped.', 'theme-check' ),
 			'/="<\?php esc_html_e/'             => __( 'Use esc_attr_e() inside HTML attributes.', 'theme-check' ),
