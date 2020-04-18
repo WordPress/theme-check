@@ -31,9 +31,10 @@ class Style_Tags implements themecheck {
 
 						if ( ! in_array( strtolower( $tag ), $allowed_tags ) ) {
 							if ( in_array( strtolower( $tag ), $deprecated_tags ) ) {
-								$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . sprintf( __('The tag %s has been deprecated, please remove it from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
+								$this->error[] = '<span class="tc-lead tc-required">'. __('REQUIRED','theme-check'). '</span>: ' . sprintf( __('The tag %s has been deprecated, please remove it from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
+								$ret = false;
 							} else {
-								$this->error[] = '<span class="tc-lead tc-warning">'. __('WARNING','theme-check'). '</span>: ' . sprintf( __('Found wrong tag, remove %s from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
+								$this->error[] = '<span class="tc-lead tc-required">'. __('REQUIRED','theme-check'). '</span>: ' . sprintf( __('Found wrong tag, remove %s from your style.css header.', 'theme-check'), '<strong>' . $tag . '</strong>' );
 								$ret = false;
 							}
 						}
