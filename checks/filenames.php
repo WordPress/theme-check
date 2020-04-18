@@ -45,6 +45,7 @@ class File_Checks implements themecheck {
 			'\.stylelintrc\.json' => __( 'Stylelint config file', 'theme-check' ),
 			'\.map'               => __( 'Map file', 'theme-check' ),
 			'\.eslintrc'          => __( 'ES lint config file', 'theme-check' ),
+			'favicon\.ico'        => __( 'Favicon', 'theme-check' ),
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
