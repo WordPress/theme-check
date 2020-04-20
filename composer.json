@@ -1,0 +1,15 @@
+{
+    "name": "wordpress/theme-check",
+    "description": "A plugin to check if the theme follows theme review standards",
+    "type": "wordpress-plugin",
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "license": "GPLv2",
+    "scripts": {
+        "standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+        "standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+    }
+}
