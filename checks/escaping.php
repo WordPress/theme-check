@@ -34,7 +34,6 @@ class EscapingCheck implements themecheck {
 			'/><\?php echo esc_attr\(/'         => __( 'Only use esc_attr() inside HTML attributes. Use esc_html() between HTML tags', 'theme-check' ),
 			'/><\?php echo esc_attr__/'         => __( 'Only use esc_attr__() inside HTML attributes. Use esc_html__() between HTML tags', 'theme-check' ),
 			'/><\?php esc_attr_e/'              => __( 'Only use esc_attr_e() inside HTML attributes. Use esc_html_e() between HTML tags', 'theme-check' ),
-			'/href=.*\. home_url/'              => __( 'home_url() must be escaped. Use esc_url() for link attributes', 'theme-check' ),
 		);
 
 		$required = array (
