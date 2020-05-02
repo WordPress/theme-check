@@ -58,7 +58,7 @@ class Plugin_Territory implements themecheck {
 			),
 			'action' => array(
 				'wp_dashboard_setup',
-			)
+			),
 		);
 
 		foreach ( $forbidden_hooks as $type => $hooks ) {
@@ -71,35 +71,51 @@ class Plugin_Territory implements themecheck {
 			}
 		}
 
-		foreach ( $php_files as $php_key => $phpfile ) {
-			checkcount();
-			if ( strpos( $phpfile, 'wp_custom_css_cb' ) !== false ) {
-				$filename      = tc_filename( $php_key );
-				$grep          = tc_grep( 'wp_custom_css_cb', $php_key );
-				$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses %1$s in %2$s. Themes must re-add the Custom CSS callback (%3$s) if they need to move it from the header. A manual review is needed. %4$s', 'theme-check' ),
-					'<strong>remove_action(‘wp_head’, ‘wp_custom_css_cb’)</strong>',
-					$filename,
-					'wp_custom_css_cb',
-					$grep,
-				);
-			}
+		/**
+		 * Check for removal of non presentational hooks.
+		 * Removing emojis is also not allowed.
+		 */
+		$blacklist = array(
+			'wp_head'             => array(
+				'wp_generator', // @link https://developer.wordpress.org/reference/functions/wp_generator/
+				'feed_links', // @link https://developer.wordpress.org/reference/functions/feed_links/
+				'feed_links_extra', // @link https://developer.wordpress.org/reference/functions/feed_links_extra/
+				'print_emoji_detection_script', // @link https://developer.wordpress.org/reference/functions/print_emoji_detection_script/
+				'wp_resource_hints', // @link https://developer.wordpress.org/reference/functions/wp_resource_hints/
+				'adjacent_posts_rel_link_wp_head', // @link https://developer.wordpress.org/reference/functions/adjacent_posts_rel_link_wp_head/
+				'wp_shortlink_wp_head', // @link https://developer.wordpress.org/reference/functions/wp_shortlink_wp_head/
+				'_admin_bar_bump_cb', // @link https://developer.wordpress.org/reference/functions/_admin_bar_bump_cb/
+				'rsd_link', // @link https://developer.wordpress.org/reference/functions/rsd_link/
+				'rest_output_link_wp_head', // @link https://developer.wordpress.org/reference/functions/rest_output_link_wp_head/
+				'wp_oembed_add_discovery_links', // @link https://developer.wordpress.org/reference/functions/wp_oembed_add_discovery_links/
+				'wp_oembed_add_host_js', // @link https://developer.wordpress.org/reference/functions/wp_oembed_add_host_js/
+				'rel_canonical', // @link https://developer.wordpress.org/reference/functions/rel_canonical/
+			),
+			'wp_print_styles'     => array(
+				'print_emoji_styles', // @link https://developer.wordpress.org/reference/functions/print_emoji_styles/
+			),
+			'admin_print_scripts' => array(
+				'print_emoji_detection_script', //@link https://developer.wordpress.org/reference/functions/print_emoji_detection_script/
+			),
+			'admin_print_styles'  => array(
+				'print_emoji_styles', // @link https://developer.wordpress.org/reference/functions/print_emoji_styles/
+			),
+			'template_redirect'   => array(
+				'rest_output_link_header', // @link https://developer.wordpress.org/reference/functions/rest_output_link_header/
+				'wp_shortlink_header', // @link https://developer.wordpress.org/reference/functions/wp_shortlink_header/
+				'redirect_canonical',  // @link https://developer.wordpress.org/reference/functions/redirect_canonical/
+			),
+		);
 
-			checkcount();
-			if ( preg_match( "/remove_action\(.*(\"|')wp_head(\"|').*\);/", $phpfile ) ) {
-				$filename = tc_filename( $php_key );
-				// Get all the results.
-				$grep = tc_grep( 'remove_action', $php_key );
-				// Split the results to be able to present them on one line each.
-				$results = preg_split( '/<pre/', $grep );
-				foreach ( $results as $line ) {
-					if ( strpos( $line, 'wp_head' ) !== false && strpos( $line, 'wp_custom_css_cb' ) === false ) {
-						$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses %1$s in %2$s. Themes are not allowed to remove non-presentational hooks. %3$s', 'theme-check' ),
-							'<strong>remove_action(‘wp_head’, ‘ ’)</strong>',
-							$filename,
-							'<pre ' . $line,
-						);
-						$ret           = false;
-					}
+		foreach ( $blacklist as $hook => $functions ) {
+			foreach ( $functions as $function ) {
+				checkcount();
+				if ( preg_match( '/[\s?]remove_action\s*\(\s*([\'"])' . $hook . '([\'"])\s*,\s*([\'"])' . $function . '([\'"])/', $php ) ) {
+					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses <strong>remove_action %1$s %2$s</strong>, which is plugin-territory functionality.', 'theme-check' ),
+						esc_html( $hook ),
+						esc_html( $function ),
+					);
+					$ret           = false;
 				}
 			}
 		}
