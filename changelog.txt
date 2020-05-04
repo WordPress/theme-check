@@ -1,3 +1,16 @@
+= 20200504.1 = 
+* Contributor and URI adjustments
+* site_url checks
+* smarter nav menu and favicon checks
+* additional filename blacklist checks
+* developer files added to github (phpcs, composer, attributes, gitignore, etc)
+* improvements to existing checks, move some warnings to required to reflect updated guidelines
+* check for themes being copies of underscores
+* check for non-gpl-compatible sites used for images
+* Add warnings for demo content
+* Update links in messages to point to new development and documentation locations
+* disallow dashboard widgets in themes
+
 = 20190801.1 =
 * Fix missing nonce and nonce check on admin page. props Steven Stern for reporting the issue to the plugins team. Though this is technically a CSRF, there is no vulnerability arising from it, as the only thing that could be done with the form is to scan a theme.
 
