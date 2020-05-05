@@ -49,13 +49,12 @@ class EscapingCheck implements themecheck {
 				$error         = 'echo get_theme_mod';
 				$grep          = tc_grep( $error, $php_key );
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found %1$s in %2$s. <a href="%3$s" target="_blank">Theme options must be escaped (Opens in a new window).</a>. ', 'theme-check' ),
+					'<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'Found %1$s in %2$s. <a href="%3$s" target="_blank">Theme options must be escaped (Opens in a new window).</a>. ', 'theme-check' ),
 					'<code>' . esc_html( $error ) . '</code>',
 					'<strong>' . $filename . '</strong>',
 					'https://developer.wordpress.org/themes/theme-security/data-sanitization-escaping/#escaping-securing-output'
 				) . $grep;
 
-				$ret = false;
 			}
 
 			foreach ( $warnings as $key => $check ) {
