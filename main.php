@@ -169,10 +169,10 @@ function tc_intro() {
 		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
 		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
 		); ?></p>
-	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the theme review team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/'); ?></p>
+	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/'); ?></p>
 	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/WordPress/theme-check' ); ?></p>
 	<h3><?php esc_html_e( 'Testers', 'theme-check' ); ?></h3>
-	<p><a href="https://make.wordpress.org/themes/"><?php esc_html_e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
+	<p><a href="https://make.wordpress.org/themes/"><?php esc_html_e( 'The WordPress Themes Team', 'theme-check' ); ?></a></p>
 	<?php
 }
 
