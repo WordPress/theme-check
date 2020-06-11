@@ -108,7 +108,12 @@ function check_main( $theme ) {
 		}
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
-		echo esc_html( $results );
+		echo wp_kses(
+			$results,
+			array(
+				'li' => array(),
+			)
+		);
 		echo '</ul></div>';
 	}
 }
