@@ -154,7 +154,16 @@ function tc_intro() {
 function tc_success() {
 	?>
 	<div class="tc-success"><p><?php esc_html_e( 'Now that your theme has passed the basic tests you need to check it properly using the test data before you upload it to the WordPress Themes Directory.', 'theme-check' ); ?></p>
-	<p><?php esc_html_e( 'Make sure to review the guidelines at <a href="https://make.wordpress.org/themes/handbook/review/required/">Theme Review</a> before uploading a Theme.', 'theme-check' ); ?></p>
+	<p>
+		<?php
+		printf(
+			/* translators: 1 is an opening anchor tag 2 is the closing part of the tag. */
+			esc_html( 'Make sure to review the guidelines at %1$sTheme Review%2$s before uploading a Theme.', 'theme-check' ),
+			'<a href="https://make.wordpress.org/themes/handbook/review/required/">',
+			'</a>'
+		);
+		?>
+	</p>
 	<h3><?php esc_html_e( 'Useful Links', 'theme-check' ); ?></h3>
 	<ul>
 	<li><a href="https://developer.wordpress.org/themes/"><?php esc_html_e( 'Theme Handbook', 'theme-check' ); ?></a></li>
