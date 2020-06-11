@@ -178,7 +178,7 @@ function tc_form() {
 		echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'value="' . $location['Stylesheet'] . '" style="font-weight:bold;">' . $name . '</option>' : 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
 	}
 	echo '</select>';
-	echo '<input class="button" type="submit" value="' . esc_html__( 'Check it!', 'theme-check' ) . '" />';
+	echo '<input class="button" type="submit" value="' . esc_attr__( 'Check it!', 'theme-check' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) {
 		echo ' <input name="trac" type="checkbox" /> ' . esc_html__( 'Output in Trac format.', 'theme-check' );
 	}
