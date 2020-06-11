@@ -176,7 +176,7 @@ function tc_success() {
 		<?php
 		printf(
 			/* translators: 1 is an opening anchor tag 2 is the closing part of the tag. */
-			esc_html( 'Make sure to review the guidelines at %1$sTheme Review%2$s before uploading a Theme.', 'theme-check' ),
+			esc_html__( 'Make sure to review the guidelines at %1$sTheme Review%2$s before uploading a Theme.', 'theme-check' ),
 			'<a href="https://make.wordpress.org/themes/handbook/review/required/">',
 			'</a>'
 		);
