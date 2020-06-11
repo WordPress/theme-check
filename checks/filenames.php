@@ -59,7 +59,7 @@ class File_Checks implements themecheck {
 				if ( $error === $whitelist ) {
 					continue;
 				}
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
 				$ret           = false;
 			}
 		}

@@ -143,13 +143,11 @@ function tc_intro() {
 		esc_html__( 'Theme Check is maintained by %1$s and %2$s.', 'theme-check' ),
 		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
 		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
-	);
-	?>
-		</p>
-	<p><?php printf( esc_html__( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the theme review team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/' ); ?></p>
-	<p><?php printf( esc_html__( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/Otto42/theme-check' ); ?></p>
-	<h3><?php esc_html_e( 'Testers', 'theme-check' ); ?></h3>
-	<p><a href="https://make.wordpress.org/themes/"><?php esc_html_e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
+		); ?></p>
+	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the theme review team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/') ; ?></p>
+	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/WordPress/theme-check'); ?></p>
+	<h3><?php _e( 'Testers', 'theme-check' ); ?></h3>
+	<p><a href="https://make.wordpress.org/themes/"><?php _e( 'The WordPress Theme Review Team', 'theme-check' ); ?></a></p>
 	<?php
 }
 

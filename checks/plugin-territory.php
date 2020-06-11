@@ -32,6 +32,7 @@ class Plugin_Territory implements themecheck {
 			'register_post_type',
 			'register_taxonomy',
 			'wp_add_dashboard_widget',
+			'register_block_type',
 		);
 
 		foreach ( $forbidden_functions as $function ) {
@@ -113,7 +114,7 @@ class Plugin_Territory implements themecheck {
 				if ( preg_match( '/[\s?]remove_action\s*\(\s*([\'"])' . $hook . '([\'"])\s*,\s*([\'"])' . $function . '([\'"])/', $php ) ) {
 					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses <strong>remove_action %1$s %2$s</strong>, which is plugin-territory functionality.', 'theme-check' ),
 						esc_html( $hook ),
-						esc_html( $function ),
+						esc_html( $function )
 					);
 					$ret           = false;
 				}
