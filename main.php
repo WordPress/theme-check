@@ -91,7 +91,20 @@ function check_main( $theme ) {
 			tc_success();
 		}
 		if ( ! defined( 'WP_DEBUG' ) || WP_DEBUG === false ) {
-			echo '<div class="updated"><span class="tc-fail">' . esc_html__( 'WARNING', 'theme-check' ) . '</span> ' . esc_html__( '<strong>WP_DEBUG is not enabled!</strong> Please test your theme with <a href="https://wordpress.org/support/article/editing-wp-config-php/">debug enabled</a> before you upload!', 'theme-check' ) . '</div>';
+			echo '<div class="updated">';
+			echo '<span class="tc-fail">';
+			echo esc_html__( 'WARNING', 'theme-check' );
+			echo '</span> ';
+			echo '<strong>';
+			echo esc_html__( 'WP_DEBUG is not enabled!', 'theme-check' );
+			echo '</strong>';
+			printf(
+				/* translators: 1 is an opening anchor tag 2 is the closing part of the tag. */
+				esc_html__( 'Please test your theme with %1$sdebug enabled%2$s before you upload!', 'theme-check' ),
+				'<a href="https://wordpress.org/support/article/editing-wp-config-php/">',
+				'</a>'
+			);
+			echo '</div>';
 		}
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
