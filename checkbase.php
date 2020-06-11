@@ -124,22 +124,6 @@ function tc_preg( $preg, $file ) {
 	return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
 }
 
-function tc_strxchr($haystack, $needle, $l_inclusive = 0, $r_inclusive = 0){
-	if(strrpos($haystack, $needle)){
-		//Everything before last $needle in $haystack.
-		$left =  substr($haystack, 0, strrpos($haystack, $needle) + $l_inclusive);
-		//Switch value of $r_inclusive from 0 to 1 and viceversa.
-		$r_inclusive = ($r_inclusive == 0) ? 1 : 0;
-		//Everything after last $needle in $haystack.
-		$right =  substr(strrchr($haystack, $needle), $r_inclusive);
-		//Return $left and $right into an array.
-		return array($left, $right);
-	} else {
-		if(strrchr($haystack, $needle)) return array('', substr(strrchr($haystack, $needle), $r_inclusive));
-		else return false;
-	}
-}
-
 function tc_filename( $file ) {
 	$filename = ( preg_match( '/themes\/[a-z0-9-]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
 	return $filename;
@@ -168,37 +152,6 @@ function listdir( $dir ) {
     	array_push( $files, $file->getPathname() );
 	}
 	return $files;
-}
-
-function old_listdir( $start_dir='.' ) {
-	$files = array();
-	if ( is_dir( $start_dir ) ) {
-		$fh = opendir( $start_dir );
-		while ( ( $file = readdir( $fh ) ) !== false ) {
-			# loop through the files, skipping . and .., and recursing if necessary
-			if ( strcmp( $file, '.' )==0 || strcmp( $file, '..' )==0 ) continue;
-			$filepath = $start_dir . '/' . $file;
-			if ( is_dir( $filepath ) )
-				$files = array_merge( $files, listdir( $filepath ) );
-			else
-				array_push( $files, $filepath );
-		}
-		closedir( $fh );
-
-	} else {
-
-		# false if the function was called with an invalid non-directory argument
-		$files = false;
-	}
-	return $files;
-}
-
-function tc_print_r( $data ) {
-	$out = "\n<pre class='html-print-r'";
-	$out .= " style='border: 1px solid #ccc; padding: 7px;'>\n";
-	$out .= esc_html( print_r( $data, TRUE ) );
-	$out .= "\n</pre>\n";
-	echo $out;
 }
 
 function get_theme_data_from_contents( $theme_data ) {
