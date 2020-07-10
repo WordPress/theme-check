@@ -7,7 +7,7 @@ class NonGPLCheck implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 
-		$ret  = true;
+		$ret  = false;
 		$code = implode( ' ', $other_files ); // The references are usually in the readme.
 
 		checkcount();
