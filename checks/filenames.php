@@ -18,9 +18,9 @@ class File_Checks implements themecheck {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 
-		$whitelist = 'wpml-config.xml';
+		$allowlist = 'wpml-config.xml';
 
-		$blacklist = array(
+		$blocklist = array(
 			'thumbs\.db'          => __( 'Windows thumbnail store', 'theme-check' ),
 			'desktop\.ini'        => __( 'windows system file', 'theme-check' ),
 			'project\.properties' => __( 'NetBeans Project File', 'theme-check' ),
@@ -53,10 +53,10 @@ class File_Checks implements themecheck {
 
 		checkcount();
 
-		foreach ( $blacklist as $file => $reason ) {
+		foreach ( $blocklist as $file => $reason ) {
 			if ( $filename     = preg_grep( '/' . $file . '/', $filenames ) ) {
 				$error         = implode( ' ', array_unique( $filename ) );
-				if ( $error === $whitelist ) {
+				if ( $error === $allowlist ) {
 					continue;
 				}
 				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );

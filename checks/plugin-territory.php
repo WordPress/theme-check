@@ -76,7 +76,7 @@ class Plugin_Territory implements themecheck {
 		 * Check for removal of non presentational hooks.
 		 * Removing emojis is also not allowed.
 		 */
-		$blacklist = array(
+		$blocklist = array(
 			'wp_head'             => array(
 				'wp_generator', // @link https://developer.wordpress.org/reference/functions/wp_generator/
 				'feed_links', // @link https://developer.wordpress.org/reference/functions/feed_links/
@@ -108,7 +108,7 @@ class Plugin_Territory implements themecheck {
 			),
 		);
 
-		foreach ( $blacklist as $hook => $functions ) {
+		foreach ( $blocklist as $hook => $functions ) {
 			foreach ( $functions as $function ) {
 				checkcount();
 				if ( preg_match( '/[\s?]remove_action\s*\(\s*([\'"])' . $hook . '([\'"])\s*,\s*([\'"])' . $function . '([\'"])/', $php ) ) {
