@@ -18,7 +18,10 @@ class File_Checks implements themecheck {
 			array_push( $filenames, strtolower( basename( $php_key ) ) );
 		}
 
-		$allowlist = 'wpml-config.xml';
+		$allowlist = array(
+			'wpml-config.xml',
+			'loco.xml'
+		);
 
 		$blocklist = array(
 			'thumbs\.db'          => __( 'Windows thumbnail store', 'theme-check' ),
@@ -55,10 +58,16 @@ class File_Checks implements themecheck {
 
 		foreach ( $blocklist as $file => $reason ) {
 			if ( $filename     = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error         = implode( ' ', array_unique( $filename ) );
-				if ( $error === $allowlist ) {
+				$commons       = array_intersect( $filename, $allowlist );
+				foreach ( $commons as $common ) {
+					if (( $allowed_key = array_search($common, $filename)) !== false) {
+						unset( $filename[$allowed_key] );
+					}
+				}
+				if ( empty( $filename ) ) {
 					continue;
 				}
+				$error         = implode( ' ', array_unique( $filename ) );
 				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
 				$ret           = false;
 			}
