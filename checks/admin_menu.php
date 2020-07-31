@@ -31,7 +31,11 @@ class AdminMenu implements themecheck {
 // Note to TGMPA: Stop trying to bypass theme check. 
 
 		$checks = array(
-			'/(?<!function)[^_>:](add_[^_\'",();]+?_page)/' => __( 'Themes should use <strong>add_theme_page()</strong> for adding admin pages.', 'theme-check' )
+			'/(?<!function)[^_>:](add_[^_\'",();]+?_page)/' => _x( 
+					'Themes must not use <strong>%s()</strong>.',
+					'function name',
+					'theme-check' 
+				)
 			);
 
 
@@ -46,7 +50,14 @@ class AdminMenu implements themecheck {
 						$filename = tc_filename( $php_key );
 						$error = ltrim( rtrim( $match, '(' ) );
 						$grep = tc_grep( $error, $php_key );
-						$this->error[] = sprintf('<span class="tc-lead tc-required">'.__( 'REQUIRED', 'theme-check' ) .'</span>: <strong>%1$s</strong>. %2$s%3$s', $filename, $check, $grep);
+						$notallowed = sprintf( $check, $match );
+
+						$this->error[] = sprintf( 
+							'<span class="tc-lead tc-required">'.__( 'REQUIRED', 'theme-check' ) .'</span>: <strong>%1$s</strong>. %2$s%3$s%', 
+							$filename,
+							$notallowed,
+							$grep
+						);
 						$ret = false;
 					}
 				}
