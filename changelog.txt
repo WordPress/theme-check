@@ -1,3 +1,8 @@
+= 20200731.1 =
+* Added add_menu_page & add_submenu_page to the allowed functions list
+* Added loco.xml to the allowed files list and extend the allowlist check functionality to support an array of (possible) filenames.
+* Updated error messages 
+
 = 20200611.1 =
 * Added escaping checks
 * Added tested up to and Requires PHP checks for the style.css
