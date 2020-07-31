@@ -40,7 +40,7 @@ class AdminMenu implements themecheck {
 				checkcount();
 				if ( preg_match_all( $key, $phpfile, $matches ) ) {
 					foreach ($matches[1] as $match) {
-						if ($match == 'add_theme_page') {
+						if ( in_array( $match, array( 'add_theme_page', 'add_menu_page', 'add_submenu_page' ), true ) ) {
 							continue;
 						}
 						$filename = tc_filename( $php_key );
