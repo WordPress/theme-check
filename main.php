@@ -119,6 +119,9 @@ function check_main( $theme ) {
 			$results,
 			array(
 				'li' => array(),
+				'span' => array(
+					'class' => array(),
+				),
 			)
 		);
 		echo '</ul></div>';
