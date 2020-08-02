@@ -118,10 +118,11 @@ function check_main( $theme ) {
 		echo wp_kses(
 			$results,
 			array(
-				'li' => array(),
-				'span' => array(
+				'li'     => array(),
+				'span'   => array(
 					'class' => array(),
 				),
+				'strong' => array(),
 			)
 		);
 		echo '</ul></div>';
