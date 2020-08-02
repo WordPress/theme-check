@@ -42,5 +42,13 @@ comments, or feedback:[[br]]
 
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
+If you want to exclude checking other files in development directories return `true` for the filter `tc_skip_development_directories`.
+
+```
+add_filter( 'tc_skip_development_directories', '__return_true' );
+```
+
+To add more directories to the paths where other files are excluded then add them to the array through the `tc_common_dev_directories` filter.
+
 ## Contributors
 Otto42, pross, The theme review team

@@ -31,6 +31,13 @@ function check_main( $theme ) {
 			} elseif ( substr( $filename, -4 ) === '.css' && ! is_dir( $filename ) ) {
 				$css[ $filename ] = file_get_contents( $filename );
 			} else {
+				// In local development it might be useful to skip other files
+				// (non .php or .css files) in dev directories.
+				if ( apply_filters( 'tc_skip_development_directories', false ) ) {
+					if ( tc_is_other_file_in_dev_directory( $filename ) ) {
+						continue;
+					}
+				}
 				$other[ $filename ] = ( ! is_dir( $filename ) ) ? file_get_contents( $filename ) : '';
 			}
 		}
@@ -223,4 +230,30 @@ function tc_form() {
 	echo '<input name="s_info" type="checkbox" /> ' . esc_html__( 'Suppress INFO.', 'theme-check' );
 	wp_nonce_field( 'themecheck-nonce' );
 	echo '</form>';
+}
+
+/**
+ * Used to allow some directories to be skipped during development.
+ *
+ * @param  string  $filename a filename/path
+ * @return boolean
+ */
+function tc_is_other_file_in_dev_directory( $filename ) {
+	$skip     = false;
+	// Filterable List of dirs that you may want to skip other files in during
+	// development.
+	$dev_dirs = apply_filters(
+		'tc_common_dev_directories',
+		array(
+			'node_modules',
+			'vendor',
+		)
+	);
+	foreach ( $dev_dirs as $dev_dir ) {
+		if ( strpos( $filename, $dev_dir ) ) {
+			$skip = true;
+			break;
+		}
+	}
+	return $skip;
 }
