@@ -5,11 +5,11 @@ class Style_Tags implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 
 		checkcount();
-		$ret = true;
+		$ret       = true;
 		$filenames = array();
 
-		foreach( $css_files as $cssfile => $content ) {
-			if ( basename( $cssfile ) === 'style.css' ) { 
+		foreach ( $css_files as $cssfile => $content ) {
+			if ( basename( $cssfile ) === 'style.css' ) {
 				$data = get_theme_data_from_contents( $content );
 
 				if ( !$data[ 'Tags' ] ) {
@@ -21,9 +21,9 @@ class Style_Tags implements themecheck {
 					$allowed_tags       = self::get_allowed_tags();
 					$subject_tags       = self::get_subject_tags();
 					$subject_tags_count = 0;
-					$subject_tags_name = "";
+					$subject_tags_name  = '';
 
-					foreach( $data[ 'Tags' ] as $tag ) {
+					foreach ( $data['Tags'] as $tag ) {
 
 						if ( strpos( strtolower( $tag ), "accessibility-ready") !== false ) {
 							$this->error[] = '<span class="tc-lead tc-info">'. __('INFO','theme-check'). '</span>: ' . __( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.','theme-check' ) . ' ' . __('See <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' );
@@ -126,4 +126,4 @@ class Style_Tags implements themecheck {
         );
     }
 }
-$themechecks[] = new Style_Tags;
+$themechecks[] = new Style_Tags();
