@@ -95,6 +95,7 @@ class Style_Tags implements themecheck {
 			'featured-images',
 			'front-page-post-form',
 			'full-width-template',
+			'full-site-editing',
 			'microformats',
 			'post-formats',
 			'rtl-language-support',
