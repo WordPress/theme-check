@@ -17,6 +17,7 @@ class Bad_Checks implements themecheck {
 			'/pub-[0-9]{16}/i' => __( 'Google advertising code detected', 'theme-check' ),
 			'/sharesale/i' => __( 'Sharesale affiliate link detected', 'theme-check' ),
 			'/affiliate_id/i' => __( 'Potential affiliate link detected', 'theme-check' ),
+			'/(elementor_partner_id)|(wpbeaverbuilder.*?fla)/i' => __( 'Potential affiliate link detected', 'theme-check' ),
 			);
 
 		$grep = '';
