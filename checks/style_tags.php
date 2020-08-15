@@ -17,7 +17,7 @@ class Style_Tags implements themecheck {
 					. ' ('. basename( dirname( $cssfile)) . ')';
 				}
 				else {
-					$deprecated_tags = array("flexible-width","fixed-width","black","blue","brown","gray","green","orange","pink","purple","red","silver","tan","white","yellow","dark","light","fixed-layout","fluid-layout","responsive-layout","blavatar","holiday","photoblogging","seasonal");
+					$deprecated_tags    = array( 'flexible-width', 'fixed-width', 'black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'silver', 'tan', 'white', 'yellow', 'dark', 'light', 'fixed-layout', 'fluid-layout', 'responsive-layout', 'blavatar', 'holiday', 'photoblogging', 'seasonal' );
 					$allowed_tags       = self::get_allowed_tags();
 					$subject_tags       = self::get_subject_tags();
 					$subject_tags_count = 0;
