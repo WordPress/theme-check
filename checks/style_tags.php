@@ -15,8 +15,7 @@ class Style_Tags implements themecheck {
 				if ( !$data[ 'Tags' ] ) {
 					$this->error[] = '<span class="tc-lead tc-recommended">' . __('RECOMMENDED','theme-check') . '</span>: ' . __( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' )
 					. ' ('. basename( dirname( $cssfile)) . ')';
-				}
-				else {
+				} else {
 					$deprecated_tags    = array( 'flexible-width', 'fixed-width', 'black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'silver', 'tan', 'white', 'yellow', 'dark', 'light', 'fixed-layout', 'fluid-layout', 'responsive-layout', 'blavatar', 'holiday', 'photoblogging', 'seasonal' );
 					$allowed_tags       = self::get_allowed_tags();
 					$subject_tags       = self::get_subject_tags();
