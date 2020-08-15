@@ -64,65 +64,65 @@ class Style_Tags implements themecheck {
 
 	function getError() { return $this->error; }
 
-    /**
-     * Get full list of allowed tags - including subject tags.
-     *
-     * @return array
-     */
+	/**
+	 * Get full list of allowed tags - including subject tags.
+	 *
+	 * @return array
+	 */
 	public static function get_allowed_tags() {
 		$allowed_tags = array(
-            'grid-layout',
-            'one-column',
-            'two-columns',
-            'three-columns',
-            'four-columns',
-            'left-sidebar',
-            'right-sidebar',
-            'wide-blocks',
-            'flexible-header',
-            'footer-widgets',
-            'accessibility-ready',
-            'block-patterns',
-            'block-styles',
-            'buddypress',
-            'custom-background',
-            'custom-colors',
-            'custom-header',
-            'custom-logo',
-            'custom-menu',
-            'editor-style',
-            'featured-image-header',
-            'featured-images',
-            'front-page-post-form',
-            'full-width-template',
-            'microformats',
-            'post-formats',
-            'rtl-language-support',
-            'sticky-post',
-            'theme-options',
-            'threaded-comments',
-            'translation-ready',
-        );
-        return array_merge( $allowed_tags, self::get_subject_tags() );
+			'grid-layout',
+			'one-column',
+			'two-columns',
+			'three-columns',
+			'four-columns',
+			'left-sidebar',
+			'right-sidebar',
+			'wide-blocks',
+			'flexible-header',
+			'footer-widgets',
+			'accessibility-ready',
+			'block-patterns',
+			'block-styles',
+			'buddypress',
+			'custom-background',
+			'custom-colors',
+			'custom-header',
+			'custom-logo',
+			'custom-menu',
+			'editor-style',
+			'featured-image-header',
+			'featured-images',
+			'front-page-post-form',
+			'full-width-template',
+			'microformats',
+			'post-formats',
+			'rtl-language-support',
+			'sticky-post',
+			'theme-options',
+			'threaded-comments',
+			'translation-ready',
+		);
+		return array_merge( $allowed_tags, self::get_subject_tags() );
 	}
 
-    /**
-     * Get the list of subject tags.
-     *
-     * @return array
-     */
-    public static function get_subject_tags() {
-        return array(
-            'blog',
-            'e-commerce',
-            'education',
-            'entertainment',
-            'food-and-drink',
-            'holiday',
-            'news',
-            'photography',
-            'portfolio'
-        );
-    }
+	/**
+	 * Get the list of subject tags.
+	 *
+	 * @return array
+	 */
+	public static function get_subject_tags() {
+		return array(
+			'blog',
+			'e-commerce',
+			'education',
+			'entertainment',
+			'food-and-drink',
+			'holiday',
+			'news',
+			'photography',
+			'portfolio'
+		);
+	}
 }
 $themechecks[] = new Style_Tags();
