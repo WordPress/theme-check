@@ -83,6 +83,7 @@ class Style_Tags implements themecheck {
             'flexible-header',
             'footer-widgets',
             'accessibility-ready',
+            'block-patterns',
             'block-styles',
             'buddypress',
             'custom-background',
