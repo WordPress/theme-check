@@ -13,12 +13,12 @@ class Style_Tags implements themecheck {
 				$data = get_theme_data_from_contents( $content );
 
 				if ( ! $data['Tags'] ) {
-                    $this->error[] = '<span class="tc-lead tc-recommended">' . __('RECOMMENDED','theme-check') . '</span>: ' . __( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' )
+					$this->error[] = '<span class="tc-lead tc-recommended">' . __('RECOMMENDED','theme-check') . '</span>: ' . __( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' )
 					. ' ('. basename( dirname( $cssfile)) . ')';
 				} else {
-					$deprecated_tags    = array( 'flexible-width', 'fixed-width', 'black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'silver', 'tan', 'white', 'yellow', 'dark', 'light', 'fixed-layout', 'fluid-layout', 'responsive-layout', 'blavatar', 'holiday', 'photoblogging', 'seasonal' );
-					$allowed_tags       = self::get_allowed_tags();
-					$subject_tags       = self::get_subject_tags();
+					$deprecated_tags    = $this->get_deprecated_tags();
+					$allowed_tags       = $this->get_allowed_tags();
+					$subject_tags       = $this->get_subject_tags();
 					$subject_tags_count = 0;
 					$subject_tags_name  = '';
 
@@ -69,7 +69,7 @@ class Style_Tags implements themecheck {
 	 *
 	 * @return array
 	 */
-	public static function get_allowed_tags() {
+	private function get_allowed_tags() {
 		$allowed_tags = array(
 			'grid-layout',
 			'one-column',
@@ -112,7 +112,7 @@ class Style_Tags implements themecheck {
 	 *
 	 * @return array
 	 */
-	public static function get_subject_tags() {
+	private function get_subject_tags() {
 		return array(
 			'blog',
 			'e-commerce',
@@ -122,7 +122,36 @@ class Style_Tags implements themecheck {
 			'holiday',
 			'news',
 			'photography',
-			'portfolio'
+			'portfolio',
+		);
+	}
+
+	private function get_depricated_tags() {
+		return array(
+			'flexible-width',
+			'fixed-width',
+			'black',
+			'blue',
+			'brown',
+			'gray',
+			'green',
+			'orange',
+			'pink',
+			'purple',
+			'red',
+			'silver',
+			'tan',
+			'white',
+			'yellow',
+			'dark',
+			'light',
+			'fixed-layout',
+			'fluid-layout',
+			'responsive-layout',
+			'blavatar',
+			'holiday',
+			'photoblogging',
+			'seasonal',
 		);
 	}
 }
