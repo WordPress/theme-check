@@ -14,7 +14,10 @@ class Bad_Checks implements themecheck {
 			'/uudecode/ims' => __( 'uudecode() is not allowed', 'theme-check' ),
 			'/str_rot13/ims' => __( 'str_rot13() is not allowed', 'theme-check' ),
 			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
-			'/pub-[0-9]{16}/i' => __( 'Google advertising code detected', 'theme-check' )
+			'/pub-[0-9]{16}/i' => __( 'Google advertising code detected', 'theme-check' ),
+			'/sharesale/i' => __( 'Sharesale affiliate link detected', 'theme-check' ),
+			'/affiliate_id/i' => __( 'Potential affiliate link detected', 'theme-check' ),
+			'/(elementor_partner_id)|(wpbeaverbuilder.*?fla)/i' => __( 'Potential affiliate link detected', 'theme-check' ),
 			);
 
 		$grep = '';
