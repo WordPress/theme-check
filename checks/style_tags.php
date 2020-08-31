@@ -126,7 +126,7 @@ class Style_Tags implements themecheck {
 		);
 	}
 
-	private function get_depricated_tags() {
+	private function get_deprecated_tags() {
 		return array(
 			'flexible-width',
 			'fixed-width',
