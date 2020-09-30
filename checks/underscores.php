@@ -17,7 +17,7 @@ class UnderscoresCheck implements themecheck {
 		if ( ! empty( $data['AuthorURI'] ) || ! empty( $data['URI'] ) ) {
 
 			if ( stripos( $data['URI'], 'underscores.me' ) || stripos( $data['AuthorURI'], 'underscores.me' ) ) {
-				$this->error[] .= __( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Using underscores.me as Theme URI or Autor URI is not allowed.', 'theme-check' ) );
+				$this->error[] .= __( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Using underscores.me as Theme URI or Author URI is not allowed.', 'theme-check' ) );
 				$ret = false;
 			}
 		}
