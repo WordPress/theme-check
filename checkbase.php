@@ -351,6 +351,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Comment_Reply
 			|| $check instanceof Basic_Checks
 			|| $check instanceof NavMenuCheck
+			|| $check instanceof PostThumbnailCheck
 		) {
 			unset( $themechecks[ $key ] );
 		}
