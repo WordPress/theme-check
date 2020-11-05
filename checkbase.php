@@ -347,4 +347,6 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 
 	// Add FSE specific checks.
 	$themechecks[] = new FSE_Required_Files();
+
+	return true;
 }
