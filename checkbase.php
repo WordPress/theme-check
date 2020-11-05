@@ -26,19 +26,6 @@ foreach ( glob( dirname( __FILE__ ) . "/{$dir}/*.php" ) as $file ) {
 do_action( 'themecheck_checks_loaded' );
 
 function run_themechecks( $php, $css, $other ) {
-	/*
-	echo '<pre>';
-	foreach( $php as $key => $value ) {
-		var_dump( $key );
-	}
-
-	foreach( $other as $key => $value ) {
-		var_dump( $key );
-	}
-	echo '</pre>';
-	*/
-
-
 	global $themechecks;
 	$pass = true;
 
