@@ -26,8 +26,24 @@ foreach ( glob( dirname( __FILE__ ) . "/{$dir}/*.php" ) as $file ) {
 do_action( 'themecheck_checks_loaded' );
 
 function run_themechecks( $php, $css, $other ) {
+	/*
+	echo '<pre>';
+	foreach( $php as $key => $value ) {
+		var_dump( $key );
+	}
+
+	foreach( $other as $key => $value ) {
+		var_dump( $key );
+	}
+	echo '</pre>';
+	*/
+
+
 	global $themechecks;
 	$pass = true;
+
+	tc_adapt_checks_for_fse_themes( $php, $css, $other );
+
 	foreach ( $themechecks as $check ) {
 		if ( $check instanceof themecheck ) {
 			$pass = $pass & $check->check( $php, $css, $other );
@@ -297,4 +313,39 @@ function tc_get_theme_data( $theme_file ) {
 		'Template Version' => $theme->display( 'Template Version', false, false ),
 	);
 	return $theme_data;
+}
+
+/**
+ * Adapt the Theme Checks if the theme is an experiment Full-Site Editing theme.
+ *
+ * @param array $php_files   The theme's PHP files.
+ * @param array $css_files   The theme's CSS files.
+ * @param array $other_files Any other theme files.
+ *
+ * @return bool Whether the theme checks were adapted for FSE or not.
+ */
+function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) {
+	global $themechecks;
+
+	// Get a list of all non PHP and CSS file paths, relative to the theme root.
+	$other_filenames = array();
+	foreach ( $other_files as $path => $contents ) {
+		$other_filenames[] = tc_filename( $path );
+	}
+
+	// Check whether this is a FSE theme by searching for an index.html block template.
+	if ( ! in_array( 'block-templates/index.html', $other_filenames, true ) ) {
+		return false;
+	}
+
+	// Change the required files check to look for `index.html` instead of `index.php`.
+	foreach ( $themechecks as $key => $check ) {
+		if ( ! $check instanceof File_Checks ) {
+			continue;
+		}
+
+		unset( $themechecks[ $key ] );
+
+		$themechecks[] = new FSE_Required_Files();
+	}
 }
