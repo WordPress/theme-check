@@ -338,14 +338,15 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 		return false;
 	}
 
-	// Change the required files check to look for `index.html` instead of `index.php`.
+	// Remove theme checks that do not apply to FSE themes.
 	foreach ( $themechecks as $key => $check ) {
-		if ( ! $check instanceof File_Checks ) {
-			continue;
+		if ( $check instanceof File_Checks
+			|| $check instanceof TagCheck
+		) {
+			unset( $themechecks[ $key ] );
 		}
-
-		unset( $themechecks[ $key ] );
-
-		$themechecks[] = new FSE_Required_Files();
 	}
+
+	// Add FSE specific checks.
+	$themechecks[] = new FSE_Required_Files();
 }
