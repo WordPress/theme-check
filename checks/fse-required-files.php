@@ -16,13 +16,7 @@ class FSE_Required_Files implements themecheck {
 
 		$filenames = array();
 
-		foreach ( $php_files as $php_key => $phpfile ) {
-			array_push( $filenames, tc_filename( $php_key ) );
-		}
 		foreach ( $other_files as $php_key => $phpfile ) {
-			array_push( $filenames, tc_filename( $php_key ) );
-		}
-		foreach ( $css_files as $php_key => $phpfile ) {
 			array_push( $filenames, tc_filename( $php_key ) );
 		}
 
