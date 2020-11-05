@@ -342,6 +342,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	foreach ( $themechecks as $key => $check ) {
 		if ( $check instanceof File_Checks
 			|| $check instanceof TagCheck
+			|| $check instanceof Style_Needed
 		) {
 			unset( $themechecks[ $key ] );
 		}
