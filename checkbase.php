@@ -340,8 +340,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 
 	// Remove theme checks that do not apply to FSE themes.
 	foreach ( $themechecks as $key => $check ) {
-		if ( $check instanceof File_Checks
-			|| $check instanceof TagCheck
+		if ( $check instanceof TagCheck
 			|| $check instanceof Style_Needed
 			|| $check instanceof WidgetsCheck
 			|| $check instanceof GravatarCheck

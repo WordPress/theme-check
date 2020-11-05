@@ -29,8 +29,6 @@ class FSE_Required_Files implements themecheck {
 		$musthave = array(
 			'block-templates/index.html',
 			'experimental-theme.json',
-			'readme.txt',
-			'style.css',
 		);
 
 		foreach ( $musthave as $file ) {
