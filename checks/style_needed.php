@@ -17,14 +17,6 @@ class Style_Needed implements themecheck {
 			'[ \t\/*#]*Text Domain:' => __( '<strong>Text Domain:</strong> is missing from your style.css header.', 'theme-check' ),
 			'[ \t\/*#]*Tested up to:' => __( '<strong>Tested up to:</strong> is missing from your style.css header. Also, this should be numbers only, so <em>5.0</em> and not <em>WP 5.0</em>', 'theme-check' ),
 			'[ \t\/*#]*Requires PHP:' => __( '<strong>Requires PHP:</strong> is missing from your style.css header.', 'theme-check' ),
-			'\.sticky' => __( '<strong>.sticky</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.bypostauthor' => __( '<strong>.bypostauthor</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.alignleft' => __( '<strong>.alignleft</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.alignright' => __( '<strong>.alignright</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.aligncenter' => __( '<strong>.aligncenter</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.wp-caption' => __( '<strong>.wp-caption</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.wp-caption-text' => __( '<strong>.wp-caption-text</strong> css class is needed in your theme css.', 'theme-check' ),
-			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is needed in your theme css.', 'theme-check' ),
 			'\.screen-reader-text' => __( '<strong>.screen-reader-text</strong> css class is needed in your theme css. See See: <a href="http://codex.wordpress.org/CSS#WordPress_Generated_Classes">the Codex</a> for an example implementation.', 'theme-check' )
 		);
 
