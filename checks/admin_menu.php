@@ -31,7 +31,7 @@ class AdminMenu implements themecheck {
 // Note to TGMPA: Stop trying to bypass theme check. 
 
 		$checks = array(
-			'/(?<!function)[^_>:](add_[^_\'",();]+?_page)/' => _x( 
+			'/(?<!function)[^_>:](add_[^_\'",();][^\s]+?_page)/' => _x( 
 					'Themes must not use <strong>%s()</strong>.',
 					'function name',
 					'theme-check' 
