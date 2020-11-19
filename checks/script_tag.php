@@ -19,7 +19,7 @@ class Script_Tag implements themecheck {
 			if ( 'footer.php' === $filename && preg_match( '/<script/', $file_content ) || 'header.php' === $filename && preg_match( '/<script/', $file_content )) {
 				$error         = '/<script/';
 				$grep          = tc_preg( $error, $file_path );
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a script tag in %1$s. Scripts and styles needs to be enqueued or added via a hook, not hard coded.', 'theme-check' ),
+				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a script tag in %s. Scripts and styles needs to be enqueued or added via a hook, not hard coded.', 'theme-check' ),
 				'<strong>' . $filename . '</strong>' ) . $grep;
 			}
 		}
