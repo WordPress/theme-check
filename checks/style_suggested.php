@@ -21,6 +21,23 @@ class Style_Suggested implements themecheck {
 			}
 		}
 
+		$css_class_checks = array(
+			'\.sticky' => __( '<strong>.sticky</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.bypostauthor' => __( '<strong>.bypostauthor</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.alignleft' => __( '<strong>.alignleft</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.alignright' => __( '<strong>.alignright</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.aligncenter' => __( '<strong>.aligncenter</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.wp-caption' => __( '<strong>.wp-caption</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.wp-caption-text' => __( '<strong>.wp-caption-text</strong> css class is recommended in your theme css.', 'theme-check' ),
+			'\.gallery-caption' => __( '<strong>.gallery-caption</strong> css class is recommended in your theme css.', 'theme-check' ),
+		);
+
+		foreach ($css_class_checks as $key => $check) {
+			if ( !preg_match( '/' . $key . '/i', $css, $matches ) ) {
+				$this->error[] = sprintf('<span class="tc-lead tc-recommended">' . __('RECOMMENDED', 'theme-check' ) . '</span>: <strong>' . $check . '</strong>' );
+			}
+		}
+
 		return $ret;
 	}
 
