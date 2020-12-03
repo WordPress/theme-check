@@ -31,7 +31,6 @@ class Script_Tag implements themecheck {
 					),
 					$grep
 				);
-				'<strong>' . $filename . '</strong>' ) . $grep;
 			}
 		}
 
