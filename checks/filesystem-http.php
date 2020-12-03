@@ -1,5 +1,5 @@
 <?php
-class MalwareCheck implements themecheck {
+class FilesystemHttpCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
@@ -46,4 +46,4 @@ class MalwareCheck implements themecheck {
 
 	function getError() { return $this->error; }
 }
-$themechecks[] = new MalwareCheck;
+$themechecks[] = new FilesystemHttpCheck;
