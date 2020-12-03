@@ -36,7 +36,6 @@ class FilesystemHttpCheck implements themecheck {
 							$check,
 							$grep
 						);
-						$ret = false;
 					}
 				}
 			}
