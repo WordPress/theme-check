@@ -53,7 +53,7 @@ class AdminMenu implements themecheck {
 						$notallowed = sprintf( $check, $match );
 
 						$this->error[] = sprintf( 
-							'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: <strong>%1$s</strong>. %2$s%3$s%', 
+							'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: <strong>%1$s</strong>. %2$s %3$s', 
 							$filename,
 							$notallowed,
 							$grep
