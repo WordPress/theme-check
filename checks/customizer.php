@@ -25,7 +25,7 @@ class CustomizerCheck implements themecheck {
 						/* Clean up our match to be able to present the results better. */
 						$match         = preg_split( '/,/', $match );
 						$filename      = tc_filename( $file_path );
-						$grep          = tc_preg( $match[0], $file_path );
+						$grep          = tc_preg( '/' . preg_quote( $match[0], '/' ) . '/', $file_path );
 						$grep          = preg_split( '/,/', $grep );
 						$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Found a Customizer setting called %1$s in %2$s that did not have a sanitization callback function. ', 'theme-check' ) . __( 'Every call to the <strong>add_setting()</strong> method needs to have a sanitization callback function passed.', 'theme-check' ),
 							'<strong>' . $match[0] . '</strong>',
