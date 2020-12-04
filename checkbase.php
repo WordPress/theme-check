@@ -247,16 +247,6 @@ function get_theme_data_from_contents( $theme_data ) {
  *
  */
 function tc_get_themes() {
-
-	if ( ! class_exists( 'WP_Theme' ) ) {
-		return wp_get_theme();
-	}
-
-	global $wp_themes;
-	if ( isset( $wp_themes ) ) {
-		return $wp_themes;
-	}
-
 	$themes    = wp_get_themes();
 	$wp_themes = array();
 
