@@ -11,7 +11,7 @@ class FilesystemHttpCheck implements themecheck {
 			'/[^a-z0-9](?<!_)(fopen|fclose|fread|fwrite|file_put_contents)\s?\(/i' => __( 'File write operations should are avoided unless necessary', 'theme-check' ),
 
 			// WP_Filesystem should only be used for theme upgrade operations. It should not be used to avoid the fopen()/file_put_contents()/etc warnings.
-			'/[^a-z0-9](?<!_)(WP_Filesystem)\s?\(/i' => __( 'WP_Filesystem should only be used for theme upgrade operations, not for all file operations. Consider using file_get_contents(), scandir(), or glob()', 'theme-check' ),
+			'/[^a-z0-9](?<!_)(WP_Filesystem)\s?\(/i'  => __( 'WP_Filesystem should only be used for theme upgrade operations, not for all file operations. Consider using file_get_contents(), scandir(), or glob()', 'theme-check' ),
 
 			// HTTP Requests should use WP_HTTP.
 			'/[^a-z0-9](?<!_)(curl_exec|curl_init|fsockopen|pfsockopen|stream_context_create)\s?\(/' => __( 'HTTP requests should be made using the WordPress HTTP wrappers, such as wp_safe_remote_get() and wp_safe_remote_post()', 'theme-check' ),
@@ -28,12 +28,16 @@ class FilesystemHttpCheck implements themecheck {
 						$error = ltrim( $match, '(' );
 						$error = rtrim( $error, '(' );
 
-						$grep = tc_grep( $error, $php_key );
+						$grep          = tc_grep( $error, $php_key );
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( '%1$s was found in the file %2$s %3$s. %4$s', 'theme-check' ),
-							'<strong>' . $error. '</strong>',
-							'<strong>' . $filename . '</strong>',
-							$check,
+							'<span class="tc-lead tc-warning">%s</span>: %s %s',
+							__( 'WARNING', 'theme-check' ),
+							sprintf(
+								__( '%1$s was found in the file %3$s %4$s.', 'theme-check' ),
+								'<strong>' . $error . '</strong>',
+								'<strong>' . $filename . '</strong>',
+								$check
+							),
 							$grep
 						);
 					}
@@ -43,6 +47,8 @@ class FilesystemHttpCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new FilesystemHttpCheck;
+$themechecks[] = new FilesystemHttpCheck();

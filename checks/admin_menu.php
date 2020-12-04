@@ -6,38 +6,35 @@ class AdminMenu implements themecheck {
 
 		$ret = true;
 
-
-// Check for levels deprecated in 2.0 in creating menus.
+		// Check for levels deprecated in 2.0 in creating menus.
 
 		$checks = array(
 			'/([^_](add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page)\s?\([^,]*,[^,]*,\s[\'|"]?(level_[0-9]|[0-9])[^;|\r|\r\n]*)/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="https://wordpress.org/support/article/roles-and-capabilities/">Roles and Capabilities</a>', 'theme-check' ),
-			'/[^a-z0-9](current_user_can\s?\(\s?[\'\"]level_[0-9][\'\"]\s?\))[^\r|\r\n]*/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="https://wordpress.org/support/article/roles-and-capabilities/">Roles and Capabilities</a>', 'theme-check' )
-			);
+			'/[^a-z0-9](current_user_can\s?\(\s?[\'\"]level_[0-9][\'\"]\s?\))[^\r|\r\n]*/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="https://wordpress.org/support/article/roles-and-capabilities/">Roles and Capabilities</a>', 'theme-check' ),
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
-					$filename = tc_filename( $php_key );
-					$grep = ( isset( $matches[2] ) ) ? tc_grep( $matches[2], $php_key ) : tc_grep( $matches[1], $php_key );
+					$filename      = tc_filename( $php_key );
+					$grep          = ( isset( $matches[2] ) ) ? tc_grep( $matches[2], $php_key ) : tc_grep( $matches[1], $php_key );
 					$this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: <strong>%1$s</strong>. %2$s%3$s', $filename, $check, $grep );
-					$ret = false;
+					$ret           = false;
 				}
 			}
 		}
 
-
-// Check for add_admin_page's, except for add_theme_page
-// Note to TGMPA: Stop trying to bypass theme check. 
+		// Check for add_admin_page's, except for add_theme_page
+		// Note to TGMPA: Stop trying to bypass theme check.
 
 		$checks = array(
-			'/(?<!function)[^_>:](add_[^_\'",();]+?_page)/' => _x( 
-					'Themes must not use <strong>%s()</strong>.',
-					'function name',
-					'theme-check' 
-				)
-			);
-
+			'/(?<!function)[^_>:](add_[^_\'",();]+?_page)/' => _x(
+				'Themes must not use <strong>%s()</strong>.',
+				'function name',
+				'theme-check'
+			),
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
@@ -47,18 +44,18 @@ class AdminMenu implements themecheck {
 						if ( in_array( $match, array( 'add_theme_page', 'add_menu_page', 'add_submenu_page' ), true ) ) {
 							continue;
 						}
-						$filename = tc_filename( $php_key );
-						$error = ltrim( rtrim( $match, '(' ) );
-						$grep = tc_grep( $error, $php_key );
+						$filename   = tc_filename( $php_key );
+						$error      = ltrim( rtrim( $match, '(' ) );
+						$grep       = tc_grep( $error, $php_key );
 						$notallowed = sprintf( $check, $match );
 
-						$this->error[] = sprintf( 
-							'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: <strong>%1$s</strong>. %2$s %3$s', 
+						$this->error[] = sprintf(
+							'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: <strong>%1$s</strong>. %2$s %3$s',
 							$filename,
 							$notallowed,
 							$grep
 						);
-						$ret = false;
+						$ret           = false;
 					}
 				}
 			}
@@ -67,7 +64,9 @@ class AdminMenu implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new AdminMenu;
+$themechecks[] = new AdminMenu();

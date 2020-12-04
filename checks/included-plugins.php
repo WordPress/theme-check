@@ -12,23 +12,32 @@ class IncludedPlugins implements themecheck {
 		}
 
 		$blocklist = array(
-			'\.zip'	=> __( 'Zipped Plugin', 'theme-check' ),
+			'\.zip' => __( 'Zipped Plugin', 'theme-check' ),
 		);
 
 		checkcount();
 
 		foreach ( $blocklist as $file => $reason ) {
 			if ( $filename = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$error = implode( ' ', array_unique( $filename ) );
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED','theme-check' ) . '</span>: ' . __( '<strong>Zip file found.</strong> Plugins are not allowed in themes. The zip file found was <em>%s</em>.', 'theme-check' ), $error );
-				$ret = false;
+				$error         = implode( ' ', array_unique( $filename ) );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( '<strong>Zip file found.</strong> Plugins are not allowed in themes. The zip file found was <em>%s</em>.', 'theme-check' ),
+						$error
+					)
+				);
+				$ret           = false;
 			}
 		}
 
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new IncludedPlugins;
+$themechecks[] = new IncludedPlugins();

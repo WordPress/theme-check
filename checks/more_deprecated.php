@@ -22,7 +22,7 @@ class More_Deprecated implements themecheck {
 				'text_direction'       => 'is_rtl()',
 				'feed_url'             => "get_feed_link( 'feed' ), where feed is rss, rss2 or atom",
 			),
-			'bloginfo' => array(
+			'bloginfo'     => array(
 				'home'                 => 'echo esc_url( home_url() )',
 				'url'                  => 'echo esc_url( home_url() )',
 				'wpurl'                => 'echo esc_url( site_url() )',
@@ -32,10 +32,10 @@ class More_Deprecated implements themecheck {
 				'text_direction'       => 'is_rtl()',
 				'feed_url'             => "echo esc_url( get_feed_link( 'feed' ) ), where feed is rss, rss2 or atom",
 			),
-			'get_option' => array(
+			'get_option'   => array(
 				'home'     => 'home_url()',
 				'site_url' => 'site_url()',
-			)
+			),
 		);
 
 		foreach ( $php_files as $php_key => $php_file ) {
@@ -59,6 +59,8 @@ class More_Deprecated implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new More_Deprecated;
+$themechecks[] = new More_Deprecated();

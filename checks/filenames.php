@@ -20,7 +20,7 @@ class File_Checks implements themecheck {
 
 		$allowlist = array(
 			'wpml-config.xml',
-			'loco.xml'
+			'loco.xml',
 		);
 
 		$blocklist = array(
@@ -57,10 +57,10 @@ class File_Checks implements themecheck {
 
 		foreach ( $blocklist as $file => $reason ) {
 			if ( $filename     = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$commons       = array_intersect( $filename, $allowlist );
+				$commons = array_intersect( $filename, $allowlist );
 				foreach ( $commons as $common ) {
-					if (( $allowed_key = array_search($common, $filename)) !== false) {
-						unset( $filename[$allowed_key] );
+					if ( ( $allowed_key = array_search( $common, $filename ) ) !== false ) {
+						unset( $filename[ $allowed_key ] );
 					}
 				}
 				if ( empty( $filename ) ) {
@@ -88,7 +88,9 @@ class File_Checks implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
 $themechecks[] = new File_Checks();

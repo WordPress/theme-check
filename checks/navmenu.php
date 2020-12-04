@@ -8,7 +8,7 @@ class NavMenuCheck implements themecheck {
 		$ret        = true;
 		$name_check = false;
 
-		$php        = implode( ' ', $php_files );
+		$php = implode( ' ', $php_files );
 
 		checkcount();
 		if ( strpos( $php, 'nav_menu' ) === false ) {
@@ -37,7 +37,8 @@ class NavMenuCheck implements themecheck {
 				if ( strpos( $menu_part[0], '$' ) !== false && strpos( $menu_part[0], 'theme_location' ) === false ) {
 					$menu_args     = explode( '$', $menu_part[0], 1 );
 					$name          = explode( ')', $menu_args[0] );
-					$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . sprintf( __( 'A menu without a theme_location was found in %1$s. %2$s is used inside wp_nav_menu(). You must manually check if the theme_location is included.', 'theme-check' ),
+					$this->error[] = '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . sprintf(
+						__( 'A menu without a theme_location was found in %1$s. %2$s is used inside wp_nav_menu(). You must manually check if the theme_location is included.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>',
 						'<code>' . $name[0] . '</code>'
 					);
@@ -45,7 +46,8 @@ class NavMenuCheck implements themecheck {
 				} else {
 					checkcount();
 					if ( strpos( $menu_part[0], 'theme_location' ) === false ) {
-						$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'A menu without a theme_location was found in %1$s.', 'theme-check' ),
+						$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf(
+							__( 'A menu without a theme_location was found in %1$s.', 'theme-check' ),
 							'<strong>' . $filename . '</strong>'
 						);
 						$ret           = false;
@@ -56,7 +58,8 @@ class NavMenuCheck implements themecheck {
 				// We only need to warn for the menu name if theme location is not set.
 				checkcount();
 				if ( $name_check === true && preg_match( '/("|\')menu("|\').*?=>/', $menu_part[0] ) ) {
-					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'A menu name is being used for a menu in %1$s. By using menu name, the menu would be required to have the exact same name in the WordPress admin area. Use a theme_location instead.', 'theme-check' ),
+					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf(
+						__( 'A menu name is being used for a menu in %1$s. By using menu name, the menu would be required to have the exact same name in the WordPress admin area. Use a theme_location instead.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>'
 					);
 					$ret           = false;
@@ -67,7 +70,9 @@ class NavMenuCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
 $themechecks[] = new NavMenuCheck();

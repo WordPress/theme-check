@@ -14,16 +14,19 @@ class IncludeCheck implements themecheck {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
 					$filename = tc_filename( $php_key );
-					$error = '/(?<![a-z0-9_\'"])(?:requir|includ)e(?:_once)?\s?[\'"\(]/';
-					$grep = tc_preg( $error, $php_key );
-					if ( basename($filename) !== 'functions.php' ) $this->error[] = sprintf ( '<span class="tc-lead tc-info">'.__('INFO','theme-check').'</span>: '.__('%1$s %2$s %3$s', 'theme-check' ), '<strong>' . $filename . '</strong>', $check, $grep );
+					$error    = '/(?<![a-z0-9_\'"])(?:requir|includ)e(?:_once)?\s?[\'"\(]/';
+					$grep     = tc_preg( $error, $php_key );
+					if ( basename( $filename ) !== 'functions.php' ) {
+						$this->error[] = sprintf( '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s %3$s', 'theme-check' ), '<strong>' . $filename . '</strong>', $check, $grep );
+					}
 				}
 			}
-
 		}
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new IncludeCheck;
+$themechecks[] = new IncludeCheck();

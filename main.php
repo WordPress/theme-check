@@ -179,8 +179,10 @@ function tc_intro() {
 		esc_html__( 'Theme Check is maintained by %1$s and %2$s.', 'theme-check' ),
 		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
 		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
-		); ?></p>
-	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/'); ?></p>
+	);
+	?>
+		</p>
+	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/' ); ?></p>
 	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/WordPress/theme-check' ); ?></p>
 	<h3><?php esc_html_e( 'Testers', 'theme-check' ); ?></h3>
 	<p><a href="https://make.wordpress.org/themes/"><?php esc_html_e( 'The WordPress Themes Team', 'theme-check' ); ?></a></p>
@@ -215,13 +217,13 @@ function tc_form() {
 	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
 
-	$selected_theme = isset( $_POST['themename'] ) ? $_POST['themename'] : get_stylesheet();
+	$selected_theme = isset( $_POST['themename'] ) ? wp_unslash( $_POST['themename'] ) : get_stylesheet();
 	foreach ( $themes as $name => $location ) {
 		printf(
 			'<option %s value="%s">%s</option>',
 			selected( $selected_theme, $location['Stylesheet'], false ),
 			esc_attr( $location['Stylesheet'] ),
-			$name
+			esc_html( $name )
 		);
 	}
 
@@ -239,11 +241,11 @@ function tc_form() {
 /**
  * Used to allow some directories to be skipped during development.
  *
- * @param  string  $filename a filename/path
+ * @param  string $filename a filename/path.
  * @return boolean
  */
 function tc_is_other_file_in_dev_directory( $filename ) {
-	$skip     = false;
+	$skip = false;
 	// Filterable List of dirs that you may want to skip other files in during
 	// development.
 	$dev_dirs = apply_filters(

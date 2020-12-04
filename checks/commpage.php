@@ -9,18 +9,20 @@ class CommentPaginationCheck implements themecheck {
 		// combine all the php files into one string to make it easier to search
 		$php = implode( ' ', $php_files );
 		checkcount();
-		if (strpos( $php, 'paginate_comments_links' ) === false &&
+		if ( strpos( $php, 'paginate_comments_links' ) === false &&
 			strpos( $php, 'the_comments_navigation' ) === false &&
 			strpos( $php, 'the_comments_pagination' ) === false &&
-		    (strpos( $php, 'next_comments_link' ) === false && strpos( $php, 'previous_comments_link' ) === false ) ) {
+			( strpos( $php, 'next_comments_link' ) === false && strpos( $php, 'previous_comments_link' ) === false ) ) {
 
-			$this->error[] = '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('The theme doesn\'t have comment pagination code in it. Use <strong>paginate_comments_links()</strong> or <strong>the_comments_navigation</strong> or <strong>the_comments_pagination</strong> or <strong>next_comments_link()</strong> and <strong>previous_comments_link()</strong> to add comment pagination.', 'theme-check' );
-			$ret = false;
+			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'The theme doesn\'t have comment pagination code in it. Use <strong>paginate_comments_links()</strong> or <strong>the_comments_navigation</strong> or <strong>the_comments_pagination</strong> or <strong>next_comments_link()</strong> and <strong>previous_comments_link()</strong> to add comment pagination.', 'theme-check' );
+			$ret           = false;
 		}
 
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new CommentPaginationCheck;
+$themechecks[] = new CommentPaginationCheck();

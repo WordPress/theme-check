@@ -6,7 +6,7 @@
 class Script_Tag implements themecheck {
 	protected $error = array();
 
-		function check( $php_files, $css_files, $other_files ) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
@@ -24,7 +24,8 @@ class Script_Tag implements themecheck {
 				$error         = '/<script/i';
 				$grep          = tc_preg( $error, $file_path );
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: %s %s',
+					'<span class="tc-lead tc-required">%s</span>: %s %s',
+					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
 						__( 'Found a script tag in %s. Scripts and styles needs to be enqueued or added via a hook, not hard coded.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>'
@@ -37,6 +38,8 @@ class Script_Tag implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 $themechecks[] = new Script_Tag();

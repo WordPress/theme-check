@@ -5,31 +5,31 @@ class LineEndingsCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 		foreach ( $php_files as $php_key => $phpfile ) {
-			if (preg_match("/\r\n/",$phpfile)) {
-				if (preg_match("/[^\r]\n/",$phpfile)) {
-					$filename = tc_filename( $php_key );
-					$this->error[] = sprintf('<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Both DOS and UNIX style line endings were found in the file %1$s. This causes a problem with SVN repositories and must be corrected before the theme can be accepted. Please change the file to use only one style of line endings.', 'theme-check'), '<strong>' . $filename . '</strong>' );
-					$ret = false;
+			if ( preg_match( "/\r\n/", $phpfile ) ) {
+				if ( preg_match( "/[^\r]\n/", $phpfile ) ) {
+					$filename      = tc_filename( $php_key );
+					$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Both DOS and UNIX style line endings were found in the file %1$s. This causes a problem with SVN repositories and must be corrected before the theme can be accepted. Please change the file to use only one style of line endings.', 'theme-check' ), '<strong>' . $filename . '</strong>' );
+					$ret           = false;
 				}
 			}
 		}
 		foreach ( $css_files as $css_key => $cssfile ) {
-			if (preg_match("/\r\n/",$cssfile)) {
-				if (preg_match("/[^\r]\n/",$cssfile)) {
-					$filename = tc_filename( $css_key );
-					$this->error[] = sprintf('<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Both DOS and UNIX style line endings were found in the file %1$s. This causes a problem with SVN repositories and must be corrected before the theme can be accepted. Please change the file to use only one style of line endings.', 'theme-check'), '<strong>' . $filename . '</strong>' );
-					$ret = false;
+			if ( preg_match( "/\r\n/", $cssfile ) ) {
+				if ( preg_match( "/[^\r]\n/", $cssfile ) ) {
+					$filename      = tc_filename( $css_key );
+					$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Both DOS and UNIX style line endings were found in the file %1$s. This causes a problem with SVN repositories and must be corrected before the theme can be accepted. Please change the file to use only one style of line endings.', 'theme-check' ), '<strong>' . $filename . '</strong>' );
+					$ret           = false;
 				}
 			}
 		}
 		foreach ( $other_files as $oth_key => $othfile ) {
-			$e = pathinfo($oth_key);
-			if ( isset( $e['extension'] ) && in_array( $e['extension'], array( 'txt','js' ) ) ) {
-				if (preg_match("/\r\n/",$othfile)) {
-					if (preg_match("/[^\r]\n/",$othfile)) {
-						$filename = tc_filename( $oth_key );
-					$this->error[] = sprintf('<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__('Both DOS and UNIX style line endings were found in the file %1$s. This causes a problem with SVN repositories and must be corrected before the theme can be accepted. Please change the file to use only one style of line endings.', 'theme-check'), '<strong>' . $filename . '</strong>' );
-						$ret = false;
+			$e = pathinfo( $oth_key );
+			if ( isset( $e['extension'] ) && in_array( $e['extension'], array( 'txt', 'js' ) ) ) {
+				if ( preg_match( "/\r\n/", $othfile ) ) {
+					if ( preg_match( "/[^\r]\n/", $othfile ) ) {
+						$filename      = tc_filename( $oth_key );
+						$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Both DOS and UNIX style line endings were found in the file %1$s. This causes a problem with SVN repositories and must be corrected before the theme can be accepted. Please change the file to use only one style of line endings.', 'theme-check' ), '<strong>' . $filename . '</strong>' );
+						$ret           = false;
 					}
 				}
 			}
@@ -37,7 +37,9 @@ class LineEndingsCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new LineEndingsCheck;
+$themechecks[] = new LineEndingsCheck();

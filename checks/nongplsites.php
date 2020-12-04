@@ -13,17 +13,17 @@ class NonGPLCheck implements themecheck {
 		checkcount();
 
 		$link_list = array(
-			'unsplash'            => 'https://unsplash.com/license',
-			'pixabay'             => 'https://pixabay.com/service/license/',
-			'freeimages'          => 'https://www.freeimages.com/license',
-			'photopin'            => 'http://photopin.com/faq',
-			'splitshire'          => 'https://www.splitshire.com/licence/',
-			'freepik'             => 'https://www.freepikcompany.com/legal',
-			'flaticon'            => 'https://www.freepikcompany.com/legal',
-			'pikwizard'           => 'https://pikwizard.com/standard-license',
-			'stock.adobe'         => 'https://stock.adobe.com/license-terms',
-			'elements.envato'     => 'https://elements.envato.com/license-terms',
-			'undraw.co'           => 'https://undraw.co/licenses',
+			'unsplash'        => 'https://unsplash.com/license',
+			'pixabay'         => 'https://pixabay.com/service/license/',
+			'freeimages'      => 'https://www.freeimages.com/license',
+			'photopin'        => 'http://photopin.com/faq',
+			'splitshire'      => 'https://www.splitshire.com/licence/',
+			'freepik'         => 'https://www.freepikcompany.com/legal',
+			'flaticon'        => 'https://www.freepikcompany.com/legal',
+			'pikwizard'       => 'https://pikwizard.com/standard-license',
+			'stock.adobe'     => 'https://stock.adobe.com/license-terms',
+			'elements.envato' => 'https://elements.envato.com/license-terms',
+			'undraw.co'       => 'https://undraw.co/licenses',
 		);
 
 		foreach ( $link_list as $link_slug => $link_url ) {
@@ -40,7 +40,9 @@ class NonGPLCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new NonGPLCheck;
+$themechecks[] = new NonGPLCheck();

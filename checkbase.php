@@ -1,9 +1,9 @@
 <?php
-// main global to hold our checks
+// main global to hold our checks.
 global $themechecks;
 $themechecks = array();
 
-// counter for the checks
+// counter for the checks.
 global $checkcount;
 $checkcount = 0;
 
@@ -93,7 +93,7 @@ function tc_grep( $error, $file ) {
 			$error      = str_replace( '"', "'", $error );
 			$this_line  = str_replace( '"', "'", $this_line );
 			$error      = ltrim( $error );
-			$pos = strpos( $this_line, $error );
+			$pos        = strpos( $this_line, $error );
 			$pre        = ( false !== $pos ? substr( $this_line, 0, $pos ) : false );
 			$pre        = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';

@@ -96,7 +96,7 @@ class Plugin_Territory implements themecheck {
 				'print_emoji_styles', // @link https://developer.wordpress.org/reference/functions/print_emoji_styles/
 			),
 			'admin_print_scripts' => array(
-				'print_emoji_detection_script', //@link https://developer.wordpress.org/reference/functions/print_emoji_detection_script/
+				'print_emoji_detection_script', // @link https://developer.wordpress.org/reference/functions/print_emoji_detection_script/
 			),
 			'admin_print_styles'  => array(
 				'print_emoji_styles', // @link https://developer.wordpress.org/reference/functions/print_emoji_styles/
@@ -112,7 +112,8 @@ class Plugin_Territory implements themecheck {
 			foreach ( $functions as $function ) {
 				checkcount();
 				if ( preg_match( '/[\s?]remove_action\s*\(\s*([\'"])' . $hook . '([\'"])\s*,\s*([\'"])' . $function . '([\'"])/', $php ) ) {
-					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses <strong>remove_action %1$s %2$s</strong>, which is plugin-territory functionality.', 'theme-check' ),
+					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf(
+						__( 'The theme uses <strong>remove_action %1$s %2$s</strong>, which is plugin-territory functionality.', 'theme-check' ),
 						esc_html( $hook ),
 						esc_html( $function )
 					);

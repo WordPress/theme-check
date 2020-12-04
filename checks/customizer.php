@@ -36,7 +36,7 @@ class CustomizerCheck implements themecheck {
 							),
 							$grep[0]
 						);
-						$ret = false;
+						$ret           = false;
 					} else {
 						// There's a callback, check that no empty parameter is passed.
 						if ( preg_match( '/[\'"](?:sanitize_callback|sanitize_js_callback)[\'"]\s*=>\s*[\'"]\s*[\'"]/', $match ) ) {
@@ -53,7 +53,7 @@ class CustomizerCheck implements themecheck {
 								),
 								$grep[0]
 							);
-							$ret = false;
+							$ret           = false;
 						}
 					}
 				}
@@ -63,7 +63,9 @@ class CustomizerCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
 $themechecks[] = new CustomizerCheck();

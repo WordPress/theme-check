@@ -1,4 +1,4 @@
-<?php // phpcs:ignore WordPress.Files.FileName
+<?php
 /**
  * Checks if site_url is used, and adds an info.
  *

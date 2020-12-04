@@ -28,15 +28,15 @@ class EscapingCheck implements themecheck {
 		$ret = true;
 
 		$warnings = array(
-			'/="<\?php esc_html_e/'             => __( 'Use esc_attr_e() inside HTML attributes, and esc_url() for link attributes', 'theme-check' ),
-			'/="<\?php echo esc_html__/'        => __( 'Use esc_attr__() inside HTML attributes, and esc_url() for link attributes', 'theme-check' ),
-			'/="<\?php esc_html\(/'             => __( 'Use esc_attr() inside HTML attributes, and esc_url() for link attributes', 'theme-check' ),
-			'/><\?php echo esc_attr\(/'         => __( 'Only use esc_attr() inside HTML attributes. Use esc_html() between HTML tags', 'theme-check' ),
-			'/><\?php echo esc_attr__/'         => __( 'Only use esc_attr__() inside HTML attributes. Use esc_html__() between HTML tags', 'theme-check' ),
-			'/><\?php esc_attr_e/'              => __( 'Only use esc_attr_e() inside HTML attributes. Use esc_html_e() between HTML tags', 'theme-check' ),
+			'/="<\?php esc_html_e/'      => __( 'Use esc_attr_e() inside HTML attributes, and esc_url() for link attributes', 'theme-check' ),
+			'/="<\?php echo esc_html__/' => __( 'Use esc_attr__() inside HTML attributes, and esc_url() for link attributes', 'theme-check' ),
+			'/="<\?php esc_html\(/'      => __( 'Use esc_attr() inside HTML attributes, and esc_url() for link attributes', 'theme-check' ),
+			'/><\?php echo esc_attr\(/'  => __( 'Only use esc_attr() inside HTML attributes. Use esc_html() between HTML tags', 'theme-check' ),
+			'/><\?php echo esc_attr__/'  => __( 'Only use esc_attr__() inside HTML attributes. Use esc_html__() between HTML tags', 'theme-check' ),
+			'/><\?php esc_attr_e/'       => __( 'Only use esc_attr_e() inside HTML attributes. Use esc_html_e() between HTML tags', 'theme-check' ),
 		);
 
-		$required = array (
+		$required = array(
 			'/echo home_url/'                   => __( 'home_url() must be escaped. Use esc_url() for link attributes', 'theme-check' ),
 			'/echo get_template_directory_uri/' => __( 'get_template_directory_uri() must be escaped when output as part of a link or image source. Use esc_url() for link attributes', 'theme-check' ),
 		);
