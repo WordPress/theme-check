@@ -13,11 +13,20 @@ class Screenshot_Checks implements themecheck {
 
 		checkcount();
 
-		if ( in_array( 'screenshot.png', $filenames ) || in_array( 'screenshot.jpg', $filenames ) ) {
+		if (
+			in_array( 'screenshot.png', $filenames ) ||
+			in_array( 'screenshot.jpg', $filenames )
+		) {
 
 			foreach ( $other_files as $other_key => $otherfile ) {
 
-				if ( ( basename( $other_key ) === 'screenshot.png' || basename( $other_key ) === 'screenshot.jpg' ) && preg_match( '/.*themes\/[^\/]*\/screenshot\.(png|jpg)/', $other_key ) ) {
+				if (
+					(
+						basename( $other_key ) === 'screenshot.png' ||
+						basename( $other_key ) === 'screenshot.jpg'
+					) &&
+					preg_match( '/.*themes\/[^\/]*\/screenshot\.(png|jpg)/', $other_key )
+				) {
 					// we have our screenshot!
 					$image = getimagesize( $other_key );
 					if ( $image[0] > 1200 || $image[1] > 900 ) {

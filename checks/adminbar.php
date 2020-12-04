@@ -51,7 +51,7 @@ class NoHiddenAdminBar implements themecheck {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s %s',
 					__( 'WARNING', 'theme-check' ),
-					sptrintf(
+					sprintf(
 						__( 'The theme is using `#wpadminbar` in %1$s. Hiding the admin bar is not allowed. This warning must be manually checked.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>'
 					),

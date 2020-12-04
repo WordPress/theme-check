@@ -19,7 +19,11 @@ class PostFormatCheck implements themecheck {
 			foreach ( $checks as $check ) {
 				checkcount();
 				if ( preg_match( $check, $phpfile, $matches ) ) {
-					if ( ! strpos( $php, 'get_post_format' ) && ! strpos( $php, 'has_post_format' ) && ! strpos( $css, '.format' ) ) {
+					if (
+						! strpos( $php, 'get_post_format' ) &&
+						! strpos( $php, 'has_post_format' ) &&
+						! strpos( $css, '.format' )
+					) {
 						$filename      = tc_filename( $php_key );
 						$matches[0]    = str_replace( array( '"', "'" ), '', $matches[0] );
 						$error         = esc_html( rtrim( $matches[0], '(' ) );

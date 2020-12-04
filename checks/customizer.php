@@ -21,7 +21,10 @@ class CustomizerCheck implements themecheck {
 				// The full match is in [0], the match group in [1].
 				foreach ( $matches[1] as $match ) {
 					// Check if we have sanitize_callback or sanitize_js_callback.
-					if ( false === strpos( $match, 'sanitize_callback' ) && false === strpos( $match, 'sanitize_js_callback' ) ) {
+					if (
+						false === strpos( $match, 'sanitize_callback' ) &&
+						false === strpos( $match, 'sanitize_js_callback' )
+					) {
 						/* Clean up our match to be able to present the results better. */
 						$match         = preg_split( '/,/', $match );
 						$filename      = tc_filename( $file_path );

@@ -12,7 +12,10 @@ class WidgetsCheck implements themecheck {
 		checkcount();
 
 		// no widgets registered or used...
-		if ( strpos( $php, 'register_sidebar' ) === false && strpos( $php, 'dynamic_sidebar' ) === false ) {
+		if (
+			strpos( $php, 'register_sidebar' ) === false &&
+			strpos( $php, 'dynamic_sidebar' ) === false
+		) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-recommended">%s</span> %s',
 				__( 'RECOMMENDED', 'theme-check' ),
@@ -21,7 +24,10 @@ class WidgetsCheck implements themecheck {
 			$ret           = true;
 		}
 
-		if ( strpos( $php, 'register_sidebar' ) !== false && strpos( $php, 'dynamic_sidebar' ) === false ) {
+		if (
+			strpos( $php, 'register_sidebar' ) !== false &&
+			strpos( $php, 'dynamic_sidebar' ) === false
+		) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-recommended">%s</span> %s',
 				__( 'REQUIRED', 'theme-check' ),
@@ -30,7 +36,10 @@ class WidgetsCheck implements themecheck {
 			$ret           = false;
 		}
 
-		if ( strpos( $php, 'register_sidebar' ) === false && strpos( $php, 'dynamic_sidebar' ) !== false ) {
+		if (
+			strpos( $php, 'register_sidebar' ) === false &&
+			strpos( $php, 'dynamic_sidebar' ) !== false
+		) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-recommended">%s</span> %s',
 				__( 'REQUIRED', 'theme-check' ),

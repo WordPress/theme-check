@@ -17,7 +17,10 @@ class FaviconCheck implements themecheck {
 
 			$filename = tc_filename( $file_path );
 
-			if ( preg_match( '/(<link rel=[\'"]icon[\'"])|(<link rel=[\'"]shortcut icon[\'"])|(<link rel=[\'"]apple-touch-icon.*[\'"])|(<meta name=[\'"]msapplication-TileImage[\'"])/i', $file_content, $matches ) ) {
+			if (
+				preg_match( '/(<link rel=[\'"](icon|shortcut icon|apple-touch-icon.*)[\'"])/i', $file_content ) ||
+				preg_match( '/(<meta name=[\'"]msapplication-TileImage[\'"])/i', $file_content )
+			) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),

@@ -33,7 +33,7 @@ class FilesystemHttpCheck implements themecheck {
 							'<span class="tc-lead tc-warning">%s</span>: %s %s',
 							__( 'WARNING', 'theme-check' ),
 							sprintf(
-								__( '%1$s was found in the file %3$s %4$s.', 'theme-check' ),
+								__( '%1$s was found in the file %2$s %3$s', 'theme-check' ),
 								'<strong>' . $error . '</strong>',
 								'<strong>' . $filename . '</strong>',
 								$check
