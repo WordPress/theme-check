@@ -52,7 +52,7 @@ class CustomizerCheck implements themecheck {
 								'<span class="tc-lead tc-required">%s</span>: %s %s',
 								__( 'REQUIRED', 'theme-check' ),
 								sprintf(
-									__( 'Found a Customizer setting called %1$s in %2$s that had an empty value passed as sanitization callback. You need to pass a function name as sanitization callback.', 'theme-check' ) .
+									__( 'Found a Customizer setting called %1$s in %2$s that had an empty value passed as sanitization callback. You need to pass a function name as sanitization callback.', 'theme-check' ),
 									'<strong>' . $match[0] . '</strong>',
 									'<strong>' . $filename . '</strong>'
 								),
