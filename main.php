@@ -211,18 +211,22 @@ function tc_success() {
 
 function tc_form() {
 	$themes = tc_get_themes();
+
 	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
+
+	$selected_theme = isset( $_POST['themename'] ) ? $_POST['themename'] : get_stylesheet();
 	foreach ( $themes as $name => $location ) {
-		echo '<option ';
-		if ( isset( $_POST['themename'] ) ) {
-			echo ( $location['Stylesheet'] === $_POST['themename'] ) ? 'selected="selected" ' : '';
-		} else {
-			echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'selected="selected" ' : '';
-		}
-		echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'value="' . $location['Stylesheet'] . '" style="font-weight:bold;">' . $name . '</option>' : 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
+		printf(
+			'<option %s value="%s">%s</option>',
+			selected( $selected_theme, $location['Stylesheet'], false ),
+			esc_attr( $location['Stylesheet'] ),
+			$name
+		);
 	}
+
 	echo '</select>';
+
 	echo '<input class="button" type="submit" value="' . esc_attr__( 'Check it!', 'theme-check' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) {
 		echo ' <input name="trac" type="checkbox" /> ' . esc_html__( 'Output in Trac format.', 'theme-check' );
