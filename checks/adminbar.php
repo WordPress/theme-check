@@ -23,9 +23,14 @@ class NoHiddenAdminBar implements themecheck {
 				$grep  = tc_preg( $error, $file_path );
 
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( '%1$s Themes are not allowed to hide the admin bar. This warning must be manually checked.', 'theme-check' ),
-					'<strong>' . $filename . '</strong>'
-				) . $grep;
+					'<span class="tc-lead tc-warning">%s</span>: %s %s',
+					__( 'WARNING', 'theme-check' ),
+					sprintf(
+						__( '%1$s Themes are not allowed to hide the admin bar. This warning must be manually checked.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					),
+					$grep
+				);
 			}
 		}
 
@@ -44,9 +49,14 @@ class NoHiddenAdminBar implements themecheck {
 
 			if ( preg_match( $css_regex, $file_content, $matches ) ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'The theme is using `#wpadminbar` in %1$s. Hiding the admin bar is not allowed. This warning must be manually checked.', 'theme-check' ),
-					'<strong>' . $filename . '</strong>'
-				) . $grep;
+					'<span class="tc-lead tc-warning">%s</span>: %s %s',
+					__( 'WARNING', 'theme-check' ),
+					sptrintf(
+						__( 'The theme is using `#wpadminbar` in %1$s. Hiding the admin bar is not allowed. This warning must be manually checked.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					),
+					$grep
+				);
 			}
 		}
 

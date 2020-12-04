@@ -28,12 +28,15 @@ class NonGPLCheck implements themecheck {
 
 		foreach ( $link_list as $link_slug => $link_url ) {
 			if ( false !== stripos( $code, $link_slug ) ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' .
-				sprintf(
-					__( 'Found a reference to %s. Images from this website does not use a license that is compatible with GPL.', 'theme-check' ),
-					'<code>' . esc_html( $link_slug ) . '</code>'
-				)
-					. ' <a href="' . esc_url( $link_url ) . '" target="_blank">' . __( 'View license (opens in a new window).', 'theme-check' ) . '</a>';
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'Found a reference to %s. Images from this website does not use a license that is compatible with GPL.', 'theme-check' ),
+						'<code>' . esc_html( $link_slug ) . '</code>'
+					),
+					'<a href="' . esc_url( $link_url ) . '" target="_blank">' . __( 'View license (opens in a new window).', 'theme-check' ) . '</a>'
+				);
 			}
 		}
 

@@ -1132,7 +1132,11 @@ class Deprecated implements themecheck {
 					$error_msg .= $grep;
 
 					// Add the finalized error message.
-					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . $error_msg;
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-required">%s</span>: %s',
+						__( 'REQUIRED', 'theme-check' ),
+						$error_msg
+					);
 
 					$ret = false;
 				}

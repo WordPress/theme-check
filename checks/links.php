@@ -23,7 +23,15 @@ class Check_Links implements themecheck {
 					}
 				}
 				if ( $grep ) {
-					$this->error[] = sprintf( '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' . __( 'Possible hard-coded links were found in the file %1$s.%2$s', 'theme-check' ), '<strong>' . $filename . '</strong>', $grep );
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-info">%s</span>: %s %s',
+						__( 'INFO', 'theme-check' ),
+						sprintf(
+							__( 'Possible hard-coded links were found in the file %s.', 'theme-check' ),
+							'<strong>' . $filename . '</strong>'
+						),
+						$grep
+					);
 				}
 			}
 		}

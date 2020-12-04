@@ -13,8 +13,12 @@ class Style_Tags implements themecheck {
 				$data = get_theme_data_from_contents( $content );
 
 				if ( ! $data['Tags'] ) {
-					$this->error[] = '<span class="tc-lead tc-recommended">' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: ' . __( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' )
-					. ' (' . basename( dirname( $cssfile ) ) . ')';
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-recommended">%s</span> %s %s',
+						__( 'RECOMMENDED', 'theme-check' ),
+						__( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' ),
+						'(' . basename( dirname( $cssfile ) ) . ')'
+					);
 				} else {
 					$deprecated_tags    = $this->get_deprecated_tags();
 					$allowed_tags       = $this->get_allowed_tags();
@@ -25,15 +29,33 @@ class Style_Tags implements themecheck {
 					foreach ( $data['Tags'] as $tag ) {
 
 						if ( strpos( strtolower( $tag ), 'accessibility-ready' ) !== false ) {
-							$this->error[] = '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' . __( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.', 'theme-check' ) . ' ' . __( 'See <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' );
+							$this->error[] = sprintf(
+								'<span class="tc-lead tc-info">%s</span> %s',
+								__( 'INFO', 'theme-check' ),
+								__( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.', 'theme-check' ) . ' ' . __( 'See <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' )
+							);
 						}
 
 						if ( ! in_array( strtolower( $tag ), $allowed_tags ) ) {
 							if ( in_array( strtolower( $tag ), $deprecated_tags ) ) {
-								$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The tag %s has been deprecated, please remove it from your style.css header.', 'theme-check' ), '<strong>' . $tag . '</strong>' );
+								$this->error[] = sprintf(
+									'<span class="tc-lead tc-required">%s</span> %s',
+									__( 'REQUIRED', 'theme-check' ),
+									sprintf(
+										__( 'The tag %s has been deprecated, please remove it from your style.css header.', 'theme-check' ),
+										'<strong>' . $tag . '</strong>'
+									)
+								);
 								$ret           = false;
 							} else {
-								$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'Found wrong tag, remove %s from your style.css header.', 'theme-check' ), '<strong>' . $tag . '</strong>' );
+								$this->error[] = sprintf(
+									'<span class="tc-lead tc-required">%s</span> %s',
+									__( 'REQUIRED', 'theme-check' ),
+									sprintf(
+										__( 'Found wrong tag, remove %s from your style.css header.', 'theme-check' ),
+										'<strong>' . $tag . '</strong>'
+									)
+								);
 								$ret           = false;
 							}
 						}
@@ -45,7 +67,14 @@ class Style_Tags implements themecheck {
 
 						if ( in_array( strtolower( $tag ), $allowed_tags ) ) {
 							if ( count( array_keys( $data['Tags'], $tag ) ) > 1 ) {
-								$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The tag %s is being used more than once, please remove it from your style.css header.', 'theme-check' ), '<strong>' . $tag . '</strong>' );
+								$this->error[] = sprintf(
+									'<span class="tc-lead tc-required">%s</span> %s',
+									__( 'REQUIRED', 'theme-check' ),
+									sprintf(
+										__( 'The tag %s is being used more than once, please remove it from your style.css header.', 'theme-check' ),
+										'<strong>' . $tag . '</strong>'
+									)
+								);
 								$ret           = false;
 							}
 						}

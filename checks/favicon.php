@@ -19,8 +19,12 @@ class FaviconCheck implements themecheck {
 
 			if ( preg_match( '/(<link rel=[\'"]icon[\'"])|(<link rel=[\'"]shortcut icon[\'"])|(<link rel=[\'"]apple-touch-icon.*[\'"])|(<meta name=[\'"]msapplication-TileImage[\'"])/i', $file_content, $matches ) ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Possible Favicon found in %1$s. Favicons are handled by the Site Icon setting in the customizer since version 4.3.', 'theme-check' ),
-					'<strong>' . $filename . '</strong>'
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'Possible Favicon found in %1$s. Favicons are handled by the Site Icon setting in the customizer since version 4.3.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					)
 				);
 				$ret           = false;
 			}

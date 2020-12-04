@@ -20,7 +20,11 @@ class PostPaginationCheck implements themecheck {
 				strpos( $php, 'next_posts_link' ) === false
 			)
 		) {
-			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( "The theme doesn't have post pagination code in it. Use <strong>posts_nav_link()</strong> or <strong>paginate_links()</strong> or <strong>the_posts_pagination()</strong> or <strong>the_posts_navigation()</strong> or <strong>next_posts_link()</strong> and <strong>previous_posts_link()</strong> to add post pagination.", 'theme-check' );
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-required">%s</span> %s',
+				__( 'REQUIRED', 'theme-check' ),
+				__( "The theme doesn't have post pagination code in it. Use <strong>posts_nav_link()</strong> or <strong>paginate_links()</strong> or <strong>the_posts_pagination()</strong> or <strong>the_posts_navigation()</strong> or <strong>next_posts_link()</strong> and <strong>previous_posts_link()</strong> to add post pagination.", 'theme-check' )
+			);
 			$ret           = false;
 		}
 

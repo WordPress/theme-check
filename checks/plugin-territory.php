@@ -38,7 +38,14 @@ class Plugin_Territory implements themecheck {
 		foreach ( $forbidden_functions as $function ) {
 			checkcount();
 			if ( preg_match( '/[\s?]' . $function . '\s?\(/', $php ) ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses the %s function, which is plugin-territory functionality.', 'theme-check' ), '<strong>' . esc_html( $function ) . '()</strong>' );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span> %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'The theme uses the %s function, which is plugin-territory functionality.', 'theme-check' ),
+						'<strong>' . esc_html( $function ) . '()</strong>'
+					)
+				);
 				$ret           = false;
 			}
 		}
@@ -46,7 +53,14 @@ class Plugin_Territory implements themecheck {
 		// Shortcodes can't be used in the post content, so warn about them.
 		if ( false !== strpos( $php, 'add_shortcode(' ) ) {
 			checkcount();
-			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ), '<strong>add_shortcode()</strong>' );
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-required">%s</span> %s',
+				__( 'REQUIRED', 'theme-check' ),
+				sprintf(
+					__( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ),
+					'<strong>add_shortcode()</strong>'
+				)
+			);
 			$ret           = false;
 		}
 
@@ -66,7 +80,15 @@ class Plugin_Territory implements themecheck {
 			foreach ( $hooks as $hook ) {
 				checkcount();
 				if ( preg_match( '/[\s?]add_' . $type . '\s*\(\s*([\'"])' . $hook . '([\'"])\s*,/', $php ) ) {
-					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme uses the %1$s %2$s, which is plugin-territory functionality.', 'theme-check' ), '<strong>' . esc_html( $hook ) . '</strong>', esc_html( $type ) );
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-required">%s</span>: %s',
+						__( 'REQUIRED', 'theme-check' ),
+						sprintf(
+							__( 'The theme uses the %1$s %2$s, which is plugin-territory functionality.', 'theme-check' ),
+							'<strong>' . esc_html( $hook ) . '</strong>',
+							esc_html( $type )
+						)
+					);
 					$ret           = false;
 				}
 			}
@@ -112,10 +134,14 @@ class Plugin_Territory implements themecheck {
 			foreach ( $functions as $function ) {
 				checkcount();
 				if ( preg_match( '/[\s?]remove_action\s*\(\s*([\'"])' . $hook . '([\'"])\s*,\s*([\'"])' . $function . '([\'"])/', $php ) ) {
-					$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf(
-						__( 'The theme uses <strong>remove_action %1$s %2$s</strong>, which is plugin-territory functionality.', 'theme-check' ),
-						esc_html( $hook ),
-						esc_html( $function )
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-required">%s</span> %s',
+						__( 'REQUIRED', 'theme-check' ),
+						sprintf(
+							__( 'The theme uses <strong>remove_action %1$s %2$s</strong>, which is plugin-territory functionality.', 'theme-check' ),
+							esc_html( $hook ),
+							esc_html( $function )
+						)
 					);
 					$ret           = false;
 				}

@@ -97,7 +97,11 @@ class Deprecated_Recommended implements themecheck {
 					$error_msg .= $grep;
 
 					// Add the finalized error message.
-					$this->error[] = '<span class="tc-lead tc-recommended">' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: ' . $error_msg;
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-recommended">%s</span>: %s',
+						__( 'RECOMMENDED', 'theme-check' ),
+						$error_msg
+					);
 				}
 			}
 		}

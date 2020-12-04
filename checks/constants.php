@@ -28,7 +28,17 @@ class Constants implements themecheck {
 					$filename      = tc_filename( $php_key );
 					$error         = ltrim( rtrim( $matches[0], '(' ), '\'"' );
 					$grep          = tc_grep( $error, $php_key );
-					$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s was found in the file %2$s. Use %3$s instead.%4$s', 'theme-check' ), '<strong>' . $error . '</strong>', '<strong>' . $filename . '</strong>', '<strong>' . $check . '</strong>', $grep );
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-required">%s</span>: %s %s',
+						__( 'REQUIRED', 'theme-check' ),
+						sprintf(
+							__( '%1$s was found in the file %2$s. Use %3$s instead.', 'theme-check' ),
+							'<strong>' . $error . '</strong>',
+							'<strong>' . $filename . '</strong>',
+							'<strong>' . $check . '</strong>'
+						),
+						$grep
+					);
 					$ret           = false;
 				}
 			}

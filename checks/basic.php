@@ -41,7 +41,15 @@ class Basic_Checks implements themecheck {
 					$key = __( 'wp_body_open action or function call at the very top of the body just after the opening body tag', 'theme-check' );
 				}
 				$key           = str_replace( '\s*\(', '', $key );
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Could not find %1$s. %2$s', 'theme-check' ), '<strong>' . $key . '</strong>', $check );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'Could not find %1$s. %2$s', 'theme-check' ),
+						'<strong>' . $key . '</strong>',
+						$check
+					)
+				);
 				$ret           = false;
 			}
 		}

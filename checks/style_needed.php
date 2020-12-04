@@ -23,7 +23,11 @@ class Style_Needed implements themecheck {
 		foreach ( $checks as $key => $check ) {
 			checkcount();
 			if ( ! preg_match( '/' . $key . '/i', $css, $matches ) ) {
-				$this->error[] = "<span class='tc-lead tc-required'>" . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . $check;
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span> %s',
+					__( 'REQUIRED', 'theme-check' ),
+					$check
+				);
 				$ret           = false;
 			}
 		}
