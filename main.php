@@ -219,18 +219,16 @@ function tc_success() {
 }
 
 function tc_form() {
-	$themes = tc_get_themes();
-
 	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
 
 	$selected_theme = isset( $_POST['themename'] ) ? wp_unslash( $_POST['themename'] ) : get_stylesheet();
-	foreach ( $themes as $name => $location ) {
+	foreach ( wp_get_themes() as $theme ) {
 		printf(
 			'<option %s value="%s">%s</option>',
-			selected( $selected_theme, $location['Stylesheet'], false ),
-			esc_attr( $location['Stylesheet'] ),
-			esc_html( $name )
+			selected( $selected_theme, $theme['Stylesheet'], false ),
+			esc_attr( $theme['Stylesheet'] ),
+			esc_html( $theme['Name'] )
 		);
 	}
 
