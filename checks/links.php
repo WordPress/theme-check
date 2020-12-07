@@ -2,11 +2,11 @@
 class Check_Links implements themecheck {
 	protected $error = array();
 
-	protected $theme_data = array();
+	protected $theme = array();
 
 	function set_context( $data ) {
-		if ( isset( $data['theme_data'] ) ) {
-			$this->theme_data = $data['theme_data'];
+		if ( isset( $data['theme'] ) ) {
+			$this->theme = $data['theme'];
 		}
 	}
 
@@ -26,11 +26,11 @@ class Check_Links implements themecheck {
 				foreach ( $out as $key ) {
 					if ( preg_match( '/\<a\s?href\s?=\s?["|\'](.*?)[\'|"](.*?)\>(.*?)\<\/a\>/is', $key[0], $stripped ) ) {
 						if (
-							! empty( $this->theme_data['AuthorURI'] ) &&
-							! empty( $this->theme_data['URI'] ) &&
+							! empty( $this->theme['AuthorURI'] ) &&
+							! empty( $this->theme['URI'] ) &&
 							$stripped[1] &&
-							! strpos( $stripped[1], $this->theme_data['URI'] ) &&
-							! strpos( $stripped[1], $this->theme_data['AuthorURI'] ) &&
+							! strpos( $stripped[1], $this->theme['URI'] ) &&
+							! strpos( $stripped[1], $this->theme['AuthorURI'] ) &&
 							! stripos( $stripped[1], 'WordPress.' )
 						) {
 							$grep .= tc_grep( $stripped[1], $php_key );

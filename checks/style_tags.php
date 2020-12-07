@@ -5,8 +5,8 @@ class Style_Tags implements themecheck {
 	protected $tags = array();
 
 	function set_context( $data ) {
-		if ( isset( $data['theme_data'] ) ) {
-			$this->tags = $data['theme_data']['Tags'];
+		if ( isset( $data['theme'] ) ) {
+			$this->tags = $data['theme']['Tags'];
 		}
 	}
 

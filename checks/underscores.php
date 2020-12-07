@@ -8,11 +8,11 @@
 class UnderscoresCheck implements themecheck {
 	protected $error = array();
 
-	protected $theme_data = array();
+	protected $theme = array();
 
 	function set_context( $data ) {
-		if ( isset( $data['theme_data'] ) ) {
-			$this->theme_data = $data['theme_data'];
+		if ( isset( $data['theme'] ) ) {
+			$this->theme = $data['theme'];
 		}
 	}
 
@@ -20,11 +20,11 @@ class UnderscoresCheck implements themecheck {
 		$ret = true;
 
 		checkcount();
-		if ( ! empty( $this->theme_data['AuthorURI'] ) || ! empty( $this->theme_data['URI'] ) ) {
+		if ( ! empty( $this->theme['AuthorURI'] ) || ! empty( $this->theme['URI'] ) ) {
 
 			if (
-				stripos( $this->theme_data['URI'], 'underscores.me' ) ||
-				stripos( $this->theme_data['AuthorURI'], 'underscores.me' )
+				stripos( $this->theme['URI'], 'underscores.me' ) ||
+				stripos( $this->theme['AuthorURI'], 'underscores.me' )
 			) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',

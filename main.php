@@ -3,26 +3,22 @@ function check_main( $theme_slug ) {
 	global $themechecks;
 
 	$themename = $theme_slug;
-	$data      = wp_get_theme( $theme_slug );
-	$theme     = $data->get_stylesheet_directory();
-	$is_child  = $data['Template'] && $data['Template'] != $data['Stylesheet'];
-	$files     = array_values( $data->get_files( null, -1, true ) );
+	$theme     = wp_get_theme( $theme_slug );
+	$is_child  = $theme['Template'] && $theme['Template'] != $theme['Stylesheet'];
+	$files     = array_values( $theme->get_files( null, -1, true ) );
 
 	if ( $is_child ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
-		$parent_data = $data->parent();
-		if ( ! $parent_data ) {
+		if ( ! $theme->parent() ) {
 			echo '<h2>';
 			printf(
 				/* translators: The parent theme name. */
 				esc_html__( 'Parent theme %1$s not found! You have to have parent AND child-theme installed!', 'theme-check' ),
-				'<strong>' . esc_html( $data['Template'] ) . '</strong>'
+				'<strong>' . esc_html( $theme['Template'] ) . '</strong>'
 			);
 			echo '</h2>';
 			return;
 		}
-
-		$themename = basename( $data->get_template_directory() );
 	}
 
 	if ( $files ) {
@@ -45,7 +41,15 @@ function check_main( $theme_slug ) {
 		}
 
 		// Run the checks.
-		$success = run_themechecks( $php, $css, $other, array( 'theme_data' => $data, 'theme_slug' => $themename ) );
+		$success = run_themechecks(
+			$php,
+			$css,
+			$other,
+			array(
+				'theme' => $theme,
+				'slug'  => $theme_slug
+			)
+		);
 
 		global $checkcount;
 
@@ -53,44 +57,60 @@ function check_main( $theme_slug ) {
 		echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
 		echo '<div class="theme-info">';
 
-		$screenshot = $data->get_screenshot( 'relative' );
+		$screenshot = $theme->get_screenshot( 'relative' );
 		if ( $screenshot ) {
-			$screenshot_file = $data->get_stylesheet_directory() . '/' . $screenshot;
+			$screenshot_file = $theme->get_stylesheet_directory() . '/' . $screenshot;
 			$image_size      = getimagesize( $screenshot_file );
 			$image_filesize  = filesize( $screenshot_file );
 
-			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $data->get_stylesheet_directory_uri() . '/' . $screenshot ) . '" />';
+			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $theme->get_stylesheet_directory_uri() . '/' . $screenshot ) . '" />';
 			echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
 		}
 
-		echo ( ! empty( $data['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Title'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Version'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['AuthorName'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $data['AuthorURI'] ) . '">' . esc_html( $data['AuthorURI'] ) . '</a></span></p>' : '';
-		echo ( ! empty( $data['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $data['URI'] ) . '">' . esc_html( $data['URI'] ) . '</a></span></p>' : '';
-		echo ( ! empty( $data['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['License'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['License URI'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $data['Tags'] ) ) . '</span></p>' : '';
-		echo ( ! empty( $data['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Description'] ) . '</span></p>' : '';
+		echo ( ! empty( $theme['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Title'] ) . '</span></p>' : '';
+		echo ( ! empty( $theme['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Version'] ) . '</span></p>' : '';
+		echo ( ! empty( $theme['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['AuthorName'] ) . '</span></p>' : '';
+		echo ( ! empty( $theme['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['AuthorURI'] ) . '">' . esc_html( $theme['AuthorURI'] ) . '</a></span></p>' : '';
+		echo ( ! empty( $theme['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['URI'] ) . '">' . esc_html( $theme['URI'] ) . '</a></span></p>' : '';
+		echo ( ! empty( $theme['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License'] ) . '</span></p>' : '';
+		echo ( ! empty( $theme['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License URI'] ) . '</span></p>' : '';
+		echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
+		echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
 
-		if ( $is_child && $data['Template Version'] /* Not supported by Core */ ) {
-			if ( $data['Template Version'] > $parent_data['Version'] ) {
-				echo '<p>' . sprintf(
-					esc_html__( 'This child theme requires at least version %1$s of theme %2$s to be installed. You only have %3$s please update the parent theme.', 'theme-check' ),
-					'<strong>' . esc_html( $data['Template Version'] ) . '</strong>',
-					'<strong>' . esc_html( $parent_data['Title'] ) . '</strong>',
-					'<strong>' . esc_html( $parent_data['Version'] ) . '</strong>'
-				) . '</p>';
-			}
-			echo '<p>' . sprintf(
+		if ( $is_child ) {
+			echo '<p>';
+			printf(
 				/* translators: %s: Name of the parent theme. */
 				esc_html__( 'This is a child theme. The parent theme is: %s. These files have been included automatically!', 'theme-check' ),
-				'<strong>' . esc_html( $data['Template'] ) . '</strong>'
-			) . '</p>';
-			if ( empty( $data['Template Version'] ) ) {
+				'<strong>' . esc_html( $theme['Template'] ) . '</strong>'
+			);
+			echo '</p>';
+		}
+		if ( $theme['Template Version'] /* Not supported by Core */ ) {
+			$parent_theme = $theme->parent();
+			if ( $theme['Template Version'] > $parent_theme['Version'] ) {
+				echo '<p>';
+				printf(
+					esc_html__( 'This child theme requires at least version %1$s of theme %2$s to be installed. You only have %3$s please update the parent theme.', 'theme-check' ),
+					'<strong>' . esc_html( $theme['Template Version'] ) . '</strong>',
+					'<strong>' . esc_html( $parent_theme['Title'] ) . '</strong>',
+					'<strong>' . esc_html( $parent_theme['Version'] ) . '</strong>'
+				);
+				echo '</p>';
+			}
+
+			if ( empty( $theme['Template Version'] ) ) {
 				echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
-			} else {
-				echo ( $data['Template Version'] < $parent_data['Version'] ) ? '<p>' . sprintf( esc_html__( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ), esc_html( $data['Template Version'] ), esc_html( $parent_data['Title'] ), esc_html( $parent_data['Title'] ), esc_html( $parent_data['Version'] ) ) . '</p>' : '';
+			} else if ( $theme['Template Version'] < $parent_theme['Version'] ) {
+				echo '<p>';
+				printf(
+					esc_html__( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ),
+					esc_html( $theme['Template Version'] ),
+					esc_html( $parent_theme['Title'] ),
+					esc_html( $parent_theme['Title'] ),
+					esc_html( $parent_theme['Version'] )
+				);
+				echo '</p>';
 			}
 		}
 		echo '</div><!-- .theme-info-->';
@@ -100,7 +120,7 @@ function check_main( $theme_slug ) {
 		echo '<p>' . sprintf(
 			esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
 			'<strong>' . esc_html( $checkcount ) . '</strong>',
-			'<strong>' . esc_html( $data['Title'] ) . '</strong>',
+			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
 			'<strong>' . esc_html( $version[0] ) . '</strong>',
 			'<strong>' . esc_html( $version[1] ) . '</strong>'
 		) . '</p>';
@@ -108,9 +128,9 @@ function check_main( $theme_slug ) {
 		$results = display_themechecks();
 
 		if ( ! $success ) {
-			echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
+			echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
 		} else {
-			echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
+			echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
 			tc_success();
 		}
 
