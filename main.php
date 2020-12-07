@@ -1,6 +1,7 @@
 <?php
 function check_main( $theme ) {
-	global $themechecks, $themename;
+	global $themechecks;
+
 	$themename = $theme;
 	$theme     = get_theme_root( $theme ) . "/$theme";
 	$files     = listdir( $theme );
