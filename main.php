@@ -7,21 +7,6 @@ function check_main( $theme_slug ) {
 		return;
 	}
 
-	$is_child = $theme['Template'] && ( $theme['Template'] != $theme['Stylesheet'] );
-	if ( $is_child ) {
-		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
-		if ( ! $theme->parent() ) {
-			echo '<h2>';
-			printf(
-				/* translators: The parent theme name. */
-				esc_html__( 'Parent theme %1$s not found! You have to have parent AND child-theme installed!', 'theme-check' ),
-				'<strong>' . esc_html( $theme['Template'] ) . '</strong>'
-			);
-			echo '</h2>';
-			return;
-		}
-	}
-
 	// Run the checks.
 	$success = run_themechecks_against_theme( $theme, $theme_slug );
 
@@ -49,7 +34,7 @@ function check_main( $theme_slug ) {
 	echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
 	echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
 
-	if ( $is_child ) {
+	if ( $theme->parent() ) {
 		echo '<p>';
 		printf(
 			/* translators: %s: Name of the parent theme. */
