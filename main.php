@@ -43,7 +43,7 @@ function check_main( $theme ) {
 		}
 
 		// Run the checks.
-		$success = run_themechecks( $php, $css, $other, $data );
+		$success = run_themechecks( $php, $css, $other, array( 'theme_data' => $data, 'theme_slug' => $themename ) );
 
 		global $checkcount;
 

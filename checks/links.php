@@ -2,7 +2,16 @@
 class Check_Links implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files, $data ) {
+	protected $theme_data = array();
+
+	function set_context( $data ) {
+		if ( isset( $data['theme_data'] ) ) {
+			$this->theme_data = $data['theme_data'];
+		}
+	}
+
+
+	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -16,7 +25,14 @@ class Check_Links implements themecheck {
 				$filename = tc_filename( $php_key );
 				foreach ( $out as $key ) {
 					if ( preg_match( '/\<a\s?href\s?=\s?["|\'](.*?)[\'|"](.*?)\>(.*?)\<\/a\>/is', $key[0], $stripped ) ) {
-						if ( ! empty( $data['AuthorURI'] ) && ! empty( $data['URI'] ) && $stripped[1] && ! strpos( $stripped[1], $data['URI'] ) && ! strpos( $stripped[1], $data['AuthorURI'] ) && ! strpos( $stripped[1], 'WordPress.' ) ) {
+						if (
+							! empty( $this->theme_data['AuthorURI'] ) &&
+							! empty( $this->theme_data['URI'] ) &&
+							$stripped[1] &&
+							! strpos( $stripped[1], $this->theme_data['URI'] ) &&
+							! strpos( $stripped[1], $this->theme_data['AuthorURI'] ) &&
+							! stripos( $stripped[1], 'WordPress.' )
+						) {
 							$grep .= tc_grep( $stripped[1], $php_key );
 						}
 					}
