@@ -32,15 +32,13 @@ do_action( 'themecheck_checks_loaded' );
  * @return bool
  */
 function run_themechecks_against_theme( $theme, $theme_slug ) {
-	$files = array_values(
-		$theme->get_files(
-			null /* all file types */,
-			-1 /* infinite recursion */,
-			true /* include parent theme files */
-		)
+	$files = $theme->get_files(
+		null /* all file types */,
+		-1 /* infinite recursion */,
+		true /* include parent theme files */
 	);
 
-	foreach ( $files as $key => $filename ) {
+	foreach ( $files as $filename ) {
 		if ( substr( $filename, -4 ) === '.php' ) {
 			$php[ $filename ] = file_get_contents( $filename );
 			$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
@@ -70,17 +68,30 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 	);
 }
 
+/**
+ * Run the Theme Checks against a set of files.
+ *
+ * @param array $php     The PHP files.
+ * @param array $css     The CSS files.
+ * @param array $other   Any non-php/css files.
+ * @param array $context Any context for the Theme Checks.
+ *
+ * @return bool
+ */
 function run_themechecks( $php, $css, $other, $context = array() ) {
 	global $themechecks;
+
 	$pass = true;
 	foreach ( $themechecks as $check ) {
 		if ( $check instanceof themecheck ) {
 			if ( $context && is_callable( array( $check, 'set_context' ) ) ) {
 				$check->set_context( $context );
 			}
+
 			$pass = $pass & $check->check( $php, $css, $other );
 		}
 	}
+
 	return $pass;
 }
 
