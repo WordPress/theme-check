@@ -1,10 +1,10 @@
 name: PHPCS check
 
-on: pull_request
+on: [push, pull_request]
 
 jobs:
   phpcs:
-      name: PHPCS
+      name: PHP Code Standards
       runs-on: ubuntu-latest
       steps:
         - name: Install dependencies
