@@ -18,12 +18,55 @@ interface themecheck {
 }
 
 // load all the checks in the checks directory.
-$dir = 'checks';
-foreach ( glob( dirname( __FILE__ ) . "/{$dir}/*.php" ) as $file ) {
+foreach ( glob( __DIR__ . "/checks/*.php" ) as $file ) {
 	include $file;
 }
 
 do_action( 'themecheck_checks_loaded' );
+
+/**
+ * Run Theme Check against a given theme.
+ *
+ * @param WP_Theme $theme      A WP_Theme instance.
+ * @param string   $theme_slug The slug of the given theme.
+ * @return bool
+ */
+function run_themechecks_against_theme( $theme, $theme_slug ) {
+	$files = array_values( $theme->get_files(
+		null /* all file types */,
+		-1 /* infinite recursion */,
+		true /* include parent theme files */
+	) );
+
+	foreach ( $files as $key => $filename ) {
+		if ( substr( $filename, -4 ) === '.php' ) {
+			$php[ $filename ] = file_get_contents( $filename );
+			$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
+		} elseif ( substr( $filename, -4 ) === '.css' ) {
+			$css[ $filename ] = file_get_contents( $filename );
+		} else {
+			// In local development it might be useful to skip other files
+			// (non .php or .css files) in dev directories.
+			if ( apply_filters( 'tc_skip_development_directories', false ) ) {
+				if ( tc_is_other_file_in_dev_directory( $filename ) ) {
+					continue;
+				}
+			}
+			$other[ $filename ] = file_get_contents( $filename );
+		}
+	}
+
+	// Run the checks.
+	return run_themechecks(
+		$php,
+		$css,
+		$other,
+		array(
+			'theme' => $theme,
+			'slug'  => $theme_slug
+		)
+	);
+}
 
 function run_themechecks( $php, $css, $other, $context = array() ) {
 	global $themechecks;
@@ -38,6 +81,7 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 	}
 	return $pass;
 }
+
 
 function display_themechecks() {
 	$results = '';
@@ -152,3 +196,61 @@ function tc_trac( $e ) {
 	return $e;
 }
 
+
+// Strip comments from a PHP file in a way that will not change the underlying structure of the file.
+function tc_strip_comments( $code ) {
+	$strip    = array(
+		T_COMMENT     => true,
+		T_DOC_COMMENT => true,
+	);
+	$newlines = array(
+		"\n" => true,
+		"\r" => true,
+	);
+	$tokens   = token_get_all( $code );
+	reset( $tokens );
+	$return = '';
+	$token  = current( $tokens );
+	while ( $token ) {
+		if ( ! is_array( $token ) ) {
+			$return .= $token;
+		} elseif ( ! isset( $strip[ $token[0] ] ) ) {
+			$return .= $token[1];
+		} else {
+			for ( $i = 0, $token_length = strlen( $token[1] ); $i < $token_length; ++$i ) {
+				if ( isset( $newlines[ $token[1][ $i ] ] ) ) {
+					$return .= $token[1][ $i ];
+				}
+			}
+		}
+		$token = next( $tokens );
+	}
+	return $return;
+}
+
+
+/**
+ * Used to allow some directories to be skipped during development.
+ *
+ * @param  string $filename a filename/path.
+ * @return boolean
+ */
+function tc_is_other_file_in_dev_directory( $filename ) {
+	$skip = false;
+	// Filterable List of dirs that you may want to skip other files in during
+	// development.
+	$dev_dirs = apply_filters(
+		'tc_common_dev_directories',
+		array(
+			'node_modules',
+			'vendor',
+		)
+	);
+	foreach ( $dev_dirs as $dev_dir ) {
+		if ( strpos( $filename, $dev_dir ) ) {
+			$skip = true;
+			break;
+		}
+	}
+	return $skip;
+}

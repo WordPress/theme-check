@@ -1,12 +1,13 @@
 <?php
 function check_main( $theme_slug ) {
-	global $themechecks;
+	global $checkcount;
 
-	$themename = $theme_slug;
-	$theme     = wp_get_theme( $theme_slug );
-	$is_child  = $theme['Template'] && $theme['Template'] != $theme['Stylesheet'];
-	$files     = array_values( $theme->get_files( null, -1, true ) );
+	$theme = wp_get_theme( $theme_slug );
+	if ( ! $theme->exists() ) {
+		return;
+	}
 
+	$is_child = $theme['Template'] && $theme['Template'] != $theme['Stylesheet'];
 	if ( $is_child ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
 		if ( ! $theme->parent() ) {
@@ -21,183 +22,122 @@ function check_main( $theme_slug ) {
 		}
 	}
 
-	if ( $files ) {
-		foreach ( $files as $key => $filename ) {
-			if ( substr( $filename, -4 ) === '.php' ) {
-				$php[ $filename ] = file_get_contents( $filename );
-				$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
-			} elseif ( substr( $filename, -4 ) === '.css' ) {
-				$css[ $filename ] = file_get_contents( $filename );
-			} else {
-				// In local development it might be useful to skip other files
-				// (non .php or .css files) in dev directories.
-				if ( apply_filters( 'tc_skip_development_directories', false ) ) {
-					if ( tc_is_other_file_in_dev_directory( $filename ) ) {
-						continue;
-					}
-				}
-				$other[ $filename ] = file_get_contents( $filename );
-			}
-		}
+	// Run the checks.
+	$success = run_themechecks_against_theme( $theme, $theme_slug );
 
-		// Run the checks.
-		$success = run_themechecks(
-			$php,
-			$css,
-			$other,
-			array(
-				'theme' => $theme,
-				'slug'  => $theme_slug
-			)
+	// Second loop, to display the errors.
+	echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
+	echo '<div class="theme-info">';
+
+	$screenshot = $theme->get_screenshot( 'relative' );
+	if ( $screenshot ) {
+		$screenshot_file = $theme->get_stylesheet_directory() . '/' . $screenshot;
+		$image_size      = getimagesize( $screenshot_file );
+		$image_filesize  = filesize( $screenshot_file );
+
+		echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $theme->get_stylesheet_directory_uri() . '/' . $screenshot ) . '" />';
+		echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
+	}
+
+	echo ( ! empty( $theme['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Title'] ) . '</span></p>' : '';
+	echo ( ! empty( $theme['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Version'] ) . '</span></p>' : '';
+	echo ( ! empty( $theme['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['AuthorName'] ) . '</span></p>' : '';
+	echo ( ! empty( $theme['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['AuthorURI'] ) . '">' . esc_html( $theme['AuthorURI'] ) . '</a></span></p>' : '';
+	echo ( ! empty( $theme['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['URI'] ) . '">' . esc_html( $theme['URI'] ) . '</a></span></p>' : '';
+	echo ( ! empty( $theme['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License'] ) . '</span></p>' : '';
+	echo ( ! empty( $theme['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License URI'] ) . '</span></p>' : '';
+	echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
+	echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
+
+	if ( $is_child ) {
+		echo '<p>';
+		printf(
+			/* translators: %s: Name of the parent theme. */
+			esc_html__( 'This is a child theme. The parent theme is: %s. These files have been included automatically!', 'theme-check' ),
+			'<strong>' . esc_html( $theme['Template'] ) . '</strong>'
 		);
+		echo '</p>';
+	}
 
-		global $checkcount;
-
-		// Second loop, to display the errors.
-		echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
-		echo '<div class="theme-info">';
-
-		$screenshot = $theme->get_screenshot( 'relative' );
-		if ( $screenshot ) {
-			$screenshot_file = $theme->get_stylesheet_directory() . '/' . $screenshot;
-			$image_size      = getimagesize( $screenshot_file );
-			$image_filesize  = filesize( $screenshot_file );
-
-			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $theme->get_stylesheet_directory_uri() . '/' . $screenshot ) . '" />';
-			echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
-		}
-
-		echo ( ! empty( $theme['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Title'] ) . '</span></p>' : '';
-		echo ( ! empty( $theme['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Version'] ) . '</span></p>' : '';
-		echo ( ! empty( $theme['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['AuthorName'] ) . '</span></p>' : '';
-		echo ( ! empty( $theme['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['AuthorURI'] ) . '">' . esc_html( $theme['AuthorURI'] ) . '</a></span></p>' : '';
-		echo ( ! empty( $theme['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['URI'] ) . '">' . esc_html( $theme['URI'] ) . '</a></span></p>' : '';
-		echo ( ! empty( $theme['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License'] ) . '</span></p>' : '';
-		echo ( ! empty( $theme['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License URI'] ) . '</span></p>' : '';
-		echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
-		echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
-
-		if ( $is_child ) {
+	if ( $theme['Template Version'] /* Not supported by Core */ ) {
+		$parent_theme = $theme->parent();
+		if ( $theme['Template Version'] > $parent_theme['Version'] ) {
 			echo '<p>';
 			printf(
-				/* translators: %s: Name of the parent theme. */
-				esc_html__( 'This is a child theme. The parent theme is: %s. These files have been included automatically!', 'theme-check' ),
-				'<strong>' . esc_html( $theme['Template'] ) . '</strong>'
+				esc_html__( 'This child theme requires at least version %1$s of theme %2$s to be installed. You only have %3$s please update the parent theme.', 'theme-check' ),
+				'<strong>' . esc_html( $theme['Template Version'] ) . '</strong>',
+				'<strong>' . esc_html( $parent_theme['Title'] ) . '</strong>',
+				'<strong>' . esc_html( $parent_theme['Version'] ) . '</strong>'
 			);
 			echo '</p>';
 		}
-		if ( $theme['Template Version'] /* Not supported by Core */ ) {
-			$parent_theme = $theme->parent();
-			if ( $theme['Template Version'] > $parent_theme['Version'] ) {
-				echo '<p>';
-				printf(
-					esc_html__( 'This child theme requires at least version %1$s of theme %2$s to be installed. You only have %3$s please update the parent theme.', 'theme-check' ),
-					'<strong>' . esc_html( $theme['Template Version'] ) . '</strong>',
-					'<strong>' . esc_html( $parent_theme['Title'] ) . '</strong>',
-					'<strong>' . esc_html( $parent_theme['Version'] ) . '</strong>'
-				);
-				echo '</p>';
-			}
 
-			if ( empty( $theme['Template Version'] ) ) {
-				echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
-			} else if ( $theme['Template Version'] < $parent_theme['Version'] ) {
-				echo '<p>';
-				printf(
-					esc_html__( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ),
-					esc_html( $theme['Template Version'] ),
-					esc_html( $parent_theme['Title'] ),
-					esc_html( $parent_theme['Title'] ),
-					esc_html( $parent_theme['Version'] )
-				);
-				echo '</p>';
-			}
-		}
-		echo '</div><!-- .theme-info-->';
-
-		$plugins = get_plugins( '/theme-check' );
-		$version = explode( '.', $plugins['theme-check.php']['Version'] );
-		echo '<p>' . sprintf(
-			esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
-			'<strong>' . esc_html( $checkcount ) . '</strong>',
-			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
-			'<strong>' . esc_html( $version[0] ) . '</strong>',
-			'<strong>' . esc_html( $version[1] ) . '</strong>'
-		) . '</p>';
-
-		$results = display_themechecks();
-
-		if ( ! $success ) {
-			echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
-		} else {
-			echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
-			tc_success();
-		}
-
-		if ( ! defined( 'WP_DEBUG' ) || WP_DEBUG === false ) {
-			echo '<div class="updated">';
-			echo '<span class="tc-fail">';
-			echo esc_html__( 'WARNING', 'theme-check' );
-			echo '</span> ';
-			echo '<strong>';
-			echo esc_html__( 'WP_DEBUG is not enabled!', 'theme-check' );
-			echo '</strong>';
+		if ( empty( $theme['Template Version'] ) ) {
+			echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
+		} else if ( $theme['Template Version'] < $parent_theme['Version'] ) {
+			echo '<p>';
 			printf(
-				/* translators: %1$s is an opening anchor tag. %2$s is the closing part of the tag. */
-				esc_html__( 'Please test your theme with %1$sdebug enabled%2$s before you upload!', 'theme-check' ),
-				'<a href="https://wordpress.org/support/article/editing-wp-config-php/">',
-				'</a>'
+				esc_html__( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ),
+				esc_html( $theme['Template Version'] ),
+				esc_html( $parent_theme['Title'] ),
+				esc_html( $parent_theme['Title'] ),
+				esc_html( $parent_theme['Version'] )
 			);
-			echo '</div>';
+			echo '</p>';
 		}
+	}
+	echo '</div><!-- .theme-info-->';
 
-		echo '<div class="tc-box">';
-		echo '<ul class="tc-result">';
-		echo wp_kses(
-			$results,
-			array(
-				'li'     => array(),
-				'span'   => array(
-					'class' => array(),
-				),
-				'strong' => array(),
-			)
+	$plugins = get_plugins( '/theme-check' );
+	$version = explode( '.', $plugins['theme-check.php']['Version'] );
+	echo '<p>' . sprintf(
+		esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
+		'<strong>' . esc_html( $checkcount ) . '</strong>',
+		'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
+		'<strong>' . esc_html( $version[0] ) . '</strong>',
+		'<strong>' . esc_html( $version[1] ) . '</strong>'
+	) . '</p>';
+
+	$results = display_themechecks();
+
+	if ( ! $success ) {
+		echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
+	} else {
+		echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
+		tc_success();
+	}
+
+	if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+		echo '<div class="updated">';
+		echo '<span class="tc-fail">';
+		echo esc_html__( 'WARNING', 'theme-check' );
+		echo '</span> ';
+		echo '<strong>';
+		echo esc_html__( 'WP_DEBUG is not enabled!', 'theme-check' );
+		echo '</strong>';
+		printf(
+			/* translators: %1$s is an opening anchor tag. %2$s is the closing part of the tag. */
+			esc_html__( 'Please test your theme with %1$sdebug enabled%2$s before you upload!', 'theme-check' ),
+			'<a href="https://wordpress.org/support/article/editing-wp-config-php/">',
+			'</a>'
 		);
-		echo '</ul></div>';
+		echo '</div>';
 	}
-}
 
-// Strip comments from a PHP file in a way that will not change the underlying structure of the file.
-function tc_strip_comments( $code ) {
-	$strip    = array(
-		T_COMMENT     => true,
-		T_DOC_COMMENT => true,
+	echo '<div class="tc-box">';
+	echo '<ul class="tc-result">';
+	echo wp_kses(
+		$results,
+		array(
+			'li'     => array(),
+			'span'   => array(
+				'class' => array(),
+			),
+			'strong' => array(),
+		)
 	);
-	$newlines = array(
-		"\n" => true,
-		"\r" => true,
-	);
-	$tokens   = token_get_all( $code );
-	reset( $tokens );
-	$return = '';
-	$token  = current( $tokens );
-	while ( $token ) {
-		if ( ! is_array( $token ) ) {
-			$return .= $token;
-		} elseif ( ! isset( $strip[ $token[0] ] ) ) {
-			$return .= $token[1];
-		} else {
-			for ( $i = 0, $token_length = strlen( $token[1] ); $i < $token_length; ++$i ) {
-				if ( isset( $newlines[ $token[1][ $i ] ] ) ) {
-					$return .= $token[1][ $i ];
-				}
-			}
-		}
-		$token = next( $tokens );
-	}
-	return $return;
+	echo '</ul></div>';
 }
-
 
 function tc_intro() {
 	?>
@@ -267,28 +207,3 @@ function tc_form() {
 	echo '</form>';
 }
 
-/**
- * Used to allow some directories to be skipped during development.
- *
- * @param  string $filename a filename/path.
- * @return boolean
- */
-function tc_is_other_file_in_dev_directory( $filename ) {
-	$skip = false;
-	// Filterable List of dirs that you may want to skip other files in during
-	// development.
-	$dev_dirs = apply_filters(
-		'tc_common_dev_directories',
-		array(
-			'node_modules',
-			'vendor',
-		)
-	);
-	foreach ( $dev_dirs as $dev_dir ) {
-		if ( strpos( $filename, $dev_dir ) ) {
-			$skip = true;
-			break;
-		}
-	}
-	return $skip;
-}
