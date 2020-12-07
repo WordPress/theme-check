@@ -98,19 +98,22 @@ function check_main( $theme_slug ) {
 		$plugins = get_plugins( '/theme-check' );
 		$version = explode( '.', $plugins['theme-check.php']['Version'] );
 		echo '<p>' . sprintf(
-			esc_html__( ' Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
+			esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
 			'<strong>' . esc_html( $checkcount ) . '</strong>',
 			'<strong>' . esc_html( $data['Title'] ) . '</strong>',
 			'<strong>' . esc_html( $version[0] ) . '</strong>',
 			'<strong>' . esc_html( $version[1] ) . '</strong>'
 		) . '</p>';
+
 		$results = display_themechecks();
+
 		if ( ! $success ) {
 			echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
 		} else {
 			echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
 			tc_success();
 		}
+
 		if ( ! defined( 'WP_DEBUG' ) || WP_DEBUG === false ) {
 			echo '<div class="updated">';
 			echo '<span class="tc-fail">';
@@ -127,6 +130,7 @@ function check_main( $theme_slug ) {
 			);
 			echo '</div>';
 		}
+
 		echo '<div class="tc-box">';
 		echo '<ul class="tc-result">';
 		echo wp_kses(
