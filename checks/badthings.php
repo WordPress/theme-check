@@ -47,7 +47,7 @@ class Bad_Checks implements themecheck {
 
 		$checks = array(
 			'/cx=[0-9]{21}:[a-z0-9]{10}/' => __( 'Google search code detected', 'theme-check' ),
-			'/pub-[0-9]{16}/'             => __( 'Google advertising code detected', 'theme-check' ),
+			'/pub-[0-9]{16}/i'            => __( 'Google advertising code detected', 'theme-check' ),
 		);
 
 		foreach ( $other_files as $php_key => $phpfile ) {
