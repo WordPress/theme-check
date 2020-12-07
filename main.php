@@ -7,7 +7,7 @@ function check_main( $theme_slug ) {
 		return;
 	}
 
-	$is_child = $theme['Template'] && $theme['Template'] != $theme['Stylesheet'];
+	$is_child = $theme['Template'] && ( $theme['Template'] != $theme['Stylesheet'] );
 	if ( $is_child ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
 		if ( ! $theme->parent() ) {

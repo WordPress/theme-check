@@ -82,7 +82,6 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 	return $pass;
 }
 
-
 function display_themechecks() {
 	$results = '';
 	global $themechecks;
@@ -196,7 +195,6 @@ function tc_trac( $e ) {
 	return $e;
 }
 
-
 // Strip comments from a PHP file in a way that will not change the underlying structure of the file.
 function tc_strip_comments( $code ) {
 	$strip    = array(
@@ -227,7 +225,6 @@ function tc_strip_comments( $code ) {
 	}
 	return $return;
 }
-
 
 /**
  * Used to allow some directories to be skipped during development.
