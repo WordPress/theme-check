@@ -152,17 +152,6 @@ function tc_trac( $e ) {
 	return $e;
 }
 
-function listdir( $dir ) {
-	$files        = array();
-	$dir_iterator = new RecursiveDirectoryIterator( $dir, FilesystemIterator::SKIP_DOTS );
-	$iterator     = new RecursiveIteratorIterator( $dir_iterator, RecursiveIteratorIterator::SELF_FIRST );
-
-	foreach ( $iterator as $file ) {
-		array_push( $files, $file->getPathname() );
-	}
-	return $files;
-}
-
 function get_theme_data_from_contents( $theme_data ) {
 	$themes_allowed_tags = array(
 		'a'       => array(

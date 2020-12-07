@@ -1,15 +1,17 @@
 <?php
-function check_main( $theme ) {
+function check_main( $theme_slug ) {
 	global $themechecks;
 
-	$themename = $theme;
-	$theme     = get_theme_root( $theme ) . "/$theme";
-	$files     = listdir( $theme );
-	$data      = tc_get_theme_data( $theme . '/style.css' );
-	if ( $data['Template'] ) {
+	$themename = $theme_slug;
+	$data      = wp_get_theme( $theme_slug );
+	$theme     = $data->get_stylesheet_directory();
+	$is_child  = $data['Template'] && $data['Template'] != $data['Stylesheet'];
+	$files     = array_values( $data->get_files( null, -1, true ) );
+
+	if ( $is_child ) {
 		// This is a child theme, so we need to pull files from the parent, which HAS to be installed.
-		$parent = get_theme_root( $data['Template'] ) . '/' . $data['Template'];
-		if ( ! tc_get_theme_data( $parent . '/style.css' ) ) { // This should never happen but we will check while were here!
+		$parent_data = $data->parent();
+		if ( ! $parent_data ) {
 			echo '<h2>';
 			printf(
 				/* translators: The parent theme name. */
@@ -19,17 +21,16 @@ function check_main( $theme ) {
 			echo '</h2>';
 			return;
 		}
-		$parent_data = tc_get_theme_data( $parent . '/style.css' );
-		$themename   = basename( $parent );
-		$files       = array_merge( listdir( $parent ), $files );
+
+		$themename = basename( $data->get_template_directory() );
 	}
 
 	if ( $files ) {
 		foreach ( $files as $key => $filename ) {
-			if ( substr( $filename, -4 ) === '.php' && ! is_dir( $filename ) ) {
+			if ( substr( $filename, -4 ) === '.php' ) {
 				$php[ $filename ] = file_get_contents( $filename );
 				$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
-			} elseif ( substr( $filename, -4 ) === '.css' && ! is_dir( $filename ) ) {
+			} elseif ( substr( $filename, -4 ) === '.css' ) {
 				$css[ $filename ] = file_get_contents( $filename );
 			} else {
 				// In local development it might be useful to skip other files
@@ -39,7 +40,7 @@ function check_main( $theme ) {
 						continue;
 					}
 				}
-				$other[ $filename ] = ( ! is_dir( $filename ) ) ? file_get_contents( $filename ) : '';
+				$other[ $filename ] = file_get_contents( $filename );
 			}
 		}
 
@@ -51,10 +52,15 @@ function check_main( $theme ) {
 		// Second loop, to display the errors.
 		echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
 		echo '<div class="theme-info">';
-		if ( file_exists( WP_CONTENT_DIR . '/themes/' . basename( $theme ) . '/screenshot.png' ) ) {
-			$image = getimagesize( $theme . '/screenshot.png' );
-			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . content_url( 'themes/' . basename( $theme ) . '/screenshot.png' ) . '" />';
-			echo '<br /><div style="text-align:center">' . intval( $image[0] ) . 'x' . intval( $image[1] ) . ' ' . round( filesize( $theme . '/screenshot.png' ) / 1024 ) . 'k</div></div>';
+
+		$screenshot = $data->get_screenshot( 'relative' );
+		if ( $screenshot ) {
+			$screenshot_file = $data->get_stylesheet_directory() . '/' . $screenshot;
+			$image_size      = getimagesize( $screenshot_file );
+			$image_filesize  = filesize( $screenshot_file );
+
+			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $data->get_stylesheet_directory_uri() . '/' . $screenshot ) . '" />';
+			echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
 		}
 
 		echo ( ! empty( $data['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Title'] ) . '</span></p>' : '';
@@ -67,7 +73,7 @@ function check_main( $theme ) {
 		echo ( ! empty( $data['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $data['Tags'] ) ) . '</span></p>' : '';
 		echo ( ! empty( $data['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Description'] ) . '</span></p>' : '';
 
-		if ( $data['Template'] ) {
+		if ( $is_child && $data['Template Version'] /* Not supported by Core */ ) {
 			if ( $data['Template Version'] > $parent_data['Version'] ) {
 				echo '<p>' . sprintf(
 					esc_html__( 'This child theme requires at least version %1$s of theme %2$s to be installed. You only have %3$s please update the parent theme.', 'theme-check' ),
@@ -82,7 +88,7 @@ function check_main( $theme ) {
 				'<strong>' . esc_html( $data['Template'] ) . '</strong>'
 			) . '</p>';
 			if ( empty( $data['Template Version'] ) ) {
-				echo '<p>' . esc_html__( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
+				echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
 			} else {
 				echo ( $data['Template Version'] < $parent_data['Version'] ) ? '<p>' . sprintf( esc_html__( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ), esc_html( $data['Template Version'] ), esc_html( $parent_data['Title'] ), esc_html( $parent_data['Title'] ), esc_html( $parent_data['Version'] ) ) . '</p>' : '';
 			}
