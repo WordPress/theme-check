@@ -18,7 +18,7 @@ interface themecheck {
 }
 
 // load all the checks in the checks directory.
-foreach ( glob( __DIR__ . "/checks/*.php" ) as $file ) {
+foreach ( glob( __DIR__ . '/checks/*.php' ) as $file ) {
 	include $file;
 }
 
@@ -32,11 +32,13 @@ do_action( 'themecheck_checks_loaded' );
  * @return bool
  */
 function run_themechecks_against_theme( $theme, $theme_slug ) {
-	$files = array_values( $theme->get_files(
-		null /* all file types */,
-		-1 /* infinite recursion */,
-		true /* include parent theme files */
-	) );
+	$files = array_values(
+		$theme->get_files(
+			null /* all file types */,
+			-1 /* infinite recursion */,
+			true /* include parent theme files */
+		)
+	);
 
 	foreach ( $files as $key => $filename ) {
 		if ( substr( $filename, -4 ) === '.php' ) {
@@ -63,7 +65,7 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 		$other,
 		array(
 			'theme' => $theme,
-			'slug'  => $theme_slug
+			'slug'  => $theme_slug,
 		)
 	);
 }

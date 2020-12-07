@@ -74,7 +74,7 @@ function check_main( $theme_slug ) {
 
 		if ( empty( $theme['Template Version'] ) ) {
 			echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
-		} else if ( $theme['Template Version'] < $parent_theme['Version'] ) {
+		} elseif ( $theme['Template Version'] < $parent_theme['Version'] ) {
 			echo '<p>';
 			printf(
 				esc_html__( 'Child theme is only tested up to version %1$s of %2$s breakage may occur! %3$s installed version is %4$s', 'theme-check' ),
