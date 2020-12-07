@@ -50,7 +50,7 @@ class Deprecated implements themecheck {
 			array( 'get_linkrating' => 'sanitize_bookmark_field()', '2.1' ),
 			array( 'get_linkcatname' => 'get_category()', '2.1' ),
 			array( 'comments_rss_link' => 'post_comments_feed_link()', '2.5' ),
-			array( 'get_category_rss_link' => 'get_category_feed_link()'. '2.5' ),
+			array( 'get_category_rss_link' => 'get_category_feed_link()', '2.5' ),
 			array( 'get_author_rss_link' => 'get_author_feed_link()', '2.5' ),
 			array( 'comments_rss' => 'get_post_comments_feed_link()', '2.2' ),
 			array( 'create_user' => 'wp_create_user()', '2.0' ),
