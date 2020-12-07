@@ -21,7 +21,7 @@ class ThemeCheckMain {
 	}
 
 	function load_styles() {
-		wp_enqueue_style( 'style', plugins_url( 'assets/style.css', __FILE__ ), null, null, 'screen' );
+		wp_enqueue_style( 'style', plugins_url( 'assets/style.css', __FILE__ ), array(), 1, 'screen' );
 	}
 
 	function themecheck_add_page() {
@@ -49,19 +49,21 @@ class ThemeCheckMain {
 		<h1><?php echo esc_html_x( 'Theme Check', 'title of the main page', 'theme-check' ); ?></h1>
 		<div class="theme-check">
 		<?php
-			tc_form();
+		tc_form();
 		if ( ! isset( $_POST['themename'] ) ) {
 			tc_intro();
-
 		}
 
 		if ( isset( $_POST['themename'] ) ) {
 			check_admin_referer( 'themecheck-nonce' );
+
 			if ( isset( $_POST['trac'] ) ) {
 				define( 'TC_TRAC', true );
 			}
+
 			wp_raise_memory_limit();
-			check_main( $_POST['themename'] );
+
+			check_main( wp_unslash( $_POST['themename'] ) );
 		}
 		?>
 		</div> <!-- .theme-check-->

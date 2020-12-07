@@ -17,7 +17,7 @@ class DirectoriesCheck implements themecheck {
 		$all_filenames = array_merge(
 			array_keys( $php_files ),
 			array_keys( $css_files ),
-			array_keys( $other_files ),
+			array_keys( $other_files )
 		);
 
 		foreach ( $all_filenames as $path ) {
@@ -26,15 +26,21 @@ class DirectoriesCheck implements themecheck {
 			$filename = basename( $path );
 
 			if ( in_array( $filename, $excluded_directories, true ) ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Please remove any extraneous directories like .git or .svn from the ZIP file before uploading it.', 'theme-check' );
-				$ret = false;
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					__( 'Please remove any extraneous directories like .git or .svn from the ZIP file before uploading it.', 'theme-check' )
+				);
+				$ret           = false;
 			}
 		}
 
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new DirectoriesCheck;
+$themechecks[] = new DirectoriesCheck();

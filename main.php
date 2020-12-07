@@ -50,21 +50,21 @@ function check_main( $theme ) {
 		// Second loop, to display the errors.
 		echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
 		echo '<div class="theme-info">';
-		if ( file_exists( trailingslashit( WP_CONTENT_DIR . '/themes' ) . trailingslashit( basename( $theme ) ) . 'screenshot.png' ) ) {
+		if ( file_exists( WP_CONTENT_DIR . '/themes/' . basename( $theme ) . '/screenshot.png' ) ) {
 			$image = getimagesize( $theme . '/screenshot.png' );
-			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . trailingslashit( WP_CONTENT_URL . '/themes' ) . trailingslashit( basename( $theme ) ) . 'screenshot.png" />';
-			echo '<br /><div style="text-align:center">' . $image[0] . 'x' . $image[1] . ' ' . round( filesize( $theme . '/screenshot.png' ) / 1024 ) . 'k</div></div>';
+			echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . content_url( 'themes/' . basename( $theme ) . '/screenshot.png' ) . '" />';
+			echo '<br /><div style="text-align:center">' . intval( $image[0] ) . 'x' . intval( $image[1] ) . ' ' . round( filesize( $theme . '/screenshot.png' ) / 1024 ) . 'k</div></div>';
 		}
 
 		echo ( ! empty( $data['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Title'] ) . '</span></p>' : '';
 		echo ( ! empty( $data['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Version'] ) . '</span></p>' : '';
 		echo ( ! empty( $data['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['AuthorName'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $data['AuthorURI'] ) . '">' . $data['AuthorURI'] . '</a></span></p>' : '';
-		echo ( ! empty( $data['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $data['URI'] ) . '">' . $data['URI'] . '</a></span></p>' : '';
+		echo ( ! empty( $data['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $data['AuthorURI'] ) . '">' . esc_html( $data['AuthorURI'] ) . '</a></span></p>' : '';
+		echo ( ! empty( $data['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $data['URI'] ) . '">' . esc_html( $data['URI'] ) . '</a></span></p>' : '';
 		echo ( ! empty( $data['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['License'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . $data['License URI'] . '</span></p>' : '';
-		echo ( ! empty( $data['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . implode( ', ', $data['Tags'] ) . '</span></p>' : '';
-		echo ( ! empty( $data['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . $data['Description'] . '</span></p>' : '';
+		echo ( ! empty( $data['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['License URI'] ) . '</span></p>' : '';
+		echo ( ! empty( $data['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $data['Tags'] ) ) . '</span></p>' : '';
+		echo ( ! empty( $data['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $data['Description'] ) . '</span></p>' : '';
 
 		if ( $data['Template'] ) {
 			if ( $data['Template Version'] > $parent_data['Version'] ) {
@@ -99,7 +99,7 @@ function check_main( $theme ) {
 		) . '</p>';
 		$results = display_themechecks();
 		if ( ! $success ) {
-			echo '<h2>' . sprintf( esc_html__( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
+			echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
 		} else {
 			echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $data['Title'] ) ) . '</h2>';
 			tc_success();
@@ -179,8 +179,10 @@ function tc_intro() {
 		esc_html__( 'Theme Check is maintained by %1$s and %2$s.', 'theme-check' ),
 		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
 		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
-		); ?></p>
-	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/'); ?></p>
+	);
+	?>
+		</p>
+	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/' ); ?></p>
 	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/WordPress/theme-check' ); ?></p>
 	<h3><?php esc_html_e( 'Testers', 'theme-check' ); ?></h3>
 	<p><a href="https://make.wordpress.org/themes/"><?php esc_html_e( 'The WordPress Themes Team', 'theme-check' ); ?></a></p>
@@ -211,18 +213,22 @@ function tc_success() {
 
 function tc_form() {
 	$themes = tc_get_themes();
+
 	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
+
+	$selected_theme = isset( $_POST['themename'] ) ? wp_unslash( $_POST['themename'] ) : get_stylesheet();
 	foreach ( $themes as $name => $location ) {
-		echo '<option ';
-		if ( isset( $_POST['themename'] ) ) {
-			echo ( $location['Stylesheet'] === $_POST['themename'] ) ? 'selected="selected" ' : '';
-		} else {
-			echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'selected="selected" ' : '';
-		}
-		echo ( basename( STYLESHEETPATH ) === $location['Stylesheet'] ) ? 'value="' . $location['Stylesheet'] . '" style="font-weight:bold;">' . $name . '</option>' : 'value="' . $location['Stylesheet'] . '">' . $name . '</option>';
+		printf(
+			'<option %s value="%s">%s</option>',
+			selected( $selected_theme, $location['Stylesheet'], false ),
+			esc_attr( $location['Stylesheet'] ),
+			esc_html( $name )
+		);
 	}
+
 	echo '</select>';
+
 	echo '<input class="button" type="submit" value="' . esc_attr__( 'Check it!', 'theme-check' ) . '" />';
 	if ( defined( 'TC_PRE' ) || defined( 'TC_POST' ) ) {
 		echo ' <input name="trac" type="checkbox" /> ' . esc_html__( 'Output in Trac format.', 'theme-check' );
@@ -235,11 +241,11 @@ function tc_form() {
 /**
  * Used to allow some directories to be skipped during development.
  *
- * @param  string  $filename a filename/path
+ * @param  string $filename a filename/path.
  * @return boolean
  */
 function tc_is_other_file_in_dev_directory( $filename ) {
-	$skip     = false;
+	$skip = false;
 	// Filterable List of dirs that you may want to skip other files in during
 	// development.
 	$dev_dirs = apply_filters(

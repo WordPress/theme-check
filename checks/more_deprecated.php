@@ -22,7 +22,7 @@ class More_Deprecated implements themecheck {
 				'text_direction'       => 'is_rtl()',
 				'feed_url'             => "get_feed_link( 'feed' ), where feed is rss, rss2 or atom",
 			),
-			'bloginfo' => array(
+			'bloginfo'     => array(
 				'home'                 => 'echo esc_url( home_url() )',
 				'url'                  => 'echo esc_url( home_url() )',
 				'wpurl'                => 'echo esc_url( site_url() )',
@@ -32,10 +32,10 @@ class More_Deprecated implements themecheck {
 				'text_direction'       => 'is_rtl()',
 				'feed_url'             => "echo esc_url( get_feed_link( 'feed' ) ), where feed is rss, rss2 or atom",
 			),
-			'get_option' => array(
+			'get_option'   => array(
 				'home'     => 'home_url()',
 				'site_url' => 'site_url()',
-			)
+			),
 		);
 
 		foreach ( $php_files as $php_key => $php_file ) {
@@ -49,7 +49,17 @@ class More_Deprecated implements themecheck {
 						$filename      = tc_filename( $php_key );
 						$error         = ltrim( rtrim( $matches[0], '(' ) );
 						$grep          = tc_grep( $error, $php_key );
-						$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s was found in the file %2$s. Use %3$s instead.%4$s', 'theme-check' ), '<strong>' . $error . '</strong>', '<strong>' . $filename . '</strong>', '<strong>' . $replacement . '</strong>', $grep );
+						$this->error[] = sprintf(
+							'<span class="tc-lead tc-required">%s</span>: %s %s',
+							__( 'REQUIRED', 'theme-check' ),
+							sprintf(
+								__( '%1$s was found in the file %2$s. Use %3$s instead.', 'theme-check' ),
+								'<strong>' . $error . '</strong>',
+								'<strong>' . $filename . '</strong>',
+								'<strong>' . $replacement . '</strong>'
+							),
+							$grep
+						);
 						$ret           = false;
 					}
 				}
@@ -59,6 +69,8 @@ class More_Deprecated implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new More_Deprecated;
+$themechecks[] = new More_Deprecated();
