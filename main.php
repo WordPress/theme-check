@@ -20,7 +20,7 @@ function check_main( $theme_slug ) {
 		$image_size      = getimagesize( $screenshot_file );
 		$image_filesize  = filesize( $screenshot_file );
 
-		echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $theme->get_stylesheet_directory_uri() . '/' . $screenshot ) . '" />';
+		echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $theme->get_screenshot() ) . '" />';
 		echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
 	}
 
@@ -44,7 +44,7 @@ function check_main( $theme_slug ) {
 		echo '</p>';
 	}
 
-	if ( $theme['Template Version'] /* Not supported by Core */ ) {
+	if ( $theme['Template Version'] /* Not supported by WordPress */ ) {
 		$parent_theme = $theme->parent();
 		if ( $theme['Template Version'] > $parent_theme['Version'] ) {
 			echo '<p>';
