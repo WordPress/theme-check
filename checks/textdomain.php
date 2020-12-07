@@ -42,7 +42,7 @@ class TextDomainCheck implements themecheck {
 			$this->slug = $data['slug'];
 		}
 
-		$this->is_wporg = !empty( $data['is_wporg'] );
+		$this->is_wporg = ! empty( $data['is_wporg'] );
 	}
 
 	function check( $php_files, $css_files, $other_files ) {
