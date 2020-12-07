@@ -34,11 +34,11 @@ class TextDomainCheck implements themecheck {
 	protected $slug = '';
 
 	function set_context( $data ) {
-		if ( isset( $data['theme_data']['Name'] ) ) {
-			$this->name = $data['theme_data']['Name'];
+		if ( isset( $data['theme']['Name'] ) ) {
+			$this->name = $data['theme']['Name'];
 		}
-		if ( isset( $data['theme_slug'] ) ) {
-			$this->slug = $data['theme_slug'];
+		if ( isset( $data['slug'] ) ) {
+			$this->slug = $data['slug'];
 		}
 	}
 
