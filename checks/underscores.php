@@ -8,10 +8,9 @@
 class UnderscoresCheck implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	function check( $php_files, $css_files, $other_files, $data ) {
 
 		$ret = true;
-		global $data;
 
 		checkcount();
 		if ( ! empty( $data['AuthorURI'] ) || ! empty( $data['URI'] ) ) {

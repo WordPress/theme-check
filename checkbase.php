@@ -25,12 +25,12 @@ foreach ( glob( dirname( __FILE__ ) . "/{$dir}/*.php" ) as $file ) {
 
 do_action( 'themecheck_checks_loaded' );
 
-function run_themechecks( $php, $css, $other ) {
+function run_themechecks( $php, $css, $other, $theme_data = array() ) {
 	global $themechecks;
 	$pass = true;
 	foreach ( $themechecks as $check ) {
 		if ( $check instanceof themecheck ) {
-			$pass = $pass & $check->check( $php, $css, $other );
+			$pass = $pass & $check->check( $php, $css, $other, $theme_data );
 		}
 	}
 	return $pass;

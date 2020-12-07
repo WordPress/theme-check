@@ -3,11 +3,10 @@
 class Check_URI implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	function check( $php_files, $css_files, $other_files, $data ) {
 
 		checkcount();
 		$ret = true;
-		global $data;
 
 		if ( ! empty( $data['AuthorURI'] ) && ! empty( $data['URI'] ) ) {
 

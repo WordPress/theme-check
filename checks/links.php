@@ -2,10 +2,9 @@
 class Check_Links implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
-
+	function check( $php_files, $css_files, $other_files, $data ) {
 		$ret = true;
-		global $data;
+
 		foreach ( $php_files as $php_key => $phpfile ) {
 			checkcount();
 			$grep = '';

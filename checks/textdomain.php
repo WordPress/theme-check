@@ -30,8 +30,8 @@ class TextDomainCheck implements themecheck {
 	// core names their themes differently
 	var $exceptions = array( 'twentyten', 'twentyeleven', 'twentytwelve', 'twentythirteen', 'twentyfourteen', 'twentyfifteen', 'twentysixteen', 'twentyseventeen', 'twentyeighteen', 'twentynineteen', 'twentytwenty' );
 
-	function check( $php_files, $css_files, $other_files ) {
-		global $data, $themename;
+	function check( $php_files, $css_files, $other_files, $data ) {
+		global $themename;
 
 		$ret   = true;
 		$error = '';

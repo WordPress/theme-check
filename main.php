@@ -1,6 +1,6 @@
 <?php
 function check_main( $theme ) {
-	global $themechecks, $data, $themename;
+	global $themechecks, $themename;
 	$themename = $theme;
 	$theme     = get_theme_root( $theme ) . "/$theme";
 	$files     = listdir( $theme );
@@ -43,7 +43,7 @@ function check_main( $theme ) {
 		}
 
 		// Run the checks.
-		$success = run_themechecks( $php, $css, $other );
+		$success = run_themechecks( $php, $css, $other, $data );
 
 		global $checkcount;
 
