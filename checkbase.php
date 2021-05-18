@@ -1,9 +1,9 @@
 <?php
-// main global to hold our checks
+// main global to hold our checks.
 global $themechecks;
 $themechecks = array();
 
-// counter for the checks
+// counter for the checks.
 global $checkcount;
 $checkcount = 0;
 
@@ -18,21 +18,80 @@ interface themecheck {
 }
 
 // load all the checks in the checks directory.
-$dir = 'checks';
-foreach ( glob( dirname( __FILE__ ) . "/{$dir}/*.php" ) as $file ) {
+foreach ( glob( __DIR__ . '/checks/*.php' ) as $file ) {
 	include $file;
 }
 
 do_action( 'themecheck_checks_loaded' );
 
-function run_themechecks( $php, $css, $other ) {
+/**
+ * Run Theme Check against a given theme.
+ *
+ * @param WP_Theme $theme      A WP_Theme instance.
+ * @param string   $theme_slug The slug of the given theme.
+ * @return bool
+ */
+function run_themechecks_against_theme( $theme, $theme_slug ) {
+	$files = $theme->get_files(
+		null /* all file types */,
+		-1 /* infinite recursion */,
+		true /* include parent theme files */
+	);
+
+	foreach ( $files as $filename ) {
+		if ( substr( $filename, -4 ) === '.php' ) {
+			$php[ $filename ] = file_get_contents( $filename );
+			$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
+		} elseif ( substr( $filename, -4 ) === '.css' ) {
+			$css[ $filename ] = file_get_contents( $filename );
+		} else {
+			// In local development it might be useful to skip other files
+			// (non .php or .css files) in dev directories.
+			if ( apply_filters( 'tc_skip_development_directories', false ) ) {
+				if ( tc_is_other_file_in_dev_directory( $filename ) ) {
+					continue;
+				}
+			}
+			$other[ $filename ] = file_get_contents( $filename );
+		}
+	}
+
+	// Run the checks.
+	return run_themechecks(
+		$php,
+		$css,
+		$other,
+		array(
+			'theme' => $theme,
+			'slug'  => $theme_slug,
+		)
+	);
+}
+
+/**
+ * Run the Theme Checks against a set of files.
+ *
+ * @param array $php     The PHP files.
+ * @param array $css     The CSS files.
+ * @param array $other   Any non-php/css files.
+ * @param array $context Any context for the Theme Checks.
+ *
+ * @return bool
+ */
+function run_themechecks( $php, $css, $other, $context = array() ) {
 	global $themechecks;
+
 	$pass = true;
 	foreach ( $themechecks as $check ) {
 		if ( $check instanceof themecheck ) {
+			if ( $context && is_callable( array( $check, 'set_context' ) ) ) {
+				$check->set_context( $context );
+			}
+
 			$pass = $pass & $check->check( $php, $css, $other );
 		}
 	}
+
 	return $pass;
 }
 
@@ -93,7 +152,7 @@ function tc_grep( $error, $file ) {
 			$error      = str_replace( '"', "'", $error );
 			$this_line  = str_replace( '"', "'", $this_line );
 			$error      = ltrim( $error );
-			$pos = strpos( $this_line, $error );
+			$pos        = strpos( $this_line, $error );
 			$pre        = ( false !== $pos ? substr( $this_line, 0, $pos ) : false );
 			$pre        = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
@@ -149,152 +208,59 @@ function tc_trac( $e ) {
 	return $e;
 }
 
-function listdir( $dir ) {
-	$files        = array();
-	$dir_iterator = new RecursiveDirectoryIterator( $dir );
-	$iterator     = new RecursiveIteratorIterator( $dir_iterator, RecursiveIteratorIterator::SELF_FIRST );
-
-	foreach ( $iterator as $file ) {
-		array_push( $files, $file->getPathname() );
-	}
-	return $files;
-}
-
-function get_theme_data_from_contents( $theme_data ) {
-	$themes_allowed_tags = array(
-		'a'       => array(
-			'href'  => array(),
-			'title' => array(),
-		),
-		'abbr'    => array(
-			'title' => array(),
-		),
-		'acronym' => array(
-			'title' => array(),
-		),
-		'code'    => array(),
-		'em'      => array(),
-		'strong'  => array(),
+// Strip comments from a PHP file in a way that will not change the underlying structure of the file.
+function tc_strip_comments( $code ) {
+	$strip    = array(
+		T_COMMENT     => true,
+		T_DOC_COMMENT => true,
 	);
-
-	$theme_data = str_replace( '\r', '\n', $theme_data );
-	preg_match( '|^[ \t\/*#@]*Theme Name:(.*)$|mi', $theme_data, $theme_name );
-	preg_match( '|^[ \t\/*#@]*Theme URI:(.*)$|mi', $theme_data, $theme_uri );
-	preg_match( '|^[ \t\/*#@]*Description:(.*)$|mi', $theme_data, $description );
-
-	if ( preg_match( '|^[ \t\/*#@]*Author URI:(.*)$|mi', $theme_data, $author_uri ) ) {
-		$author_uri = esc_url( trim( $author_uri[1] ) );
-	} else {
-		$author_uri = '';
-	}
-
-	if ( preg_match( '|^[ \t\/*#@]*Template:(.*)$|mi', $theme_data, $template ) ) {
-		$template = wp_kses( trim( $template[1] ), $themes_allowed_tags );
-	} else {
-		$template = '';
-	}
-
-	if ( preg_match( '|^[ \t\/*#@]*Version:(.*)|mi', $theme_data, $version ) ) {
-		$version = wp_kses( trim( $version[1] ), $themes_allowed_tags );
-	} else {
-		$version = '';
-	}
-
-	if ( preg_match( '|^[ \t\/*#@]*Status:(.*)|mi', $theme_data, $status ) ) {
-		$status = wp_kses( trim( $status[1] ), $themes_allowed_tags );
-	} else {
-		$status = 'publish';
-	}
-
-	if ( preg_match( '|^[ \t\/*#@]*Tags:(.*)|mi', $theme_data, $tags ) ) {
-		$tags = array_map( 'trim', explode( ',', wp_kses( trim( $tags[1] ), array() ) ) );
-	} else {
-		$tags = array();
-	}
-
-	$theme = ( isset( $theme_name[1] ) ) ? wp_kses( trim( $theme_name[1] ), $themes_allowed_tags ) : '';
-
-	$theme_uri = ( isset( $theme_uri[1] ) ) ? esc_url( trim( $theme_uri[1] ) ) : '';
-
-	$description = ( isset( $description[1] ) ) ? wp_kses( trim( $description[1] ), $themes_allowed_tags ) : '';
-
-	if ( preg_match( '|^[ \t\/*#@]*Author:(.*)$|mi', $theme_data, $author_name ) ) {
-		if ( empty( $author_uri ) ) {
-			$author = wp_kses( trim( $author_name[1] ), $themes_allowed_tags );
+	$newlines = array(
+		"\n" => true,
+		"\r" => true,
+	);
+	$tokens   = token_get_all( $code );
+	reset( $tokens );
+	$return = '';
+	$token  = current( $tokens );
+	while ( $token ) {
+		if ( ! is_array( $token ) ) {
+			$return .= $token;
+		} elseif ( ! isset( $strip[ $token[0] ] ) ) {
+			$return .= $token[1];
 		} else {
-			$author = sprintf( '<a href="%1$s" title="%2$s">%3$s</a>', $author_uri, __( 'Visit author homepage', 'theme-check' ), wp_kses( trim( $author_name[1] ), $themes_allowed_tags ) );
+			for ( $i = 0, $token_length = strlen( $token[1] ); $i < $token_length; ++$i ) {
+				if ( isset( $newlines[ $token[1][ $i ] ] ) ) {
+					$return .= $token[1][ $i ];
+				}
+			}
 		}
-	} else {
-		$author = __( 'Anonymous', 'theme-check' );
+		$token = next( $tokens );
 	}
-
-	return array(
-		'Name'        => $theme,
-		'Title'       => $theme,
-		'URI'         => $theme_uri,
-		'Description' => $description,
-		'Author'      => $author,
-		'Author_URI'  => $author_uri,
-		'Version'     => $version,
-		'Template'    => $template,
-		'Status'      => $status,
-		'Tags'        => $tags,
-	);
+	return $return;
 }
 
-/*
- * 3.3/3.4 compat
+/**
+ * Used to allow some directories to be skipped during development.
  *
+ * @param  string $filename a filename/path.
+ * @return boolean
  */
-function tc_get_themes() {
-
-	if ( ! class_exists( 'WP_Theme' ) ) {
-		return wp_get_theme();
-	}
-
-	global $wp_themes;
-	if ( isset( $wp_themes ) ) {
-		return $wp_themes;
-	}
-
-	$themes    = wp_get_themes();
-	$wp_themes = array();
-
-	foreach ( $themes as $theme ) {
-		$name = $theme->get( 'Name' );
-		if ( isset( $wp_themes[ $name ] ) ) {
-			$wp_themes[ $name . '/' . $theme->get_stylesheet() ] = $theme;
-		} else {
-			$wp_themes[ $name ] = $theme;
+function tc_is_other_file_in_dev_directory( $filename ) {
+	$skip = false;
+	// Filterable List of dirs that you may want to skip other files in during
+	// development.
+	$dev_dirs = apply_filters(
+		'tc_common_dev_directories',
+		array(
+			'node_modules',
+			'vendor',
+		)
+	);
+	foreach ( $dev_dirs as $dev_dir ) {
+		if ( strpos( $filename, $dev_dir ) ) {
+			$skip = true;
+			break;
 		}
 	}
-
-	return $wp_themes;
-}
-
-function tc_get_theme_data( $theme_file ) {
-
-	if ( ! class_exists( 'WP_Theme' ) ) {
-		return wp_get_theme( $theme_file );
-	}
-
-	$theme = new WP_Theme( basename( dirname( $theme_file ) ), dirname( dirname( $theme_file ) ) );
-
-	$theme_data = array(
-		'Name'             => $theme->get( 'Name' ),
-		'URI'              => $theme->display( 'ThemeURI', true, false ),
-		'Description'      => $theme->display( 'Description', true, false ),
-		'Author'           => $theme->display( 'Author', true, false ),
-		'AuthorURI'        => $theme->display( 'AuthorURI', true, false ),
-		'Version'          => $theme->get( 'Version' ),
-		'Template'         => $theme->get( 'Template' ),
-		'Status'           => $theme->get( 'Status' ),
-		'Tags'             => $theme->get( 'Tags' ),
-		'Title'            => $theme->get( 'Name' ),
-		'AuthorName'       => $theme->display( 'Author', false, false ),
-		'License'          => $theme->display( 'License', false, false ),
-		'License URI'      => $theme->display( 'License URI', false, false ),
-		'Template Version' => $theme->display( 'Template Version', false, false ),
-	);
-	return $theme_data;
+	return $skip;
 }

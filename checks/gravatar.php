@@ -11,14 +11,23 @@ class GravatarCheck implements themecheck {
 
 		$ret = true;
 
-		if ( ( strpos( $php, 'get_avatar' ) === false ) && ( strpos( $php, 'wp_list_comments' ) === false ) ) {
-			$this->error[] = '<span class="tc-lead tc-required">'.__('REQUIRED','theme-check').'</span>: '.__("This theme doesn't seem to support the standard avatar functions. Use <strong>get_avatar</strong> or <strong>wp_list_comments</strong> to add this support.", 'theme-check' );
-			$ret = false;
+		if (
+			strpos( $php, 'get_avatar' ) === false &&
+			strpos( $php, 'wp_list_comments' ) === false
+		) {
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-required">%s</span>: %s',
+				__( 'REQUIRED', 'theme-check' ),
+				__( "This theme doesn't seem to support the standard avatar functions. Use <strong>get_avatar</strong> or <strong>wp_list_comments</strong> to add this support.", 'theme-check' )
+			);
+			$ret           = false;
 		}
 
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new GravatarCheck;
+$themechecks[] = new GravatarCheck();

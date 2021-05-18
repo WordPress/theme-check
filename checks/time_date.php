@@ -9,23 +9,33 @@ class Time_Date implements themecheck {
 		$checks = array(
 			'/\sdate_i18n\(\s?["|\'][A-Za-z\s]+\s?["|\']\)/' => 'date_i18n( get_option( \'date_format\' ) )',
 			'/[^get_]the_date\(\s?["|\'][A-Za-z\s]+\s?["|\']\)/' => 'the_date( get_option( \'date_format\' ) )',
-			'/[^get_]the_time\(\s?["|\'][A-Za-z\s]+\s?["|\']\)/' => 'the_time( get_option( \'date_format\' ) )'
-			);
+			'/[^get_]the_time\(\s?["|\'][A-Za-z\s]+\s?["|\']\)/' => 'the_time( get_option( \'date_format\' ) )',
+		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
-					$filename = tc_filename( $php_key );
-					$matches[0] = str_replace(array('"',"'"),'', $matches[0]);
-					$error = trim( esc_html( rtrim( $matches[0], '(' ) ) );
-					$this->error[] = sprintf( '<span class="tc-lead tc-info">' . __( 'INFO', 'theme-check' ) . '</span>: ' . __( 'At least one hard coded date was found in the file %1$s. Consider %2$s instead.', 'theme-check' ), '<strong>' . $filename . '</strong>', "<strong>get_option( 'date_format' )</strong>" );
+					$filename      = tc_filename( $php_key );
+					$matches[0]    = str_replace( array( '"', "'" ), '', $matches[0] );
+					$error         = trim( esc_html( rtrim( $matches[0], '(' ) ) );
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-info">%s</span> %s',
+						__( 'INFO', 'theme-check' ),
+						sprintf(
+							__( 'At least one hard coded date was found in the file %1$s. Consider %2$s instead.', 'theme-check' ),
+							'<strong>' . $filename . '</strong>',
+							"<strong>get_option( 'date_format' )</strong>"
+						)
+					);
 				}
 			}
 		}
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
-$themechecks[] = new Time_Date;
+$themechecks[] = new Time_Date();

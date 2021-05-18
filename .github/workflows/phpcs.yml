@@ -1,0 +1,18 @@
+name: PHP Code Standards check
+
+on: [push, pull_request]
+
+jobs:
+  phpcs:
+      name: PHP Code Standards
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Install dependencies
+          run: composer install --prefer-dist --no-progress
+        - name: PHPCS check
+          uses: chekalsky/phpcs-action@v1
+          with:
+            phpcs_bin_path: './vendor/bin/phpcs'
+            enable_warnings: true

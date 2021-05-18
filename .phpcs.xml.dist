@@ -18,11 +18,22 @@
 	<rule ref="WordPress-Extra"/>
 
 	<!-- Let's also check that everything is properly documented. -->
-	<rule ref="WordPress-Docs"/>
-
-	<!-- Add in some extra rules from other standards. -->
-	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
-	<rule ref="Generic.Commenting.Todo"/>
+	<rule ref="WordPress-Docs">
+		<exclude name="Squiz.Scope.MethodScope.Missing"/>
+		<exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+		<exclude name="Squiz.Commenting.FunctionComment.WrongStyle"/>
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<exclude name="Squiz.Commenting.FileComment.WrongStyle"/>
+		<exclude name="Squiz.Commenting.ClassComment.SpacingAfter"/>
+		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+		<exclude name="Squiz.Commenting.VariableComment.Missing"/>
+		<exclude name="Squiz.Commenting.VariableComment.WrongStyle"/>
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+		<exclude name="PSR2.Classes.PropertyDeclaration.VarUsed"/>
+		<exclude name="PSR2.Classes.PropertyDeclaration.ScopeMissing"/>
+		<exclude name="Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure"/>
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+	</rule>
 
 	<!-- Check for PHP cross-version compatibility. -->
 	<config name="testVersion" value="5.6-"/>
@@ -36,5 +47,39 @@
 				<element value="theme-check"/>
 			</property>
 		</properties>
+
+		<!-- Right now this is more noise, due to the code style -->
+		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+	</rule>
+
+	<rule ref="WordPress">
+		<!-- We don't process data. -->
+		<exclude name="WordPress.Security.NonceVerification.Missing"/>
+
+		<!-- Output is intentionally non-escaped in many places. -->
+		<exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>
+
+		<!-- We take no real input -->
+		<exclude name="WordPress.Security.ValidatedSanitizedInput.InputNotSanitized"/>
+	
+		<!-- This sniff seems irrelevant. -->
+		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
+		<exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/>
+
+		<!-- Intentionally different names. -->
+		<exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"/>
+		<exclude name="PEAR.NamingConventions.ValidClassName.StartWithCapital"/>
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+
+		<!-- We're not strict about this. -->
+		<exclude name="WordPress.PHP.StrictComparisons.LooseComparison"/>
+
+		<!-- We don't want Yoda conditions.. -->
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+
+		<!-- We want to allow this. -->
+		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found"/>
+		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
 	</rule>
 </ruleset>

@@ -6,14 +6,22 @@ class NonPrintableCheck implements themecheck {
 		$ret = true;
 
 		foreach ( $php_files as $name => $content ) {
-		checkcount();
+			checkcount();
 			// 09 = tab
 			// 0A = line feed
 			// 0D = new line
-			if ( preg_match('/[\x00-\x08\x0B-\x0C\x0E-\x1F]/', $content, $matches ) ) {
-				$filename = tc_filename( $name );
-				$non_print = tc_preg( '/[\x00-\x08\x0B-\x0C\x0E-\x1F]/', $name );
-				$this->error[] = sprintf('<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'Non-printable characters were found in the %1$s file. You may want to check this file for errors.%2$s', 'theme-check' ), '<strong>' . $filename . '</strong>', $non_print);
+			if ( preg_match( '/[\x00-\x08\x0B-\x0C\x0E-\x1F]/', $content, $matches ) ) {
+				$filename      = tc_filename( $name );
+				$non_print     = tc_preg( '/[\x00-\x08\x0B-\x0C\x0E-\x1F]/', $name );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-warning">%s</span>: %s %s',
+					__( 'WARNING', 'theme-check' ),
+					sprintf(
+						__( 'Non-printable characters were found in the %s file. You may want to check this file for errors.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					),
+					$non_print
+				);
 			}
 		}
 
@@ -21,7 +29,9 @@ class NonPrintableCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new NonPrintableCheck;
+$themechecks[] = new NonPrintableCheck();

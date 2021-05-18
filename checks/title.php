@@ -17,7 +17,11 @@ class Title_Checks implements themecheck {
 		// Look for add_theme_support( 'title-tag' ) first.
 		$titletag = true;
 		if ( ! preg_match( '#add_theme_support\s?\(\s?[\'|"]title-tag#', $php ) ) {
-			$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'No reference to <strong>add_theme_support( "title-tag" )</strong> was found in the theme.', 'theme-check' );
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-required">%s</span>: %s',
+				__( 'REQUIRED', 'theme-check' ),
+				__( 'No reference to <strong>add_theme_support( "title-tag" )</strong> was found in the theme.', 'theme-check' )
+			);
 			$titletag      = false;
 			$ret           = false;
 		}
@@ -28,18 +32,28 @@ class Title_Checks implements themecheck {
 
 			// Look for <title> and </title> tags.
 			checkcount();
-			if ( ( 0 <= strpos( $php, '<title>' ) || 0 <= strpos( $php, '</title>' ) ) && ! $titletag  ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme must not use the <strong>&lt;title&gt;</strong> tags. Found the tag in %1$s.', 'theme-check' ),
-					'<strong>' . $filename . '</strong>'
+			if ( ( false !== strpos( $php, '<title>' ) || false !== strpos( $php, '</title>' ) ) && ! $titletag ) {
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'The theme must not use the <strong>&lt;title&gt;</strong> tags. Found the tag in %1$s.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					)
 				);
 				$ret           = false;
 			}
 
 			// Check whether there is a call to wp_title().
 			checkcount();
-			if ( 0 <= strpos( $php, 'wp_title(' ) && ! $titletag ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . sprintf( __( 'The theme must not call to <strong>wp_title()</strong>. Found wp_title() in %1$s.', 'theme-check' ),
-					'<strong>' . $filename . '</strong>'
+			if ( false !== strpos( $php, 'wp_title(' ) && ! $titletag ) {
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'The theme must not call to <strong>wp_title()</strong>. Found wp_title() in %1$s.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					)
 				);
 				$ret           = false;
 			}
@@ -54,9 +68,15 @@ class Title_Checks implements themecheck {
 			$grep  = tc_preg( $error, $file_path );
 
 			if ( preg_match( '/(?=<title>(.*)<\/title>)(?!<title>\s*<\?php\s*wp_title\([^\)]*\);?\s*\?>\s*<\/title>)/s', $file_content ) ) {
-				$this->error[] = '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check').'</span>: ' . sprintf( __( '%1$s: The <strong>&lt;title&gt;</strong> tags can only contain a call to <strong>wp_title()</strong>. Use the <strong>wp_title filter</strong> to modify the output.', 'theme-check' ),
-					'<strong>' . $filename . '</strong>'
-				) . $grep;
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( '%1$s: The <strong>&lt;title&gt;</strong> tags can only contain a call to <strong>wp_title()</strong>. Use the <strong>wp_title filter</strong> to modify the output.', 'theme-check' ),
+						'<strong>' . $filename . '</strong>'
+					),
+					$grep
+				);
 				$ret           = false;
 			}
 		}
@@ -64,7 +84,9 @@ class Title_Checks implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
 $themechecks[] = new Title_Checks();

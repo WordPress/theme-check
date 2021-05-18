@@ -1,3 +1,9 @@
+= 20200922.1 =
+* Reformatting of main.php and checkbase.php
+* Additions to malware checks in badthings.php
+* Spacing fix in postthumb.php
+* Improved check for tags in styletags.php
+
 = 20200731.1 =
 * Added add_menu_page & add_submenu_page to the allowed functions list
 * Added loco.xml to the allowed files list and extend the allowlist check functionality to support an array of (possible) filenames.

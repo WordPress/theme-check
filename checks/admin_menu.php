@@ -2,7 +2,7 @@
 class AdminMenu implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files) {
+	function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
@@ -16,10 +16,16 @@ class AdminMenu implements themecheck {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match( $key, $phpfile, $matches ) ) {
-					$filename = tc_filename( $php_key );
-					$grep = ( isset( $matches[2] ) ) ? tc_grep( $matches[2], $php_key ) : tc_grep( $matches[1], $php_key );
-					$this->error[] = sprintf('<span class="tc-lead tc-warning">'.__( 'WARNING', 'theme-check' ) . '</span>: <strong>%1$s</strong>. %2$s%3$s', $filename, $check, $grep );
-					$ret = false;
+					$filename      = tc_filename( $php_key );
+					$grep          = tc_grep( isset( $matches[2] ) ? $matches[2] : $matches[1], $php_key );
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-warning">%s</span>: <strong>%s</strong>. %s %s',
+						__( 'WARNING', 'theme-check' ),
+						$filename,
+						$check,
+						$grep
+					);
+					$ret           = false;
 				}
 			}
 		}
@@ -38,22 +44,23 @@ class AdminMenu implements themecheck {
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 				if ( preg_match_all( $key, $phpfile, $matches ) ) {
-					foreach ($matches[1] as $match) {
+					foreach ( $matches[1] as $match ) {
 						if ( in_array( $match, array( 'add_theme_page', 'add_menu_page', 'add_submenu_page' ), true ) ) {
 							continue;
 						}
-						$filename = tc_filename( $php_key );
-						$error = ltrim( rtrim( $match, '(' ) );
-						$grep = tc_grep( $error, $php_key );
+						$filename   = tc_filename( $php_key );
+						$error      = ltrim( rtrim( $match, '(' ) );
+						$grep       = tc_grep( $error, $php_key );
 						$notallowed = sprintf( $check, $match );
 
-						$this->error[] = sprintf( 
-							'<span class="tc-lead tc-required">'.__( 'REQUIRED', 'theme-check' ) .'</span>: <strong>%1$s</strong>. %2$s%3$s%', 
+						$this->error[] = sprintf(
+							'<span class="tc-lead tc-required">%s</span>: <strong>%s</strong>. %s %s',
+							__( 'REQUIRED', 'theme-check' ),
 							$filename,
 							$notallowed,
 							$grep
 						);
-						$ret = false;
+						$ret           = false;
 					}
 				}
 			}
@@ -62,7 +69,9 @@ class AdminMenu implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
-$themechecks[] = new AdminMenu;
+$themechecks[] = new AdminMenu();

@@ -20,7 +20,7 @@ class File_Checks implements themecheck {
 
 		$allowlist = array(
 			'wpml-config.xml',
-			'loco.xml'
+			'loco.xml',
 		);
 
 		$blocklist = array(
@@ -46,7 +46,6 @@ class File_Checks implements themecheck {
 			'postcss\.config\.js' => __( 'PostCSS config file', 'theme-check' ),
 			'\.editorconfig.'     => __( 'Editor config file', 'theme-check' ),
 			'\.stylelintrc\.json' => __( 'Stylelint config file', 'theme-check' ),
-			'\.map'               => __( 'Map file', 'theme-check' ),
 			'\.eslintrc'          => __( 'ES lint config file', 'theme-check' ),
 			'favicon\.ico'        => __( 'Favicon', 'theme-check' ),
 		);
@@ -58,38 +57,63 @@ class File_Checks implements themecheck {
 
 		foreach ( $blocklist as $file => $reason ) {
 			if ( $filename     = preg_grep( '/' . $file . '/', $filenames ) ) {
-				$commons       = array_intersect( $filename, $allowlist );
+				$commons = array_intersect( $filename, $allowlist );
 				foreach ( $commons as $common ) {
-					if (( $allowed_key = array_search($common, $filename)) !== false) {
-						unset( $filename[$allowed_key] );
+					if ( ( $allowed_key = array_search( $common, $filename ) ) !== false ) {
+						unset( $filename[ $allowed_key ] );
 					}
 				}
 				if ( empty( $filename ) ) {
 					continue;
 				}
 				$error         = implode( ' ', array_unique( $filename ) );
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ), '<strong>' . $error . '</strong>', $reason );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ),
+						'<strong>' . $error . '</strong>',
+						$reason
+					)
+				);
 				$ret           = false;
 			}
 		}
 
 		foreach ( $musthave as $file ) {
 			if ( ! in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Could not find the file %s in the theme.', 'theme-check' ), '<strong>' . $file . '</strong>' );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'REQUIRED', 'theme-check' ),
+					sprintf(
+						__( 'Could not find the file %s in the theme.', 'theme-check' ),
+						'<strong>' . $file . '</strong>'
+					)
+				);
 				$ret           = false;
 			}
 		}
 
 		foreach ( $rechave as $file => $reason ) {
 			if ( ! in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf( '<span class="tc-lead tc-recommended">' . __( 'RECOMMENDED', 'theme-check' ) . '</span>: ' . __( 'Could not find the file %1$s in the theme. %2$s', 'theme-check' ), '<strong>' . $file . '</strong>', $reason );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-recommended">%s</span>: %s %s',
+					__( 'RECOMMENDED', 'theme-check' ),
+					sprintf(
+						__( 'Could not find the file %s in the theme.', 'theme-check' ),
+						'<strong>' . $file . '</strong>'
+					),
+					$reason
+				);
 			}
 		}
 
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
 
 $themechecks[] = new File_Checks();
