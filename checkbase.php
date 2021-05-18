@@ -82,6 +82,9 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 	global $themechecks;
 
 	$pass = true;
+
+	tc_adapt_checks_for_fse_themes( $php, $css, $other );
+
 	foreach ( $themechecks as $check ) {
 		if ( $check instanceof themecheck ) {
 			if ( $context && is_callable( array( $check, 'set_context' ) ) ) {
@@ -263,4 +266,53 @@ function tc_is_other_file_in_dev_directory( $filename ) {
 		}
 	}
 	return $skip;
+}
+
+/**
+ * Adapt the Theme Checks if the theme is an experiment Full-Site Editing theme.
+ *
+ * @param array $php_files   The theme's PHP files.
+ * @param array $css_files   The theme's CSS files.
+ * @param array $other_files Any other theme files.
+ *
+ * @return bool Whether the theme checks were adapted for FSE or not.
+ */
+function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) {
+	global $themechecks;
+
+	// Get a list of all non PHP and CSS file paths, relative to the theme root.
+	$other_filenames = array();
+	foreach ( $other_files as $path => $contents ) {
+		$other_filenames[] = tc_filename( $path );
+	}
+
+	// Check whether this is a FSE theme by searching for an index.html block template.
+	if ( ! in_array( 'block-templates/index.html', $other_filenames, true ) ) {
+		return false;
+	}
+
+	// Remove theme checks that do not apply to FSE themes.
+	foreach ( $themechecks as $key => $check ) {
+		if ( $check instanceof TagCheck
+			|| $check instanceof Style_Needed
+			|| $check instanceof WidgetsCheck
+			|| $check instanceof GravatarCheck
+			|| $check instanceof Title_Checks
+			|| $check instanceof PostPaginationCheck
+			|| $check instanceof CommentPaginationCheck
+			|| $check instanceof Comment_Reply
+			|| $check instanceof Basic_Checks
+			|| $check instanceof NavMenuCheck
+			|| $check instanceof PostThumbnailCheck
+			|| $check instanceof CustomCheck
+			|| $check instanceof EditorStyleCheck
+		) {
+			unset( $themechecks[ $key ] );
+		}
+	}
+
+	// Add FSE specific checks.
+	$themechecks[] = new FSE_Required_Files();
+
+	return true;
 }
