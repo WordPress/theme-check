@@ -3,15 +3,21 @@
 class Check_URI implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	protected $theme = array();
 
+	function set_context( $data ) {
+		if ( isset( $data['theme'] ) ) {
+			$this->theme = $data['theme'];
+		}
+	}
+
+	function check( $php_files, $css_files, $other_files ) {
 		checkcount();
 		$ret = true;
-		global $data;
 
-		if ( ! empty( $data['AuthorURI'] ) && ! empty( $data['URI'] ) ) {
+		if ( ! empty( $this->theme['AuthorURI'] ) && ! empty( $this->theme['URI'] ) ) {
 
-			if ( strtolower( preg_replace( '/https?:\/\/|www./i', '', trim( $data['URI'], '/' ) ) ) == strtolower( preg_replace( '/https?:\/\/|www./i', '', trim( $data['AuthorURI'], '/' ) ) ) ) {
+			if ( strtolower( preg_replace( '/https?:\/\/|www./i', '', trim( $this->theme['URI'], '/' ) ) ) == strtolower( preg_replace( '/https?:\/\/|www./i', '', trim( $this->theme['AuthorURI'], '/' ) ) ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
@@ -22,8 +28,8 @@ class Check_URI implements themecheck {
 
 			// We allow .org user profiles as Author URI, so only check the Theme URI. We also allow WordPress.com links.
 			if (
-				$data['AuthorName'] != 'the WordPress team' &&
-				( stripos( $data['URI'], 'wordpress.org' ) || stripos( $data['URI'], 'w.org' ) )
+				$this->theme['AuthorName'] != 'the WordPress team' &&
+				( stripos( $this->theme['URI'], 'wordpress.org' ) || stripos( $this->theme['URI'], 'w.org' ) )
 			) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',

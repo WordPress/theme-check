@@ -8,15 +8,24 @@
 class UnderscoresCheck implements themecheck {
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	protected $theme = array();
 
+	function set_context( $data ) {
+		if ( isset( $data['theme'] ) ) {
+			$this->theme = $data['theme'];
+		}
+	}
+
+	function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
-		global $data;
 
 		checkcount();
-		if ( ! empty( $data['AuthorURI'] ) || ! empty( $data['URI'] ) ) {
+		if ( ! empty( $this->theme['AuthorURI'] ) || ! empty( $this->theme['URI'] ) ) {
 
-			if ( stripos( $data['URI'], 'underscores.me' ) || stripos( $data['AuthorURI'], 'underscores.me' ) ) {
+			if (
+				stripos( $this->theme['URI'], 'underscores.me' ) ||
+				stripos( $this->theme['AuthorURI'], 'underscores.me' )
+			) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),

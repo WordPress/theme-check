@@ -30,9 +30,22 @@ class TextDomainCheck implements themecheck {
 	// core names their themes differently
 	var $exceptions = array( 'twentyten', 'twentyeleven', 'twentytwelve', 'twentythirteen', 'twentyfourteen', 'twentyfifteen', 'twentysixteen', 'twentyseventeen', 'twentyeighteen', 'twentynineteen', 'twentytwenty' );
 
-	function check( $php_files, $css_files, $other_files ) {
-		global $data, $themename;
+	protected $name     = '';
+	protected $slug     = '';
+	protected $is_wporg = false;
 
+	function set_context( $data ) {
+		if ( isset( $data['theme']['Name'] ) ) {
+			$this->name = $data['theme']['Name'];
+		}
+		if ( isset( $data['slug'] ) ) {
+			$this->slug = $data['slug'];
+		}
+
+		$this->is_wporg = ! empty( $data['is_wporg'] );
+	}
+
+	function check( $php_files, $css_files, $other_files ) {
 		$ret   = true;
 		$error = '';
 		checkcount();
@@ -131,9 +144,9 @@ class TextDomainCheck implements themecheck {
 		$domainscount = count( $domains );
 
 		// ignore core themes and uploads on w.org for this one check
-		if ( ! in_array( $themename, $this->exceptions ) && ! defined( 'WPORGPATH' ) ) {
-			$correct_domain = sanitize_title_with_dashes( $data['Name'] );
-			if ( $themename != $correct_domain ) {
+		if ( ! in_array( $this->slug, $this->exceptions ) && ! $this->is_wporg ) {
+			$correct_domain = sanitize_title_with_dashes( $this->name );
+			if ( $this->slug != $correct_domain ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span> %s %s',
 					__( 'WARNING', 'theme-check' ),
