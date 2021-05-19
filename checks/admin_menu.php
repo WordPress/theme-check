@@ -36,8 +36,8 @@ class AdminMenu implements themecheck {
 			'/(?<!function)[^_>:](add_[a-z]+_page)/' => _x(
 				'Themes must not use <strong>%s()</strong>.',
 				'function name',
-				'theme-check',
-			)
+				'theme-check'
+			),
 		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
