@@ -6,10 +6,10 @@ class AdminMenu implements themecheck {
 
 		$ret = true;
 
-		//check for levels deprecated in 2.0 in creating menus.
+		// Check for levels deprecated in 2.0 in creating menus.
 		$checks = array(
 			'/([^_](add_(admin|submenu|menu|dashboard|posts|media|links|pages|comments|theme|plugins|users|management|options)_page)\s?\([^,]*,[^,]*,\s[\'|"]?(level_[0-9]|[0-9])[^;|\r|\r\n]*)/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="https://wordpress.org/support/article/roles-and-capabilities/">Roles_and_Capabilities</a>', 'theme-check' ),
-			'/[^a-z0-9](current_user_can\s?\(\s?[\'\"]level_[0-9][\'\"]\s?\))[^\r|\r\n]*/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="https://wordpress.org/support/article/roles-and-capabilities/">Roles_and_Capabilities</a>', 'theme-check' )
+			'/[^a-z0-9](current_user_can\s?\(\s?[\'\"]level_[0-9][\'\"]\s?\))[^\r|\r\n]*/' => __( 'User levels were deprecated in <strong>2.0</strong>. Please see <a href="https://wordpress.org/support/article/roles-and-capabilities/">Roles_and_Capabilities</a>', 'theme-check' ),
 		);
 
 		foreach ( $php_files as $php_key => $phpfile ) {
@@ -36,7 +36,7 @@ class AdminMenu implements themecheck {
 			'/(?<!function)[^_>:](add_[a-z]+_page)/' => _x(
 				'Themes must not use <strong>%s()</strong>.',
 				'function name',
-				'theme-check' 
+				'theme-check',
 			)
 		);
 
