@@ -22,7 +22,7 @@ class FSE_Required_Files implements themecheck {
 
 		$musthave = array(
 			'block-templates/index.html',
-			'experimental-theme.json',
+			'theme.json',
 		);
 
 		foreach ( $musthave as $file ) {
@@ -35,5 +35,7 @@ class FSE_Required_Files implements themecheck {
 		return $ret;
 	}
 
-	function getError() { return $this->error; }
+	function getError() {
+		return $this->error;
+	}
 }
