@@ -13,7 +13,7 @@ class BlockPatternsCheck implements themecheck {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-recommended">%s</span>: %s',
 				__( 'RECOMMENDED', 'theme-check' ),
-				__( 'No reference to <strong>register_block_pattern</strong> was found in the theme. Theme authors are encouraged to implement custom block patterns as a transition to block-based themes.', 'theme-check' )
+				__( 'No reference to <strong>register_block_pattern</strong> was found in the theme. Theme authors are encouraged to implement custom block patterns as a transition to block themes.', 'theme-check' )
 			);
 		}
 
