@@ -14,8 +14,7 @@ class NoHiddenAdminBar implements themecheck {
 		foreach ( $php_files as $file_path => $file_content ) {
 
 			if ( preg_match( $php_regex, $file_content, $matches ) ) {
-				$grep  = tc_preg( '/show_admin_bar/', $file_path );
-
+				$grep          = tc_preg( '/show_admin_bar/', $file_path );
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s %s',
 					__( 'WARNING', 'theme-check' ),

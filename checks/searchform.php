@@ -7,7 +7,7 @@ class SearchFormCheck implements themecheck {
 
 		$ret    = true;
 		$checks = array(
-			'/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/' => __( 'Please use <strong>get_search_form()</strong> instead of including searchform.php directly.', 'theme-check' )
+			'/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/' => __( 'Please use <strong>get_search_form()</strong> instead of including searchform.php directly.', 'theme-check' ),
 		);
 
 		foreach ( $php_files as $file_path => $file_contents ) {
