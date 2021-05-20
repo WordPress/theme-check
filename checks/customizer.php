@@ -28,7 +28,8 @@ class CustomizerCheck implements themecheck {
 						/* Clean up our match to be able to present the results better. */
 						$match         = preg_split( '/,/', $match );
 						$filename      = tc_filename( $file_path );
-						$grep          = tc_preg( '/' . preg_quote( $match[0], '/' ) . '/', $file_path );
+						// Note: The delimiter in the following regex MUST be a special regex character per preg_quote().
+						$grep          = tc_preg( '!' . preg_quote( $match[0], '!' ) . '!', $file_path );
 						$grep          = preg_split( '/,/', $grep );
 						$this->error[] = sprintf(
 							'<span class="tc-lead tc-required">%s</span>: %s %s',
