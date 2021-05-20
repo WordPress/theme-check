@@ -7,22 +7,17 @@ class Script_Tag implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-
-		$ret = true;
-
-		checkcount();
-		/**
-		 * This check is limited to header.php and footer.php.
-		 */
 		foreach ( $php_files as $file_path => $file_content ) {
+			checkcount();
+
+			// This check is limited to header.php and footer.php.
 			$filename = tc_filename( $file_path );
 			if ( ! in_array( $filename, array( 'header.php', 'footer.php' ) ) ) {
 				continue;
 			}
 
-			if ( preg_match( '/<script/i', $file_content ) ) {
-				$error         = '/<script/i';
-				$grep          = tc_preg( $error, $file_path );
+			if ( false !== stripos( $file_content, '<script' ) ) {
+				$grep          = tc_preg( '/<script/i', $file_path );
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
@@ -35,7 +30,7 @@ class Script_Tag implements themecheck {
 			}
 		}
 
-		return $ret;
+		return true;
 	}
 
 	function getError() {

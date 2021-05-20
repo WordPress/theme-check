@@ -4,26 +4,24 @@ class PHPShortTagsCheck implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-
-		foreach ( $php_files as $php_key => $phpfile ) {
+		foreach ( $php_files as $file_path => $file_content ) {
 			checkcount();
-			if ( preg_match( '/<\?(\=?)(?!php|xml)/i', $phpfile ) ) {
-				$filename      = tc_filename( $php_key );
-				$grep          = tc_preg( '/<\?(\=?)(?!php|xml)/', $php_key );
+
+			if ( preg_match( '/<\?(\=?)(?!php|xml)/i', $file_content ) ) {
+				$grep          = tc_preg( '/<\?(\=?)(?!php|xml)/', $file_path );
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s %s',
 					__( 'WARNING', 'theme-check' ),
 					sprintf(
 						__( 'Found PHP short tags in file %s.', 'theme-check' ),
-						'<strong>' . $filename . '</strong>'
+						'<strong>' . tc_filename( $file_path ) . '</strong>'
 					),
 					$grep
 				);
 			}
 		}
 
-		return $ret;
+		return true;
 	}
 
 	function getError() {

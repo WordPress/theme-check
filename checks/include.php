@@ -4,31 +4,34 @@ class IncludeCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
+		$checks = array(
+			'/(?<![a-z0-9_\'"])(?:require|include)(?:_once)?\s?[\'"\(]/i' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' )
+		);
 
-		$ret = true;
-
-		$checks = array( '/(?<![a-z0-9_\'"])(?:requir|includ)e(?:_once)?\s?[\'"\(]/' => __( 'The theme appears to use include or require. If these are being used to include separate sections of a template from independent files, then <strong>get_template_part()</strong> should be used instead.', 'theme-check' ) );
-
-		foreach ( $php_files as $php_key => $phpfile ) {
-			foreach ( $checks as $key => $check ) {
+		foreach ( $php_files as $file_path => $file_content ) {
+			foreach ( $checks as $check_regex => $check ) {
 				checkcount();
-				if ( preg_match( $key, $phpfile, $matches ) ) {
-					$filename = tc_filename( $php_key );
-					$error    = '/(?<![a-z0-9_\'"])(?:requir|includ)e(?:_once)?\s?[\'"\(]/';
-					$grep     = tc_preg( $error, $php_key );
-					if ( basename( $filename ) !== 'functions.php' ) {
-						$this->error[] = sprintf(
-							'<span class="tc-lead tc-info">%s</span>: <strong>%s</strong> %s %s',
-							__( 'INFO', 'theme-check' ),
-							$filename,
-							$check,
-							$grep
-						);
-					}
+
+				$filename = tc_filename( $file_path );
+				// This doesn't apply to functions.php
+				if ( $filename === 'functions.php' ) {
+					continue;
+				}
+
+				if ( preg_match( $check_regex, $file_content, $matches ) ) {
+					$grep          = tc_preg( '/(?<![a-z0-9_\'"])(?:require|include)(?:_once)?\s?[\'"\(]/i', $file_path );
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-info">%s</span>: <strong>%s</strong> %s %s',
+						__( 'INFO', 'theme-check' ),
+						$filename,
+						$check,
+						$grep
+					);
 				}
 			}
 		}
-		return $ret;
+
+		return true;
 	}
 
 	function getError() {

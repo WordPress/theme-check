@@ -6,21 +6,24 @@ class SearchFormCheck implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 
 		$ret    = true;
-		$checks = array( '/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/' => __( 'Please use <strong>get_search_form()</strong> instead of including searchform.php directly.', 'theme-check' ) );
-		foreach ( $php_files as $php_key => $phpfile ) {
-			foreach ( $checks as $key => $check ) {
+		$checks = array(
+			'/(include\s?\(\s?TEMPLATEPATH\s?\.?\s?["|\']\/searchform.php["|\']\s?\))/' => __( 'Please use <strong>get_search_form()</strong> instead of including searchform.php directly.', 'theme-check' )
+		);
+
+		foreach ( $php_files as $file_path => $file_contents ) {
+			foreach ( $checks as $regex => $check_text ) {
 				checkcount();
-				if ( preg_match( $key, $phpfile, $out ) ) {
-					$grep          = tc_preg( $key, $php_key );
-					$filename      = tc_filename( $php_key );
+
+				if ( preg_match( $regex, $file_contents, $out ) ) {
+					$ret           = false;
+					$grep          = tc_preg( $key, $file_path );
 					$this->error[] = sprintf(
 						'<span class="tc-lead tc-required">%s</span> %s %s %s',
 						__( 'REQUIRED', 'theme-check' ),
-						'<strong>' . $filename . '</strong>',
-						$check,
+						'<strong>' . tc_filename( $file_path ) . '</strong>',
+						$check_text,
 						$grep
 					);
-					$ret           = false;
 				}
 			}
 		}
