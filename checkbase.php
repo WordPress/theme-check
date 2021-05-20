@@ -294,7 +294,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	// Remove theme checks that do not apply to FSE themes.
 	foreach ( $themechecks as $key => $check ) {
 		if ( $check instanceof TagCheck
-			|| $check instanceof Style_Needed
+			|| $check instanceof Style_Suggested
 			|| $check instanceof WidgetsCheck
 			|| $check instanceof GravatarCheck
 			|| $check instanceof Title_Checks
@@ -306,6 +306,13 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof PostThumbnailCheck
 			|| $check instanceof CustomCheck
 			|| $check instanceof EditorStyleCheck
+			|| $check instanceof UnderscoresCheck
+			|| $check instanceof Constants
+			|| $check instanceof CustomizerCheck
+			|| $check instanceof Deprecated_Recommended
+			|| $check instanceof PostFormatCheck
+			|| $check instanceof PostThumbnailCheck
+			|| $check instanceof SearchFormCheck
 		) {
 			unset( $themechecks[ $key ] );
 		}
