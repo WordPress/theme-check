@@ -5,20 +5,16 @@ class Comment_Reply implements themecheck {
 	function check( $php_files, $css_files, $other_files ) {
 
 		$php = implode( ' ', $php_files );
-		$ret = true;
 
 		checkcount();
 
 		if ( ! preg_match( '/wp_enqueue_script\(\s?("|\')comment-reply("|\')/i', $php ) ) {
 			if ( ! preg_match( '/comment-reply/', $php ) ) {
-				$check         = __( 'See: <a href="https://codex.wordpress.org/Migrating_Plugins_and_Themes_to_2.7/Enhanced_Comment_Display">Migrating Plugins and Themes to 2.7/Enhanced Comment Display</a><pre> &lt;?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?&gt;</pre>', 'theme-check' );
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s %s',
-					__( 'REQUIRED', 'theme-check' ),
+					'<span class="tc-lead tc-recommended">%s</span>: %s',
+					__( 'RECOMMENDED', 'theme-check' ),
 					__( 'Could not find the <strong>comment-reply</strong> script enqueued.', 'theme-check' ),
-					$check
 				);
-				$ret           = false;
 			} else {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-info">%s</span>: %s',
@@ -27,7 +23,8 @@ class Comment_Reply implements themecheck {
 				);
 			}
 		}
-		return $ret;
+
+		return true;
 	}
 
 	function getError() {
