@@ -6,6 +6,10 @@
 /.github export-ignore
 /.phpcs.xml.dist export-ignore
 /.stylelintrc export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
+/composer.json export-ignore
+/composer.lock export-ignore
 
 #
 # Auto detect text files and perform LF normalization
