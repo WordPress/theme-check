@@ -157,7 +157,7 @@ function tc_success() {
 			'<a href="https://make.wordpress.org/themes/handbook/review/required/">',
 			'</a>'
 		);
-		?>
+	?>
 	<h3><?php esc_html_e( 'Useful Links', 'theme-check' ); ?></h3>
 	<ul>
 	<li><a href="https://developer.wordpress.org/themes/"><?php esc_html_e( 'Theme Handbook', 'theme-check' ); ?></a></li>
