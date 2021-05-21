@@ -87,7 +87,6 @@ function check_main( $theme_slug ) {
 
 	$results = display_themechecks();
 
-
 	if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
 		echo '<div class="notice notice-warning"><p>';
 		echo '<span class="tc-fail">';
@@ -123,9 +122,9 @@ function check_main( $theme_slug ) {
 				'class' => array(),
 			),
 			'strong' => array(),
-			'code' => array(),
-			'pre' => array(),
-			'a' => array(
+			'code'   => array(),
+			'pre'    => array(),
+			'a'      => array(
 				'href' => array(),
 			),
 		)
@@ -192,4 +191,3 @@ function tc_form() {
 	wp_nonce_field( 'themecheck-nonce' );
 	echo '</form>';
 }
-
