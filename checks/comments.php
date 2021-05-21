@@ -5,7 +5,7 @@ class Comments implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 
-		$php  = implode( ' ', $php_files );
+		$php    = implode( ' ', $php_files );
 
 		$checks = array(
 			'comments_template\s*\(' => __( 'See: <a href="https://developer.wordpress.org/reference/functions/comments_template/">comments_template</a><pre> &lt;?php comments_template( $file, $separate_comments ); ?&gt;</pre>', 'theme-check' ),

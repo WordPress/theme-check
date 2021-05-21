@@ -13,7 +13,7 @@ class Comment_Reply implements themecheck {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
-					__( 'Could not find the <strong>comment-reply</strong> script enqueued.', 'theme-check' ),
+					__( 'Could not find the <strong>comment-reply</strong> script enqueued.', 'theme-check' )
 				);
 			} else {
 				$this->error[] = sprintf(
