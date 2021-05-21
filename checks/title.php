@@ -34,7 +34,7 @@ class Title_Checks implements themecheck {
 
 			// Look for <title> and </title> tags.
 			checkcount();
-			if ( (false !== strpos( $file_content, '<title>' ) ) || ( false !== strpos( $file_content, '</title>' ) ) ) {
+			if ( ( false !== strpos( $file_content, '<title>' ) ) || ( false !== strpos( $file_content, '</title>' ) ) ) {
 				$ret           = false;
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
