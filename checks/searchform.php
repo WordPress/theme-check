@@ -18,7 +18,7 @@ class SearchFormCheck implements themecheck {
 					$ret           = false;
 					$grep          = tc_preg( $key, $file_path );
 					$this->error[] = sprintf(
-						'<span class="tc-lead tc-required">%s</span> %s %s %s',
+						'<span class="tc-lead tc-required">%s</span>: %s %s %s',
 						__( 'REQUIRED', 'theme-check' ),
 						'<strong>' . tc_filename( $file_path ) . '</strong>',
 						$check_text,

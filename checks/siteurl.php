@@ -33,7 +33,7 @@ class SiteUrlCheck implements themecheck {
 
 			if ( strpos( $file_content, 'site_url' ) !== false ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-info">%s</span> %s',
+					'<span class="tc-lead tc-info">%s</span>: %s',
 					__( 'INFO', 'theme-check' ),
 					sprintf(
 						__( 'site_url() or get_site_url() was found in %s. site_url() references the URL where the WordPress files are located. Use home_url() if the intention is to point to the site address (home page), and in the search form.', 'theme-check' ),

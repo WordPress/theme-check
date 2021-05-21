@@ -10,29 +10,19 @@ function check_main( $theme_slug ) {
 	// Run the checks.
 	$success = run_themechecks_against_theme( $theme, $theme_slug );
 
-	// Second loop, to display the errors.
-	echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
+	// Display theme info.
 	echo '<div class="theme-info">';
-
-	$screenshot = $theme->get_screenshot( 'relative' );
-	if ( $screenshot ) {
-		$screenshot_file = $theme->get_stylesheet_directory() . '/' . $screenshot;
-		$image_size      = getimagesize( $screenshot_file );
-		$image_filesize  = filesize( $screenshot_file );
-
-		echo '<div style="float:right" class="theme-info"><img style="max-height:180px;" src="' . esc_url( $theme->get_screenshot() ) . '" />';
-		echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
-	}
-
-	echo ( ! empty( $theme['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Title'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Version'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['AuthorName'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['AuthorURI'] ) . '">' . esc_html( $theme['AuthorURI'] ) . '</a></span></p>' : '';
-	echo ( ! empty( $theme['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['URI'] ) . '">' . esc_html( $theme['URI'] ) . '</a></span></p>' : '';
-	echo ( ! empty( $theme['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License URI'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
-	echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
+	echo '<div>';
+	echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
+	echo ( ! empty( $theme['Title'] ) ) ? '<p><b>' . esc_html__( 'Name:', 'theme-check' ) . '</b> ' . esc_html( $theme['Title'] ) . '</p>' : '';
+	echo ( ! empty( $theme['Version'] ) ) ? '<p><b>' . esc_html__( 'Version:', 'theme-check' ) . '</b> ' . esc_html( $theme['Version'] ) . '</p>' : '';
+	echo ( ! empty( $theme['AuthorName'] ) ) ? '<p><b>' . esc_html__( 'Author:', 'theme-check' ) . '</b> ' . esc_html( $theme['AuthorName'] ) . '</p>' : '';
+	echo ( ! empty( $theme['AuthorURI'] ) ) ? '<p><b>' . esc_html__( 'Author URI:', 'theme-check' ) . '</b> <a href="' . esc_attr( $theme['AuthorURI'] ) . '">' . esc_html( $theme['AuthorURI'] ) . '</a></p>' : '';
+	echo ( ! empty( $theme['URI'] ) ) ? '<p><b>' . esc_html__( 'Theme URI:', 'theme-check' ) . '</b> <a href="' . esc_attr( $theme['URI'] ) . '">' . esc_html( $theme['URI'] ) . '</a></p>' : '';
+	echo ( ! empty( $theme['License'] ) ) ? '<p><b>' . esc_html__( 'License:', 'theme-check' ) . '</b> ' . esc_html( $theme['License'] ) . '</p>' : '';
+	echo ( ! empty( $theme['License URI'] ) ) ? '<p><b>' . esc_html__( 'License URI:', 'theme-check' ) . '</b> ' . esc_html( $theme['License URI'] ) . '</p>' : '';
+	echo ( ! empty( $theme['Tags'] ) ) ? '<p><b>' . esc_html__( 'Tags:', 'theme-check' ) . '</b> ' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</p>' : '';
+	echo ( ! empty( $theme['Description'] ) ) ? '<p><b>' . esc_html__( 'Description:', 'theme-check' ) . '</b> ' . esc_html( $theme['Description'] ) . '</p>' : '';
 
 	if ( $theme->parent() ) {
 		echo '<p>';
@@ -71,19 +61,51 @@ function check_main( $theme_slug ) {
 			echo '</p>';
 		}
 	}
+
+	echo '</div>';
+
+	$screenshot = $theme->get_screenshot( 'relative' );
+	if ( $screenshot ) {
+		$screenshot_file = $theme->get_stylesheet_directory() . '/' . $screenshot;
+		$image_size      = getimagesize( $screenshot_file );
+		$image_filesize  = filesize( $screenshot_file );
+
+		echo '<div><img style="max-height:180px;" src="' . esc_url( $theme->get_screenshot() ) . '" />';
+		echo '<br /><div style="text-align:center">' . intval( $image_size[0] ) . 'x' . intval( $image_size[1] ) . ' ' . round( $image_filesize / 1024 ) . 'k</div></div>';
+	}
 	echo '</div><!-- .theme-info-->';
 
 	$plugins = get_plugins( '/theme-check' );
 	$version = explode( '.', $plugins['theme-check.php']['Version'] );
-	echo '<p>' . sprintf(
+	echo '<div class="running-tests">' . sprintf(
 		esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
 		'<strong>' . esc_html( $checkcount ) . '</strong>',
 		'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
 		'<strong>' . esc_html( $version[0] ) . '</strong>',
 		'<strong>' . esc_html( $version[1] ) . '</strong>'
-	) . '</p>';
+	) . '</div>';
 
 	$results = display_themechecks();
+
+
+	if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+		echo '<div class="notice notice-warning"><p>';
+		echo '<span class="tc-fail">';
+		echo esc_html__( 'WARNING', 'theme-check' );
+		echo '</span> ';
+		echo '<strong>';
+		echo esc_html__( 'WP_DEBUG is not enabled!', 'theme-check' );
+		echo '</strong> ';
+		printf(
+			/* translators: %1$s is an opening anchor tag. %2$s is the closing part of the tag. */
+			esc_html__( 'Please test your theme with %1$sdebug enabled%2$s before you upload!', 'theme-check' ),
+			'<a href="https://wordpress.org/support/article/editing-wp-config-php/">',
+			'</a>'
+		);
+		echo '</p></div>';
+	}
+
+	echo '<div class="tc-box">';
 
 	if ( ! $success ) {
 		echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
@@ -92,24 +114,6 @@ function check_main( $theme_slug ) {
 		tc_success();
 	}
 
-	if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
-		echo '<div class="updated">';
-		echo '<span class="tc-fail">';
-		echo esc_html__( 'WARNING', 'theme-check' );
-		echo '</span> ';
-		echo '<strong>';
-		echo esc_html__( 'WP_DEBUG is not enabled!', 'theme-check' );
-		echo '</strong>';
-		printf(
-			/* translators: %1$s is an opening anchor tag. %2$s is the closing part of the tag. */
-			esc_html__( 'Please test your theme with %1$sdebug enabled%2$s before you upload!', 'theme-check' ),
-			'<a href="https://wordpress.org/support/article/editing-wp-config-php/">',
-			'</a>'
-		);
-		echo '</div>';
-	}
-
-	echo '<div class="tc-box">';
 	echo '<ul class="tc-result">';
 	echo wp_kses(
 		$results,
@@ -119,6 +123,11 @@ function check_main( $theme_slug ) {
 				'class' => array(),
 			),
 			'strong' => array(),
+			'code' => array(),
+			'pre' => array(),
+			'a' => array(
+				'href' => array(),
+			),
 		)
 	);
 	echo '</ul></div>';
@@ -126,38 +135,30 @@ function check_main( $theme_slug ) {
 
 function tc_intro() {
 	?>
+	<div class="tc-box">
 	<h2><?php esc_html_e( 'About', 'theme-check' ); ?></h2>
 	<p><?php esc_html_e( "The Theme Check plugin is an easy way to test your theme and make sure it's up to date with the latest theme review standards. With it, you can run all the same automated testing tools on your theme that WordPress.org uses for theme submissions.", 'theme-check' ); ?></p>
-	<h2><?php esc_html_e( 'Contact', 'theme-check' ); ?></h2>
-	<p>
-	<?php
-	printf(
-		esc_html__( 'Theme Check is maintained by %1$s and %2$s.', 'theme-check' ),
-		'<a href="https://profiles.wordpress.org/otto42/">Otto42</a>',
-		'<a href="https://profiles.wordpress.org/pross/">Pross</a>'
-	);
-	?>
-		</p>
-	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ), 'https://wordpress.org/tags/theme-check?forum_id=10', 'https://make.wordpress.org/themes/' ); ?></p>
+	<h3><?php esc_html_e( 'Contact', 'theme-check' ); ?></h3>
+	<p><?php printf( __( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress plugin support forums</a>, ', 'theme-check' ), 'https://wordpress.org/support/plugin/theme-check/' ); ?></p>
 	<p><?php printf( __( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ), 'https://github.com/WordPress/theme-check' ); ?></p>
 	<h3><?php esc_html_e( 'Testers', 'theme-check' ); ?></h3>
 	<p><a href="https://make.wordpress.org/themes/"><?php esc_html_e( 'The WordPress Themes Team', 'theme-check' ); ?></a></p>
+	</div>
 	<?php
 }
 
 function tc_success() {
 	?>
-	<div class="tc-success"><p><?php esc_html_e( 'Now that your theme has passed the basic tests you need to check it properly using the test data before you upload it to the WordPress Themes Directory.', 'theme-check' ); ?></p>
-	<p>
-		<?php
+	<div class="tc-success">
+	<?php esc_html_e( 'Now that your theme has passed the basic tests you need to check it properly using the test data before you upload it to the WordPress Themes Directory.', 'theme-check' ); ?>
+	<?php
 		printf(
 			/* translators: %1$s is an opening anchor tag. %2$s is the closing part of the tag. */
-			esc_html__( 'Make sure to review the guidelines at %1$sTheme Review%2$s before uploading a Theme.', 'theme-check' ),
+			esc_html__( 'Make sure to review the %1$sguidelines%2$s before uploading a theme.', 'theme-check' ),
 			'<a href="https://make.wordpress.org/themes/handbook/review/required/">',
 			'</a>'
 		);
 		?>
-	</p>
 	<h3><?php esc_html_e( 'Useful Links', 'theme-check' ); ?></h3>
 	<ul>
 	<li><a href="https://developer.wordpress.org/themes/"><?php esc_html_e( 'Theme Handbook', 'theme-check' ); ?></a></li>

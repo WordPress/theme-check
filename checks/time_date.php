@@ -20,7 +20,7 @@ class Time_Date implements themecheck {
 					$matches[0]    = str_replace( array( '"', "'" ), '', $matches[0] );
 					$error         = trim( esc_html( rtrim( $matches[0], '(' ) ) );
 					$this->error[] = sprintf(
-						'<span class="tc-lead tc-info">%s</span> %s',
+						'<span class="tc-lead tc-info">%s</span>: %s',
 						__( 'INFO', 'theme-check' ),
 						sprintf(
 							__( 'At least one hard coded date was found in the file %1$s. Consider %2$s instead.', 'theme-check' ),

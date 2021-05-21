@@ -35,7 +35,7 @@ class Style_Suggested implements themecheck {
 		foreach ( $css_class_checks as $key => $check ) {
 			if ( ! preg_match( '/' . $key . '/i', $css, $matches ) ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-recommended">%s</span> %s',
+					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
 					$check
 				);

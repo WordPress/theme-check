@@ -16,7 +16,7 @@ class Style_Tags implements themecheck {
 
 		if ( ! $this->tags ) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-recommended">%s</span> %s',
+				'<span class="tc-lead tc-recommended">%s</span>: %s',
 				__( 'RECOMMENDED', 'theme-check' ),
 				__( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' )
 			);
@@ -31,7 +31,7 @@ class Style_Tags implements themecheck {
 
 				if ( strpos( strtolower( $tag ), 'accessibility-ready' ) !== false ) {
 					$this->error[] = sprintf(
-						'<span class="tc-lead tc-info">%s</span> %s',
+						'<span class="tc-lead tc-info">%s</span>: %s',
 						__( 'INFO', 'theme-check' ),
 						__( 'Themes that use the tag accessibility-ready will need to undergo an accessibility review.', 'theme-check' ) . ' ' . __( 'See <a href="https://make.wordpress.org/themes/handbook/review/accessibility/">https://make.wordpress.org/themes/handbook/review/accessibility/</a>', 'theme-check' )
 					);
@@ -40,7 +40,7 @@ class Style_Tags implements themecheck {
 				if ( ! in_array( strtolower( $tag ), $allowed_tags ) ) {
 					if ( in_array( strtolower( $tag ), $deprecated_tags ) ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
+							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							sprintf(
 								__( 'The tag %s has been deprecated, please remove it from your style.css header.', 'theme-check' ),
@@ -50,7 +50,7 @@ class Style_Tags implements themecheck {
 						$ret           = false;
 					} else {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
+							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							sprintf(
 								__( 'Found wrong tag, remove %s from your style.css header.', 'theme-check' ),
@@ -69,7 +69,7 @@ class Style_Tags implements themecheck {
 				if ( in_array( strtolower( $tag ), $allowed_tags ) ) {
 					if ( count( array_keys( $this->tags, $tag ) ) > 1 ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
+							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							sprintf(
 								__( 'The tag %s is being used more than once, please remove it from your style.css header.', 'theme-check' ),

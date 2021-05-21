@@ -21,7 +21,7 @@ class PostPaginationCheck implements themecheck {
 			)
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span> %s',
+				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
 				__( "The theme doesn't have post pagination code in it. Use <strong>posts_nav_link()</strong> or <strong>paginate_links()</strong> or <strong>the_posts_pagination()</strong> or <strong>the_posts_navigation()</strong> or <strong>next_posts_link()</strong> and <strong>previous_posts_link()</strong> to add post pagination.", 'theme-check' )
 			);

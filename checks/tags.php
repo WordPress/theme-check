@@ -16,7 +16,7 @@ class TagCheck implements themecheck {
 			strpos( $php, 'get_the_term_list' ) === false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span> %s',
+				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
 				__( "This theme doesn't seem to display tags. Modify it to display tags in appropriate locations.", 'theme-check' )
 			);

@@ -31,7 +31,7 @@ class Screenshot_Checks implements themecheck {
 					$image = getimagesize( $other_key );
 					if ( $image[0] > 1200 || $image[1] > 900 ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
+							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							sprintf(
 								__( 'Screenshot is wrong size! Detected: %s. Maximum allowed size is 1200x900px.', 'theme-check' ),
@@ -42,7 +42,7 @@ class Screenshot_Checks implements themecheck {
 					}
 					if ( $image[1] / $image[0] != 0.75 ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
+							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							__( 'Screenshot dimensions are wrong! Ratio of width to height should be 4:3.', 'theme-check' )
 						);
@@ -50,7 +50,7 @@ class Screenshot_Checks implements themecheck {
 					}
 					if ( $image[0] != 1200 || $image[1] != 900 ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-recommended">%s</span> %s',
+							'<span class="tc-lead tc-recommended">%s</span>: %s',
 							__( 'RECOMMENDED', 'theme-check' ),
 							__( 'Screenshot size should be 1200x900, to account for HiDPI displays. Any 4:3 image size is acceptable, but 1200x900 is preferred.', 'theme-check' )
 						);
@@ -59,7 +59,7 @@ class Screenshot_Checks implements themecheck {
 			}
 		} else {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span> %s',
+				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
 				__( 'No screenshot detected! Please include a screenshot.png or screenshot.jpg.', 'theme-check' )
 			);

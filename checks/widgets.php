@@ -17,7 +17,7 @@ class WidgetsCheck implements themecheck {
 			strpos( $php, 'dynamic_sidebar' ) === false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-recommended">%s</span> %s',
+				'<span class="tc-lead tc-recommended">%s</span>: %s',
 				__( 'RECOMMENDED', 'theme-check' ),
 				__( "This theme contains no sidebars/widget areas. See <a href='https://codex.wordpress.org/Widgets_API'>Widgets API</a>", 'theme-check' )
 			);
@@ -29,7 +29,7 @@ class WidgetsCheck implements themecheck {
 			strpos( $php, 'dynamic_sidebar' ) === false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-recommended">%s</span> %s',
+				'<span class="tc-lead tc-recommended">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
 				__( "The theme appears to use <strong>register_sidebar()</strong> but no <strong>dynamic_sidebar()</strong> was found. See: <a href='https://developer.wordpress.org/reference/functions/dynamic_sidebar/'>dynamic_sidebar</a><pre> &lt;?php dynamic_sidebar( \$index ); ?&gt;</pre>", 'theme-check' )
 			);
@@ -41,7 +41,7 @@ class WidgetsCheck implements themecheck {
 			strpos( $php, 'dynamic_sidebar' ) !== false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-recommended">%s</span> %s',
+				'<span class="tc-lead tc-recommended">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
 				__( "The theme appears to use <strong>dynamic_sidebars()</strong> but no <strong>register_sidebar()</strong> was found. See: <a href='https://developer.wordpress.org/reference/functions/register_sidebar/'>register_sidebar</a><pre> &lt;?php register_sidebar( \$args ); ?&gt;</pre>", 'theme-check' )
 			);
@@ -56,7 +56,7 @@ class WidgetsCheck implements themecheck {
 			preg_match( '/add_action\s*\(\s*("|\')widgets_init("|\')\s*,/', $php ) == false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-recommended">%s</span> %s',
+				'<span class="tc-lead tc-recommended">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
 				sprintf(
 					__( 'Sidebars need to be registered in a custom function hooked to the <strong>widgets_init</strong> action. See: %s.', 'theme-check' ),

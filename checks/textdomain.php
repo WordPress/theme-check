@@ -158,7 +158,7 @@ class TextDomainCheck implements themecheck {
 				);
 			} elseif ( ! in_array( $correct_domain, $domains ) ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span> %s %s',
+					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
 						__( "This theme text domain does not match the theme's slug. The text domain used: %s", 'theme-check' ),
@@ -185,7 +185,7 @@ class TextDomainCheck implements themecheck {
 			);
 		} else {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-info">%s</span> %s %s',
+				'<span class="tc-lead tc-info">%s</span>: %s %s',
 				__( 'INFO', 'theme-check' ),
 				__( "Only one text-domain is being used in this theme. Make sure it matches the theme's slug correctly so that the theme will be compatible with WordPress.org language packs.", 'theme-check' ),
 				sprintf(
