@@ -3,8 +3,8 @@
     "description": "A plugin to check if the theme follows theme review standards",
     "type": "wordpress-plugin",
     "require-dev": {
-        "wp-coding-standards/wpcs": "^2.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "wp-coding-standards/wpcs": "^2.3",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
         "phpcompatibility/phpcompatibility-wp": "^2.1"
     },
     "license": "GPLv2",
