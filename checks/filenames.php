@@ -71,7 +71,7 @@ class File_Checks implements themecheck {
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
-						__( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ),
+						__( '%1$s %2$s found. This file must not be in a production version of the theme.', 'theme-check' ),
 						'<strong>' . $error . '</strong>',
 						$reason
 					)
