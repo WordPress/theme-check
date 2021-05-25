@@ -4,9 +4,8 @@ class CommentPaginationCheck implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
-		$ret = true;
 
-		// combine all the php files into one string to make it easier to search
+		// Combine all the php files into one string to make it easier to search.
 		$php = implode( ' ', $php_files );
 		checkcount();
 		if (
@@ -18,14 +17,13 @@ class CommentPaginationCheck implements themecheck {
 		) {
 
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span>: %s',
-				__( 'REQUIRED', 'theme-check' ),
+				'<span class="tc-lead tc-recommended">%s</span>: %s',
+				__( 'RECOMMENDED', 'theme-check' ),
 				__( "The theme doesn't have comment pagination code in it. Use <strong>paginate_comments_links()</strong> or <strong>the_comments_navigation</strong> or <strong>the_comments_pagination</strong> or <strong>next_comments_link()</strong> and <strong>previous_comments_link()</strong> to add comment pagination.", 'theme-check' )
 			);
-			$ret           = false;
 		}
 
-		return $ret;
+		return true;
 	}
 
 	function getError() {
