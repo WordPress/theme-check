@@ -1,6 +1,6 @@
 <?php
 
-class CustomCheck implements themecheck {
+class ThemeSupport implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
@@ -72,4 +72,4 @@ class CustomCheck implements themecheck {
 		return $this->error;
 	}
 }
-$themechecks[] = new CustomCheck();
+$themechecks[] = new ThemeSupport();
