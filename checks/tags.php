@@ -8,7 +8,7 @@ class TagCheck implements themecheck {
 		// combine all the php files into one string to make it easier to search
 		$php = implode( ' ', $php_files );
 		checkcount();
-		$ret = true;
+
 		if (
 			strpos( $php, 'the_tags' ) === false &&
 			strpos( $php, 'the_taxonomies' ) === false &&
@@ -16,14 +16,13 @@ class TagCheck implements themecheck {
 			strpos( $php, 'get_the_term_list' ) === false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span> %s',
-				__( 'REQUIRED', 'theme-check' ),
+				'<span class="tc-lead tc-recommended">%s</span> %s',
+				__( 'RECOMMENDED', 'theme-check' ),
 				__( "This theme doesn't seem to display tags. Modify it to display tags in appropriate locations.", 'theme-check' )
 			);
-			$ret           = false;
 		}
 
-		return $ret;
+		return true;
 	}
 
 	function getError() {
