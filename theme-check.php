@@ -21,7 +21,7 @@ class ThemeCheckMain {
 	}
 
 	function load_styles() {
-		wp_enqueue_style( 'style', plugins_url( 'assets/style.css', __FILE__ ), array(), 1, 'screen' );
+		wp_enqueue_style( 'style', plugins_url( 'assets/style.css', __FILE__ ), array(), false, 'screen' );
 	}
 
 	function themecheck_add_page() {
