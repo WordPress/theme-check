@@ -51,7 +51,6 @@ class File_Checks implements themecheck {
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
-		$rechave  = array();
 
 		checkcount();
 
@@ -91,20 +90,6 @@ class File_Checks implements themecheck {
 					)
 				);
 				$ret           = false;
-			}
-		}
-
-		foreach ( $rechave as $file => $reason ) {
-			if ( ! in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf(
-					'<span class="tc-lead tc-recommended">%s</span>: %s %s',
-					__( 'RECOMMENDED', 'theme-check' ),
-					sprintf(
-						__( 'Could not find the file %s in the theme.', 'theme-check' ),
-						'<strong>' . $file . '</strong>'
-					),
-					$reason
-				);
 			}
 		}
 
