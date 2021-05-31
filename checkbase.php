@@ -299,21 +299,23 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof GravatarCheck
 			|| $check instanceof Title_Checks
 			|| $check instanceof PostPaginationCheck
+			|| $check instanceof Comments
 			|| $check instanceof CommentPaginationCheck
 			|| $check instanceof Comment_Reply
 			|| $check instanceof Basic_Checks
 			|| $check instanceof NavMenuCheck
 			|| $check instanceof PostThumbnailCheck
-			|| $check instanceof CustomCheck
+			|| $check instanceof ThemeSupport
 			|| $check instanceof EditorStyleCheck
 			|| $check instanceof UnderscoresCheck
 			|| $check instanceof Constants
 			|| $check instanceof CustomizerCheck
 			|| $check instanceof Deprecated_Recommended
 			|| $check instanceof PostFormatCheck
-			|| $check instanceof PostThumbnailCheck
 			|| $check instanceof SearchFormCheck
 			|| $check instanceof Theme_Support_Title_Tag
+			|| $check instanceof Screen_Reader_Text
+			|| $check instanceof IncludeCheck
 		) {
 			unset( $themechecks[ $key ] );
 		}

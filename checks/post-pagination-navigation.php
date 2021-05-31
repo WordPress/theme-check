@@ -5,8 +5,6 @@ class PostPaginationCheck implements themecheck {
 
 	function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-
 		// combine all the php files into one string to make it easier to search
 		$php = implode( ' ', $php_files );
 		checkcount();
@@ -21,14 +19,13 @@ class PostPaginationCheck implements themecheck {
 			)
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span> %s',
-				__( 'REQUIRED', 'theme-check' ),
+				'<span class="tc-lead tc-recommended">%s</span> %s',
+				__( 'RECOMMENDED', 'theme-check' ),
 				__( "The theme doesn't have post pagination code in it. Use <strong>posts_nav_link()</strong> or <strong>paginate_links()</strong> or <strong>the_posts_pagination()</strong> or <strong>the_posts_navigation()</strong> or <strong>next_posts_link()</strong> and <strong>previous_posts_link()</strong> to add post pagination.", 'theme-check' )
 			);
-			$ret           = false;
 		}
 
-		return $ret;
+		return true;
 	}
 
 	function getError() {
