@@ -80,24 +80,26 @@ Checks that register_sidebar() is used together with the widgets_init action hoo
 
 ## Warning
 
+-
+
 ## Recommended
 
 ### Comment
 
-Checks if the theme supports comments:
+Checks that the theme supports comments:
 comments_template, wp_list_comments, comment_form.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/comments.php>
 
 #### Comment reply
 
-Checks if the theme enqueues the comment-reply script.
+Checks that the theme enqueues the comment-reply script.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/comment_reply.php>
 
 #### Comment pagination
 
-Checks if the theme supports comment pagination:
+Checks that the theme supports comment pagination:
 paginate_comments_links, the_comments_navigation, the_comments_pagination, next_comments_link, previous_comments_link.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/commpage.php>
@@ -118,21 +120,21 @@ Check that add_editor_style is included in the theme.
 
 ### Navigation menu support
 
-Checks if the theme supports navigation menus.
+Checks that the theme supports navigation menus.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/navmenu.php>
 
 ### Post navigation and pagination
 
-Checks if the theme supports post navigation:
+Checks that the theme supports post navigation:
 posts_nav_link, paginate_links, the_posts_pagination, the_posts_navigation, previous_posts_link, next_posts_link
 
 <https://github.com/WordPress/theme-check/blob/master/checks/post-pagination-navigation.php>
 
 ### Post thumbnails
 
-Checks if the theme includes add_theme_support( 'post-thumbnails' ).
-Checks if the theme presents images with the_post_thumbnail().
+Checks that the theme includes add_theme_support( 'post-thumbnails' ).
+Checks that the theme presents images with the_post_thumbnail().
 
 <https://github.com/WordPress/theme-check/blob/master/checks/postthumb.php>
 
@@ -147,21 +149,21 @@ sticky, bypostauthor, alignleft, alignright, aligncenter, wp-caption, wp-caption
 
 ### Tags
 
-Checks if the theme displays tags:
+Checks that the theme displays tags:
 the_tags, the_taxonomies, get_the_tag_list, get_the_term_list
 
 <https://github.com/WordPress/theme-check/blob/master/checks/tags.php>
 
 ### Theme Support
 
-Checks if the theme includes add_theme_support:
+Checks that the theme includes add_theme_support:
 custom-header, custom-background, custom-logo, html5, responsive-embeds, align-wide, wp-block-styles
 
 <https://github.com/WordPress/theme-check/blob/master/checks/theme-support.php>
 
 ### Widget Support
 
-Checks if the theme supports widgets by including dynamic_sidebar and register_sidebar.
+Checks that the theme supports widgets by including dynamic_sidebar and register_sidebar.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/widgets.php>
 
