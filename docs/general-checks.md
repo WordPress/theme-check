@@ -299,16 +299,8 @@ Using iframes to display remote content is not allowed.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/iframes.php>
 
-### Include
-
-Checks if the theme uses include or require and informats that templates
-should be included using get_template_part instead.
-
-<https://github.com/WordPress/theme-check/blob/master/checks/include.php>
-
 ### Links
 
 Checks if the theme includes hardcoded links in PHP files that are neither theme- or author URI.
 
 <https://github.com/WordPress/theme-check/blob/master/checks/links.php>
-

@@ -168,3 +168,10 @@ Checks that the theme supports widgets by including dynamic_sidebar and register
 <https://github.com/WordPress/theme-check/blob/master/checks/widgets.php>
 
 ## Info
+
+### Include
+
+Checks if the theme uses include or require and informats that templates
+should be included using get_template_part instead.
+
+<https://github.com/WordPress/theme-check/blob/master/checks/include.php>
