@@ -312,9 +312,9 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof CustomizerCheck
 			|| $check instanceof Deprecated_Recommended
 			|| $check instanceof PostFormatCheck
-			|| $check instanceof PostThumbnailCheck
 			|| $check instanceof SearchFormCheck
 			|| $check instanceof Screen_Reader_Text
+			|| $check instanceof IncludeCheck
 		) {
 			unset( $themechecks[ $key ] );
 		}
