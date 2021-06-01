@@ -1,14 +1,16 @@
-<?php // phpcs:ignore WordPress.Files.FileName
+<?php
 /**
  * Checks for Plugin Territory Guidelines.
  *
  * @link https://make.wordpress.org/themes/handbook/review/required/#presentation-vs-functionality
+ *
+ * @package Theme Check
  */
 
 /**
  * Checks for Plugin Territory
  */
-class Plugin_Territory implements themecheck {
+class Plugin_Territory_Check implements themecheck {
 	/**
 	 * Error messages, warnings and info notices.
 	 *
@@ -161,4 +163,4 @@ class Plugin_Territory implements themecheck {
 	}
 }
 
-$themechecks[] = new Plugin_Territory();
+$themechecks[] = new Plugin_Territory_Check();
