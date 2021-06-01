@@ -1,9 +1,33 @@
 <?php
+/**
+ * Checks if deprecated constants are included
+ *
+ * @package Theme Check
+ */
 
-class Constants implements themecheck {
+/**
+ * Checks if deprecated constants are included.
+ *
+ * Checks if deprecated constants are included. If they are, require them to be removed.
+ *
+ * @see https://core.trac.wordpress.org/changeset/20212
+ */
+class Constants_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
@@ -46,8 +70,14 @@ class Constants implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new Constants();
+
+$themechecks[] = new Constants_Check();
