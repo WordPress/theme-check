@@ -298,22 +298,22 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof WidgetsCheck
 			|| $check instanceof GravatarCheck
 			|| $check instanceof Title_Checks
-			|| $check instanceof PostPaginationCheck
+			|| $check instanceof Post_Pagination_Check
 			|| $check instanceof Comments
 			|| $check instanceof CommentPaginationCheck
 			|| $check instanceof Comment_Reply
 			|| $check instanceof Basic_Checks
 			|| $check instanceof NavMenuCheck
-			|| $check instanceof PostThumbnailCheck
+			|| $check instanceof Post_Thumbnail_Check
 			|| $check instanceof ThemeSupport
 			|| $check instanceof EditorStyleCheck
 			|| $check instanceof UnderscoresCheck
 			|| $check instanceof Constants
 			|| $check instanceof CustomizerCheck
 			|| $check instanceof Deprecated_Recommended
-			|| $check instanceof PostFormatCheck
+			|| $check instanceof Post_Format_Check
 			|| $check instanceof SearchFormCheck
-			|| $check instanceof Screen_Reader_Text
+			|| $check instanceof Screen_Reader_Text_Check
 			|| $check instanceof IncludeCheck
 		) {
 			unset( $themechecks[ $key ] );
