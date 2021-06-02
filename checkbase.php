@@ -306,7 +306,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof NavMenuCheck
 			|| $check instanceof PostThumbnailCheck
 			|| $check instanceof ThemeSupport
-			|| $check instanceof EditorStyleCheck
+			|| $check instanceof Editor_Style_Check
 			|| $check instanceof UnderscoresCheck
 			|| $check instanceof Constants_Check
 			|| $check instanceof Customizer_Check
@@ -320,7 +320,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	}
 
 	// Add FSE specific checks.
-	$themechecks[] = new FSE_Required_Files();
+	$themechecks[] = new FSE_Required_Files_Check();
 
 	return true;
 }
