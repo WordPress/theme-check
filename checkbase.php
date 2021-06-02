@@ -299,18 +299,17 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof GravatarCheck
 			|| $check instanceof Title_Checks
 			|| $check instanceof PostPaginationCheck
-			|| $check instanceof Comments
-			|| $check instanceof CommentPaginationCheck
-			|| $check instanceof Comment_Reply
 			|| $check instanceof Basic_Check
+			|| $check instanceof Comments_Check
+			|| $check instanceof Comment_Pagination_Check
+			|| $check instanceof Comment_Reply_Check
 			|| $check instanceof NavMenuCheck
 			|| $check instanceof PostThumbnailCheck
 			|| $check instanceof ThemeSupport
-			|| $check instanceof EditorStyleCheck
+			|| $check instanceof Editor_Style_Check
 			|| $check instanceof UnderscoresCheck
-			|| $check instanceof Constants
-			|| $check instanceof CustomizerCheck
-			|| $check instanceof Deprecated_Recommended
+			|| $check instanceof Constants_Check
+			|| $check instanceof Customizer_Check
 			|| $check instanceof PostFormatCheck
 			|| $check instanceof SearchFormCheck
 			|| $check instanceof Screen_Reader_Text
@@ -321,7 +320,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	}
 
 	// Add FSE specific checks.
-	$themechecks[] = new FSE_Required_Files();
+	$themechecks[] = new FSE_Required_Files_Check();
 
 	return true;
 }

@@ -1,15 +1,35 @@
 <?php
+/**
+ * Checks if deprecated functions are included
+ *
+ * @package Theme Check
+ */
 
-class Deprecated implements themecheck {
+/**
+ * Checks if deprecated functions are included
+ */
+class Deprecated_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
-		$grep = '';
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
+		$grep = '';
+		$ret  = true;
 
 		$checks = array(
-			// start wp-includes deprecated
+			// Start wp-includes deprecated.
 			array(
 				'get_postdata' => 'get_post()',
 				'1.5.1',
@@ -947,6 +967,22 @@ class Deprecated implements themecheck {
 				'preview_theme' => '',
 				'4.3',
 			),
+			array(
+				'_preview_theme_stylesheet_filter' => '',
+				'4.3',
+			),
+			array(
+				'preview_theme_ob_filter' => '',
+				'4.3',
+			),
+			array(
+				'preview_theme_ob_filter_callback' => '',
+				'4.3',
+			),
+			array(
+				'wp_ajax_wp_fullscreen_save_post' => '',
+				'4.3',
+			),
 
 			array(
 				'wp_get_http' => 'WP_Http',
@@ -958,6 +994,14 @@ class Deprecated implements themecheck {
 			),
 			array(
 				'force_ssl_login' => 'force_ssl_admin',
+				'4.4',
+			),
+			array(
+				'create_empty_blog' => '',
+				'4.4',
+			),
+			array(
+				'get_admin_users_for_domain' => '',
 				'4.4',
 			),
 
@@ -1102,7 +1146,6 @@ class Deprecated implements themecheck {
 				'install_blog' => '',
 				'5.1',
 			),
-
 		);
 		foreach ( $php_files as $php_key => $phpfile ) {
 			foreach ( $checks as $alt => $check ) {
@@ -1145,8 +1188,14 @@ class Deprecated implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new Deprecated();
+
+$themechecks[] = new Deprecated_Check();

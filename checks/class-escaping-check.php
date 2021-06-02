@@ -1,14 +1,16 @@
-<?php // phpcs:ignore WordPress.Files.FileName
+<?php
 /**
  * Checks for common escaping issues.
  *
  * @link https://make.wordpress.org/themes/handbook/review/required/#code
+ *
+ * @package Theme Check
  */
 
 /**
  * Checks for common escaping issues.
  */
-class EscapingCheck implements themecheck {
+class Escaping_Check implements themecheck {
 	/**
 	 * Error messages, warnings and info notices.
 	 *
@@ -117,4 +119,4 @@ class EscapingCheck implements themecheck {
 	}
 }
 
-$themechecks[] = new EscapingCheck();
+$themechecks[] = new Escaping_Check();
