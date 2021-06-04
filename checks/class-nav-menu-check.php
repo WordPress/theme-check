@@ -1,9 +1,29 @@
 <?php
+/**
+ * Checks if nav menus are supported and if theme location or menu names are used
+ *
+ * @package Theme Check
+ */
 
-class NavMenuCheck implements themecheck {
+/**
+ * Checks if nav menus are supported and if theme location or menu names are used.
+ */
+class Nav_Menu_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 
 		$ret        = true;
 		$name_check = false;
@@ -94,9 +114,14 @@ class NavMenuCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
 
-$themechecks[] = new NavMenuCheck();
+$themechecks[] = new Nav_Menu_Check();
