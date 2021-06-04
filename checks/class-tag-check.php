@@ -1,11 +1,19 @@
 <?php
+/**
+ * Checks if tags are supported
+ *
+ * @package Theme Check
+ */
 
-class TagCheck implements themecheck {
+/**
+ * Checks if tags are supported.
+ */
+class Tag_Check implements themecheck {
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
 
-		// combine all the php files into one string to make it easier to search
+		// Combine all the php files into one string to make it easier to search.
 		$php = implode( ' ', $php_files );
 		checkcount();
 
@@ -29,4 +37,5 @@ class TagCheck implements themecheck {
 		return $this->error;
 	}
 }
-$themechecks[] = new TagCheck();
+
+$themechecks[] = new Tag_Check();
