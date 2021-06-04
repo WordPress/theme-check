@@ -1,7 +1,7 @@
 <?php
 /**
  * Checks if core scripts are deregistered.
- * 
+ *
  * Themes must use WordPress’ default libraries.
  * WordPress includes a number of libraries such as jQuery.
  * For security and stability reasons themes may not include those libraries in their own code.
