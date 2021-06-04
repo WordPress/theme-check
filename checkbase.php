@@ -305,7 +305,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 		if ( $check instanceof Tag_Check
 			|| $check instanceof Style_Suggested
 			|| $check instanceof WidgetsCheck
-			|| $check instanceof GravatarCheck
+			|| $check instanceof Gravatar_Check
 			|| $check instanceof Title_Checks
 			|| $check instanceof Post_Pagination_Check
 			|| $check instanceof Basic_Check
@@ -322,7 +322,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Post_Format_Check
 			|| $check instanceof SearchFormCheck
 			|| $check instanceof Screen_Reader_Text_Check
-			|| $check instanceof IncludeCheck
+			|| $check instanceof Include_Check
 		) {
 			unset( $themechecks[ $key ] );
 		}
