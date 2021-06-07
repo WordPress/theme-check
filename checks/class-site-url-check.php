@@ -3,12 +3,13 @@
  * Checks if site_url is used, and adds an info.
  *
  * @link https://developer.wordpress.org/reference/functions/site_url/
+ * @package Theme Check
  */
 
 /**
  * Check for site_url
  */
-class SiteUrlCheck implements themecheck {
+class Site_URL_Check implements themecheck {
 	/**
 	 * Error messages, warnings and info notices.
 	 *
@@ -55,4 +56,4 @@ class SiteUrlCheck implements themecheck {
 	}
 }
 
-$themechecks[] = new SiteUrlCheck();
+$themechecks[] = new Site_URL_Check();
