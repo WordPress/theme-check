@@ -1,17 +1,34 @@
 <?php
-
 /**
  * Check for various I18N errors
+ *
+ * @package Theme Check
  */
-class I18NCheck implements themecheck {
+
+/**
+ * Check for various I18N errors.
+ */
+class I18N_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 		$ret   = true;
 		$error = '';
 		checkcount();
 
-		// make sure the tokenizer is available
+		// Make sure the tokenizer is available.
 		if ( ! function_exists( 'token_get_all' ) ) {
 			return true;
 		}
@@ -64,7 +81,7 @@ class I18NCheck implements themecheck {
 									$error
 								)
 							);
-							break; // stop looking at the tokens on this line once a variable is found
+							break; // Stop looking at the tokens on this line once a variable is found.
 						}
 					}
 				}
@@ -73,8 +90,14 @@ class I18NCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new I18NCheck();
+
+$themechecks[] = new I18N_Check();
