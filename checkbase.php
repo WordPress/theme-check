@@ -1,4 +1,13 @@
 <?php
+/**
+ * Runs checks against themes and displays the results
+ *
+ * Runs checks against themes and displays the results. Includes helper functions
+ * for performing checks.
+ *
+ * @package Theme Check
+ */
+
 // main global to hold our checks.
 global $themechecks;
 $themechecks = array();
@@ -293,27 +302,27 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 
 	// Remove theme checks that do not apply to FSE themes.
 	foreach ( $themechecks as $key => $check ) {
-		if ( $check instanceof TagCheck
-			|| $check instanceof Style_Suggested
+		if ( $check instanceof Tag_Check
+			|| $check instanceof Suggested_Styles_Check
 			|| $check instanceof WidgetsCheck
-			|| $check instanceof GravatarCheck
+			|| $check instanceof Gravatar_Check
 			|| $check instanceof Title_Checks
-			|| $check instanceof PostPaginationCheck
+			|| $check instanceof Post_Pagination_Check
 			|| $check instanceof Basic_Check
 			|| $check instanceof Comments_Check
 			|| $check instanceof Comment_Pagination_Check
 			|| $check instanceof Comment_Reply_Check
-			|| $check instanceof NavMenuCheck
-			|| $check instanceof PostThumbnailCheck
+			|| $check instanceof Nav_Menu_Check
+			|| $check instanceof Post_Thumbnail_Check
 			|| $check instanceof ThemeSupport
 			|| $check instanceof Editor_Style_Check
 			|| $check instanceof UnderscoresCheck
 			|| $check instanceof Constants_Check
 			|| $check instanceof Customizer_Check
-			|| $check instanceof PostFormatCheck
+			|| $check instanceof Post_Format_Check
 			|| $check instanceof SearchFormCheck
-			|| $check instanceof Screen_Reader_Text
-			|| $check instanceof IncludeCheck
+			|| $check instanceof Screen_Reader_Text_Check
+			|| $check instanceof Include_Check
 		) {
 			unset( $themechecks[ $key ] );
 		}
