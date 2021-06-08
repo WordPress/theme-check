@@ -1,7 +1,22 @@
 <?php
+/**
+ * Functions for displaying theme information, test results, and the form
+ *
+ * @package Theme Check
+ */
+
+/**
+ * Present theme information and test results.
+ *
+ * @param string $theme_slug theme slug of the theme to be tested.
+ */
 function check_main( $theme_slug ) {
 	global $checkcount;
 
+	/**
+	 * Get theme data. Return early if the theme is not found.
+	 * @link https://developer.wordpress.org/reference/functions/wp_get_theme/
+	 */
 	$theme = wp_get_theme( $theme_slug );
 	if ( ! $theme->exists() ) {
 		return;
@@ -10,7 +25,7 @@ function check_main( $theme_slug ) {
 	// Run the checks.
 	$success = run_themechecks_against_theme( $theme, $theme_slug );
 
-	// Second loop, to display the errors.
+	// Display theme info.
 	echo '<h2>' . esc_html__( 'Theme Info', 'theme-check' ) . ': </h2>';
 	echo '<div class="theme-info">';
 
@@ -26,11 +41,11 @@ function check_main( $theme_slug ) {
 
 	echo ( ! empty( $theme['Title'] ) ) ? '<p><label>' . esc_html__( 'Title', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Title'] ) . '</span></p>' : '';
 	echo ( ! empty( $theme['Version'] ) ) ? '<p><label>' . esc_html__( 'Version', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Version'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['AuthorName'] ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['AuthorName'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['AuthorURI'] ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['AuthorURI'] ) . '">' . esc_html( $theme['AuthorURI'] ) . '</a></span></p>' : '';
-	echo ( ! empty( $theme['URI'] ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_attr( $theme['URI'] ) . '">' . esc_html( $theme['URI'] ) . '</a></span></p>' : '';
-	echo ( ! empty( $theme['License'] ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License'] ) . '</span></p>' : '';
-	echo ( ! empty( $theme['License URI'] ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['License URI'] ) . '</span></p>' : '';
+	echo ( ! empty( $theme->get( 'Author' ) ) ) ? '<p><label>' . esc_html__( 'Author', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme->get( 'Author' ) ) . '</span></p>' : '';
+	echo ( ! empty( $theme->get( 'AuthorURI' ) ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_url( $theme->get( 'AuthorURI' ) ) . '">' . esc_html( $theme->get( 'AuthorURI' ) ) . '</a></span></p>' : '';
+	echo ( ! empty( $theme->get( 'ThemeURI' ) ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_url( $theme->get( 'ThemeURI' ) ) . '">' . esc_html( $theme->get( 'ThemeURI' ) ) . '</a></span></p>' : '';
+	echo ( ! empty( $theme->get( 'License' ) ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme->get( 'License' ) ) . '</span></p>' : '';
+	echo ( ! empty( $theme->get( 'License URI' )) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme->get( 'License URI' ) ) . '</span></p>' : '';
 	echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
 	echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
 
@@ -124,6 +139,9 @@ function check_main( $theme_slug ) {
 	echo '</ul></div>';
 }
 
+/**
+ * Present information about the plugin.
+ */
 function tc_intro() {
 	?>
 	<h2><?php esc_html_e( 'About', 'theme-check' ); ?></h2>
@@ -145,6 +163,9 @@ function tc_intro() {
 	<?php
 }
 
+/**
+ * Present information about submitting themes.
+ */
 function tc_success() {
 	?>
 	<div class="tc-success"><p><?php esc_html_e( 'Now that your theme has passed the basic tests you need to check it properly using the test data before you upload it to the WordPress Themes Directory.', 'theme-check' ); ?></p>
@@ -167,6 +188,9 @@ function tc_success() {
 	<?php
 }
 
+/**
+ * Print the form for selecting the theme to test.
+ */
 function tc_form() {
 	echo '<form action="themes.php?page=themecheck" method="post">';
 	echo '<select name="themename">';
