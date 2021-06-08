@@ -34,7 +34,7 @@ class Search_Form_Check implements themecheck {
 				if ( preg_match( $regex, $file_contents, $out ) ) {
 					$grep          = tc_preg( $regex, $file_path );
 					$this->error[] = sprintf(
-						'<span class="tc-lead tc-warning">%s:</span> %s %s',
+						'<span class="tc-lead tc-warning">%s</span>: %s %s',
 						__( 'WARNING', 'theme-check' ),
 						sprintf(
 							__( '<strong>searchform.php</strong> was found in %1$s. %2$s', 'theme-check' ),
@@ -58,7 +58,7 @@ class Search_Form_Check implements themecheck {
 			if ( false !== strpos( $file_contents, 'role="search"' ) ) {
 				$grep          = tc_preg( $regex, $file_path );
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-warning">%s:</span> %s %s',
+					'<span class="tc-lead tc-warning">%s</span>: %s %s',
 					__( 'WARNING', 'theme-check' ),
 					sprintf(
 						__( '<strong>role="search"</strong> was found in %1$s. %2$s', 'theme-check' ),
