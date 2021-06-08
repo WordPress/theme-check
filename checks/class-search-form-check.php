@@ -63,7 +63,7 @@ class Search_Form_Check implements themecheck {
 					sprintf(
 						__( '<strong>role="search"</strong> was found in %1$s. %2$s', 'theme-check' ),
 						'<strong>' . tc_filename( $file_path ) . '</strong>',
-						__( 'Use <strong>get_search_form()</strong> instead of hard coding forms. Otherwise, the form can not be filtered.', 'theme-check' ),
+						__( 'Use <strong>get_search_form()</strong> instead of hard coding forms. Otherwise, the form can not be filtered.', 'theme-check' )
 					),
 					$grep
 				);
