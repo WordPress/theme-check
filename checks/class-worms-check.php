@@ -1,5 +1,19 @@
 <?php
-class WormCheck implements themecheck {
+/**
+ * Check for signs of worms and hacks
+ *
+ * @package Theme Check
+ */
+
+/**
+ * Check for signs of worms and hacks.
+ */
+class Worms_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
@@ -34,8 +48,14 @@ class WormCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new WormCheck();
+
+$themechecks[] = new Worms_Check();

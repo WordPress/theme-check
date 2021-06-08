@@ -1,17 +1,37 @@
 <?php
+/**
+ * Check if widgets are supported in classic themes
+ *
+ * @package Theme Check
+ */
 
-class WidgetsCheck implements themecheck {
+/**
+ * Check if widgets are supported in classic themes.
+ */
+class Widgets_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 
 		$ret = true;
 
-		// combine all the php files into one string to make it easier to search
+		// Combine all the php files into one string to make it easier to search.
 		$php = implode( ' ', $php_files );
 		checkcount();
 
-		// no widgets registered or used...
+		// No widgets registered or used.
 		if (
 			strpos( $php, 'register_sidebar' ) === false &&
 			strpos( $php, 'dynamic_sidebar' ) === false
@@ -24,6 +44,7 @@ class WidgetsCheck implements themecheck {
 			$ret           = true;
 		}
 
+		// Widget area is registered but not used.
 		if (
 			strpos( $php, 'register_sidebar' ) !== false &&
 			strpos( $php, 'dynamic_sidebar' ) === false
@@ -36,6 +57,7 @@ class WidgetsCheck implements themecheck {
 			$ret           = false;
 		}
 
+		// Widget area is used but not registered.
 		if (
 			strpos( $php, 'register_sidebar' ) === false &&
 			strpos( $php, 'dynamic_sidebar' ) !== false
@@ -68,8 +90,14 @@ class WidgetsCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new WidgetsCheck();
+
+$themechecks[] = new Widgets_Check();
