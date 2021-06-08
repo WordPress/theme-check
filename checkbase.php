@@ -304,7 +304,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	foreach ( $themechecks as $key => $check ) {
 		if ( $check instanceof Tag_Check
 			|| $check instanceof Style_Suggested
-			|| $check instanceof WidgetsCheck
+			|| $check instanceof Widgets_Check
 			|| $check instanceof Gravatar_Check
 			|| $check instanceof Title_Checks
 			|| $check instanceof Post_Pagination_Check
@@ -314,9 +314,9 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Comment_Reply_Check
 			|| $check instanceof Nav_Menu_Check
 			|| $check instanceof Post_Thumbnail_Check
-			|| $check instanceof ThemeSupport
+			|| $check instanceof Theme_Support_Check
 			|| $check instanceof Editor_Style_Check
-			|| $check instanceof UnderscoresCheck
+			|| $check instanceof Underscores_Check
 			|| $check instanceof Constants_Check
 			|| $check instanceof Customizer_Check
 			|| $check instanceof Post_Format_Check
