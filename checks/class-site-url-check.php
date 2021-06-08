@@ -26,9 +26,8 @@ class Site_URL_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-
 		checkcount();
+
 		foreach ( $php_files as $file_path => $file_content ) {
 			$filename = tc_filename( $file_path );
 
@@ -43,7 +42,8 @@ class Site_URL_Check implements themecheck {
 				);
 			}
 		}
-		return $ret;
+
+		return true;
 	}
 
 	/**
