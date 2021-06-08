@@ -19,11 +19,11 @@ class Link_Check implements themecheck {
 	protected $error = array();
 
 	/**
-	 * Theme information. Author URI, theme URI
+	 * Theme information. Author URI, theme URI, Author name
 	 *
-	 * @var array $theme
+	 * @var object $theme
 	 */
-	protected $theme = array();
+	protected $theme;
 
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {

@@ -19,9 +19,9 @@ class URI_Check implements themecheck {
 	/**
 	 * Theme information. Author URI, theme URI, Author name
 	 *
-	 * @var array $theme
+	 * @var object $theme
 	 */
-	protected $theme = array();
+	protected $theme;
 
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
