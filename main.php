@@ -15,6 +15,7 @@ function check_main( $theme_slug ) {
 
 	/**
 	 * Get theme data. Return early if the theme is not found.
+	 *
 	 * @link https://developer.wordpress.org/reference/functions/wp_get_theme/
 	 */
 	$theme = wp_get_theme( $theme_slug );
@@ -45,7 +46,7 @@ function check_main( $theme_slug ) {
 	echo ( ! empty( $theme->get( 'AuthorURI' ) ) ) ? '<p><label>' . esc_html__( 'Author URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_url( $theme->get( 'AuthorURI' ) ) . '">' . esc_html( $theme->get( 'AuthorURI' ) ) . '</a></span></p>' : '';
 	echo ( ! empty( $theme->get( 'ThemeURI' ) ) ) ? '<p><label>' . esc_html__( 'Theme URI', 'theme-check' ) . '</label><span class="info"><a href="' . esc_url( $theme->get( 'ThemeURI' ) ) . '">' . esc_html( $theme->get( 'ThemeURI' ) ) . '</a></span></p>' : '';
 	echo ( ! empty( $theme->get( 'License' ) ) ) ? '<p><label>' . esc_html__( 'License', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme->get( 'License' ) ) . '</span></p>' : '';
-	echo ( ! empty( $theme->get( 'License URI' )) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme->get( 'License URI' ) ) . '</span></p>' : '';
+	echo ( ! empty( $theme->get( 'License URI' ) ) ) ? '<p><label>' . esc_html__( 'License URI', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme->get( 'License URI' ) ) . '</span></p>' : '';
 	echo ( ! empty( $theme['Tags'] ) ) ? '<p><label>' . esc_html__( 'Tags', 'theme-check' ) . '</label><span class="info">' . esc_html( implode( ', ', $theme['Tags'] ) ) . '</span></p>' : '';
 	echo ( ! empty( $theme['Description'] ) ) ? '<p><label>' . esc_html__( 'Description', 'theme-check' ) . '</label><span class="info">' . esc_html( $theme['Description'] ) . '</span></p>' : '';
 
