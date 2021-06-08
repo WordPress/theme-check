@@ -1,26 +1,8 @@
 <?php
-/**
- * Check if theme and author URI are the same and that wordpress.org is not used for theme URI
- *
- * @package Theme Check
- */
 
-/**
- * Check if theme and author URI are the same and that wordpress.org is not used for theme URI.
- */
-class URI_Check implements themecheck {
-	/**
-	 * Error messages, warnings and info notices.
-	 *
-	 * @var array $error
-	 */
+class Check_URI implements themecheck {
 	protected $error = array();
 
-	/**
-	 * Theme information. Author URI, Author name
-	 *
-	 * @var array $theme
-	 */
 	protected $theme = array();
 
 	function set_context( $data ) {
@@ -29,14 +11,7 @@ class URI_Check implements themecheck {
 		}
 	}
 
-	/**
-	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
-	 *
-	 * @param array $php_files File paths and content for PHP files.
-	 * @param array $css_files File paths and content for CSS files.
-	 * @param array $other_files Folder names, file paths and content for other files.
-	 */
-	public function check( $php_files, $css_files, $other_files ) {
+	function check( $php_files, $css_files, $other_files ) {
 		checkcount();
 		$ret = true;
 
@@ -68,14 +43,8 @@ class URI_Check implements themecheck {
 		return $ret;
 	}
 
-	/**
-	 * Get error messages from the checks.
-	 *
-	 * @return array Error message.
-	 */
-	public function getError() {
+	function getError() {
 		return $this->error;
 	}
 }
-
-$themechecks[] = new URI_Check();
+$themechecks[] = new Check_URI();
