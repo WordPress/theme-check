@@ -1,7 +1,26 @@
 <?php
-class Style_Tags implements themecheck {
+/**
+ * Checks if the tags in style.css are valid
+ *
+ * @package Theme Check
+ */
+
+/**
+ * Checks if the tags in style.css are valid.
+ */
+class Style_Tags_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
+	/**
+	 * Array of theme tags in style.css
+	 *
+	 * @var array $tags
+	 */
 	protected $tags = array();
 
 	function set_context( $data ) {
@@ -10,7 +29,14 @@ class Style_Tags implements themecheck {
 		}
 	}
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 		checkcount();
 		$ret = true;
 
@@ -103,7 +129,12 @@ class Style_Tags implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 
@@ -169,6 +200,11 @@ class Style_Tags implements themecheck {
 		);
 	}
 
+	/**
+	 * Get the list of deprecated tags.
+	 *
+	 * @return array
+	 */
 	private function get_deprecated_tags() {
 		return array(
 			'flexible-width',
@@ -198,4 +234,5 @@ class Style_Tags implements themecheck {
 		);
 	}
 }
-$themechecks[] = new Style_Tags();
+
+$themechecks[] = new Style_Tags_Check();
