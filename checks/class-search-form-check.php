@@ -38,8 +38,8 @@ class Search_Form_Check implements themecheck {
 						__( 'WARNING', 'theme-check' ),
 						sprintf(
 							__( '<strong>searchform.php</strong> was found in %1$s. %2$s', 'theme-check' ),
-								'<strong>' . tc_filename( $file_path ) . '</strong>',
-								$check_text,
+							'<strong>' . tc_filename( $file_path ) . '</strong>',
+							$check_text,
 						),
 						$grep,
 					);
@@ -57,17 +57,17 @@ class Search_Form_Check implements themecheck {
 			// Checking for role="search" instead of form because it has a low risk of false positives.
 			if ( false !== strpos( $file_contents, 'role="search"' ) ) {
 				$grep          = tc_preg( $regex, $file_path );
-					$this->error[] = sprintf(
-						'<span class="tc-lead tc-warning">%s:</span> %s %s',
-						__( 'WARNING', 'theme-check' ),
-						sprintf(
-							__( '<strong>role="search"</strong> was found in %1$s. %2$s', 'theme-check' ),
-								'<strong>' . tc_filename( $file_path ) . '</strong>',
-								__( 'Use <strong>get_search_form()</strong> instead of hard coding forms. Otherwise, the form can not be filtered.' )
-						),
-						$grep,
-					);
-				}
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-warning">%s:</span> %s %s',
+					__( 'WARNING', 'theme-check' ),
+					sprintf(
+						__( '<strong>role="search"</strong> was found in %1$s. %2$s', 'theme-check' ),
+						'<strong>' . tc_filename( $file_path ) . '</strong>',
+						__( 'Use <strong>get_search_form()</strong> instead of hard coding forms. Otherwise, the form can not be filtered.' )
+					),
+					$grep,
+				);
+			}
 		}
 
 		return true;
