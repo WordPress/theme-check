@@ -3,12 +3,13 @@
  * Checks if site_url is used, and adds an info.
  *
  * @link https://developer.wordpress.org/reference/functions/site_url/
+ * @package Theme Check
  */
 
 /**
  * Check for site_url
  */
-class SiteUrlCheck implements themecheck {
+class Site_URL_Check implements themecheck {
 	/**
 	 * Error messages, warnings and info notices.
 	 *
@@ -25,9 +26,8 @@ class SiteUrlCheck implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-
 		checkcount();
+
 		foreach ( $php_files as $file_path => $file_content ) {
 			$filename = tc_filename( $file_path );
 
@@ -42,7 +42,8 @@ class SiteUrlCheck implements themecheck {
 				);
 			}
 		}
-		return $ret;
+
+		return true;
 	}
 
 	/**
@@ -55,4 +56,4 @@ class SiteUrlCheck implements themecheck {
 	}
 }
 
-$themechecks[] = new SiteUrlCheck();
+$themechecks[] = new Site_URL_Check();

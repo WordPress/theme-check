@@ -1,14 +1,30 @@
 <?php
 /**
+ * Check if the theme is a copy of underscores.
+ *
+ * @package Theme Check
+ */
+
+/**
  * Check if:
  * Theme or author URI refers to _s
  * The readme is a copy of _s
  * footer credit link refers to _s
  */
-class UnderscoresCheck implements themecheck {
+class Underscores_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	protected $theme = array();
+	/**
+	 * Theme information. Author URI, theme URI, Author name
+	 *
+	 * @var object $theme
+	 */
+	protected $theme;
 
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
@@ -16,21 +32,28 @@ class UnderscoresCheck implements themecheck {
 		}
 	}
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 
 		checkcount();
-		if ( ! empty( $this->theme['AuthorURI'] ) || ! empty( $this->theme['URI'] ) ) {
+		if ( ! empty( $this->theme->get( 'AuthorURI' ) ) || ! empty( $this->theme->get( 'ThemeURI' ) ) ) {
 
 			if (
-				stripos( $this->theme['URI'], 'underscores.me' ) ||
-				stripos( $this->theme['AuthorURI'], 'underscores.me' )
+				stripos( $this->theme->get( 'ThemeURI' ), 'underscores.me' ) ||
+				stripos( $this->theme->get( 'AuthorURI' ), 'underscores.me' )
 			) {
 				$ret           = false;
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
-					__( 'Using underscores.me as Theme URI or Author URI is not allowed.', 'theme-check' )
+					__( 'Found a copy of Underscores. Using underscores.me as Theme URI or Author URI is not allowed. Update the files for your own theme.', 'theme-check' )
 				);
 			}
 		}
@@ -79,8 +102,14 @@ class UnderscoresCheck implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new UnderscoresCheck();
+
+$themechecks[] = new Underscores_Check();

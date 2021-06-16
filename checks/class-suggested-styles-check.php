@@ -1,14 +1,34 @@
 <?php
-class Style_Suggested implements themecheck {
+/**
+ * Checks if style.css includes theme and author URI
+ *
+ * @package Theme Check
+ */
+
+/**
+ * Checks if style.css includes theme and author URI
+ */
+class Suggested_Styles_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 
-		// combine all the css files into one string to make it easier to search
+		// Combine all the css files into one string to make it easier to search.
 		$css = implode( ' ', $css_files );
 
 		checkcount();
-		$ret = true;
 
 		$checks = array(
 			'[ \t\/*#]*Theme URI:'  => 'Theme URI:',
@@ -42,11 +62,17 @@ class Style_Suggested implements themecheck {
 			}
 		}
 
-		return $ret;
+		return true;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
-$themechecks[] = new Style_Suggested();
+
+$themechecks[] = new Suggested_Styles_Check();

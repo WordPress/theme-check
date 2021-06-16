@@ -31,17 +31,18 @@ class Non_GPL_Check implements themecheck {
 		checkcount();
 
 		$link_list = array(
-			'unsplash'        => 'https://unsplash.com/license',
+			'unsplash.com'    => 'https://unsplash.com/license',
 			'pixabay'         => 'https://pixabay.com/service/license/',
 			'freeimages'      => 'https://www.freeimages.com/license',
-			'photopin'        => 'http://photopin.com/faq',
+			'photopin'        => 'https://www.vecteezy.com/licensing-agreement',
+			'vecteezy'        => 'https://www.vecteezy.com/licensing-agreement',
 			'splitshire'      => 'https://www.splitshire.com/licence/',
 			'freepik'         => 'https://www.freepikcompany.com/legal',
 			'flaticon'        => 'https://www.freepikcompany.com/legal',
 			'pikwizard'       => 'https://pikwizard.com/standard-license',
 			'stock.adobe'     => 'https://stock.adobe.com/license-terms',
 			'elements.envato' => 'https://elements.envato.com/license-terms',
-			'undraw.co'       => 'https://undraw.co/licenses',
+			'undraw.co'       => 'https://undraw.co/license',
 		);
 
 		foreach ( $link_list as $link_slug => $link_url ) {
@@ -50,7 +51,7 @@ class Non_GPL_Check implements themecheck {
 					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
-						__( 'Found a reference to %s. Images from this website does not use a license that is compatible with GPL.', 'theme-check' ),
+						__( 'Found a reference to %s. Assets from this website does not use a license that is compatible with GPL.', 'theme-check' ),
 						'<code>' . esc_html( $link_slug ) . '</code>'
 					),
 					'<a href="' . esc_url( $link_url ) . '" target="_blank">' . __( 'View license (opens in a new window).', 'theme-check' ) . '</a>'
