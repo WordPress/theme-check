@@ -24,7 +24,6 @@ class Post_Format_Check implements themecheck {
 	 * @param array $other_files Folder names, file paths and content for other files.
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
-		$ret = true;
 
 		$php = implode( ' ', $php_files );
 		$css = implode( ' ', $css_files );
@@ -49,20 +48,20 @@ class Post_Format_Check implements themecheck {
 						$error         = esc_html( rtrim( $matches[0], '(' ) );
 						$grep          = tc_grep( rtrim( $matches[0], '(' ), $php_key );
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-info">%s</span> %s',
+							__( 'INFO', 'theme-check' ),
 							sprintf(
 								__( '%1$s was found in the file %2$s. However get_post_format and/or has_post_format were not found, and no use of formats in the CSS was detected.', 'theme-check' ),
 								'<strong>' . $error . '</strong>',
 								'<strong>' . $filename . '</strong>'
 							)
 						);
-						$ret           = false;
 					}
 				}
 			}
 		}
-		return $ret;
+
+		return true;
 	}
 
 	/**
