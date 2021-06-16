@@ -1,6 +1,19 @@
 <?php
+/**
+ * Check classic themes for add_theme_support( 'title-tag' ).
+ *
+ * @package Theme Check
+ */
 
-class Theme_Support_Title_Tag implements themecheck {
+/**
+ * Check classic themes for add_theme_support( 'title-tag' ).
+ */
+class Theme_Support_Title_Tag_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
 	function check( $php_files, $css_files, $other_files ) {
@@ -20,9 +33,14 @@ class Theme_Support_Title_Tag implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
 
-$themechecks[] = new Theme_Support_Title_Tag();
+$themechecks[] = new Theme_Support_Title_Tag_Check();
