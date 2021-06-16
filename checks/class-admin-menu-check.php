@@ -52,7 +52,6 @@ class Admin_Menu_Check implements themecheck {
 						$check,
 						$grep
 					);
-					$ret           = false;
 				}
 			}
 		}
@@ -61,7 +60,7 @@ class Admin_Menu_Check implements themecheck {
 		// Note to TGMPA: Stop trying to bypass theme check.
 		$checks = array(
 			'/(?<!function)[^_>:](add_[a-z]+_page)/' => _x(
-				'Themes must not use <strong>%s()</strong>.',
+				'Themes should not use <strong>%s()</strong>.',
 				'function name',
 				'theme-check'
 			),
@@ -81,19 +80,18 @@ class Admin_Menu_Check implements themecheck {
 						$notallowed = sprintf( $check, $match );
 
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span>: <strong>%s</strong>. %s %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-recommended">%s</span>: <strong>%s</strong>. %s %s',
+							__( 'RECOMMENDED', 'theme-check' ),
 							$filename,
 							$notallowed,
 							$grep
 						);
-						$ret           = false;
 					}
 				}
 			}
 		}
 
-		return $ret;
+		return true;
 	}
 
 	/**
