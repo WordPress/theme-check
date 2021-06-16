@@ -319,7 +319,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Constants_Check
 			|| $check instanceof Customizer_Check
 			|| $check instanceof Post_Format_Check
-			|| $check instanceof SearchFormCheck
+			|| $check instanceof Search_Form_Check
 			|| $check instanceof Theme_Support_Title_Tag_Check
 			|| $check instanceof Screen_Reader_Text_Check
 			|| $check instanceof Include_Check
