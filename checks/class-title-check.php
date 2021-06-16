@@ -1,15 +1,33 @@
 <?php
 /**
+ * Check for wp_title and title tags.
+ *
+ * @package Theme Check
+ */
+
+/**
  * Checks for the title:
  * Is there a call to wp_title()?
  * Are there <title> and </title> tags?
  *
  * See: https://make.wordpress.org/themes/handbook/review/required/theme-check-plugin/
  */
-class Title_Checks implements themecheck {
+class Title_Check implements themecheck {
+	/**
+	 * Error messages, warnings and info notices.
+	 *
+	 * @var array $error
+	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 		$php = implode( ' ', $php_files );
 
@@ -50,9 +68,15 @@ class Title_Checks implements themecheck {
 		return $ret;
 	}
 
-	function getError() {
+
+	/**
+	 * Get error messages from the checks.
+	 *
+	 * @return array Error message.
+	 */
+	public function getError() {
 		return $this->error;
 	}
 }
 
-$themechecks[] = new Title_Checks();
+$themechecks[] = new Title_Check();

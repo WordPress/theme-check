@@ -16,7 +16,14 @@ class Theme_Support_Title_Tag_Check implements themecheck {
 	 */
 	protected $error = array();
 
-	function check( $php_files, $css_files, $other_files ) {
+	/**
+	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $other_files Folder names, file paths and content for other files.
+	 */
+	public function check( $php_files, $css_files, $other_files ) {
 		$ret = true;
 		$php = implode( ' ', $php_files );
 
