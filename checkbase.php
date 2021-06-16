@@ -306,7 +306,6 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Style_Suggested
 			|| $check instanceof WidgetsCheck
 			|| $check instanceof Gravatar_Check
-			|| $check instanceof Title_Checks
 			|| $check instanceof Post_Pagination_Check
 			|| $check instanceof Basic_Check
 			|| $check instanceof Comments_Check
