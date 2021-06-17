@@ -47,7 +47,7 @@ class Favicon_Check implements themecheck {
 						'<strong>' . $filename . '</strong>'
 					)
 				);
-				$ret           = false;
+				$ret           = true;
 			}
 		}
 		return $ret;
