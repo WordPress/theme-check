@@ -25,8 +25,6 @@ class Deprecated_Param_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-
 		$checks = array(
 			'get_bloginfo' => array(
 				'home'                 => 'home_url()',
@@ -66,8 +64,8 @@ class Deprecated_Param_Check implements themecheck {
 						$error         = ltrim( rtrim( $matches[0], '(' ) );
 						$grep          = tc_grep( $error, $php_key );
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span>: %s %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-warning">%s</span>: %s %s',
+							__( 'WARNING', 'theme-check' ),
 							sprintf(
 								__( '%1$s was found in the file %2$s. Use %3$s instead.', 'theme-check' ),
 								'<strong>' . $error . '</strong>',
@@ -76,13 +74,12 @@ class Deprecated_Param_Check implements themecheck {
 							),
 							$grep
 						);
-						$ret           = false;
 					}
 				}
 			}
 		}
 
-		return $ret;
+		return true;
 	}
 
 	/**
