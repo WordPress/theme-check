@@ -38,12 +38,11 @@ class Style_Tags_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 		checkcount();
-		$ret = true;
 
 		if ( ! $this->tags ) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-recommended">%s</span> %s',
-				__( 'RECOMMENDED', 'theme-check' ),
+				'<span class="tc-lead tc-info">%s</span> %s',
+				__( 'INFO', 'theme-check' ),
 				__( '<strong>Tags:</strong> is either empty or missing in style.css header.', 'theme-check' )
 			);
 		} else {
@@ -66,24 +65,22 @@ class Style_Tags_Check implements themecheck {
 				if ( ! in_array( strtolower( $tag ), $allowed_tags ) ) {
 					if ( in_array( strtolower( $tag ), $deprecated_tags ) ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-info">%s</span> %s',
+							__( 'INFO', 'theme-check' ),
 							sprintf(
 								__( 'The tag %s has been deprecated, please remove it from your style.css header.', 'theme-check' ),
 								'<strong>' . $tag . '</strong>'
 							)
 						);
-						$ret           = false;
 					} else {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-info">%s</span> %s',
+							__( 'INFO', 'theme-check' ),
 							sprintf(
 								__( 'Found wrong tag, remove %s from your style.css header.', 'theme-check' ),
 								'<strong>' . $tag . '</strong>'
 							)
 						);
-						$ret           = false;
 					}
 				}
 
@@ -95,22 +92,21 @@ class Style_Tags_Check implements themecheck {
 				if ( in_array( strtolower( $tag ), $allowed_tags ) ) {
 					if ( count( array_keys( $this->tags, $tag ) ) > 1 ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-info">%s</span> %s',
+							__( 'INFO', 'theme-check' ),
 							sprintf(
 								__( 'The tag %s is being used more than once, please remove it from your style.css header.', 'theme-check' ),
 								'<strong>' . $tag . '</strong>'
 							)
 						);
-						$ret           = false;
 					}
 				}
 			}
 
 			if ( $subject_tags_count > 3 ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s %s',
-					__( 'REQUIRED', 'theme-check' ),
+					'<span class="tc-lead tc-info">%s</span>: %s %s',
+					__( 'INFO', 'theme-check' ),
 					sprintf(
 						__( 'A maximum of 3 subject tags are allowed. The theme has %1$u subjects tags ( %2$s ). Please remove the subject tags, which do not directly apply to the theme.', 'theme-check' ),
 						$subject_tags_count,
@@ -122,11 +118,10 @@ class Style_Tags_Check implements themecheck {
 						__( 'See Theme Tags', 'theme-check' )
 					)
 				);
-				$ret           = false;
 			}
 		}
 
-		return $ret;
+		return true;
 	}
 
 	/**
