@@ -52,6 +52,4 @@ comments, or feedback:[[br]]
 If **either** of these two vars are defined a new trac tickbox will appear next to the *Check it!* button.
 
 == Changelog ==
-
-= 20200504.1 =
 * Changes can be found in the changelog.txt file.
