@@ -33,7 +33,6 @@ class Plugin_Territory_Check implements themecheck {
 		$forbidden_functions = array(
 			'register_post_type',
 			'register_taxonomy',
-			'wp_add_dashboard_widget',
 			'register_block_type',
 		);
 
@@ -59,7 +58,7 @@ class Plugin_Territory_Check implements themecheck {
 				'<span class="tc-lead tc-required">%s</span> %s',
 				__( 'REQUIRED', 'theme-check' ),
 				sprintf(
-					__( 'The theme uses the %s function. Custom post-content shortcodes are plugin-territory functionality.', 'theme-check' ),
+					__( 'The theme uses the %s function. Custom shortcodes are plugin-territory functionality.', 'theme-check' ),
 					'<strong>add_shortcode()</strong>'
 				)
 			);
@@ -72,9 +71,6 @@ class Plugin_Territory_Check implements themecheck {
 				'mime_types',
 				'upload_mimes',
 				'user_contactmethods',
-			),
-			'action' => array(
-				'wp_dashboard_setup',
 			),
 		);
 
