@@ -1,7 +1,7 @@
 === Theme Check ===
 Contributors: Otto42, pross, poena, dingo-d, acosmin, joyously
 Requires at Least: 3.7
-Tested Up To: 5.4
+Tested Up To: 5.8
 Tags: template, theme, check, checker, tool, wordpress.org, upload, uploader, test, guideline, review
 Stable tag: 20210617
 
