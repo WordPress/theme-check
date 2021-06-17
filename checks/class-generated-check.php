@@ -30,7 +30,6 @@ class Generated_Check implements themecheck {
 
 		checkcount();
 
-		$ret = true;
 		if (
 			// Artisteer.
 			strpos( $php, 'art_normalize_widget_style_tokens' ) !== false
@@ -51,14 +50,13 @@ class Generated_Check implements themecheck {
 			|| strpos( $php, 'wptg_' ) !== false
 		) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-required">%s</span>: %s',
-				__( 'REQUIRED', 'theme-check' ),
-				__( 'This theme appears to have been auto-generated. Generated themes are not allowed in the themes directory.', 'theme-check' )
+				'<span class="tc-lead tc-warning">%s</span>: %s',
+				__( 'WARNING', 'theme-check' ),
+				__( 'This theme appears to have been auto-generated.', 'theme-check' )
 			);
-			$ret           = false;
 		}
 
-		return $ret;
+		return true;
 	}
 
 	/**
