@@ -50,7 +50,7 @@ class Favicon_Check implements themecheck {
 				$ret           = true;
 			}
 		}
-		return $ret;
+		return true;
 	}
 
 	/**
