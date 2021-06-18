@@ -26,7 +26,6 @@ class Deprecated_Check implements themecheck {
 	public function check( $php_files, $css_files, $other_files ) {
 
 		$grep = '';
-		$ret  = true;
 
 		$checks = array(
 			// Start wp-includes deprecated.
@@ -1176,16 +1175,14 @@ class Deprecated_Check implements themecheck {
 
 					// Add the finalized error message.
 					$this->error[] = sprintf(
-						'<span class="tc-lead tc-required">%s</span>: %s',
-						__( 'REQUIRED', 'theme-check' ),
+						'<span class="tc-lead tc-warning">%s</span>: %s',
+						__( 'WARNING', 'theme-check' ),
 						$error_msg
 					);
-
-					$ret = false;
 				}
 			}
 		}
-		return $ret;
+		return true;
 	}
 
 	/**
