@@ -96,7 +96,7 @@ function check_main( $theme_slug ) {
 		'<strong>' . esc_html( $checkcount ) . '</strong>',
 		'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
 		'<strong>' . esc_html( $version[0] ) . '</strong>',
-		'<strong>' . esc_html( $version[0] ) . '</strong>'
+		'<strong>' . esc_html( $version[1] ) . '</strong>'
 	) . '</p>';
 
 	$results = display_themechecks();
