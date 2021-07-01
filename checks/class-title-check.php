@@ -37,7 +37,7 @@ class Title_Check implements themecheck {
 			checkcount();
 			if ( preg_match( '/\bwp_title\b/', $file_content ) ) {
 				$filename      = tc_filename( $file_path );
-				$grep          = tc_grep( 'wp_title(', $file_path ); // tc_grep does not use preg_match, so there is a known risk for false positives here. 
+				$grep          = tc_grep( 'wp_title(', $file_path ); // tc_grep does not use preg_match, so there is a known risk for false positives here.
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s. %s',
 					__( 'RECOMMENDED', 'theme-check' ),
@@ -64,7 +64,7 @@ class Title_Check implements themecheck {
 						__( '<strong>&lt;title&gt;</strong> tag was found in the file %1$s. Document titles must not be hard coded, use <strong>add_theme_support( "title-tag" )</strong> instead', 'theme-check' ),
 						'<strong>' . tc_filename( $file_path ) . '</strong>'
 					),
-					$grep,
+					$grep
 				);
 			}
 		}
