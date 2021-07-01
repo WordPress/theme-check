@@ -42,6 +42,7 @@ class File_Check implements themecheck {
 		$allowlist = array(
 			'wpml-config.xml',
 			'loco.xml',
+			'phpcs.xml'
 		);
 
 		$blocklist = array(
@@ -60,14 +61,8 @@ class File_Check implements themecheck {
 			'\.lubith'            => __( 'Lubith theme generator file', 'theme-check' ),
 			'\.wie'               => __( 'Widget import file', 'theme-check' ),
 			'\.dat'               => __( 'Customizer import file', 'theme-check' ),
-			'phpcs\.xml\.dist'    => __( 'PHPCS file', 'theme-check' ),
-			'phpcs\.xml'          => __( 'PHPCS file', 'theme-check' ),
 			'\.xml'               => __( 'XML file', 'theme-check' ),
 			'\.sh'                => __( 'Shell script file', 'theme-check' ),
-			'postcss\.config\.js' => __( 'PostCSS config file', 'theme-check' ),
-			'\.editorconfig.'     => __( 'Editor config file', 'theme-check' ),
-			'\.stylelintrc\.json' => __( 'Stylelint config file', 'theme-check' ),
-			'\.eslintrc'          => __( 'ES lint config file', 'theme-check' ),
 			'favicon\.ico'        => __( 'Favicon', 'theme-check' ),
 		);
 
@@ -91,7 +86,7 @@ class File_Check implements themecheck {
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
-						__( '%1$s %2$s found. This file must not be in a theme.', 'theme-check' ),
+						__( '%1$s %2$s found. This file must not be in the production version of the theme.', 'theme-check' ),
 						'<strong>' . $error . '</strong>',
 						$reason
 					)
