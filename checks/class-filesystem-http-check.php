@@ -62,12 +62,12 @@ class Filesystem_HTTP_Check implements themecheck {
 		}
 
 		foreach ( $php_files as $php_key => $phpfile ) {
-	
+
 			$checks = array(
 				// WP_Filesystem should only be used for theme upgrade operations. It should not be used to avoid the fopen()/file_put_contents()/etc warnings.
-				'/[^a-z0-9](?<!_)(WP_Filesystem)\s?\(/i'  => __( 'Theme Check is not able to determine if WP_Filesystem is used correctly. WP_Filesystem should only be used for theme upgrade operations, not for all file operations. Before continuing, you must manually review the code. Consider using file_get_contents(), scandir(), or glob(). It is not recommended to make changes to third-party frameworks that use WP_Filesystem, for example, TGMPA', 'theme-check' ),
+				'/[^a-z0-9](?<!_)(WP_Filesystem)\s?\(/i' => __( 'Theme Check is not able to determine if WP_Filesystem is used correctly. WP_Filesystem should only be used for theme upgrade operations, not for all file operations. Before continuing, you must manually review the code. Consider using file_get_contents(), scandir(), or glob(). It is not recommended to make changes to third-party frameworks that use WP_Filesystem, for example, TGMPA', 'theme-check' ),
 			);
-				
+
 			foreach ( $checks as $key => $check ) {
 				checkcount();
 
@@ -94,9 +94,9 @@ class Filesystem_HTTP_Check implements themecheck {
 				}
 			}
 		}
-	
+
 		return true;
-		
+
 	}
 
 	/**
