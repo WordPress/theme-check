@@ -42,7 +42,7 @@ class File_Check implements themecheck {
 		$allowlist = array(
 			'wpml-config.xml',
 			'loco.xml',
-			'phpcs.xml'
+			'phpcs.xml',
 		);
 
 		$blocklist = array(
