@@ -135,6 +135,11 @@ function check_main( $theme_slug ) {
 				'class' => array(),
 			),
 			'strong' => array(),
+			'code'   => array(),
+			'pre'    => array(),
+			'a'      => array(
+				'href' => array(),
+			),
 		)
 	);
 	echo '</ul></div>';
