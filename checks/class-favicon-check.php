@@ -27,8 +27,6 @@ class Favicon_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-
 		checkcount();
 
 		foreach ( $php_files as $file_path => $file_content ) {
@@ -40,17 +38,16 @@ class Favicon_Check implements themecheck {
 				preg_match( '/(<meta name=[\'"]msapplication-TileImage[\'"])/i', $file_content )
 			) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s',
-					__( 'REQUIRED', 'theme-check' ),
+					'<span class="tc-lead tc-info">%s</span>: %s',
+					__( 'INFO', 'theme-check' ),
 					sprintf(
 						__( 'Possible Favicon found in %1$s. Favicons are handled by the Site Icon setting in the customizer since version 4.3.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>'
 					)
 				);
-				$ret           = false;
 			}
 		}
-		return $ret;
+		return true;
 	}
 
 	/**
