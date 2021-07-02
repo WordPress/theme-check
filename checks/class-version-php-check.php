@@ -1,16 +1,16 @@
 <?php
 /**
- * Check for wp_title and title tags.
+ * Check for Requires PHP versioning
  *
  * @package Theme Check
  */
 
 /**
- * Checks for the title:
- * Is there a call to wp_title()?
- * Are there <title> and </title> tags?
+ * Check for PHP versioning. 
+ * Does "Requires PHP" include patch versions (e.g. 7.4.1)? 
+ * If so, recommend including major and minor verisions only (e.g. 7.4)
  *
- * See: https://make.wordpress.org/themes/handbook/review/required/theme-check-plugin/
+ * See: https://developer.wordpress.org/themes/basics/main-stylesheet-style-css/#explanations
  */
 class Version_Requires_PHP_Check implements themecheck {
 	/**
@@ -21,7 +21,7 @@ class Version_Requires_PHP_Check implements themecheck {
 	protected $error = array();
 
 	/**
-	 * Theme information. Author URI, theme URI, Author name
+	 * Theme information. Requires PHP,
 	 *
 	 * @var object $theme
 	 */
@@ -43,7 +43,6 @@ class Version_Requires_PHP_Check implements themecheck {
 	public function check( $php_files, $css_files, $other_files ) {
 
 		checkcount();
-		$ret = true;
 
 		if ( ! empty( $this->theme->get( 'RequiresPHP' ) ) ) {
 
@@ -53,11 +52,11 @@ class Version_Requires_PHP_Check implements themecheck {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
-					__( '<strong>Requires PHP</strong> is recommended to have major and minor versions only (e.g. 7.4). No need to include patch versions (e.g. 7.4.1).', 'theme-check' )
+					__( '<strong>Requires PHP</strong> is recommended to have major and minor versions only (e.g. 7.4). Patch version is not needed (e.g. 7.4.1).', 'theme-check' )
 				);
-				$ret  = false;
 			}
 		}	
+		return true;
   }
 
   /**
