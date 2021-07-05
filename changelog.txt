@@ -1,3 +1,26 @@
+= 20210617 =
+* Introduced a generic function, run_themechecks_against_theme(), that allows it to be run against a WP_Theme instance, rather than relying upon global state
+* Adapted checks for block themes. Create a list of the checks that are skipped for block themes (full site editing themes)
+* Fix: Avoid false positives in title checks
+* Fix invalid regular expression in the customizer check
+* Fix: Avoid false positives when .svn/.git/.hg/.bzr exists within the path to a theme
+* Fix: Allow .map files
+* Fix Non GPL sites check: Adjust the unsplash text, add vecteezy and update a link for undraw that was not correct
+* Fixed a bug where all the theme information was not showing on the plugins admin page
+* Added a check for files required by block themes
+* Added checks for block patterns and block styles
+* Added checks for custom logo, html5, responsive embeds, align-wide, wp-block-styles
+* Split the Style_Needed check into two: Screen_Reader_Text_Check and Style_CSS_Header_Check
+* Split the Title_Checks into two: Title_Check and Theme_Support_Title_Tag_Check
+* Removed warnings about file_get_contents() and encourages it's usage over WP_Filesystem for general IO operations
+* New error message for HTTP methods, to use the WordPress HTTP library instead
+* Removed dep_recommended.php and moved items into class-deprecated-check.php
+* Removed unused code from the file names check
+* Codestyle improvements, including new file names for checks
+* Reduce the severity level of the following checks:
+    Admin menu, comments, comment reply, content width, gravatar, pagination, post formats, 
+    script tag, search form, suggested styles, tags
+
 = 20200922.1 =
 * Reformatting of main.php and checkbase.php
 * Additions to malware checks in badthings.php
