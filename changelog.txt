@@ -1,4 +1,4 @@
-= 20210617.1 =
+= 20210617 =
 * Introduced a generic function, run_themechecks_against_theme(), that allows it to be run against a WP_Theme instance, rather than relying upon global state
 * Adapted checks for block themes. Create a list of the checks that are skipped for block themes (full site editing themes)
 * Fix: Avoid false positives in title checks
