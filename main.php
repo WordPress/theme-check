@@ -91,13 +91,22 @@ function check_main( $theme_slug ) {
 
 	$plugins = get_plugins( '/theme-check' );
 	$version = explode( '.', $plugins['theme-check.php']['Version'] );
-	echo '<p>' . sprintf(
-		esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
-		'<strong>' . esc_html( $checkcount ) . '</strong>',
-		'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
-		'<strong>' . esc_html( $version[0] ) . '</strong>',
-		'<strong>' . esc_html( $version[1] ) . '</strong>'
-	) . '</p>';
+
+	if ( isset( $version[0] ) && isset( $version[1] ) ) {
+		echo '<p>' . sprintf(
+			esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
+			'<strong>' . esc_html( $checkcount ) . '</strong>',
+			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
+			'<strong>' . esc_html( $version[0] ) . '</strong>',
+			'<strong>' . esc_html( $version[1] ) . '</strong>'
+		) . '</p>';
+	} else {
+		echo '<p>' . sprintf(
+			esc_html__( 'Running %1$s tests against %2$s.', 'theme-check' ),
+			'<strong>' . esc_html( $checkcount ) . '</strong>',
+			'<strong>' . esc_html( $theme['Title'] ) . '</strong>'
+		) . '</p>';
+	}
 
 	$results = display_themechecks();
 
@@ -135,6 +144,11 @@ function check_main( $theme_slug ) {
 				'class' => array(),
 			),
 			'strong' => array(),
+			'code'   => array(),
+			'pre'    => array(),
+			'a'      => array(
+				'href' => array(),
+			),
 		)
 	);
 	echo '</ul></div>';

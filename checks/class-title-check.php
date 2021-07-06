@@ -28,22 +28,24 @@ class Title_Check implements themecheck {
 	 * @param array $other_files Folder names, file paths and content for other files.
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
-		$ret = true;
+
 		$php = implode( ' ', $php_files );
 
 		foreach ( $php_files as $file_path => $file_content ) {
 
 			// Check whether there is a call to wp_title().
 			checkcount();
-			if ( false !== strpos( $file_content, 'wp_title(' ) ) {
-				$ret           = false;
+			if ( preg_match( '/\bwp_title\b/', $file_content ) ) {
+				$filename      = tc_filename( $file_path );
+				$grep          = tc_grep( 'wp_title(', $file_path ); // tc_grep does not use preg_match, so there is a known risk for false positives here.
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s',
-					__( 'REQUIRED', 'theme-check' ),
+					'<span class="tc-lead tc-recommended">%s</span>: %s. %s',
+					__( 'RECOMMENDED', 'theme-check' ),
 					sprintf(
-						__( 'The theme must not use <strong>wp_title()</strong>. Found wp_title() in %1$s.', 'theme-check' ),
+						__( '<strong>wp_title()</strong> was found in the file %1$s. wp_title was historically used for the document &lt;title&gt; tag and was never intended for other purposes. Use <strong>add_theme_support( "title-tag" )</strong> instead', 'theme-check' ),
 						'<strong>' . tc_filename( $file_path ) . '</strong>'
-					)
+					),
+					$grep
 				);
 			}
 
@@ -53,21 +55,23 @@ class Title_Check implements themecheck {
 			// Look for <title> and </title> tags.
 			checkcount();
 			if ( ( false !== strpos( $file_content, '<title>' ) ) || ( false !== strpos( $file_content, '</title>' ) ) ) {
-				$ret           = false;
+				$filename      = tc_filename( $file_path );
+				$grep          = tc_grep( '<title>', $file_path );
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s',
-					__( 'REQUIRED', 'theme-check' ),
+					'<span class="tc-lead tc-recommended">%s</span>: %s. %s',
+					__( 'RECOMMENDED', 'theme-check' ),
 					sprintf(
-						__( 'The theme must not use <strong>&lt;title&gt;</strong> tags. Found the tag in %1$s.', 'theme-check' ),
+						__( '<strong>&lt;title&gt;</strong> tag was found in the file %1$s. Document titles must not be hard coded, use <strong>add_theme_support( "title-tag" )</strong> instead', 'theme-check' ),
 						'<strong>' . tc_filename( $file_path ) . '</strong>'
-					)
+					),
+					$grep
 				);
 			}
 		}
 
-		return $ret;
-	}
+		return true;
 
+	}
 
 	/**
 	 * Get error messages from the checks.

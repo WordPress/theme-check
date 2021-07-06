@@ -46,8 +46,11 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 		-1 /* infinite recursion */,
 		true /* include parent theme files */
 	);
+	unset( $files[0] ); // Work around https://core.trac.wordpress.org/ticket/53599
 
-	$php = $css = $other = array();
+	$php   = array();
+	$css   = array();
+	$other = array();
 	foreach ( $files as $filename ) {
 		if ( substr( $filename, -4 ) === '.php' ) {
 			$php[ $filename ] = file_get_contents( $filename );
