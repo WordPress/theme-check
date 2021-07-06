@@ -98,9 +98,7 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 	global $themechecks, $theme_check_current_theme;
 
 	// Provide context to some functions that need to know the current theme, but aren't passed the object.
-	if ( isset( $context['theme'] ) ) {
-		$theme_check_current_theme = $context['theme'];
-	}
+	$theme_check_current_theme = isset( $context['theme'] ) ? $context['theme'] : false;
 
 	$pass = true;
 
@@ -116,7 +114,7 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 		}
 	}
 
-	unset( $theme_check_current_theme );
+	$theme_check_current_theme = false;
 
 	return $pass;
 }
