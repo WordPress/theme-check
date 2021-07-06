@@ -16,6 +16,10 @@ $themechecks = array();
 global $checkcount;
 $checkcount = 0;
 
+// current WP_Theme being tested. Internal use only.
+global $theme_check_current_theme;
+$theme_check_current_theme = false;
+
 // interface that all checks should implement.
 interface themecheck {
 
@@ -217,7 +221,7 @@ function tc_filename( $file ) {
 	$filename = false;
 
 	// If we know the WP_Theme object, we can get the exact path.
-	if ( ! empty( $theme_check_current_theme ) ) {
+	if ( $theme_check_current_theme ) {
 
 		$root = trailingslashit( $theme_check_current_theme->get_theme_root() );
 		if ( $root === substr( $file, 0, strlen( $root ) ) ) {
