@@ -63,7 +63,7 @@ class Version_Requires_PHP_Check implements themecheck {
 	 * Get error messages from the checks.
 	 *
 	 * @return array Error message.
-	*/
+	 */
 	public function getError() {
 		return $this->error;
 	}
