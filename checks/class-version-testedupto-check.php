@@ -42,14 +42,14 @@ class Version_Tested_Upto_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$file_path  =  get_stylesheet_directory() . '/style.css';
-		$theme_data  =  get_file_data( $file_path, array(
-			'TestedUpto'  =>  'Tested up to',
+		$file_path = get_stylesheet_directory() . '/style.css';
+		$theme_data = get_file_data( $file_path, array(
+			'TestedUpto' => 'Tested up to',
 		)
 	);
 		
 		if (! empty( $theme_data['TestedUpto'])){
-			$req_php_decimal_count = substr_count($theme_data['TestedUpto'] , '.' );
+			$req_php_decimal_count = substr_count( $theme_data[ 'TestedUpto' ], '.' );
 			if ( $req_php_decimal_count > 1 ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
