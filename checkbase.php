@@ -47,7 +47,9 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 		true /* include parent theme files */
 	);
 
-	$php = $css = $other = array();
+	$php   = array();
+	$css   = array();
+	$other = array();
 	foreach ( $files as $filename ) {
 		if ( substr( $filename, -4 ) === '.php' ) {
 			$php[ $filename ] = file_get_contents( $filename );
