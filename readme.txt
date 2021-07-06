@@ -53,5 +53,4 @@ If **either** of these two vars are defined a new trac tickbox will appear next 
 
 == Changelog ==
 
-= 20200504.1 =
-* Changes can be found in the changelog.txt file.
+Changes can be found in [the changelog.txt file](https://github.com/WordPress/theme-check/blob/master/changelog.txt).

@@ -1,3 +1,7 @@
+= nextrelease =
+* Fix: `tc_filename()` to always return theme-relative paths when possible.
+* Fix: Correct the block theme adaptation check to work in WordPress.org Theme Uploader
+
 = 20210617 =
 * Introduced a generic function, run_themechecks_against_theme(), that allows it to be run against a WP_Theme instance, rather than relying upon global state
 * Adapted checks for block themes. Create a list of the checks that are skipped for block themes (full site editing themes)
