@@ -91,7 +91,12 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
  * @return bool
  */
 function run_themechecks( $php, $css, $other, $context = array() ) {
-	global $themechecks;
+	global $themechecks, $theme_check_current_theme;
+
+	// Provide context to some functions that need to know the current theme, but aren't passed the object.
+	if ( isset( $context['theme'] ) ) {
+		$theme_check_current_theme = $context['theme'];
+	}
 
 	$pass = true;
 
@@ -106,6 +111,8 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 			$pass = $pass & $check->check( $php, $css, $other );
 		}
 	}
+
+	unset( $theme_check_current_theme );
 
 	return $pass;
 }
@@ -205,7 +212,40 @@ function tc_preg( $preg, $file ) {
 }
 
 function tc_filename( $file ) {
-	$filename = ( preg_match( '/themes\/[a-z0-9-]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
+	global $theme_check_current_theme;
+
+	$filename = false;
+
+	// If we know the WP_Theme object, we can get the exact path.
+	if ( ! empty( $theme_check_current_theme ) ) {
+
+		$root = trailingslashit( $theme_check_current_theme->get_theme_root() );
+		if ( $root === substr( $file, 0, strlen( $root ) ) ) {
+			// Trim the root path off first.
+			$filename = substr( $file, strlen( $root ) );
+
+			// Trim off the Stylesheet or Template from the file path.
+			$stylesheet = $theme_check_current_theme->get_stylesheet();
+			$template   = $theme_check_current_theme->get_template();
+			if ( 0 === strpos( $filename, $stylesheet ) ) {
+				$filename = substr( $filename, strlen( $stylesheet ) + 1 );
+			} elseif ( 0 === strpos( $filename, $template ) ) {
+				$filename = substr( $filename, strlen( $template ) + 1 );
+			}
+		}
+	}
+
+	// If the $file exists within a theme-like folder, use that/
+	// does not support themes nested in directories such as wp-content/themes/public/my-theme/index.php
+	if ( ! $filename && preg_match( '!/themes/[^/]+/(.*)$!i', $file, $out ) ) {
+		$filename = $out[1];
+	}
+
+	// If still nothing, use the basename.
+	if ( ! $filename ) {
+		$filename = basename( $file );
+	}
+
 	return $filename;
 }
 
