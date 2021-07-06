@@ -104,7 +104,7 @@ function check_main( $theme_slug ) {
 		echo '<p>' . sprintf(
 			esc_html__( 'Running %1$s tests against %2$s.', 'theme-check' ),
 			'<strong>' . esc_html( $checkcount ) . '</strong>',
-			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
+			'<strong>' . esc_html( $theme['Title'] ) . '</strong>'
 		) . '</p>';
 	}
 
