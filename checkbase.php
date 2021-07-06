@@ -220,21 +220,13 @@ function tc_filename( $file ) {
 
 	// If we know the WP_Theme object, we can get the exact path.
 	if ( $theme_check_current_theme ) {
+		$theme_files = $theme_check_current_theme->get_files(
+			null /* all file types */,
+			-1 /* infinite recursion */,
+			true /* include parent theme files */
+		);
 
-		$root = trailingslashit( $theme_check_current_theme->get_theme_root() );
-		if ( $root === substr( $file, 0, strlen( $root ) ) ) {
-			// Trim the root path off first.
-			$filename = substr( $file, strlen( $root ) );
-
-			// Trim off the Stylesheet or Template from the file path.
-			$stylesheet = $theme_check_current_theme->get_stylesheet();
-			$template   = $theme_check_current_theme->get_template();
-			if ( 0 === strpos( $filename, $stylesheet ) ) {
-				$filename = substr( $filename, strlen( $stylesheet ) + 1 );
-			} elseif ( 0 === strpos( $filename, $template ) ) {
-				$filename = substr( $filename, strlen( $template ) + 1 );
-			}
-		}
+		$filename = array_search( $file, $theme_files, true );
 	}
 
 	// If the $file exists within a theme-like folder, use that/
