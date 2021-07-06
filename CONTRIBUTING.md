@@ -48,6 +48,6 @@ This will allow you to download the repository in one click, keep it in sync, an
 
 Once a pull request is selected in the application, create a zip file of the whole repository, and upload it to your site to test.
 
-Otherwise, you can test a pull request by pulling down the associated branch, creating a zip file of the contents, and uploading to your WordPress site via the admin. This repository includes all compiled files, so it will install just like any other uploaded plugin
+Otherwise, you can test a pull request by pulling down the associated branch, creating a zip file of the contents, and uploading to your WordPress site via the admin. This repository includes all files, so it will install just like any other uploaded plugin.
 
 Once you've tested and reviewed, please report your findings by adding a review or comment to the pull request on GitHub.
