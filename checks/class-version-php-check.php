@@ -55,15 +55,15 @@ class Version_Requires_PHP_Check implements themecheck {
 					__( '<strong>Requires PHP</strong> is recommended to have major and minor versions only (e.g. 7.4). Patch version is not needed (e.g. 7.4.1).', 'theme-check' )
 				);
 			}
-    }
+		}
 		return true;
-  }
+	}
 
-  /**
-   * Get error messages from the checks.
-   *
-   * @return array Error message.
-   */
+	/**
+	* Get error messages from the checks.
+	*
+	* @return array Error message.
+	*/
 	public function getError() {
 		return $this->error;
 	}
