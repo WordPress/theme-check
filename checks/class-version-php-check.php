@@ -6,8 +6,8 @@
  */
 
 /**
- * Check for PHP versioning. 
- * Does "Requires PHP" include patch versions (e.g. 7.4.1)? 
+ * Check for PHP versioning.
+ * Does "Requires PHP" include patch versions (e.g. 7.4.1)?
  * If so, recommend including major and minor verisions only (e.g. 7.4)
  *
  * See: https://developer.wordpress.org/themes/basics/main-stylesheet-style-css/#explanations
@@ -46,7 +46,7 @@ class Version_Requires_PHP_Check implements themecheck {
 
 		if ( ! empty( $this->theme->get( 'RequiresPHP' ) ) ) {
 
-			$req_php_decimal_count = substr_count( $this->theme->get( 'RequiresPHP' ) , "." );
+			$req_php_decimal_count = substr_count( $this->theme->get( 'RequiresPHP' ), '.' );
 
 			if ( $req_php_decimal_count > 1 ) {
 				$this->error[] = sprintf(
@@ -55,15 +55,15 @@ class Version_Requires_PHP_Check implements themecheck {
 					__( '<strong>Requires PHP</strong> is recommended to have major and minor versions only (e.g. 7.4). Patch version is not needed (e.g. 7.4.1).', 'theme-check' )
 				);
 			}
-		}	
+    }
 		return true;
   }
 
   /**
-	 * Get error messages from the checks.
-	 *
-	 * @return array Error message.
-	 */
+   * Get error messages from the checks.
+   *
+   * @return array Error message.
+   */
 	public function getError() {
 		return $this->error;
 	}
