@@ -229,8 +229,8 @@ function tc_filename( $file ) {
 		$filename = array_search( $file, $theme_files, true );
 	}
 
-	// If the $file exists within a theme-like folder, use that/
-	// does not support themes nested in directories such as wp-content/themes/public/my-theme/index.php
+	// If the $file exists within a theme-like folder, use that.
+	// Does not support themes nested in directories such as wp-content/themes/pub/wporg-themes/index.php
 	if ( ! $filename && preg_match( '!/themes/[^/]+/(.*)$!i', $file, $out ) ) {
 		$filename = $out[1];
 	}
