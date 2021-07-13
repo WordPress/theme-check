@@ -45,18 +45,18 @@ class Version_Tested_Upto_Check implements themecheck {
 		$file_path  = get_stylesheet_directory() . '/style.css';
 		$theme_data = get_file_data(
 			$file_path,
-      		array(
-        		'TestedUpto' => 'Tested up to',
-      		)
+			array(
+				'TestedUpto' => 'Tested up to',
+			)
 		);
-		
-		if ( !empty ( $theme_data['TestedUpto'] )) {
-			$req_tested_decimal_count = substr_count( $theme_data['TestedUpto'], "." );
+
+		if ( ! empty( $theme_data['TestedUpto'] ) ) {
+			$req_tested_decimal_count = substr_count( $theme_data['TestedUpto'], '.' );
 			if ( $req_tested_decimal_count > 1 ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
-					__( '<strong>Tested up to</strong> is recommended to have major and minor versions only (e.g. 7.4). Patch version is not needed (e.g. 7.4.1).','theme-check')
+					__( '<strong>Tested up to</strong> is recommended to have major and minor versions only (e.g. 7.4). Patch version is not needed (e.g. 7.4.1).', 'theme-check' )
 				);
 			}
 		}
@@ -67,7 +67,7 @@ class Version_Tested_Upto_Check implements themecheck {
 	 * Get error messages from the checks.
 	 *
 	 * @return array Error message.
-	*/
+	 */
 	public function getError() {
 		return $this->error;
 	}
