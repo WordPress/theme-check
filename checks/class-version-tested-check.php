@@ -43,10 +43,11 @@ class Version_Tested_Upto_Check implements themecheck {
 	public function check( $php_files, $css_files, $other_files ) {
 
 		$file_path  = get_stylesheet_directory() . '/style.css';
-		$theme_data = get_file_data( $file_path, array(
-      'TestedUpto' => 'Tested up to',
+		$theme_data = get_file_data( $file_path, 
+      array(
+        'TestedUpto' => 'Tested up to',
       )
-    );
+);
 		
 		if ( !empty ( $theme_data['TestedUpto'] )) {
 			$req_tested_decimal_count = substr_count( $theme_data['TestedUpto'], "." );
@@ -61,11 +62,11 @@ class Version_Tested_Upto_Check implements themecheck {
 		return true;
 	}
 
-  /**
-   * Get error messages from the checks.
-   *
-   * @return array Error message.
-  */
+   /**
+    * Get error messages from the checks.
+    *
+    * @return array Error message.
+   */
 	public function getError() {
 		return $this->error;
 	}
