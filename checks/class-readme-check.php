@@ -18,7 +18,7 @@ class Readme_Check implements themecheck {
 	 *
 	 * @var string $latest_wordpress_version
 	 */
-	protected $latest_wordpress_version = '5.9';
+	protected $latest_wordpress_version = '5.8';
 
 	/**
 	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
@@ -42,18 +42,18 @@ class Readme_Check implements themecheck {
 		}
 
 		// Publish an error if there is no readme file.
-		if ( ! in_array( 'readme.txt', $other_filenames, true ) && ! in_array( 'readme.md', $other_filenames, true )) {
+		if ( ! in_array( 'readme.txt', $other_filenames, true ) && ! in_array( 'readme.md', $other_filenames, true ) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'ERROR', 'theme-check' ),
-				__( 'The readme file is missing.', 'theme-check' ),
+				__( 'The readme file is missing.', 'theme-check' )
 			);
-			$ret = false;
+			$ret           = false;
 		} else {
 			// Parse the content of the readme.
 			$readme = new Readme_Parser( $readme );
 
-			// Fatal errors:
+			// Error.
 			if ( empty( $readme->name ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
@@ -67,13 +67,13 @@ class Readme_Check implements themecheck {
 				);
 				$ret = false;
 			}
-	
+
 			// Warnings.
 			if ( isset( $readme->warnings['requires_header_ignored'] ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s',
 					__( 'README WARNING', 'theme-check' ),
-						/* translators: 1: theme header tag; 2: Example version 5.0. 3: Example version 4.9. */
+					/* translators: 1: theme header tag; 2: Example version 5.0. 3: Example version 4.9. */
 					sprintf(
 						__( 'The %1$s field in the readme was ignored. This field should only contain a valid WordPress version such as %2$s or %3$s.', 'theme-check' ),
 						'<code>Requires at least</code>',
@@ -86,7 +86,7 @@ class Readme_Check implements themecheck {
 					'<span class="tc-lead tc-warning">%s</span>: %s',
 					__( 'README WARNING', 'theme-check' ),
 					sprintf(
-						/* translators: %s: plugin header tag */
+						/* translators: %s: theme header tag */
 						__( 'The %s field is missing from the readme.', 'theme-check' ),
 						'<code>Requires at least</code>'
 					)
@@ -108,12 +108,12 @@ class Readme_Check implements themecheck {
 			} elseif ( empty( $readme->tested ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s',
-						__( 'README WARNING', 'theme-check' ),
-						sprintf(
-							/* translators: %s: plugin header tag */
-							__( 'The %s field is missing from the readme file.', 'wporg-plugins' ),
-							'<code>Tested up to</code>'
-						)
+					__( 'README WARNING', 'theme-check' ),
+					sprintf(
+						/* translators: %s: plugin header tag */
+						__( 'The %s field is missing from the readme.', 'theme-check' ),
+						'<code>Tested up to</code>'
+					)
 				);
 			}
 
@@ -129,7 +129,7 @@ class Readme_Check implements themecheck {
 						'<code>7.0</code>'
 					)
 				);
-			} else if ( empty( $readme->requires_php ) ) {
+			} elseif ( empty( $readme->requires_php ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s',
 					__( 'README WARNING', 'theme-check' ),
@@ -223,7 +223,6 @@ class Readme_Check implements themecheck {
 					)
 				);
 			}
-
 		}
 	}
 

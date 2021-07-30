@@ -7,66 +7,92 @@
 class Readme_Parser {
 
 	/**
+	 * Theme name
+	 *
 	 * @var string
 	 */
 	public $name = '';
 
 	/**
+	 * Theme tags
+	 *
 	 * @var array
 	 */
 	public $tags = array();
 
 	/**
+	 * Minimum WordPress version
+	 *
 	 * @var string
 	 */
 	public $requires = '';
 
 	/**
+	 * Tested up to
+	 *
 	 * @var string
 	 */
 	public $tested = '';
 
 	/**
+	 * Requires PHP
+	 *
 	 * @var string
 	 */
 	public $requires_php = '';
 
 	/**
+	 * Contributors, a WordPress.org username.
+	 *
 	 * @var array
 	 */
 	public $contributors = array();
 
 	/**
+	 * Donation link
+	 *
 	 * @var string
 	 */
 	public $donate_link = '';
 
 	/**
+	 * Readme short description
+	 *
 	 * @var string
 	 */
 	public $short_description = '';
 
 	/**
+	 * Theme license
+	 *
 	 * @var string
 	 */
 	public $license = '';
 
 	/**
+	 * Theme license URI
+	 *
 	 * @var string
 	 */
 	public $license_uri = '';
 
 	/**
+	 * Readme sections
+	 *
 	 * @var array
 	 */
 	public $sections = array();
 
 	/**
+	 * Theme upgrade notice
+	 *
 	 * @var array
 	 */
 	public $upgrade_notice = array();
 
 	/**
+	 * Theme FAQ
+	 *
 	 * @var array
 	 */
 	public $faq = array();
@@ -124,13 +150,14 @@ class Readme_Parser {
 	 * Parser constructor.
 	 *
 	 * @param string $string Contents of a readme to parse.
-	 *
 	 */
 	public function __construct( $string ) {
 		$this->parse_readme_contents( $string );
 	}
 
 	/**
+	 * Parse and sanitize the readme
+	 *
 	 * @param string $contents The contents of the readme to parse.
 	 * @return bool
 	 */
@@ -227,9 +254,11 @@ class Readme_Parser {
 	}
 
 	/**
+	 * Get the first non white space in the readme file content
+	 *
 	 * @access protected
 	 *
-	 * @param string $contents
+	 * @param string $contents Readme file content.
 	 * @return string
 	 */
 	protected function get_first_nonwhitespace( &$contents ) {
@@ -244,9 +273,11 @@ class Readme_Parser {
 	}
 
 	/**
+	 * Strip new lines
+	 *
 	 * @access protected
 	 *
-	 * @param string $line
+	 * @param string $line The line to remove the line endings from.
 	 * @return string
 	 */
 	protected function strip_newlines( $line ) {
@@ -254,13 +285,14 @@ class Readme_Parser {
 	}
 
 	/**
+	 * Sanitize and remove characters from the theme name
+	 *
 	 * @access protected
 	 *
-	 * @param string $text
+	 * @param string $text Text to sanitize.
 	 * @return string
 	 */
 	protected function sanitize_text( $text ) {
-		// not fancy
 		$text = strip_tags( $text );
 		$text = esc_html( $text );
 		$text = trim( $text );
@@ -269,9 +301,9 @@ class Readme_Parser {
 	}
 
 	/**
-	 * Sanitizes the Requires PHP header to ensure that it's a valid version header.
+	 * Sanitizes the Requires PHP header to ensure that it's a valid version header
 	 *
-	 * @param string $version
+	 * @param string $version Minimum required PHP version.
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_requires_php( $version ) {
@@ -288,23 +320,22 @@ class Readme_Parser {
 	}
 
 	/**
-	 * Sanitizes the Tested header to ensure that it's a valid version header.
+	 * Sanitizes the Tested header to ensure that it's a valid version header
 	 *
-	 * @param string $version
+	 * @param string $version WordPress version that the theme is tested with.
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_tested_version( $version ) {
-		$version = trim( $version );
+		$version                  = trim( $version );
 		$latest_wordpress_version = '5.8';
 
 		if ( $version ) {
-
 			// Handle the edge-case of 'WordPress 5.0' and 'WP 5.0' for historical purposes.
 			$strip_phrases = [
 				'WordPress',
 				'WP',
 			];
-			$version = trim( str_ireplace( $strip_phrases, '', $version ) );
+			$version       = trim( str_ireplace( $strip_phrases, '', $version ) );
 
 			// Strip off any -alpha, -RC, -beta suffixes, as these complicate comparisons and are rarely used.
 			list( $version, ) = explode( '-', $version );
@@ -315,9 +346,9 @@ class Readme_Parser {
 				// Allow themes to mark themselves as compatible with Stable+0.1 (trunk/master) but not higher
 				(
 					$latest_wordpress_version &&
-					version_compare( (float)$version, (float)$latest_wordpress_version+0.1, '>' )
+					version_compare( (float) $version, (float) $latest_wordpress_version + 0.1, '>' )
 				)
-			 ) {
+			) {
 				$this->warnings['tested_header_ignored'] = true;
 				// Ignore the readme value.
 				$version = '';
@@ -328,16 +359,16 @@ class Readme_Parser {
 	}
 
 	/**
-	 * Sanitizes the Requires at least header to ensure that it's a valid version header.
+	 * Sanitizes the Requires at least header to ensure that it's a valid version header
 	 *
-	 * @param string $version
+	 * @param string $version The minim required WordPress version.
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_requires_version( $version ) {
-		$version = trim( $version );
+		$version                  = trim( $version );
 		$latest_wordpress_version = '5.9';
-		if ( $version ) {
 
+		if ( $version ) {
 			// Handle the edge-case of 'WordPress 5.0' and 'WP 5.0' for historical purposes.
 			$strip_phrases = [
 				'WordPress',
@@ -346,8 +377,8 @@ class Readme_Parser {
 				'and above',
 				'+',
 			];
-			$version = trim( str_ireplace( $strip_phrases, '', $version ) );
-			
+			$version       = trim( str_ireplace( $strip_phrases, '', $version ) );
+
 			// Strip off any -alpha, -RC, -beta suffixes, as these complicate comparisons and are rarely used.
 			list( $version, ) = explode( '-', $version );
 
@@ -355,8 +386,8 @@ class Readme_Parser {
 				// x.y or x.y.z
 				! preg_match( '!^\d+\.\d(\.\d+)?$!', $version ) ||
 				// Allow themes to mark themselves as requireing Stable+0.1 (trunk/master) but not higher
-				$latest_wordpress_version && ( (float)$version > (float)$latest_wordpress_version+0.1 )
-			 ) {
+				$latest_wordpress_version && ( (float) $version > (float) $latest_wordpress_version + 0.1 )
+			) {
 				$this->warnings['requires_header_ignored'] = true;
 				// Ignore the readme value.
 				$version = '';
