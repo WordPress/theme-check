@@ -293,7 +293,7 @@ class Readme_Parser {
 	 * @return string
 	 */
 	protected function sanitize_text( $text ) {
-		$text = strip_tags( $text );
+		$text = wp_strip_all_tags( $text );
 		$text = esc_html( $text );
 		$text = trim( $text );
 
@@ -331,10 +331,7 @@ class Readme_Parser {
 
 		if ( $version ) {
 			// Handle the edge-case of 'WordPress 5.0' and 'WP 5.0' for historical purposes.
-			$strip_phrases = [
-				'WordPress',
-				'WP',
-			];
+			$strip_phrases = array( 'WordPress', 'WP' );
 			$version       = trim( str_ireplace( $strip_phrases, '', $version ) );
 
 			// Strip off any -alpha, -RC, -beta suffixes, as these complicate comparisons and are rarely used.
@@ -370,13 +367,7 @@ class Readme_Parser {
 
 		if ( $version ) {
 			// Handle the edge-case of 'WordPress 5.0' and 'WP 5.0' for historical purposes.
-			$strip_phrases = [
-				'WordPress',
-				'WP',
-				'or higher',
-				'and above',
-				'+',
-			];
+			$strip_phrases = array( 'WordPress', 'WP', 'or higher', 'and above', '+' );
 			$version       = trim( str_ireplace( $strip_phrases, '', $version ) );
 
 			// Strip off any -alpha, -RC, -beta suffixes, as these complicate comparisons and are rarely used.

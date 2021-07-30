@@ -45,7 +45,7 @@ class Readme_Check implements themecheck {
 		if ( ! in_array( 'readme.txt', $other_filenames, true ) && ! in_array( 'readme.md', $other_filenames, true ) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-required">%s</span>: %s',
-				__( 'ERROR', 'theme-check' ),
+				__( 'REQUIRED', 'theme-check' ),
 				__( 'The readme file is missing.', 'theme-check' )
 			);
 			$ret           = false;
