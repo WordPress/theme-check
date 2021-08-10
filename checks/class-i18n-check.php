@@ -65,15 +65,15 @@ class I18N_Check implements themecheck {
 							$grep     = tc_grep( ltrim( $match ), $php_key );
 							preg_match( '/[^\s]*\s[0-9]+/', $grep, $line );
 								$this->error[] = sprintf(
-								'<span class="tc-lead tc-recommended">%s</span>: %s',
-								__( 'RECOMMENDED', 'theme-check' ),
-								sprintf(
-									__( 'Possible variable %1$s found in translation function in %2$s. Translation function calls must not contain PHP variables, use placeholders instead. See <a href="%3$s" target="_blank">Internationalization Guidelines (Opens in a new window)</a>.', 'theme-check' ),
-									'<strong>' . $token[1] . '</strong>',
-									'<strong>' . $filename . '</strong>',
-									'https://developer.wordpress.org/apis/handbook/internationalization/internationalization-guidelines/#variables'
-								)
-							);
+									'<span class="tc-lead tc-recommended">%s</span>: %s',
+									__( 'RECOMMENDED', 'theme-check' ),
+									sprintf(
+										__( 'Possible variable %1$s found in translation function in %2$s. Translation function calls must not contain PHP variables, use placeholders instead. See <a href="%3$s" target="_blank">Internationalization Guidelines (Opens in a new window)</a>.', 'theme-check' ),
+										'<strong>' . $token[1] . '</strong>',
+										'<strong>' . $filename . '</strong>',
+										'https://developer.wordpress.org/apis/handbook/internationalization/internationalization-guidelines/#variables'
+									)
+								);
 							break; // Stop looking at the tokens on this line once a variable is found.
 						}
 					}
