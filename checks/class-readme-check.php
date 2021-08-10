@@ -2,6 +2,8 @@
 /**
  * Validate readme files.
  *
+ * @link https://meta.svn.wordpress.org/sites/trunk/wordpress.org/public_html/wp-content/plugins/plugin-directory/readme/
+ *
  * @package Theme Check
  */
 
