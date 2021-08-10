@@ -36,7 +36,7 @@ class I18N_Check implements themecheck {
 			$stmts = array();
 			foreach ( array( '_e(', '__(', '_e (', '__ (' ) as $finder ) {
 				$search = $phpfile;
-				while ( ( $pos = strpos( $search, $finder ) ) !== false && 
+				while ( ( $pos = strpos( $search, $finder ) ) !== false &&
 					strpos( $search, 'pll__' ) === false &&
 					strpos( $search, 'pll_e' ) === false ) {
 					$search = substr( $search, $pos );
@@ -64,8 +64,8 @@ class I18N_Check implements themecheck {
 				if ( ! empty( $tokens ) ) {
 					foreach ( $tokens as $token ) {
 						if ( is_array( $token ) && in_array( $token[0], array( T_VARIABLE ) ) ) {
-							$filename = tc_filename( $php_key );
-							$grep     = tc_grep( ltrim( $token[1] ), $php_key );
+							$filename      = tc_filename( $php_key );
+							$grep          = tc_grep( ltrim( $token[1] ), $php_key );
 							$this->error[] = sprintf(
 								'<span class="tc-lead tc-recommended">%s</span>: %s',
 								__( 'RECOMMENDED', 'theme-check' ),
@@ -74,7 +74,7 @@ class I18N_Check implements themecheck {
 									'<strong>' . $token[1] . '</strong>',
 									'<strong>' . $filename . '</strong>',
 									'https://developer.wordpress.org/apis/handbook/internationalization/internationalization-guidelines/#variables',
-									$grep,
+									$grep
 								)
 							);
 							break; // Stop looking at the tokens on this line once a variable is found.
