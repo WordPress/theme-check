@@ -36,7 +36,9 @@ class I18N_Check implements themecheck {
 			$stmts = array();
 			foreach ( array( '_e(', '__(', '_e (', '__ (' ) as $finder ) {
 				$search = $phpfile;
-				while ( ( $pos = strpos( $search, $finder ) ) !== false ) {
+				while ( ( $pos = strpos( $search, $finder ) ) !== false && 
+					strpos( $search, 'pll__' ) === false &&
+					strpos( $search, 'pll_e' ) === false ) {
 					$search = substr( $search, $pos );
 					$open   = 1;
 					$i      = strpos( $search, '(' ) + 1;
@@ -58,22 +60,23 @@ class I18N_Check implements themecheck {
 
 			foreach ( $stmts as $match ) {
 				$tokens = token_get_all( '<?php ' . $match . ';' );
+
 				if ( ! empty( $tokens ) ) {
 					foreach ( $tokens as $token ) {
 						if ( is_array( $token ) && in_array( $token[0], array( T_VARIABLE ) ) ) {
 							$filename = tc_filename( $php_key );
-							$grep     = tc_grep( ltrim( $match ), $php_key );
-							preg_match( '/[^\s]*\s[0-9]+/', $grep, $line );
-								$this->error[] = sprintf(
-									'<span class="tc-lead tc-recommended">%s</span>: %s',
-									__( 'RECOMMENDED', 'theme-check' ),
-									sprintf(
-										__( 'Possible variable %1$s found in translation function in %2$s. Translation function calls must not contain PHP variables, use placeholders instead. See <a href="%3$s" target="_blank">Internationalization Guidelines (Opens in a new window)</a>.', 'theme-check' ),
-										'<strong>' . $token[1] . '</strong>',
-										'<strong>' . $filename . '</strong>',
-										'https://developer.wordpress.org/apis/handbook/internationalization/internationalization-guidelines/#variables'
-									)
-								);
+							$grep     = tc_grep( ltrim( $token[1] ), $php_key );
+							$this->error[] = sprintf(
+								'<span class="tc-lead tc-recommended">%s</span>: %s',
+								__( 'RECOMMENDED', 'theme-check' ),
+								sprintf(
+									__( 'Possible variable %1$s found in translation function in %2$s. Translation function calls must not contain PHP variables, use placeholders instead. See <a href="%3$s" target="_blank">Internationalization Guidelines (Opens in a new window)</a>. %4$s', 'theme-check' ),
+									'<strong>' . $token[1] . '</strong>',
+									'<strong>' . $filename . '</strong>',
+									'https://developer.wordpress.org/apis/handbook/internationalization/internationalization-guidelines/#variables',
+									$grep,
+								)
+							);
 							break; // Stop looking at the tokens on this line once a variable is found.
 						}
 					}
