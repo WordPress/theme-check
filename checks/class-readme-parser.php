@@ -191,7 +191,9 @@ class Readme_Parser {
 
 		// Handle readme's which do `=== Theme Name ===\nMy SuperAwesome Name\n...`
 		if ( 'theme name' == strtolower( $this->name ) ) {
-			$this->name = $line = $this->get_first_nonwhitespace( $contents );
+
+			$line = $this->get_first_nonwhitespace( $contents );
+			$this->name = $line;
 
 			// Ensure that the line read wasn't an actual header or description.
 			if ( strlen( $line ) > 50 || preg_match( '~^(' . implode( '|', array_keys( $this->valid_headers ) ) . ')\s*:~i', $line ) ) {
