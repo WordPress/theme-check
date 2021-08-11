@@ -7,8 +7,8 @@
 
 /**
  * Check for "Tested up to" versioning.
- * Does "Tested up to" include patch versions (e.g. 7.4.1)?
- * If so, recommend including major and minor verisions only (e.g. 7.4)
+ * Does "Tested up to" include patch versions (e.g. 5.8.1)?
+ * If so, recommend including major and minor verisions only (e.g. 5/8)
  *
  * See: https://developer.wordpress.org/themes/basics/main-stylesheet-style-css/#explanations
  */
@@ -56,7 +56,7 @@ class Version_Tested_Upto_Check implements themecheck {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
-					__( '<strong>Tested up to</strong> is recommended to have major and minor versions only (e.g. 7.4). Patch version is not needed (e.g. 7.4.1).', 'theme-check' )
+					__( '<strong>Tested up to</strong> is recommended to have major and minor versions only (e.g. 5.8). Patch version is not needed (e.g. 5.8.1).', 'theme-check' )
 				);
 			}
 		}
