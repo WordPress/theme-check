@@ -50,7 +50,7 @@ class Plugin_Territory_Check implements themecheck {
 		 * Check for removal of non presentational hooks.
 		 */
 		$blocklist = array(
-			'wp_head'             => array(
+			'wp_head'           => array(
 				'wp_generator', // @link https://developer.wordpress.org/reference/functions/wp_generator/
 				'feed_links', // @link https://developer.wordpress.org/reference/functions/feed_links/
 				'feed_links_extra', // @link https://developer.wordpress.org/reference/functions/feed_links_extra/
@@ -64,7 +64,7 @@ class Plugin_Territory_Check implements themecheck {
 				'wp_oembed_add_host_js', // @link https://developer.wordpress.org/reference/functions/wp_oembed_add_host_js/
 				'rel_canonical', // @link https://developer.wordpress.org/reference/functions/rel_canonical/
 			),
-			'template_redirect'   => array(
+			'template_redirect' => array(
 				'rest_output_link_header', // @link https://developer.wordpress.org/reference/functions/rest_output_link_header/
 				'wp_shortlink_header', // @link https://developer.wordpress.org/reference/functions/wp_shortlink_header/
 				'redirect_canonical',  // @link https://developer.wordpress.org/reference/functions/redirect_canonical/
@@ -76,7 +76,7 @@ class Plugin_Territory_Check implements themecheck {
 			foreach ( $forbidden_functions as $function ) {
 				checkcount();
 				if ( preg_match( '/[\s?]' . $function . '\s?\(/', $phpfile ) ) {
-					$filename     = tc_filename( $php_key );
+					$filename      = tc_filename( $php_key );
 					$grep          = tc_grep( $function, $php_key );
 					$this->error[] = sprintf(
 						'<span class="tc-lead tc-required">%s</span> %s',
@@ -94,10 +94,10 @@ class Plugin_Territory_Check implements themecheck {
 
 			foreach ( $forbidden_hooks as $type => $hooks ) {
 				foreach ( $hooks as $hook ) {
-					$filename     = tc_filename( $php_key );
-					$grep         = tc_grep( $hook, $php_key );
 					checkcount();
 					if ( preg_match( '/[\s?]add_' . $type . '\s*\(\s*([\'"])' . $hook . '([\'"])\s*,/', $phpfile ) ) {
+						$filename      = tc_filename( $php_key );
+						$grep          = tc_grep( $hook, $php_key );
 						$this->error[] = sprintf(
 							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
