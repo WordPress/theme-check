@@ -16,13 +16,6 @@ class Readme_Check implements themecheck {
 	protected $error = array();
 
 	/**
-	 * Latest WordPress version
-	 *
-	 * @var string $latest_wordpress_version
-	 */
-	protected $latest_wordpress_version = '5.8';
-
-	/**
 	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
 	 *
 	 * @param array $php_files File paths and content for PHP files.
@@ -30,6 +23,13 @@ class Readme_Check implements themecheck {
 	 * @param array $other_files Folder names, file paths and content for other files.
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
+
+		/**
+		 * Latest WordPress version
+		 *
+		 * @var string $latest_wordpress_version
+		 */
+		$latest_wordpress_version = '5.8';
 
 		checkcount();
 
@@ -143,13 +143,13 @@ class Readme_Check implements themecheck {
 				);
 			}
 
-			if ( isset( $readme->warnings['contributor_ignored'] ) ) {
+			if ( 2 <= count( $readme->contributors ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-warning">%s</span>: %s',
 					__( 'README WARNING', 'theme-check' ),
 					sprintf(
 						/* translators: %s: theme header tag */
-						__( 'One or more contributors listed in the readme were ignored. The %s field should only contain WordPress.org usernames. Remember that usernames are case-sensitive.', 'theme-check' ),
+						__( 'The %s field should only contain one WordPress.org username. Remember that usernames are case-sensitive.', 'theme-check' ),
 						'<code>Contributors</code>'
 					)
 				);
@@ -159,7 +159,7 @@ class Readme_Check implements themecheck {
 					__( 'README WARNING', 'theme-check' ),
 					sprintf(
 						/* translators: %s: theme header tag */
-						__( 'The %s field is missing from the readme.', 'theme-check' ),
+						__( 'The %s field is missing from the readme or is empty.', 'theme-check' ),
 						'<code>Contributors</code>'
 					)
 				);
