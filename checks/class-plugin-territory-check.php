@@ -79,12 +79,12 @@ class Plugin_Territory_Check implements themecheck {
 					$filename      = tc_filename( $php_key );
 					$grep          = tc_grep( $function, $php_key );
 					$this->error[] = sprintf(
-						'<span class="tc-lead tc-required">%s</span> %s',
+						'<span class="tc-lead tc-required">%s</span>: %s',
 						__( 'REQUIRED', 'theme-check' ),
 						sprintf(
 							__( 'The theme uses the %1$s function in the file %2$s. %1$s is plugin-territory functionality and must not be used in themes. Use a plugin instead. %3$s', 'theme-check' ),
 							'<strong>' . esc_html( $function ) . '()</strong>',
-							'<strong>' . esc_html( $filename ) . '</strong>',
+							esc_html( $filename ),
 							$grep
 						)
 					);
@@ -102,7 +102,7 @@ class Plugin_Territory_Check implements themecheck {
 							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							sprintf(
-								__( 'The theme uses the %1$s %2$s in the file %3$s. This is plugin-territory functionality. Use a plugin instead. %4$s', 'theme-check' ),
+								__( 'The theme uses the %1$s %2$s in the file %3$s. This is plugin-territory functionality and must not be used in themes. Use a plugin instead. %4$s', 'theme-check' ),
 								'<strong>' . esc_html( $hook ) . '</strong>',
 								esc_html( $type ),
 								$filename,
@@ -121,10 +121,10 @@ class Plugin_Territory_Check implements themecheck {
 						$filename      = tc_filename( $php_key );
 						$grep          = tc_preg( '/' . $hook . '([\'"])\s*,\s*([\'"])' . $function . '([\'"])/', $php_key );
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
+							'<span class="tc-lead tc-required">%s</span>: %s',
 							__( 'REQUIRED', 'theme-check' ),
 							sprintf(
-								__( 'The theme uses <strong>remove_action %1$s %2$s</strong> in the file %3$s. This is plugin-territory functionality. Use a plugin instead. %4$s', 'theme-check' ),
+								__( 'The theme uses <strong>remove_action %1$s %2$s</strong> in the file %3$s. This is plugin-territory functionality and must not be used in themes. Use a plugin instead. %4$s', 'theme-check' ),
 								esc_html( $hook ),
 								esc_html( $function ),
 								$filename,
