@@ -29,7 +29,13 @@ class Readme_Check implements themecheck {
 		 *
 		 * @var string $latest_wordpress_version
 		 */
-		$latest_wordpress_version = '5.8';
+		if ( defined( 'WP_CORE_LATEST_RELEASE' ) ) {
+			// When running on WordPress.org, this constant defines the latest WordPress release.
+			$latest_wordpress_version = WP_CORE_LATEST_RELEASE;
+		} else {
+			// Assume that the local environment being tested in is up to date.
+			$latest_wordpress_version = $GLOBALS['wp_version'];
+		}
 
 		checkcount();
 
