@@ -21,14 +21,14 @@ class TextDomain_Check implements themecheck {
 	 *
 	 * @var string $name
 	 */
-	protected $name     = '';
+	protected $name = '';
 
 	/**
 	 * Theme slug
 	 *
 	 * @var string $slug
 	 */
-	protected $slug     = '';
+	protected $slug = '';
 
 	protected $is_wporg = false;
 
@@ -88,13 +88,13 @@ class TextDomain_Check implements themecheck {
 			return true;
 		}
 
-		$funcs = array_keys( $this->rules );
+		$funcs   = array_keys( $this->rules );
 		$domains = array();
 
 		foreach ( $php_files as $php_key => $phpfile ) {
 			$error = '';
-			// tokenize the file
-			$tokens = token_get_all( $phpfile );
+			// Tokenize the file.
+			$tokens         = token_get_all( $phpfile );
 			$in_func        = false;
 			$args_started   = false;
 			$parens_balance = 0;
