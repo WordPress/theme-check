@@ -113,7 +113,7 @@ class TextDomain_Check implements themecheck {
 					} elseif ( T_CONSTANT_ENCAPSED_STRING == $id ) {
 						if ( $in_func && $args_started ) {
 							if ( ! isset( $this->rules[ $func ][ $args_count ] ) ) {
-								$filename      = tc_filename( $php_key );
+								$filename = tc_filename( $php_key );
 								// Avoid a warning when too many arguments are in a function, cause a fail case.
 								$new_args      = $args;
 								$new_args[]    = $text;
@@ -128,7 +128,7 @@ class TextDomain_Check implements themecheck {
 									)
 								);
 							} elseif ( $this->rules[ $func ][ $args_count ] == 'domain' ) {
-								//Sstrip quotes from the domain, avoids 'domain' and "domain" not being recognized as the same
+								// Strip quotes from the domain, avoids 'domain' and "domain" not being recognized as the same
 								$text         = str_replace( array( '"', "'" ), '', $text );
 								$domains[]    = $text;
 								$found_domain = true;
