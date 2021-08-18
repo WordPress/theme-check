@@ -35,7 +35,7 @@ class Copyright_Notice_Check implements themecheck {
 			}
 		}
 
-		$css  = implode( ' ', $css_files );
+		$css   = implode( ' ', $css_files );
 		$files = $css . $contents;
 
 		checkcount();
@@ -49,7 +49,7 @@ class Copyright_Notice_Check implements themecheck {
 			);
 
 		}
-		
+
 		return true;
 	}
 
