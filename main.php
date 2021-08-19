@@ -99,8 +99,9 @@ function check_main( $theme_slug ) {
 			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
 			'<strong>' . esc_html( $version[0] ) . '</strong>',
 			'<strong>' . esc_html( $version[1] ) . '</strong>',
-			sprintf( __( 'Tests completed in %s seconds.', 'theme-check' ),
-				microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']
+			sprintf(
+				__( 'Tests completed in %s seconds.', 'theme-check' ),
+				microtime( true ) - wp_unslash( $_SERVER['REQUEST_TIME_FLOAT'] )
 			)
 		) . '</p>';
 	} else {
@@ -108,8 +109,9 @@ function check_main( $theme_slug ) {
 			esc_html__( 'Running %1$s tests against %2$s. %3$s', 'theme-check' ),
 			'<strong>' . esc_html( $checkcount ) . '</strong>',
 			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
-			sprintf( __( 'Tests completed in %s seconds.', 'theme-check' ),
-				microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']
+			sprintf(
+				__( 'Tests completed in %s seconds.', 'theme-check' ),
+				microtime( true ) - wp_unslash( $_SERVER['REQUEST_TIME_FLOAT'] )
 			)
 		) . '</p>';
 	}
