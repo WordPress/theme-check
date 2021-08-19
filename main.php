@@ -94,17 +94,23 @@ function check_main( $theme_slug ) {
 
 	if ( isset( $version[0] ) && isset( $version[1] ) ) {
 		echo '<p>' . sprintf(
-			esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s', 'theme-check' ),
+			esc_html__( 'Running %1$s tests against %2$s using Guidelines Version: %3$s Plugin revision: %4$s. %5$s', 'theme-check' ),
 			'<strong>' . esc_html( $checkcount ) . '</strong>',
 			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
 			'<strong>' . esc_html( $version[0] ) . '</strong>',
-			'<strong>' . esc_html( $version[1] ) . '</strong>'
+			'<strong>' . esc_html( $version[1] ) . '</strong>',
+			sprintf( __( 'Tests completed in %s seconds.', 'theme-check' ),
+				microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']
+			)
 		) . '</p>';
 	} else {
 		echo '<p>' . sprintf(
-			esc_html__( 'Running %1$s tests against %2$s.', 'theme-check' ),
+			esc_html__( 'Running %1$s tests against %2$s. %3$s', 'theme-check' ),
 			'<strong>' . esc_html( $checkcount ) . '</strong>',
-			'<strong>' . esc_html( $theme['Title'] ) . '</strong>'
+			'<strong>' . esc_html( $theme['Title'] ) . '</strong>',
+			sprintf( __( 'Tests completed in %s seconds.', 'theme-check' ),
+				microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']
+			)
 		) . '</p>';
 	}
 
