@@ -182,7 +182,7 @@ class Readme_Parser {
 			}
 		}
 
-		$contents = array_filter( $contents, 'strlen' ); 
+		$contents   = array_filter( $contents, 'strlen' ); 
 
 		$line       = $this->get_first_nonwhitespace( $contents );
 		$this->name = $this->sanitize_text( trim( $line, "#= \t\0\x0B" ) );
@@ -331,7 +331,8 @@ class Readme_Parser {
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_tested_version( $version ) {
-		$version                  = trim( $version );
+		$version = trim( $version );
+
 		/**
 		 * Latest WordPress version
 		 *
