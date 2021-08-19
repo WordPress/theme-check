@@ -167,6 +167,7 @@ class Readme_Parser {
 		} else {
 			$contents = preg_split( '!\R!', $contents ); // regex failed due to invalid UTF8 in $contents, see #2298
 		}
+		// Remove empty lines.
 		$contents = array_map( array( $this, 'strip_newlines' ), $contents );
 
 		// Strip UTF8 BOM if present.
@@ -180,6 +181,8 @@ class Readme_Parser {
 				$contents[ $i ] = mb_convert_encoding( $line, 'UTF-8', 'UTF-16' );
 			}
 		}
+
+		$contents = array_filter( $contents, 'strlen' ); 
 
 		$line       = $this->get_first_nonwhitespace( $contents );
 		$this->name = $this->sanitize_text( trim( $line, "#= \t\0\x0B" ) );
@@ -329,7 +332,18 @@ class Readme_Parser {
 	 */
 	protected function sanitize_tested_version( $version ) {
 		$version                  = trim( $version );
-		$latest_wordpress_version = '5.8';
+		/**
+		 * Latest WordPress version
+		 *
+		 * @var string $latest_wordpress_version
+		 */
+		if ( defined( 'WP_CORE_LATEST_RELEASE' ) ) {
+			// When running on WordPress.org, this constant defines the latest WordPress release.
+			$latest_wordpress_version = WP_CORE_LATEST_RELEASE;
+		} else {
+			// Assume that the local environment being tested in is up to date.
+			$latest_wordpress_version = $GLOBALS['wp_version'];
+		}
 
 		if ( $version ) {
 			// Handle the edge-case of 'WordPress 5.0' and 'WP 5.0' for historical purposes.

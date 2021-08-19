@@ -8,12 +8,26 @@
  */
 
 class Readme_Check implements themecheck {
+	
 	/**
 	 * Error messages, warnings and info notices.
 	 *
 	 * @var array $error
 	 */
 	protected $error = array();
+	
+	/**
+	 * Theme information. Author URI, theme URI, Author name
+	 *
+	 * @var object $theme
+	 */
+	protected $theme;
+
+	function set_context( $data ) {
+		if ( isset( $data['theme'] ) ) {
+			$this->theme = $data['theme'];
+		}
+	}
 
 	/**
 	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
@@ -61,7 +75,7 @@ class Readme_Check implements themecheck {
 			// Parse the content of the readme.
 			$readme = new Readme_Parser( $readme );
 
-			// Error.
+			// Error if the theme name is missing in the readme.
 			if ( empty( $readme->name ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
@@ -69,6 +83,20 @@ class Readme_Check implements themecheck {
 					/* translators: 1: 'Theme Name' section title, 2: 'Theme Name' */
 					sprintf(
 						__( 'Could not find a theme name in the readme. Theme name format looks like: %1$s. Please change %2$s to reflect the actual name of your theme.', 'theme-check' ),
+						'<code>=== Theme Name ===</code>',
+						'<code>Theme Name</code>'
+					)
+				);
+				$ret = false;
+			} else if ( $readme->name != $this->theme ) {
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-required">%s</span>: %s',
+					__( 'README ERROR', 'theme-check' ),
+					/* translators: 1: actual theme name, 2: theme name in readme, 3: 'Theme Name' section title, 4: 'Theme Name' */
+					sprintf(
+						__( 'The theme name in the readme %1$s does not match the name of your theme %2$s. Theme name format looks like: %3$s. Please change %4$s to reflect the actual name of your theme.', 'theme-check' ),
+						'<code>' .  esc_html( $readme->name ) . '</code>',
+						'<code>' . esc_html( $this->theme ) . '</code>',
 						'<code>=== Theme Name ===</code>',
 						'<code>Theme Name</code>'
 					)
