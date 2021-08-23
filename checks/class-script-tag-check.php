@@ -37,10 +37,10 @@ class Script_Tag_Check implements themecheck {
 			if ( false !== stripos( $file_content, '<script' ) ) {
 				$grep          = tc_preg( '/<script/i', $file_path );
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s %s',
-					__( 'REQUIRED', 'theme-check' ),
+					'<span class="tc-lead tc-recommended">%s</span>: %s %s',
+					__( 'RECOMMENDED', 'theme-check' ),
 					sprintf(
-						__( 'Found a script tag in %s. Scripts and styles needs to be enqueued or added via a hook, not hard coded.', 'theme-check' ),
+						__( 'Found a script tag in %s. Scripts and styles need to be enqueued or added via a hook, otherwise it is more difficult to remove or replace them with plugins or child themes.', 'theme-check' ),
 						'<strong>' . $filename . '</strong>'
 					),
 					$grep
