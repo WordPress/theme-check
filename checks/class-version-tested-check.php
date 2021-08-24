@@ -8,7 +8,7 @@
 /**
  * Check for "Tested up to" versioning.
  * Does "Tested up to" include patch versions (e.g. 5.8.1)?
- * If so, recommend including major and minor verisions only (e.g. 5/8)
+ * If so, recommend including major versions only (e.g. 5.8)
  *
  * See: https://developer.wordpress.org/themes/basics/main-stylesheet-style-css/#explanations
  */
