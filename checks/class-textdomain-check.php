@@ -115,10 +115,10 @@ class TextDomain_Check implements themecheck {
 							if ( ! isset( $this->rules[ $func ][ $args_count ] ) ) {
 								$filename = tc_filename( $php_key );
 								// Avoid a warning when too many arguments are in a function, cause a fail case.
-								$new_args      = $args;
-								$new_args[]    = $text;
-								$error         = $new_args['0'];
-								$grep          = tc_grep( $error, $php_key );
+								$new_args   = $args;
+								$new_args[] = $text;
+								$error      = $new_args['0'];
+								$grep       = tc_grep( $error, $php_key );
 
 								$this->error[] = sprintf(
 									'<span class="tc-lead tc-warning">%s</span>: %s',
@@ -157,8 +157,8 @@ class TextDomain_Check implements themecheck {
 						$error = implode( ', ', $args );
 
 						if ( ! $found_domain && ! empty( $error ) ) {
-							$filename      = tc_filename( $php_key );
-							$grep          = tc_grep( $error, $php_key );
+							$filename = tc_filename( $php_key );
+							$grep     = tc_grep( $error, $php_key );
 
 							$this->error[] = sprintf(
 								'<span class="tc-lead tc-warning">%s</span>: %s',
@@ -172,7 +172,7 @@ class TextDomain_Check implements themecheck {
 								)
 							);
 						}
-						
+
 						$in_func      = false;
 						$func         = '';
 						$args_started = false;
