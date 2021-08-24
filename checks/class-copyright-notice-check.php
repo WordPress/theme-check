@@ -16,6 +16,12 @@ class Copyright_Notice_Check implements themecheck {
 	 */
 	protected $error = array();
 
+	function set_context( $data ) {
+		if ( isset( $data['slug'] ) ) {
+			$this->slug = $data['slug'];
+		}
+	}
+
 	/**
 	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
 	 *
@@ -25,29 +31,30 @@ class Copyright_Notice_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		// Get a list of file names and check for the readme.
-		$other_filenames = array();
-		foreach ( $other_files as $path => $contents ) {
-			$other_filenames[] = tc_filename( $path );
-			if ( tc_filename( $path ) == 'readme.txt' || tc_filename( $path ) == 'readme.md' ) {
-				$readme = $contents;
-				break;
+		// Get a list of file names and check for the readme, license.txt and style.css.
+		$combined_files = $css_files + $other_files;
+		$content = '';
+
+		// Get the contents of themeslug/filename:
+		foreach ( $combined_files as $path => $contents ) {
+			if ( strpos( $path, $this->slug . '/readme.txt' ) ||
+				strpos( $path, $this->slug . '/readme.md' ) ||
+				strpos( $path, $this->slug . '/style.css' ) ||
+				strpos( $path, $this->slug . '/licence.txt' ) !== false ) {
+				$content .= $contents;
 			}
 		}
 
-		$css   = implode( ' ', $css_files );
-		$files = $css . $contents;
-
 		checkcount();
-		// Check for Copyright and (C).
-		if ( ! preg_match( '/[ \t\/*#]*Copyright/i', $files, $matches ) && ! preg_match( '/[ \t\/*#]*\(C\)/i', $files, $matches ) ) {
+
+		// Check for Copyright and (C) in the combined content of the selected files.
+		if ( ! preg_match( '/[ \t\/*#]*Copyright/i', $content, $matches ) && ! preg_match( '/[ \t\/*#]*\(C\)/i', $content, $matches ) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-warning">%s</span>: %s %s',
 				__( 'WARNING', 'theme-check' ),
 				__( 'Could not find a copyright notice for the theme. A copyright notice is needed if your theme is licenced as GPL.', 'theme-check' ),
 				'<a href="' . esc_url( 'https://www.gnu.org/licenses/gpl-howto.html' ) . '" target="_blank">' . __( 'Learn how to add a copyright notice (opens in a new window).', 'theme-check' ) . '</a>'
 			);
-
 		}
 
 		return true;
