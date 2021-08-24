@@ -33,14 +33,14 @@ class Copyright_Notice_Check implements themecheck {
 
 		// Get a list of file names and check for the readme, license.txt and style.css.
 		$combined_files = $css_files + $other_files;
-		$content = '';
+		$content        = '';
 
 		// Get the contents of themeslug/filename:
 		foreach ( $combined_files as $path => $contents ) {
-			if ( strpos( $path, $this->slug . '/readme.txt' ) ||
-				strpos( $path, $this->slug . '/readme.md' ) ||
-				strpos( $path, $this->slug . '/style.css' ) ||
-				strpos( $path, $this->slug . '/licence.txt' ) !== false ) {
+			if ( stripos( $path, $this->slug . '/readme.txt' ) ||
+				stripos( $path, $this->slug . '/readme.md' ) ||
+				stripos( $path, $this->slug . '/style.css' ) ||
+				stripos( $path, $this->slug . '/licence.txt' ) !== false ) {
 				$content .= $contents;
 			}
 		}
