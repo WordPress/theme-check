@@ -117,14 +117,18 @@ class TextDomain_Check implements themecheck {
 								// Avoid a warning when too many arguments are in a function, cause a fail case.
 								$new_args      = $args;
 								$new_args[]    = $text;
+								$error         = $new_args['0'];
+								$grep          = tc_grep( $error, $php_key );
+
 								$this->error[] = sprintf(
 									'<span class="tc-lead tc-warning">%s</span>: %s',
 									__( 'WARNING', 'theme-check' ),
 									sprintf(
-										__( 'Found a translation function that has an incorrect number of arguments in the file %1$s. Function %2$s, with the arguments %3$s', 'theme-check' ),
+										__( 'Found a translation function that has an incorrect number of arguments in the file %1$s. Function %2$s, with the arguments %3$s. %4$s', 'theme-check' ),
 										$filename,
 										'<strong>' . $func . '</strong>',
-										'<strong>' . implode( ', ', $new_args ) . '</strong>'
+										'<strong>' . implode( ', ', $new_args ) . '</strong>',
+										$grep
 									)
 								);
 							} elseif ( $this->rules[ $func ][ $args_count ] == 'domain' ) {
@@ -150,19 +154,25 @@ class TextDomain_Check implements themecheck {
 				} elseif ( ')' == $token ) {
 					--$parens_balance;
 					if ( $in_func && 0 == $parens_balance ) {
-						if ( ! $found_domain ) {
+						$error = implode( ', ', $args );
+
+						if ( ! $found_domain && ! empty( $error ) ) {
 							$filename      = tc_filename( $php_key );
+							$grep          = tc_grep( $error, $php_key );
+
 							$this->error[] = sprintf(
 								'<span class="tc-lead tc-warning">%s</span>: %s',
 								__( 'WARNING', 'theme-check' ),
 								sprintf(
-									__( 'Found a translation function that is missing a text-domain in the file %1$s. Function %2$s, with the arguments %3$s', 'theme-check' ),
+									__( 'Found a translation function that is missing a text-domain in the file %1$s. Function %2$s, with the arguments %3$s. %4$s', 'theme-check' ),
 									$filename,
 									'<strong>' . $func . '</strong>',
-									'<strong>' . implode( ', ', $args ) . '</strong>'
+									'<strong>' . $error . '</strong>',
+									$grep
 								)
 							);
 						}
+						
 						$in_func      = false;
 						$func         = '';
 						$args_started = false;
