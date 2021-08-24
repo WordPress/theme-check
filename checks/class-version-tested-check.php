@@ -56,7 +56,7 @@ class Version_Tested_Upto_Check implements themecheck {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
-					__( '<strong>Tested up to</strong> is recommended to have major and minor versions only (e.g. 5.8). Patch version is not needed (e.g. 5.8.1).', 'theme-check' )
+					__( '<strong>Tested up to</strong> is recommended to have major versions only (e.g. 5.8). Patch version is not needed (e.g. 5.8.1).', 'theme-check' )
 				);
 			}
 		}
