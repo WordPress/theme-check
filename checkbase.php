@@ -16,6 +16,10 @@ $themechecks = array();
 global $checkcount;
 $checkcount = 0;
 
+// current WP_Theme being tested. Internal use only.
+global $theme_check_current_theme;
+$theme_check_current_theme = false;
+
 // interface that all checks should implement.
 interface themecheck {
 
@@ -92,7 +96,10 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
  * @return bool
  */
 function run_themechecks( $php, $css, $other, $context = array() ) {
-	global $themechecks;
+	global $themechecks, $theme_check_current_theme;
+
+	// Provide context to some functions that need to know the current theme, but aren't passed the object.
+	$theme_check_current_theme = isset( $context['theme'] ) ? $context['theme'] : false;
 
 	$pass = true;
 
@@ -107,6 +114,8 @@ function run_themechecks( $php, $css, $other, $context = array() ) {
 			$pass = $pass & $check->check( $php, $css, $other );
 		}
 	}
+
+	$theme_check_current_theme = false;
 
 	return $pass;
 }
@@ -206,7 +215,32 @@ function tc_preg( $preg, $file ) {
 }
 
 function tc_filename( $file ) {
-	$filename = ( preg_match( '/themes\/[a-z0-9-]*\/(.*)/', $file, $out ) ) ? $out[1] : basename( $file );
+	global $theme_check_current_theme;
+
+	$filename = false;
+
+	// If we know the WP_Theme object, we can get the exact path.
+	if ( $theme_check_current_theme ) {
+		$theme_files = $theme_check_current_theme->get_files(
+			null /* all file types */,
+			-1 /* infinite recursion */,
+			true /* include parent theme files */
+		);
+
+		$filename = array_search( $file, $theme_files, true );
+	}
+
+	// If the $file exists within a theme-like folder, use that.
+	// Does not support themes nested in directories such as wp-content/themes/pub/wporg-themes/index.php
+	if ( ! $filename && preg_match( '!/themes/[^/]+/(.*)$!i', $file, $out ) ) {
+		$filename = $out[1];
+	}
+
+	// If still nothing, use the basename.
+	if ( ! $filename ) {
+		$filename = basename( $file );
+	}
+
 	return $filename;
 }
 

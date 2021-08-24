@@ -1,12 +1,12 @@
 <?php
 /**
- * Check if theme and author URI are the same and that wordpress.org is not used for theme URI
+ * Check that wordpress.org is not used for theme URI
  *
  * @package Theme Check
  */
 
 /**
- * Check if theme and author URI are the same and that wordpress.org is not used for theme URI.
+ * Check that wordpress.org is not used for theme URI.
  */
 class URI_Check implements themecheck {
 	/**
@@ -40,16 +40,7 @@ class URI_Check implements themecheck {
 		checkcount();
 		$ret = true;
 
-		if ( ! empty( $this->theme->get( 'AuthorURI' ) ) && ! empty( $this->theme->get( 'ThemeURI' ) ) ) {
-
-			if ( strtolower( preg_replace( '/https?:\/\/|www./i', '', trim( $this->theme->get( 'ThemeURI' ), '/' ) ) ) == strtolower( preg_replace( '/https?:\/\/|www./i', '', trim( $this->theme->get( 'AuthorURI' ), '/' ) ) ) ) {
-				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span>: %s',
-					__( 'REQUIRED', 'theme-check' ),
-					__( 'Your Theme URI and Author URI must not be the same.', 'theme-check' )
-				);
-				$ret           = false;
-			}
+		if ( ! empty( $this->theme->get( 'ThemeURI' ) ) ) {
 
 			// We allow .org user profiles as Author URI, so only check the Theme URI. We also allow WordPress.com links.
 			if (

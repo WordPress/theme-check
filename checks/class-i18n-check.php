@@ -1,12 +1,12 @@
 <?php
 /**
- * Check for various I18N errors
+ * Check if there are PHP variables in translation strings.
  *
  * @package Theme Check
  */
 
 /**
- * Check for various I18N errors.
+ * Check if there are PHP variables in translation strings.
  */
 class I18N_Check implements themecheck {
 	/**
@@ -24,8 +24,7 @@ class I18N_Check implements themecheck {
 	 * @param array $other_files Folder names, file paths and content for other files.
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
-		$ret   = true;
-		$error = '';
+
 		checkcount();
 
 		// Make sure the tokenizer is available.
@@ -34,16 +33,16 @@ class I18N_Check implements themecheck {
 		}
 
 		foreach ( $php_files as $php_key => $phpfile ) {
-			$error = '';
-
 			$stmts = array();
 			foreach ( array( '_e(', '__(', '_e (', '__ (' ) as $finder ) {
 				$search = $phpfile;
-				while ( ( $pos = strpos( $search, $finder ) ) !== false ) {
+				while ( ( $pos = strpos( $search, $finder ) ) !== false &&
+					strpos( $search, 'pll__' ) === false &&
+					strpos( $search, 'pll_e' ) === false ) {
 					$search = substr( $search, $pos );
 					$open   = 1;
 					$i      = strpos( $search, '(' ) + 1;
-					while ( $open > 0 ) {
+					while ( $open > 0 && isset( $search[ $i ] ) ) {
 						switch ( $search[ $i ] ) {
 							case '(':
 								$open++;
@@ -61,24 +60,21 @@ class I18N_Check implements themecheck {
 
 			foreach ( $stmts as $match ) {
 				$tokens = token_get_all( '<?php ' . $match . ';' );
+
 				if ( ! empty( $tokens ) ) {
 					foreach ( $tokens as $token ) {
 						if ( is_array( $token ) && in_array( $token[0], array( T_VARIABLE ) ) ) {
-							$filename = tc_filename( $php_key );
-							$grep     = tc_grep( ltrim( $match ), $php_key );
-							preg_match( '/[^\s]*\s[0-9]+/', $grep, $line );
-							$error = '';
-							if ( isset( $line[0] ) ) {
-								$error = ( ! strpos( $error, $line[0] ) ) ? $grep : '';
-							}
+							$filename      = tc_filename( $php_key );
+							$grep          = tc_grep( ltrim( $token[1] ), $php_key );
 							$this->error[] = sprintf(
 								'<span class="tc-lead tc-recommended">%s</span>: %s',
 								__( 'RECOMMENDED', 'theme-check' ),
 								sprintf(
-									__( 'Possible variable %1$s found in translation function in %2$s. Translation function calls must NOT contain PHP variables. %3$s', 'theme-check' ),
+									__( 'Possible variable %1$s found in translation function in %2$s. Translation function calls must not contain PHP variables, use placeholders instead. See <a href="%3$s" target="_blank">Internationalization Guidelines (Opens in a new window)</a>. %4$s', 'theme-check' ),
 									'<strong>' . $token[1] . '</strong>',
 									'<strong>' . $filename . '</strong>',
-									$error
+									'https://developer.wordpress.org/apis/handbook/internationalization/internationalization-guidelines/#variables',
+									$grep
 								)
 							);
 							break; // Stop looking at the tokens on this line once a variable is found.
@@ -87,7 +83,8 @@ class I18N_Check implements themecheck {
 				}
 			}
 		}
-		return $ret;
+
+		return true;
 	}
 
 	/**
