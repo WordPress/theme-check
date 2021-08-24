@@ -23,9 +23,19 @@ class Readme_Check implements themecheck {
 	 */
 	protected $theme;
 
+	/**
+	 * Theme slug.
+	 *
+	 * @var object $slug
+	 */
+	protected $slug;
+
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
 			$this->theme = $data['theme'];
+		}
+		if ( isset( $data['slug'] ) ) {
+			$this->slug = $data['slug'];
 		}
 	}
 
@@ -54,17 +64,17 @@ class Readme_Check implements themecheck {
 		checkcount();
 
 		// Get a list of file names and check for the readme.
-		$other_filenames = array();
+		$readme        = '';
+
+		// Get the contents of themeslug/filename:
 		foreach ( $other_files as $path => $contents ) {
-			$other_filenames[] = tc_filename( $path );
-			if ( tc_filename( $path ) == 'readme.txt' || tc_filename( $path ) == 'readme.md' ) {
-				$readme = $contents;
-				break;
+			if ( stripos( $path, $this->slug . '/readme.txt' ) || stripos( $path, $this->slug . '/readme.md' ) !== false ) {
+				$readme .= $contents;
 			}
 		}
 
 		// Publish an error if there is no readme file.
-		if ( ! in_array( 'readme.txt', $other_filenames, true ) && ! in_array( 'readme.md', $other_filenames, true ) ) {
+		if ( empty( $readme) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
