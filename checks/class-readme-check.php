@@ -64,7 +64,7 @@ class Readme_Check implements themecheck {
 		checkcount();
 
 		// Get a list of file names and check for the readme.
-		$readme        = '';
+		$readme = '';
 
 		// Get the contents of themeslug/filename:
 		foreach ( $other_files as $path => $contents ) {
@@ -74,7 +74,7 @@ class Readme_Check implements themecheck {
 		}
 
 		// Publish an error if there is no readme file.
-		if ( empty( $readme) ) {
+		if ( empty( $readme ) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
