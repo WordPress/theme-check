@@ -1,6 +1,18 @@
 = nextrelease =
 * Fix: `tc_filename()` to always return theme-relative paths when possible.
 * Fix: Correct the block theme adaptation check to work in WordPress.org Theme Uploader
+* Fix: Update the texts of the script tag check and the WP_Filesystem check.
+* Fix: Allow pre, link and code tags when presenting the result.
+* Fix: Allow phpcs.xml and development tool configuration files (postcss, stylelint etc).
+* Fix: Correct the theme information display on the plugin page.
+* Fix: Add template-editing to the list of allowed tags.
+* Fix: Solve PHP notice in the i18n check.
+* Reduce the severity level of the following checks:
+    Favicon, wp_title, title tag
+* Added checks:
+    Requires PHP versioning, Tested up to versioning, add_role, copyright notice
+* Removed checks:
+    content_width, Theme URI and Author URI must not be the same, emoji scripts
 
 = 20210617 =
 * Introduced a generic function, run_themechecks_against_theme(), that allows it to be run against a WP_Theme instance, rather than relying upon global state
