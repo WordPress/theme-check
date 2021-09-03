@@ -33,7 +33,7 @@ class Image_Size_Check implements themecheck {
 				$image = filesize( $other_key );
 				// Convert image size to KB.
 				$image_size = round( $image / 1024 );
-				//Check if the file is larger than 500 KB.
+				// Check if the file is larger than 500 KB.
 				if ( $image_size > 500 ) {
 					$this->error[] = sprintf(
 						'<span class="tc-lead tc-warning">%s</span>: %s',
@@ -42,7 +42,7 @@ class Image_Size_Check implements themecheck {
 							/* translators: %1$s file name. %2$s file size. */
 							__( '%1$s is %2$s KB large. Large file sizes have a negative impact on website performance and loading time. Compress images before using them.', 'theme-check' ),
 							basename( $other_key ),
-							$image_size,
+							$image_size
 						)
 					);
 				}
