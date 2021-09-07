@@ -215,33 +215,50 @@ function tc_preg( $preg, $file ) {
 }
 
 function tc_filename( $file ) {
-	global $theme_check_current_theme;
-
-	$filename = false;
-
 	// If we know the WP_Theme object, we can get the exact path.
-	if ( $theme_check_current_theme ) {
+	$filename = _get_filename_from_current_theme( $file );
+	if ( $filename ) {
+		return $filename;
+	}
+
+	// If the $file exists within a theme-like folder, use that.
+	// Does not support themes nested in directories such as wp-content/themes/pub/wporg-themes/index.php
+	if ( preg_match( '!/themes/[^/]+/(.*)$!i', $file, $m ) ) {
+		return $m[1];
+	}
+
+	// If still nothing, use the basename.
+	return basename( $file );
+}
+
+/**
+ * Get a filename relative to the current theme.
+ *
+ * @param string $file the file to get a relative filename for.
+ * @return false|string The filename, or false on failure.
+ * @access private
+ */
+function _get_filename_from_current_theme( $file ) {
+	global $theme_check_current_theme;
+	static $theme_files = array();
+	static $theme_path  = '';
+
+	if ( empty( $theme_check_current_theme ) ) {
+		return false;
+	}
+
+	// Fetch the files for the theme, once per theme.
+	if ( $theme_path != $theme_check_current_theme->get_stylesheet_directory() ) {
+		$theme_path = $theme_check_current_theme->get_stylesheet_directory();
+
 		$theme_files = $theme_check_current_theme->get_files(
 			null /* all file types */,
 			-1 /* infinite recursion */,
 			true /* include parent theme files */
 		);
-
-		$filename = array_search( $file, $theme_files, true );
 	}
 
-	// If the $file exists within a theme-like folder, use that.
-	// Does not support themes nested in directories such as wp-content/themes/pub/wporg-themes/index.php
-	if ( ! $filename && preg_match( '!/themes/[^/]+/(.*)$!i', $file, $out ) ) {
-		$filename = $out[1];
-	}
-
-	// If still nothing, use the basename.
-	if ( ! $filename ) {
-		$filename = basename( $file );
-	}
-
-	return $filename;
+	return array_search( $file, $theme_files, true );
 }
 
 function tc_trac( $e ) {
