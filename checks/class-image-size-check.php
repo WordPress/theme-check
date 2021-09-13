@@ -28,7 +28,7 @@ class Image_Size_Check implements themecheck {
 		checkcount();
 
 		foreach ( $other_files as $other_key => $otherfile ) {
-			/* 
+			/*
 			* Check if the file is an image.
 			* Silence read error if the file is too small. @see https://www.php.net/manual/en/function.exif-imagetype.php#79283.
 			*/
