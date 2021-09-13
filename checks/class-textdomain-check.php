@@ -119,6 +119,13 @@ class TextDomain_Check implements themecheck {
 								$new_args[] = $text;
 								$error      = $new_args['0'];
 								$grep       = tc_grep( $error, $php_key );
+								$lines      = explode( 'Line', $grep );
+
+								foreach ( $lines as $line ) {
+									if ( strpos( $line, $func ) !== false && strpos( $line, $error ) !== false ) {
+										$grep = "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . $line . '</pre>';
+									}
+								}
 
 								$this->error[] = sprintf(
 									'<span class="tc-lead tc-warning">%s</span>: %s',
@@ -159,6 +166,12 @@ class TextDomain_Check implements themecheck {
 						if ( ! $found_domain && ! empty( $error ) ) {
 							$filename = tc_filename( $php_key );
 							$grep     = tc_grep( $error, $php_key );
+							$lines    = explode( 'Line', $grep );
+							foreach ( $lines as $line ) {
+								if ( strpos( $line, $func ) !== false && strpos( $line, $error ) !== false ) {
+									$grep = "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . $line . '</pre>';
+								}
+							}
 
 							$this->error[] = sprintf(
 								'<span class="tc-lead tc-warning">%s</span>: %s',
@@ -191,7 +204,7 @@ class TextDomain_Check implements themecheck {
 			$correct_domain = sanitize_title_with_dashes( $this->name );
 			if ( $this->slug != $correct_domain ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-warning">%s</span> %s %s',
+					'<span class="tc-lead tc-warning">%s</span>: %s %s',
 					__( 'WARNING', 'theme-check' ),
 					sprintf(
 						__( "Your theme appears to be in the wrong directory for the theme name. The directory name must match the slug of the theme. This theme's correct slug and text-domain is %s.", 'theme-check' ),
@@ -201,7 +214,7 @@ class TextDomain_Check implements themecheck {
 				);
 			} elseif ( ! in_array( $correct_domain, $domains ) ) {
 				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span> %s %s',
+					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
 						__( "This theme text domain does not match the theme's slug. The text domain used: %s", 'theme-check' ),
@@ -218,7 +231,7 @@ class TextDomain_Check implements themecheck {
 
 		if ( $domainscount > 1 ) {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-warning">%s</span> %s %s',
+				'<span class="tc-lead tc-warning">%s</span>: %s %s',
 				__( 'WARNING', 'theme-check' ),
 				__( 'More than one text-domain is being used in this theme. This means the theme will not be compatible with WordPress.org language packs.', 'theme-check' ),
 				sprintf(
@@ -228,7 +241,7 @@ class TextDomain_Check implements themecheck {
 			);
 		} else {
 			$this->error[] = sprintf(
-				'<span class="tc-lead tc-info">%s</span> %s %s',
+				'<span class="tc-lead tc-info">%s</span>: %s %s',
 				__( 'INFO', 'theme-check' ),
 				__( "Only one text-domain is being used in this theme. Make sure it matches the theme's slug correctly so that the theme will be compatible with WordPress.org language packs.", 'theme-check' ),
 				sprintf(
