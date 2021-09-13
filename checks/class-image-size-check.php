@@ -28,8 +28,11 @@ class Image_Size_Check implements themecheck {
 		checkcount();
 
 		foreach ( $other_files as $other_key => $otherfile ) {
-			// Check if the file is an image.
-			if ( exif_imagetype( $other_key ) !== false ) {
+			/* 
+			* Check if the file is an image.
+			* Silence read error if the file is too small. @see https://www.php.net/manual/en/function.exif-imagetype.php#79283.
+			*/
+			if ( @wp_get_image_mime( $other_key ) !== false ) {
 				$image = filesize( $other_key );
 				// Convert image size to KB.
 				$image_size = round( $image / 1024 );
