@@ -155,20 +155,24 @@ function tc_intro() {
 		'<a href="https://make.wordpress.org/themes/">' . esc_html__( 'The WordPress Themes Team', 'theme-check' ) . '</a>'
 	);
 	?>
-		</p>
-	<p><?php
+	</p>
+	<p>
+	<?php
 		printf(
 			__( 'If you have found a bug or would like to make a suggestion or contribution, please leave a post on the <a href="%1$s">WordPress forums</a>, or talk about it with the Themes Team on <a href="%2$s">Make WordPress Themes</a> site.', 'theme-check' ),
 			'https://wordpress.org/support/plugin/theme-check/',
 			'https://make.wordpress.org/themes/'
 		);
-	?></p>
-	<p><?php
+	?>
+	</p>
+	<p>
+	<?php
 		printf(
 			__( 'The code for Theme Check can be contributed to on <a href="%s">GitHub</a>.', 'theme-check' ),
 			'https://github.com/WordPress/theme-check'
 		);
-	?></p>
+	?>
+	</p>
 	<?php
 }
 
