@@ -28,29 +28,30 @@ class Image_Size_Check implements themecheck {
 		checkcount();
 
 		foreach ( $other_files as $other_key => $otherfile ) {
-			/*
-			* Check if the file is an image.
-			* Silence read error if the file is too small. @see https://www.php.net/manual/en/function.exif-imagetype.php#79283.
-			*/
-			if ( @wp_get_image_mime( $other_key ) !== false ) {
-				$image = filesize( $other_key );
-				// Convert image size to KB.
-				$image_size = round( $image / 1024 );
-				// Check if the file is larger than 500 KB.
-				if ( $image_size > 500 ) {
-					$this->error[] = sprintf(
-						'<span class="tc-lead tc-warning">%s</span>: %s',
-						__( 'WARNING', 'theme-check' ),
-						sprintf(
-							/* translators: %1$s file name. %2$s file size. */
-							__( '%1$s is %2$s KB large. Large file sizes have a negative impact on website performance and loading time. Compress images before using them.', 'theme-check' ),
-							basename( $other_key ),
-							$image_size
-						)
-					);
-				}
+
+			$file = wp_check_filetype_and_ext( $other_key, basename( $other_key ) );
+			if ( 'image/' !== substr( $file['type'], 0, 6 ) ) {
+				continue;
 			}
+
+			// Check if the file is larger than 500 KB.
+			$image_size = filesize( $other_key );
+			if ( $image_size < 500 * KB_IN_BYTES ) {
+				continue;
+			}
+
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-warning">%s</span>: %s',
+				__( 'WARNING', 'theme-check' ),
+				sprintf(
+					/* translators: %1$s file name. %2$s file size. */
+					__( '%1$s is %2$s in size. Large file sizes have a negative impact on website performance and loading time. Compress images before using them.', 'theme-check' ),
+					'<strong>' . tc_filename( $other_key ) . '</strong>',
+					size_format( $image_size, 1 )
+				)
+			);
 		}
+
 		return true;
 	}
 
