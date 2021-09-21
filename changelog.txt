@@ -1,4 +1,4 @@
-= nextrelease =
+= 20210921 =
 * Fix: `tc_filename()` to always return theme-relative paths when possible.
 * Fix: Correct the block theme adaptation check to work in WordPress.org Theme Uploader
 * Fix: Update the texts of the script tag check and the WP_Filesystem check.
