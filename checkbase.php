@@ -351,7 +351,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	}
 
 	// Check whether this is a FSE theme by searching for an index.html block template.
-	if ( ! in_array( 'block-templates/index.html', $other_filenames, true ) ) {
+	if ( ! in_array( 'block-templates/index.html', $other_filenames, true ) && ! in_array( 'templates/index.html', $other_filenames, true ) ) {
 		return false;
 	}
 
