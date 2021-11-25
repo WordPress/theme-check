@@ -37,16 +37,14 @@ class FSE_Required_Files_Check implements themecheck {
 			array_push( $filenames, tc_filename( $php_key ) );
 		}
 
-		$musthave = array(
-			'block-templates/index.html',
-			'theme.json',
-		);
+		if ( ! in_array( 'theme.json', $filenames ) ) {
+			$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Could not find the file theme.json in the theme.', 'theme-check' ), '<strong>theme.json</strong>' );
+			$ret           = false;
+		}
 
-		foreach ( $musthave as $file ) {
-			if ( ! in_array( $file, $filenames ) ) {
-				$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Could not find the file %s in the theme.', 'theme-check' ), '<strong>' . $file . '</strong>' );
-				$ret           = false;
-			}
+		if ( ! in_array( 'block-templates/index.html', $filenames ) && ! in_array( 'templates/index.html', $filenames ) ) {
+			$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'Could not find the index.html template in the theme.', 'theme-check' ), '<strong>index.html</strong>' );
+			$ret           = false;
 		}
 
 		return $ret;
