@@ -1,5 +1,5 @@
-= nextrelease =
- * Fix: <Please replace this line>
+= 20211203 =
+ * Update: FSE theme folders to the new proposed structure
 
 = 20210921 =
 * Fix: `tc_filename()` to always return theme-relative paths when possible.
