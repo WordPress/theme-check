@@ -34,7 +34,7 @@ class Directories_Macosx_Check implements themecheck {
 		$ret = true;
 
 		$path = get_template_directory();
-        $directories = scandir($path);
+		$directories = scandir( $path );
 
 		foreach ( $directories as $dir ) {
 			checkcount();
