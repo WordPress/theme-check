@@ -35,7 +35,7 @@ class JQuery_Check implements themecheck {
 				__( 'RECOMMENDED', 'theme-check' ),
 				sprintf(
 					'JQuery is enqueued on the front end, however you may not need it, see <a href="%s">this article</a> for tips on switching to vanilla JavaScript.',
-					'https://tobiasahlin.com/blog/move-from-jquery-to-vanilla-javascript/'
+					'https://make.wordpress.org/themes/2021/10/04/the-performance-impact-of-using-jquery-in-wordpress-themes/'
 				)
 			);
 		}
