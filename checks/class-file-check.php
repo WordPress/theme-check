@@ -66,7 +66,11 @@ class File_Check implements themecheck {
 			'favicon\.ico'        => __( 'Favicon', 'theme-check' ),
 		);
 
-		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
+		$musthave = array( 'style.css', 'readme.txt' );
+
+		if ( get_bloginfo( 'version' ) < '6.0' ) {
+			$musthave[] = 'index.php';
+		}
 
 		checkcount();
 
