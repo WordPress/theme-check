@@ -109,11 +109,11 @@ class File_Check implements themecheck {
 			}
 		}
 
-		if ( ! in_array( 'index.php', $filenames ) && ! in_array( 'templates/index.html', $filenames ) {
+		if ( ! in_array( 'index.php', $filenames ) && ! in_array( 'templates/index.html', $filenames ) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-required">%s</span>: %s',
 				__( 'REQUIRED', 'theme-check' ),
-				__( 'Theme must contain an index.php or templates/index.html file.', 'theme-check' ),
+				__( 'Theme must contain an index.php or templates/index.html file.', 'theme-check' )
 			);
 			$ret           = false;
 		}
