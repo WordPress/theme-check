@@ -68,10 +68,6 @@ class File_Check implements themecheck {
 
 		$musthave = array( 'style.css', 'readme.txt' );
 
-		if ( get_bloginfo( 'version' ) < '6.0' ) {
-			$musthave[] = 'index.php';
-		}
-
 		checkcount();
 
 		foreach ( $blocklist as $file => $reason ) {
@@ -111,6 +107,15 @@ class File_Check implements themecheck {
 				);
 				$ret           = false;
 			}
+		}
+
+		if ( ! in_array( 'index.php', $filenames ) && ! in_array( 'templates/index.html', $filenames ) {
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-required">%s</span>: %s',
+				__( 'REQUIRED', 'theme-check' ),
+				__( 'Theme must contain an index.php or templates/index.html file.', 'theme-check' ),
+			);
+			$ret           = false;
 		}
 
 		return $ret;
