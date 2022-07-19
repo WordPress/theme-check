@@ -68,13 +68,16 @@ class File_Check implements themecheck {
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
 
-		$fse_find = array_filter( array_keys( $other_files ), function( $file_name ) {
-			if ( false !== stripos( $file_name, 'templates/index.html' ) || false !== stripos( $file_name, 'block-templates/index.html' ) ) {
-				return true;
-			}
+		$fse_find = array_filter(
+			array_keys( $other_files ),
+			function( $file_name ) {
+				if ( false !== stripos( $file_name, 'templates/index.html' ) || false !== stripos( $file_name, 'block-templates/index.html' ) ) {
+					return true;
+				}
 
-			return false;
-		} );
+				return false;
+			}
+		);
 
 		if ( ! empty( $fse_find ) ) {
 			$fse_not_needed = array_search( 'index.php', $musthave );
