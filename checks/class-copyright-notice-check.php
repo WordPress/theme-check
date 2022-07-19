@@ -16,6 +16,8 @@ class Copyright_Notice_Check implements themecheck {
 	 */
 	protected $error = array();
 
+	protected $slug;
+
 	function set_context( $data ) {
 		if ( isset( $data['slug'] ) ) {
 			$this->slug = $data['slug'];
