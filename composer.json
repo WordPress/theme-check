@@ -11,5 +11,10 @@
     "scripts": {
         "standards:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
         "standards:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
