@@ -1,3 +1,6 @@
+= 20220929 =
+ * Update: Removed index.php requirements for block theme
+
 = 20211203 =
  * Update: FSE theme folders to the new proposed structure
 
