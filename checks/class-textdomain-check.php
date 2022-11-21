@@ -212,7 +212,7 @@ class TextDomain_Check implements themecheck {
 					),
 					__( '(If this is a child theme, you can ignore this error.)', 'theme-check' )
 				);
-			} elseif ( ! in_array( $correct_domain, $domains ) ) {
+			} elseif ( ! empty( $domains ) && ! in_array( $correct_domain, $domains ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
