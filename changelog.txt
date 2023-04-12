@@ -1,3 +1,11 @@
+= 20230412 =
+ * Added checks: Full Site Editing tag for block theme
+ * Added checks: Update URI in style.css header
+ * Added checks: Style Variations tag to the list of valid tags
+ * Fix: PHPCS for WP version lower than 8.x
+ * Fix: PHPCS issues
+ * Update: Composer version 
+
 = 20220929 =
  * Update: Removed index.php requirements for block theme
 
