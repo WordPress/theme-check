@@ -1,3 +1,6 @@
+= 20230417 =
+ * Fixed Full Site Editing tag for block theme in WordPress.org 
+
 = 20230412 =
  * Added checks: Full Site Editing tag for block theme
  * Added checks: Update URI in style.css header
