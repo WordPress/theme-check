@@ -200,6 +200,7 @@ class Style_Tags_Check implements themecheck {
 			'post-formats',
 			'rtl-language-support',
 			'sticky-post',
+			'style-variations',
 			'template-editing',
 			'theme-options',
 			'threaded-comments',
