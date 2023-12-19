@@ -1,3 +1,8 @@
+= 20231220 =
+ * Added checks: Style Variations tag for block theme
+ * Update: Team name from Theme Review Team to Themes Team 
+ * Tested with WordPress 6.4 
+
 = 20230417 =
  * Fixed Full Site Editing tag for block theme in WordPress.org 
 
