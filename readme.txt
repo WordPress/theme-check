@@ -33,7 +33,7 @@ This plugin does not decide the guidelines used. Any issues with particular them
 
 = How to enable trac formatting =
 
-The Theme Review team use this plugin while reviewing themes and copy/paste the output into trac tickets, the trac system has its own markup language.
+The Themes Team use this plugin while reviewing themes and copy/paste the output into trac tickets, the trac system has its own markup language.
 To enable trac formatting in Theme-Check you need to define a couple of variables in wp-config.php: *TC_PRE* and *TC_POST* are used as a ticket header and footer.
 For example:
 
