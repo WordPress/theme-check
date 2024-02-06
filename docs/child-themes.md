@@ -1,0 +1,1 @@
+# Checks for child themes
