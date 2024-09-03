@@ -33,13 +33,13 @@ class Skip_Links_Check implements themecheck {
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
 			$this->wp_theme = $data['theme'];
-			$theme_dir = $this->wp_theme->get_stylesheet_directory();
+			$theme_dir      = $this->wp_theme->get_stylesheet_directory();
 			// Check if the theme has all the required files.
 			if (
-				file_exists($theme_dir.'/theme.json') ||
+				file_exists( $theme_dir . '/theme.json' ) ||
 				(
-					file_exists($theme_dir.'/templates/index.html') &&
-					file_exists($theme_dir.'/block-templates/index.html')
+					file_exists( $theme_dir . '/templates/index.html' ) &&
+					file_exists( $theme_dir . '/block-templates/index.html' )
 				)
 			) {
 				$this->is_block_theme = true;
@@ -56,31 +56,30 @@ class Skip_Links_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-
-		$info = '';
-		$templates_without_main_tag = [];
+		$info                       = '';
+		$templates_without_main_tag = array();
 
 		$directory = 'templates'; // Path to the folder containing HTML files
 		$theme_dir = $this->wp_theme->get_stylesheet_directory();
 
 		// Get all HTML files in the directory
-		$files = glob($theme_dir . '/' . $directory . '/*.html');
-		
-		foreach ($files as $file) {
-			$contents = file_get_contents($file);
-			$hasMainTag = strpos($contents, '<main') !== false;
-			$fileName = basename($file);
+		$files = glob( $theme_dir . '/' . $directory . '/*.html' );
+
+		foreach ( $files as $file ) {
+			$contents   = file_get_contents( $file );
+			$hasMainTag = strpos( $contents, '<main' ) !== false;
+			$fileName   = basename( $file );
 
 			// Print the result
-			if(!$hasMainTag) {
+			if ( ! $hasMainTag ) {
 				$templates_without_main_tag[] = $fileName;
 			}
-			//TODO: check on nested patterns!!
+			// TODO: check on nested patterns!!
 		}
 
-		$info = implode(', ', $templates_without_main_tag);
+		$info = implode( ', ', $templates_without_main_tag );
 
-		if($info !== '') {
+		if ( $info !== '' ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-required">%s</span> %s ',
 				__( 'REQUIRED', 'theme-check' ),
