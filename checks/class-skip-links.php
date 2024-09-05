@@ -66,21 +66,21 @@ class Skip_Links_Check implements themecheck {
 		$files = glob( $theme_dir . '/' . $directory . '/*.html' );
 
 		foreach ( $files as $file ) {
-			$contents   = file_get_contents( $file );
-			$hasMainTag = strpos( $contents, '<main' ) !== false;
-			$fileName   = basename( $file );
+			$contents     = file_get_contents( $file );
+			$has_main_tag = strpos( $contents, '<main' ) !== false;
+			$file_name    = basename( $file );
 
-			if ( ! $hasMainTag ) {
-				$pattern_slugs = $this->template_has_patterns($contents);
-				if( $pattern_slugs ) {
-					foreach($pattern_slugs as $slug){
-						$hasMainTag = $this->pattern_has_tag($slug);
-						if ( ! $hasMainTag ) {
-							$templates_without_main_tag[] = $fileName;
+			if ( ! $has_main_tag ) {
+				$pattern_slugs = $this->template_has_patterns( $contents );
+				if ( $pattern_slugs ) {
+					foreach ( $pattern_slugs as $slug ) {
+						$has_main_tag = $this->pattern_has_tag( $slug );
+						if ( ! $has_main_tag ) {
+							$templates_without_main_tag[] = $file_name;
 						}
 					}
-				}else {
-					$templates_without_main_tag[] = $fileName;
+				} else {
+					$templates_without_main_tag[] = $file_name;
 				}
 			}
 		}
@@ -92,7 +92,8 @@ class Skip_Links_Check implements themecheck {
 				'<span class="tc-lead tc-required">%s</span> %s ',
 				__( 'REQUIRED', 'theme-check' ),
 				sprintf(
-					__( 'Skip links are missing from the following templates: ' . $info . '. Please make sure the templates have a <main> tag', 'theme-check' )
+					__( 'Skip links are missing from the following templates: %s Please make sure the templates have a <main> tag', 'theme-check' ),
+					$info
 				)
 			);
 		}
@@ -100,9 +101,9 @@ class Skip_Links_Check implements themecheck {
 		return true;
 	}
 
-	function template_has_patterns($contents) {
+	function template_has_patterns( $contents ) {
 		$pattern = '/<!-- wp:pattern \{"slug":"([^"]+)"\} \/-->/';
-		if (preg_match_all($pattern, $contents, $matches)) {
+		if ( preg_match_all( $pattern, $contents, $matches ) ) {
 			$slugs = $matches[1];
 			return $slugs;
 		} else {
@@ -110,32 +111,31 @@ class Skip_Links_Check implements themecheck {
 		}
 	}
 
-	function pattern_has_tag($slug){
-		$directory = 'patterns'; 		
+	function pattern_has_tag( $slug ) {
+		$directory = 'patterns';
 		$theme_dir = $this->wp_theme->get_stylesheet_directory();
 
-		if(! is_dir($theme_dir . '/' . $directory)){
-			$directory = 'block-patterns'; 		
+		if ( ! is_dir( $theme_dir . '/' . $directory ) ) {
+			$directory = 'block-patterns';
 		}
-		if(! is_dir($theme_dir . '/' . $directory)){
-			return false;	
+		if ( ! is_dir( $theme_dir . '/' . $directory ) ) {
+			return false;
 		}
 
 		$files = glob( $theme_dir . '/' . $directory . '/*.php' );
 
 		$has_tag = false;
-	
-		foreach ($files as $file) {
-			if (is_file($file)) {
-				$contents = file_get_contents($file);
-				$pattern = '/\* Slug: ' . preg_quote($slug, '/') . '\b/';
-				if (preg_match($pattern, $contents)) {
+
+		foreach ( $files as $file ) {
+			if ( is_file( $file ) ) {
+				$contents = file_get_contents( $file );
+				$pattern  = '/\* Slug: ' . preg_quote( $slug, '/' ) . '\b/';
+				if ( preg_match( $pattern, $contents ) ) {
 					$has_tag = strpos( $contents, '<main' ) !== false;
-					print_r($has_tag);
 				}
 			}
 		}
-	
+
 		return $has_tag;
 	}
 
