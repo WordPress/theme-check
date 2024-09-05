@@ -70,11 +70,19 @@ class Skip_Links_Check implements themecheck {
 			$hasMainTag = strpos( $contents, '<main' ) !== false;
 			$fileName   = basename( $file );
 
-			// Print the result
 			if ( ! $hasMainTag ) {
-				$templates_without_main_tag[] = $fileName;
+				$pattern_slugs = $this->template_has_patterns($contents);
+				if( $pattern_slugs ) {
+					foreach($pattern_slugs as $slug){
+						$hasMainTag = $this->pattern_has_tag($slug);
+						if ( ! $hasMainTag ) {
+							$templates_without_main_tag[] = $fileName;
+						}
+					}
+				}else {
+					$templates_without_main_tag[] = $fileName;
+				}
 			}
-			// TODO: check on nested patterns!!
 		}
 
 		$info = implode( ', ', $templates_without_main_tag );
@@ -90,6 +98,45 @@ class Skip_Links_Check implements themecheck {
 		}
 
 		return true;
+	}
+
+	function template_has_patterns($contents) {
+		$pattern = '/<!-- wp:pattern \{"slug":"([^"]+)"\} \/-->/';
+		if (preg_match_all($pattern, $contents, $matches)) {
+			$slugs = $matches[1];
+			return $slugs;
+		} else {
+			return false;
+		}
+	}
+
+	function pattern_has_tag($slug){
+		$directory = 'patterns'; 		
+		$theme_dir = $this->wp_theme->get_stylesheet_directory();
+
+		if(! is_dir($theme_dir . '/' . $directory)){
+			$directory = 'block-patterns'; 		
+		}
+		if(! is_dir($theme_dir . '/' . $directory)){
+			return false;	
+		}
+
+		$files = glob( $theme_dir . '/' . $directory . '/*.php' );
+
+		$has_tag = false;
+	
+		foreach ($files as $file) {
+			if (is_file($file)) {
+				$contents = file_get_contents($file);
+				$pattern = '/\* Slug: ' . preg_quote($slug, '/') . '\b/';
+				if (preg_match($pattern, $contents)) {
+					$has_tag = strpos( $contents, '<main' ) !== false;
+					print_r($has_tag);
+				}
+			}
+		}
+	
+		return $has_tag;
 	}
 
 	/**
