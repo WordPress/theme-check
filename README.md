@@ -50,5 +50,23 @@ add_filter( 'tc_skip_development_directories', '__return_true' );
 
 To add more directories to the paths where other files are excluded then add them to the array through the `tc_common_dev_directories` filter.
 
+### Usage with wp-cli
+
+To use with [wp-cli](https://wp-cli.org/), ensure the theme check plugin is active and `wp-cli` is installed. The `theme-check` subcommand is added to `wp-cli` and can be used as follows:
+
+`wp theme-check run [<theme>] [--format=<format>]`
+
+#### Options
+| Option | Accepts | Required | Default
+| -- | -- | -- | -- | 
+| `theme` | The slug of the theme to check | No | Current theme slug
+| `format` | `cli` or `json` | No | `cli`
+
+#### Examples
+`wp theme-check run`
+`wp theme-check run twentytwentyfour`
+`wp theme-check run --format=json`
+`wp theme-check run twentytwentyfour --format=json`
+
 ## Contributors
 Otto42, pross, The theme review team
