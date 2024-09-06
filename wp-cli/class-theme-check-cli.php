@@ -11,6 +11,9 @@ class Theme_Check_CLI {
 	/**
 	 * Run a theme check on the specified theme or the current theme.
 	 *
+	 * @param array $args       Indexed array of positional arguments.
+	 * @param array $assoc_args Associative array of options.
+	 *
 	 * ## OPTIONS
 	 *
 	 * [<theme>]
@@ -126,6 +129,7 @@ class Theme_Check_CLI {
 	/**
 	 * Display the theme checks in the CLI.
 	 *
+	 * @param string $slug The slug of the theme to display the checks for.
 	 * @return void
 	 */
 	private function display_themechecks_in_cli( $slug ) {
@@ -159,6 +163,7 @@ class Theme_Check_CLI {
 	/**
 	 * Display the theme checks in JSON format.
 	 *
+	 * @param string $slug The slug of the theme to display the checks for.
 	 * @return void
 	 */
 	private function display_themechecks_as_json( $slug ) {
