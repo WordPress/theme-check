@@ -13,9 +13,9 @@ class Theme_Check_CLI {
 	 *
 	 * @param array $args       Indexed array of positional arguments.
 	 * @param array $assoc_args Associative array of options.
+	 * @return void
 	 *
 	 * ## OPTIONS
-	 *
 	 * [<theme>]
 	 * : The slug of the theme to check. If not provided, checks the current theme.
 	 *
@@ -23,7 +23,6 @@ class Theme_Check_CLI {
 	 * : Output format. Accepts 'cli' or 'json'. Default: 'cli'.
 	 *
 	 * ## EXAMPLES
-	 *
 	 *     wp theme-check run
 	 *     wp theme-check run twentytwentyfour
 	 *     wp theme-check run --format=json
@@ -42,7 +41,7 @@ class Theme_Check_CLI {
 		$current_theme_slug = $current_theme->get_stylesheet();
 
 		// Use the provided theme slug if available, otherwise use the current theme
-		$check_theme_slug = !empty( $args[0] ) ? $args[0] : $current_theme_slug;
+		$check_theme_slug = ! empty( $args[0] ) ? $args[0] : $current_theme_slug;
 
 		// Get the theme
 		$theme = wp_get_theme( $check_theme_slug );
