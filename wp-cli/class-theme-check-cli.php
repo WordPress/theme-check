@@ -42,7 +42,7 @@ class Theme_Check_CLI {
 		$current_theme_slug = $current_theme->get_stylesheet();
 
 		// Use the provided theme slug if available, otherwise use the current theme
-		$check_theme_slug = $args[0] ?? $current_theme_slug;
+		$check_theme_slug = !empty( $args[0] ) ? $args[0] : $current_theme_slug;
 
 		// Get the theme
 		$theme = wp_get_theme( $check_theme_slug );
