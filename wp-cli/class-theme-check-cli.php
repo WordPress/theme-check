@@ -110,7 +110,7 @@ class Theme_Check_CLI {
 		}
 
 		foreach ( $messages as $message ) {
-			$clean_message = html_entity_decode( strip_tags( $message ), ENT_QUOTES, 'UTF-8' );
+			$clean_message = html_entity_decode( wp_strip_all_tags( $message ), ENT_QUOTES, 'UTF-8' );
 
 			if ( strpos( $clean_message, 'ERROR:' ) === 0 ) {
 				$processed_messages['errors'][] = $clean_message;
