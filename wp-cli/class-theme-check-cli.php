@@ -67,7 +67,7 @@ class Theme_Check_CLI {
 			if ( ! $success ) {
 				$json_output = array(
 					'check-completed' => false,
-					'result'          => "Error: Theme check failed for {$slug}.",
+					'result'          => "Error: Theme check failed for {$check_theme_slug}.",
 					'messages'        => array(),
 				);
 				WP_CLI::log( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
@@ -76,7 +76,7 @@ class Theme_Check_CLI {
 			$this->display_themechecks_as_json( $check_theme_slug );
 		} else {
 			if ( ! $success ) {
-				WP_CLI::error( "Theme check failed for {$slug}." );
+				WP_CLI::error( "Theme check failed for {$check_theme_slug}." );
 				return;
 			}
 			$this->display_themechecks_in_cli( $check_theme_slug );
