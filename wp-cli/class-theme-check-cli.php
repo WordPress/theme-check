@@ -11,10 +11,6 @@ class Theme_Check_Command extends WP_CLI_Command {
 	/**
 	 * Run a theme check on the specified theme or the current theme.
 	 *
-	 * @param array $args       Indexed array of positional arguments.
-	 * @param array $assoc_args Associative array of options.
-	 * @return void
-	 *
 	 * ## OPTIONS
 	 * [<theme>]
 	 * : The slug of the theme to check. If not provided, checks the current theme.
@@ -40,6 +36,10 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 * 
 	 *     # Check a specific theme and output results as JSON
 	 *     wp theme-check run twentytwentyfour --format=json
+	 * 
+	 * @param array $args       Indexed array of positional arguments.
+	 * @param array $assoc_args Associative array of options.
+	 * @return void
 	 */
 	public function run( $args, $assoc_args ) {
 		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'cli' );
