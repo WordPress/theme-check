@@ -25,18 +25,18 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 * ---
 	 *
 	 * ## EXAMPLES
-	 * 	   # Check the current active theme
+	 *     # Check the current active theme
 	 *     wp theme-check run
-	 * 
+	 *
 	 *     # Check a specific theme
 	 *     wp theme-check run twentytwentyfour
-	 * 
+	 *
 	 *     # Check the current active theme and output results as JSON
 	 *     wp theme-check run --format=json
-	 * 
+	 *
 	 *     # Check a specific theme and output results as JSON
 	 *     wp theme-check run twentytwentyfour --format=json
-	 * 
+	 *
 	 * @param array $args       Indexed array of positional arguments.
 	 * @param array $assoc_args Associative array of options.
 	 * @return void
@@ -58,8 +58,8 @@ class Theme_Check_Command extends WP_CLI_Command {
 			if ( $format === 'json' ) {
 				$json_output = array(
 					'completed' => false,
-					'result'          => "Error: Theme '{$check_theme_slug}' not found.",
-					'messages'        => array(),
+					'result'    => "Error: Theme '{$check_theme_slug}' not found.",
+					'messages'  => array(),
 				);
 				WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
 				return;
@@ -74,8 +74,8 @@ class Theme_Check_Command extends WP_CLI_Command {
 			if ( ! $success ) {
 				$json_output = array(
 					'completed' => false,
-					'result'          => "Error: Theme check failed for {$check_theme_slug}.",
-					'messages'        => array(),
+					'result'    => "Error: Theme check failed for {$check_theme_slug}.",
+					'messages'  => array(),
 				);
 				WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
 				return;
@@ -108,9 +108,12 @@ class Theme_Check_Command extends WP_CLI_Command {
 			}
 		}
 
-		$processed_messages = array_map(function($message) {
-			return html_entity_decode( wp_strip_all_tags( $message ), ENT_QUOTES, 'UTF-8' );
-		}, $messages);
+		$processed_messages = array_map(
+			function( $message ) {
+				return html_entity_decode( wp_strip_all_tags( $message ), ENT_QUOTES, 'UTF-8' );
+			},
+			$messages
+		);
 
 		return $processed_messages;
 	}
@@ -148,8 +151,8 @@ class Theme_Check_Command extends WP_CLI_Command {
 
 		$json_output = array(
 			'completed' => true,
-			'result'          => "Theme check completed for {$slug}.",
-			'messages'        => $processed_messages,
+			'result'    => "Theme check completed for {$slug}.",
+			'messages'  => $processed_messages,
 		);
 
 		WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
