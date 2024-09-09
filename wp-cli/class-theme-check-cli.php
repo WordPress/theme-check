@@ -43,10 +43,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 */
 	public function run( $args, $assoc_args ) {
 		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'cli' );
-		if ( ! in_array( $format, array( 'cli', 'json' ) ) ) {
-			WP_CLI::error( "Invalid format. Accepts 'cli' or 'json'." );
-			return;
-		}
+
 		// Get the current theme
 		$current_theme      = wp_get_theme();
 		$current_theme_slug = $current_theme->get_stylesheet();
@@ -60,15 +57,14 @@ class Theme_Check_Command extends WP_CLI_Command {
 		if ( ! $theme->exists() ) {
 			if ( $format === 'json' ) {
 				$json_output = array(
-					'check-completed' => false,
+					'completed' => false,
 					'result'          => "Error: Theme '{$check_theme_slug}' not found.",
 					'messages'        => array(),
 				);
-				WP_CLI::log( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
+				WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
 				return;
 			}
 			WP_CLI::error( "Theme '{$check_theme_slug}' not found." );
-			return;
 		}
 
 		// Run the checks.
@@ -77,18 +73,17 @@ class Theme_Check_Command extends WP_CLI_Command {
 		if ( $format === 'json' ) {
 			if ( ! $success ) {
 				$json_output = array(
-					'check-completed' => false,
+					'completed' => false,
 					'result'          => "Error: Theme check failed for {$check_theme_slug}.",
 					'messages'        => array(),
 				);
-				WP_CLI::log( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
+				WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
 				return;
 			}
 			$this->display_themechecks_as_json( $check_theme_slug );
 		} else {
 			if ( ! $success ) {
 				WP_CLI::error( "Theme check failed for {$check_theme_slug}." );
-				return;
 			}
 			$this->display_themechecks_in_cli( $check_theme_slug );
 		}
@@ -97,17 +92,11 @@ class Theme_Check_Command extends WP_CLI_Command {
 	/**
 	 * Process theme check messages.
 	 *
-	 * @return array Processed messages categorized by type.
+	 * @return array Processed messages.
 	 */
 	private function process_themecheck_messages() {
 		global $themechecks;
-		$messages           = array();
-		$processed_messages = array(
-			'errors'   => array(),
-			'warnings' => array(),
-			'infos'    => array(),
-			'others'   => array(),
-		);
+		$messages = array();
 
 		foreach ( $themechecks as $check ) {
 			if ( $check instanceof themecheck ) {
@@ -119,19 +108,9 @@ class Theme_Check_Command extends WP_CLI_Command {
 			}
 		}
 
-		foreach ( $messages as $message ) {
-			$clean_message = html_entity_decode( wp_strip_all_tags( $message ), ENT_QUOTES, 'UTF-8' );
-
-			if ( strpos( $clean_message, 'ERROR:' ) === 0 ) {
-				$processed_messages['errors'][] = $clean_message;
-			} elseif ( strpos( $clean_message, 'WARNING:' ) === 0 ) {
-				$processed_messages['warnings'][] = $clean_message;
-			} elseif ( strpos( $clean_message, 'INFO' ) === 0 ) {
-				$processed_messages['infos'][] = $clean_message;
-			} else {
-				$processed_messages['others'][] = $clean_message;
-			}
-		}
+		$processed_messages = array_map(function($message) {
+			return html_entity_decode( wp_strip_all_tags( $message ), ENT_QUOTES, 'UTF-8' );
+		}, $messages);
 
 		return $processed_messages;
 	}
@@ -147,26 +126,14 @@ class Theme_Check_Command extends WP_CLI_Command {
 
 		WP_CLI::success( "Theme check completed for {$slug}." );
 
-		if (
-			! empty( $processed_messages['errors'] ) ||
-			! empty( $processed_messages['warnings'] ) ||
-			! empty( $processed_messages['infos'] ) ||
-			! empty( $processed_messages['others'] )
-		) {
-			foreach ( $processed_messages['errors'] as $error ) {
-				WP_CLI::error( ltrim( $error, 'ERROR: ' ), false );
-			}
-			foreach ( $processed_messages['warnings'] as $warning ) {
-				WP_CLI::warning( ltrim( $warning, 'WARNING: ' ) );
-			}
-			foreach ( $processed_messages['infos'] as $info ) {
-				WP_CLI::log( $info );
-			}
-			foreach ( $processed_messages['others'] as $other ) {
-				WP_CLI::log( 'LOG: ' . $other );
-			}
-		} else {
-			WP_CLI::success( 'No issues found.' );
+		if ( empty( $processed_messages ) ) {
+			WP_CLI::line( 'No issues found.' );
+			return;
+		}
+
+		foreach ( $processed_messages as $message ) {
+			WP_CLI::line( '' );
+			WP_CLI::line( $message );
 		}
 	}
 
@@ -180,11 +147,11 @@ class Theme_Check_Command extends WP_CLI_Command {
 		$processed_messages = $this->process_themecheck_messages();
 
 		$json_output = array(
-			'check-completed' => true,
+			'completed' => true,
 			'result'          => "Theme check completed for {$slug}.",
 			'messages'        => $processed_messages,
 		);
 
-		WP_CLI::log( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
+		WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
 	}
 }
