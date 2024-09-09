@@ -20,12 +20,25 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 * : The slug of the theme to check. If not provided, checks the current theme.
 	 *
 	 * [--format=<format>]
-	 * : Output format. Accepts 'cli' or 'json'. Default: 'cli'.
+	 * : Render output in a particular format.
+	 * ---
+	 * default: cli
+	 * options:
+	 *   - cli
+	 *   - json
+	 * ---
 	 *
 	 * ## EXAMPLES
+	 * 	   # Check the current active theme
 	 *     wp theme-check run
+	 * 
+	 *     # Check a specific theme
 	 *     wp theme-check run twentytwentyfour
+	 * 
+	 *     # Check the current active theme and output results as JSON
 	 *     wp theme-check run --format=json
+	 * 
+	 *     # Check a specific theme and output results as JSON
 	 *     wp theme-check run twentytwentyfour --format=json
 	 */
 	public function run( $args, $assoc_args ) {
