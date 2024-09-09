@@ -4,10 +4,10 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	$parent_dir = dirname( __DIR__ );
 	require_once $parent_dir . '/checkbase.php';
 	require_once $parent_dir . '/main.php';
-	WP_CLI::add_command( 'theme-check', 'Theme_Check_CLI' );
+	WP_CLI::add_command( 'theme-check', 'Theme_Check_Command' );
 }
 
-class Theme_Check_CLI {
+class Theme_Check_Command extends WP_CLI_Command {
 	/**
 	 * Run a theme check on the specified theme or the current theme.
 	 *
@@ -29,13 +29,11 @@ class Theme_Check_CLI {
 	 *     wp theme-check run twentytwentyfour --format=json
 	 */
 	public function run( $args, $assoc_args ) {
-		// Get the output format
 		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'cli' );
 		if ( ! in_array( $format, array( 'cli', 'json' ) ) ) {
 			WP_CLI::error( "Invalid format. Accepts 'cli' or 'json'." );
 			return;
 		}
-
 		// Get the current theme
 		$current_theme      = wp_get_theme();
 		$current_theme_slug = $current_theme->get_stylesheet();
