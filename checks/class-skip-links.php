@@ -32,7 +32,7 @@ class Skip_Links_Check implements themecheck {
 
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
-			$this->wp_theme = $data['theme'];
+			$this->wp_theme       = $data['theme'];
 			$this->is_block_theme = wp_is_block_theme();
 		}
 	}
@@ -122,6 +122,14 @@ class Skip_Links_Check implements themecheck {
 				$pattern  = '/\* Slug: ' . preg_quote( $slug, '/' ) . '\b/';
 				if ( preg_match( $pattern, $contents ) ) {
 					$has_tag = strpos( $contents, '<main' ) !== false;
+					if ( ! $has_tag ) {
+						$nested_patterns_slugs = $this->template_has_patterns( $contents );
+						if ( $nested_patterns_slugs ) {
+							foreach ( $nested_patterns_slugs as $slug ) {
+								$has_tag = $this->pattern_has_tag( $slug );
+							}
+						}
+					}
 				}
 			}
 		}
