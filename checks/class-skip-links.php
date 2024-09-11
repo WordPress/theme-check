@@ -82,7 +82,7 @@ class Skip_Links_Check implements themecheck {
 				'<span class="tc-lead tc-required">%s</span> %s ',
 				__( 'REQUIRED', 'theme-check' ),
 				sprintf(
-					__( 'Skip links are missing from the following templates: %s Please make sure the templates have a <main> tag', 'theme-check' ),
+					__( 'Skip links are missing from the following templates: %s Please make sure the templates have a &lt;main&gt; tag', 'theme-check' ),
 					$info
 				)
 			);
