@@ -33,17 +33,7 @@ class Skip_Links_Check implements themecheck {
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
 			$this->wp_theme = $data['theme'];
-			$theme_dir      = $this->wp_theme->get_stylesheet_directory();
-			// Check if the theme has all the required files.
-			if (
-				file_exists( $theme_dir . '/theme.json' ) ||
-				(
-					file_exists( $theme_dir . '/templates/index.html' ) &&
-					file_exists( $theme_dir . '/block-templates/index.html' )
-				)
-			) {
-				$this->is_block_theme = true;
-			}
+			$this->is_block_theme = wp_is_block_theme();
 		}
 	}
 
