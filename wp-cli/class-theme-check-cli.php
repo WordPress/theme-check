@@ -59,7 +59,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 		}
 
 		// Run the checks
-		$success = run_themechecks_against_theme( $theme, $check_theme_slug );
+		$success            = run_themechecks_against_theme( $theme, $check_theme_slug );
 		$processed_messages = $this->process_themecheck_messages();
 
 		// The validation value is a boolean, but if the format is not JSON, we want to return a string.
@@ -68,7 +68,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 			: "There are no required changes in the theme {$check_theme_slug}.";
 
 		if ( ! $success ) {
-			$validation_value = 
+			$validation_value =
 				// If the format is JSON, return false, otherwise return a message
 				$format === 'json'
 					? false
@@ -76,7 +76,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 		}
 
 		$processed_messages[] = array(
-			'type' => 'VALIDATION',
+			'type'  => 'VALIDATION',
 			'value' => $validation_value,
 		);
 
@@ -108,23 +108,23 @@ class Theme_Check_Command extends WP_CLI_Command {
 		$processed_messages = array_map(
 			function( $message ) {
 				if ( preg_match( '/<span[^>]*>(.*?)<\/span>(.*)/', $message, $matches ) ) {
-					$key = $matches[1];
+					$key   = $matches[1];
 					$value = $matches[2];
 				} else {
-					$key = '';
+					$key   = '';
 					$value = $message;
 				}
 
-				$key   = wp_strip_all_tags( $key );
-				$key   = html_entity_decode( $key, ENT_QUOTES, 'UTF-8' );
-				$key   = rtrim( $key, ':' );
+				$key = wp_strip_all_tags( $key );
+				$key = html_entity_decode( $key, ENT_QUOTES, 'UTF-8' );
+				$key = rtrim( $key, ':' );
 
 				$value = wp_strip_all_tags( $value );
 				$value = html_entity_decode( $value, ENT_QUOTES, 'UTF-8' );
 				$value = ltrim( $value, ': ' );
 
 				return array(
-					'type' => trim( $key ),
+					'type'  => trim( $key ),
 					'value' => trim( $value ),
 				);
 			},
