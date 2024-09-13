@@ -18,9 +18,9 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 * [--format=<format>]
 	 * : Render output in a particular format.
 	 * ---
-	 * default: cli
+	 * default: table
 	 * options:
-	 *   - cli
+	 *   - table
 	 *   - json
 	 * ---
 	 *
@@ -42,7 +42,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 * @return void
 	 */
 	public function run( $args, $assoc_args ) {
-		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'cli' );
+		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'table' );
 
 		// Get the current theme
 		$current_theme      = wp_get_theme();
@@ -55,38 +55,35 @@ class Theme_Check_Command extends WP_CLI_Command {
 		$theme = wp_get_theme( $check_theme_slug );
 
 		if ( ! $theme->exists() ) {
-			if ( $format === 'json' ) {
-				$json_output = array(
-					'completed' => false,
-					'result'    => "Error: Theme '{$check_theme_slug}' not found.",
-					'messages'  => array(),
-				);
-				WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
-				return;
-			}
 			WP_CLI::error( "Theme '{$check_theme_slug}' not found." );
 		}
 
-		// Run the checks.
+		// Run the checks
 		$success = run_themechecks_against_theme( $theme, $check_theme_slug );
+		$processed_messages = $this->process_themecheck_messages();
 
-		if ( $format === 'json' ) {
-			if ( ! $success ) {
-				$json_output = array(
-					'completed' => false,
-					'result'    => "Error: Theme check failed for {$check_theme_slug}.",
-					'messages'  => array(),
-				);
-				WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
-				return;
-			}
-			$this->display_themechecks_as_json( $check_theme_slug );
-		} else {
-			if ( ! $success ) {
-				WP_CLI::error( "Theme check failed for {$check_theme_slug}." );
-			}
-			$this->display_themechecks_in_cli( $check_theme_slug );
+		// The validation value is a boolean, but if the format is not JSON, we want to return a string.
+		$validation_value = $format === 'json'
+			? false
+			: "There are no required changes in the theme {$check_theme_slug}.";
+
+		if ( ! $success ) {
+			$validation_value = 
+				// If the format is JSON, return false, otherwise return a message
+				$format === 'json'
+					? true
+					: "There are required changes in the theme {$check_theme_slug}.";
 		}
+
+		$processed_messages[] = array(
+			'type' => 'VALIDATION',
+			'value' => $validation_value,
+		);
+
+		WP_CLI\Utils\format_items( $format, $processed_messages, array( 'type', 'value' ) );
+		
+		// Set the exit code based on $success
+		WP_CLI::halt( $success ? 0 : 1 );
 	}
 
 	/**
@@ -110,51 +107,30 @@ class Theme_Check_Command extends WP_CLI_Command {
 
 		$processed_messages = array_map(
 			function( $message ) {
-				return html_entity_decode( wp_strip_all_tags( $message ), ENT_QUOTES, 'UTF-8' );
+				if ( preg_match( '/<span[^>]*>(.*?)<\/span>(.*)/', $message, $matches ) ) {
+					$key = $matches[1];
+					$value = $matches[2];
+				} else {
+					$key = '';
+					$value = $message;
+				}
+
+				$key   = wp_strip_all_tags( $key );
+				$key   = html_entity_decode( $key, ENT_QUOTES, 'UTF-8' );
+				$key   = rtrim( $key, ':' );
+
+				$value = wp_strip_all_tags( $value );
+				$value = html_entity_decode( $value, ENT_QUOTES, 'UTF-8' );
+				$value = ltrim( $value, ': ' );
+
+				return array(
+					'type' => trim( $key ),
+					'value' => trim( $value ),
+				);
 			},
 			$messages
 		);
 
 		return $processed_messages;
-	}
-
-	/**
-	 * Display the theme checks in the CLI.
-	 *
-	 * @param string $slug The slug of the theme to display the checks for.
-	 * @return void
-	 */
-	private function display_themechecks_in_cli( $slug ) {
-		$processed_messages = $this->process_themecheck_messages();
-
-		WP_CLI::success( "Theme check completed for {$slug}." );
-
-		if ( empty( $processed_messages ) ) {
-			WP_CLI::line( 'No issues found.' );
-			return;
-		}
-
-		foreach ( $processed_messages as $message ) {
-			WP_CLI::line( '' );
-			WP_CLI::line( $message );
-		}
-	}
-
-	/**
-	 * Display the theme checks in JSON format.
-	 *
-	 * @param string $slug The slug of the theme to display the checks for.
-	 * @return void
-	 */
-	private function display_themechecks_as_json( $slug ) {
-		$processed_messages = $this->process_themecheck_messages();
-
-		$json_output = array(
-			'completed' => true,
-			'result'    => "Theme check completed for {$slug}.",
-			'messages'  => $processed_messages,
-		);
-
-		WP_CLI::line( wp_json_encode( $json_output, JSON_PRETTY_PRINT ) );
 	}
 }
