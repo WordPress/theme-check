@@ -64,14 +64,14 @@ class Theme_Check_Command extends WP_CLI_Command {
 
 		// The validation value is a boolean, but if the format is not JSON, we want to return a string.
 		$validation_value = $format === 'json'
-			? false
+			? $success
 			: "There are no required changes in the theme {$check_theme_slug}.";
 
 		if ( ! $success ) {
 			$validation_value = 
 				// If the format is JSON, return false, otherwise return a message
 				$format === 'json'
-					? true
+					? $success
 					: "There are required changes in the theme {$check_theme_slug}.";
 		}
 
@@ -81,7 +81,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 		);
 
 		WP_CLI\Utils\format_items( $format, $processed_messages, array( 'type', 'value' ) );
-		
+
 		// Set the exit code based on $success
 		WP_CLI::halt( $success ? 0 : 1 );
 	}
