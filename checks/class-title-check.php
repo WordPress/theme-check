@@ -50,7 +50,7 @@ class Title_Check implements themecheck {
 			}
 
 			// Look for anything that looks like <svg>...</svg> and exclude it (inline svg's have titles too).
-			$file_content = preg_replace( '/<svg.*>.*<\/svg>/s', '', $file_content );
+			$file_content = preg_replace( '/<svg.*>.*<\/svg>/i', '', $file_content );
 
 			// Look for <title> and </title> tags.
 			checkcount();
