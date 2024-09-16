@@ -12,7 +12,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 class Theme_Check_Command extends WP_CLI_Command {
 	/**
 	 * Run a theme check on the specified theme or the current theme.
-	 * 
+	 *
 	 * ## OPTIONS
 	 * [<theme>]
 	 * : The slug of the theme to check. If not provided, checks the current theme.
@@ -42,7 +42,6 @@ class Theme_Check_Command extends WP_CLI_Command {
 	 * @param array $args       Indexed array of positional arguments.
 	 * @param array $assoc_args Associative array of options.
 	 * @return void
-	 * 
 	 */
 	public function run( $args, $assoc_args ) {
 		$format = \WP_CLI\Utils\get_flag_value( $assoc_args, 'format', 'table' );
