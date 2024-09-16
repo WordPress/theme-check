@@ -62,24 +62,6 @@ class Theme_Check_Command extends WP_CLI_Command {
 		$success            = run_themechecks_against_theme( $theme, $check_theme_slug );
 		$processed_messages = $this->process_themecheck_messages();
 
-		// The validation value is a boolean, but if the format is not JSON, we want to return a string.
-		$validation_value = $format === 'json'
-			? true
-			: "There are no required changes in the theme {$check_theme_slug}.";
-
-		if ( ! $success ) {
-			$validation_value =
-				// If the format is JSON, return false, otherwise return a message
-				$format === 'json'
-					? false
-					: "There are required changes in the theme {$check_theme_slug}.";
-		}
-
-		$processed_messages[] = array(
-			'type'  => 'VALIDATION',
-			'value' => $validation_value,
-		);
-
 		WP_CLI\Utils\format_items( $format, $processed_messages, array( 'type', 'value' ) );
 
 		// Set the exit code based on $success
