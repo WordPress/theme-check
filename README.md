@@ -56,6 +56,8 @@ To use with [wp-cli](https://wp-cli.org/), ensure the theme check plugin is acti
 
 `wp theme-check run [<theme>] [--format=<format>]`
 
+On success, the command returns a formatted table of results from the theme check plugin.
+
 #### Options
 | Option | Accepts | Required | Default
 | -- | -- | -- | -- | 
