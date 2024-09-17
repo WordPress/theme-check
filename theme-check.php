@@ -14,6 +14,10 @@ class ThemeCheckMain {
 	function __construct() {
 		add_action( 'admin_init', array( $this, 'tc_i18n' ) );
 		add_action( 'admin_menu', array( $this, 'themecheck_add_page' ) );
+
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			include 'wp-cli/class-theme-check-cli.php';
+		}
 	}
 
 	function tc_i18n() {
