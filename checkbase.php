@@ -378,6 +378,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Theme_Support_Title_Tag_Check
 			|| $check instanceof Screen_Reader_Text_Check
 			|| $check instanceof Include_Check
+			|| $check instanceof Block_Patterns_Check
 		) {
 			unset( $themechecks[ $key ] );
 		}
