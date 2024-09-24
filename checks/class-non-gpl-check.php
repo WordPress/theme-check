@@ -56,6 +56,8 @@ class Non_GPL_Check implements themecheck {
 					),
 					'<a href="' . esc_url( $link_url ) . '" target="_blank">' . __( 'View license (opens in a new window).', 'theme-check' ) . '</a>'
 				);
+				// Return false to indicate that the check failed with a REQUIRED change message.
+				$ret = false;
 			}
 		}
 
