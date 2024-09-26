@@ -29,32 +29,32 @@ class FSE_Templates_H1_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$ret = true;
-        $templates = get_block_templates();
-        $templates_with_multiple_h1_tags = array();
-        $templates_with_no_h1_tags = array();
+		$ret                             = true;
+		$templates                       = get_block_templates();
+		$templates_with_multiple_h1_tags = array();
+		$templates_with_no_h1_tags       = array();
 
-        foreach ($templates as $template) {
-            $blocks = parse_blocks( $template->content );
-            $h1_count = $this->count_h1_tags_recursively( $blocks );
+		foreach ( $templates as $template ) {
+			$blocks   = parse_blocks( $template->content );
+			$h1_count = $this->count_h1_tags_recursively( $blocks );
 
-            if ( $h1_count > 1 ) {
-                $ret = false;
-                $templates_with_multiple_h1_tags[] = $template->slug;
-            }
+			if ( $h1_count > 1 ) {
+				$ret                               = false;
+				$templates_with_multiple_h1_tags[] = $template->slug;
+			}
 
-            if ( $h1_count === 0 ) {
-                $templates_with_no_h1_tags[] = $template->slug;
-            }
-        }
+			if ( $h1_count === 0 ) {
+				$templates_with_no_h1_tags[] = $template->slug;
+			}
+		}
 
-        if ( ! empty( $templates_with_multiple_h1_tags ) ) {
-            $this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'The following templates have multiple h1 tags: %s', 'theme-check' ), '<strong>' . implode( ', ', $templates_with_multiple_h1_tags ) . '</strong>' );
-        }
+		if ( ! empty( $templates_with_multiple_h1_tags ) ) {
+			$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'The following templates have multiple h1 tags: %s', 'theme-check' ), '<strong>' . implode( ', ', $templates_with_multiple_h1_tags ) . '</strong>' );
+		}
 
-        if ( ! empty( $templates_with_no_h1_tags ) ) {
-            $this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'The following templates have no h1 tags: %s', 'theme-check' ), '<strong>' . implode( ', ', $templates_with_no_h1_tags ) . '</strong>' );
-        }
+		if ( ! empty( $templates_with_no_h1_tags ) ) {
+			$this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'The following templates have no h1 tags: %s', 'theme-check' ), '<strong>' . implode( ', ', $templates_with_no_h1_tags ) . '</strong>' );
+		}
 
 		return $ret;
 	}
@@ -71,12 +71,12 @@ class FSE_Templates_H1_Check implements themecheck {
 			if ( ! empty( $block['innerBlocks'] ) ) {
 				$h1_count += $this->count_h1_tags_recursively( $block['innerBlocks'] );
 			} else {
-                if ( $block['blockName'] === 'core/heading' || $block['blockName'] === 'core/post-title' ){
-                    if ( isset( $block['attrs']['level'] ) && $block['attrs']['level'] === 1 ) {
-                        $h1_count++;
-                    }
-                }
-            }
+				if ( $block['blockName'] === 'core/heading' || $block['blockName'] === 'core/post-title' ) {
+					if ( isset( $block['attrs']['level'] ) && $block['attrs']['level'] === 1 ) {
+						$h1_count++;
+					}
+				}
+			}
 		}
 		return $h1_count;
 	}
