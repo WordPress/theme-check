@@ -62,7 +62,7 @@ On success, the command returns a formatted table of results from the theme chec
 | Option | Accepts | Required | Default
 | -- | -- | -- | -- | 
 | `theme` | The slug of the theme to check | No | Current theme slug
-| `format` | `cli` or `json` | No | `cli`
+| `format` | `table` or `json` | No | `table`
 
 #### Examples
 `wp theme-check run`
