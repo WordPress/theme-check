@@ -39,7 +39,6 @@ class FSE_Templates_H1_Check implements themecheck {
 			$h1_count = $this->count_h1_tags_recursively( $blocks );
 
 			if ( $h1_count > 1 ) {
-				$ret                               = false;
 				$templates_with_multiple_h1_tags[] = $template->slug;
 			}
 
@@ -49,7 +48,7 @@ class FSE_Templates_H1_Check implements themecheck {
 		}
 
 		if ( ! empty( $templates_with_multiple_h1_tags ) ) {
-			$this->error[] = sprintf( '<span class="tc-lead tc-required">' . __( 'REQUIRED', 'theme-check' ) . '</span>: ' . __( 'The following templates have multiple h1 tags: %s', 'theme-check' ), '<strong>' . implode( ', ', $templates_with_multiple_h1_tags ) . '</strong>' );
+			$this->error[] = sprintf( '<span class="tc-lead tc-warning">' . __( 'WARNING', 'theme-check' ) . '</span>: ' . __( 'The following templates have multiple h1 tags: %s', 'theme-check' ), '<strong>' . implode( ', ', $templates_with_multiple_h1_tags ) . '</strong>' );
 		}
 
 		if ( ! empty( $templates_with_no_h1_tags ) ) {
