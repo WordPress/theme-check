@@ -1,28 +1,52 @@
 name: Deploy to WordPress.org
+
 on:
-  release:
-    types: [published]
+    pull_request:
+        types: [closed]
+        branches:
+            - trunk
+
 jobs:
-  tag:
-    name: New release
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: WordPress Plugin Deploy
-      id: deploy
-      uses: 10up/action-wordpress-plugin-deploy@stable
-      with:
-        generate-zip: true
-      env:
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ${{github.workspace}}/${{ github.event.repository.name }}.zip
-        asset_name: ${{ github.event.repository.name }}.zip
-        asset_content_type: application/zip
+    deploy-to-wordpress:
+        if: >
+            github.event_name == 'pull_request' &&
+            github.event.pull_request.merged == true &&
+            startsWith(github.event.pull_request.head.ref, 'release/') &&
+            ( contains(github.event.pull_request.head.ref, '/major') || contains(github.event.pull_request.head.ref, '/minor') || contains(github.event.pull_request.head.ref, '/patch') ) &&
+            ( github.event.pull_request.user.login == 'github-actions[bot]' )
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+            - name: Install node dependencies
+              run: npm install
+
+            - name: Get New Version
+              id: get-version
+              run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+            - name: Create Tag and Release on GitHub
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  VERSION=v${{ steps.get-version.outputs.VERSION }}
+                  git tag $VERSION
+                  git push origin $VERSION
+                  gh release create $VERSION --generate-notes
+
+            - name: Deploy Plugin to WordPress Plugin Directory
+              uses: 10up/action-wordpress-plugin-deploy@stable
+              env:
+                  SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                  SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+                  VERSION: ${{ steps.get-version.outputs.VERSION }}
+
+            - name: WordPress.org plugin asset/readme update
+              uses: 10up/action-wordpress-plugin-asset-update@stable
+              env:
+                  SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                  SVN_USERNAME: ${{ secrets.SVN_USERNAME }}

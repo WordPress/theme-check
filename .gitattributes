@@ -10,6 +10,8 @@
 /.gitattributes export-ignore
 /composer.json export-ignore
 /composer.lock export-ignore
+/package.json export-ignore
+/update-version-and-changelog.js export-ignore
 
 #
 # Auto detect text files and perform LF normalization
