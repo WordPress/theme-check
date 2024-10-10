@@ -61,7 +61,7 @@ jobs:
               run: |
                   gh pr create \
                   --title "[Automation] New ${{ github.event.inputs.release_type }} Release: ${{ steps.update-version.outputs.NEW_VERSION }}" \
-                  --base trunk \
+                  --base master \
                   --head ${{ steps.create-branch.outputs.BRANCH_NAME }} \
                   --label "Release: ${{ github.event.inputs.release_type }}" \
                   --body "

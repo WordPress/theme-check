@@ -41,7 +41,7 @@ async function getChangesSinceLastTag() {
 
 // To know if there are changes since the last tag.
 // we are not using getChangesSinceGitTag because it returns the just the merges and not the commits.
-// So for example if a hotfix was committed directly to trunk this function will detect it but getChangesSinceGitTag will not.
+// So for example if a hotfix was committed directly to master this function will detect it but getChangesSinceGitTag will not.
 async function getHasChangesSinceGitTag( tag ) {
 	const changes = await git.log( [ `HEAD...${ tag }` ] );
 	return changes?.all?.length > 0;
