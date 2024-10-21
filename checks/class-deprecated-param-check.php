@@ -67,6 +67,7 @@ class Deprecated_Param_Check implements themecheck {
 							'<span class="tc-lead tc-warning">%s</span>: %s %s',
 							__( 'WARNING', 'theme-check' ),
 							sprintf(
+								// translators: %1$s is the error found, %2$s is the file name where the error was found, and %3$s is the suggested replacement.
 								__( '%1$s was found in the file %2$s. Use %3$s instead.', 'theme-check' ),
 								'<strong>' . $error . '</strong>',
 								'<strong>' . $filename . '</strong>',
