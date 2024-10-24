@@ -64,7 +64,7 @@ class Constants_Check implements themecheck {
 						),
 						$grep
 					);
-					$ret           = false;
+					$ret = false;
 				}
 			}
 		}
