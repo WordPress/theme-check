@@ -43,7 +43,7 @@ class Comments_Check implements themecheck {
 					'<span class="tc-lead tc-recommended">%s</span>: %s',
 					__( 'RECOMMENDED', 'theme-check' ),
 					sprintf(
-						/* Translators: %1$s is the missing key, and %2$s is the additional check or message related to the missing key. */
+						/* translators: %1$s is the missing key, and %2$s is the additional check or message related to the missing key. */
 						__( 'Could not find %1$s. %2$s', 'theme-check' ),
 						'<strong>' . $key . '</strong>',
 						$check
