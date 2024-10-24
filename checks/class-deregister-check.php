@@ -26,7 +26,7 @@ class Deregister_Check implements themecheck {
 					'<span class="tc-lead tc-warning">%s</span>: %s %s',
 					__( 'WARNING', 'theme-check' ),
 					sprintf(
-						// translators: %1$s is the file path where wp_deregister_script is found
+						/* Translators: %1$s is the file path where wp_deregister_script is found */
 						__( 'Found wp_deregister_script in %1$s. Themes must not deregister scripts that are included in WordPress. Deregistering third party scripts that are registered by parent themes is allowed.', 'theme-check' ),
 						'<strong>' . tc_filename( $file_path ) . '</strong>'
 					),

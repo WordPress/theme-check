@@ -51,7 +51,7 @@ class Non_GPL_Check implements themecheck {
 					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
-						// translators: %s is the link slug that references the asset
+						/* Translators: %s is the link slug that references the asset */
 						__( 'Found a reference to %s. Assets from this website does not use a license that is compatible with GPL.', 'theme-check' ),
 						'<code>' . esc_html( $link_slug ) . '</code>'
 					),
