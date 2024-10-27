@@ -96,7 +96,8 @@ function check_main( $theme_slug ) {
 
 	$results = display_themechecks();
 
-	if ( ! $success ) {echo '<h2>' . esc_html( sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), $theme['Title'] ) ) . '</h2>';
+	if ( ! $success ) {
+		echo '<h2>' . esc_html( sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), $theme['Title'] ) ) . '</h2>';
 	} else {
 		echo '<h2>' . esc_html( sprintf( __( '%1$s passed the tests', 'theme-check' ), $theme['Title'] ) ) . '</h2>';
 		tc_success();
