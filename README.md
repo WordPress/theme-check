@@ -65,10 +65,10 @@ On success, the command returns a formatted table of results from the theme chec
 | `format` | `table` or `json` | No | `table`
 
 #### Examples
-`wp theme-check run`
-`wp theme-check run twentytwentyfour`
-`wp theme-check run --format=json`
-`wp theme-check run twentytwentyfour --format=json`
+- `wp theme-check run`
+- `wp theme-check run twentytwentyfour`
+- `wp theme-check run --format=json`
+- `wp theme-check run twentytwentyfour --format=json`
 
 ## Contributors
 Otto42, pross, The theme review team
