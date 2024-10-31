@@ -86,6 +86,7 @@ class Skip_Links_Check implements themecheck {
 					$info
 				)
 			);
+			return false;
 		}
 
 		return true;
