@@ -50,10 +50,10 @@ class Skip_Links_Check implements themecheck {
 		$templates_without_main_tag = array();
 
 		foreach ( $other_files as $php_key => $file ) {
-			//if the file is a template, print the name of the file
+			// if the file is a template, print the name of the file
 			if ( strpos( $php_key, 'templates/' ) !== false ) {
 
-				$file_name = tc_filename( $php_key );
+				$file_name    = tc_filename( $php_key );
 				$has_main_tag = strpos( $file, '<main' ) !== false;
 
 				if ( ! $has_main_tag ) {
