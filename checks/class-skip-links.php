@@ -66,11 +66,15 @@ class Skip_Links_Check implements themecheck {
 					foreach ( $pattern_slugs as $slug ) {
 						$has_main_tag = $this->pattern_has_tag( $slug );
 						if ( ! $has_main_tag ) {
-							$templates_without_main_tag[] = $file_name;
+							if ( ! in_array( $file_name, $templates_without_main_tag ) ) {
+								$templates_without_main_tag[] = $file_name;
+							}
 						}
 					}
 				} else {
-					$templates_without_main_tag[] = $file_name;
+					if ( ! in_array( $file_name, $templates_without_main_tag ) ) {
+						$templates_without_main_tag[] = $file_name;
+					}
 				}
 			}
 		}
