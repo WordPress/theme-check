@@ -49,31 +49,28 @@ class Skip_Links_Check implements themecheck {
 		$info                       = '';
 		$templates_without_main_tag = array();
 
-		$directory = 'templates'; // Path to the folder containing HTML files
-		$theme_dir = $this->wp_theme->get_stylesheet_directory();
+		foreach ( $other_files as $php_key => $file ) {
+			//if the file is a template, print the name of the file
+			if ( strpos( $php_key, 'templates/' ) !== false ) {
 
-		// Get all HTML files in the directory
-		$files = glob( $theme_dir . '/' . $directory . '/*.html' );
+				$file_name = tc_filename( $php_key );
+				$has_main_tag = strpos( $file, '<main' ) !== false;
 
-		foreach ( $files as $file ) {
-			$contents     = file_get_contents( $file );
-			$has_main_tag = strpos( $contents, '<main' ) !== false;
-			$file_name    = basename( $file );
-
-			if ( ! $has_main_tag ) {
-				$pattern_slugs = $this->template_has_patterns( $contents );
-				if ( $pattern_slugs ) {
-					foreach ( $pattern_slugs as $slug ) {
-						$has_main_tag = $this->pattern_has_tag( $slug );
-						if ( ! $has_main_tag ) {
-							if ( ! in_array( $file_name, $templates_without_main_tag ) ) {
-								$templates_without_main_tag[] = $file_name;
+				if ( ! $has_main_tag ) {
+					$pattern_slugs = $this->template_has_patterns( $file );
+					if ( $pattern_slugs ) {
+						foreach ( $pattern_slugs as $slug ) {
+							$has_main_tag = $this->pattern_has_tag( $slug );
+							if ( ! $has_main_tag ) {
+								if ( ! in_array( $file_name, $templates_without_main_tag ) ) {
+									$templates_without_main_tag[] = $file_name;
+								}
 							}
 						}
-					}
-				} else {
-					if ( ! in_array( $file_name, $templates_without_main_tag ) ) {
-						$templates_without_main_tag[] = $file_name;
+					} else {
+						if ( ! in_array( $file_name, $templates_without_main_tag ) ) {
+							$templates_without_main_tag[] = $file_name;
+						}
 					}
 				}
 			}
