@@ -54,19 +54,18 @@ class Title_Check implements themecheck {
 
 			// Look for <title> and </title> tags.
 			checkcount();
-			if ( ( is_string( $file_content ) && false !== strpos( $file_content, '<title>' ) ) || 
-			     ( is_string( $file_content ) && false !== strpos( $file_content, '</title>' ) ) ) {
-			    $filename      = tc_filename( $file_path );
-			    $grep          = tc_grep( '<title>', $file_path );
-			    $this->error[] = sprintf(
-			        '<span class="tc-lead tc-recommended">%s</span>: %s. %s',
-			        __( 'RECOMMENDED', 'theme-check' ),
-			        sprintf(
-			            __( '<strong>&lt;title&gt;</strong> tag was found in the file %1$s. Document titles must not be hard coded, use <strong>add_theme_support( "title-tag" )</strong> instead', 'theme-check' ),
-			            '<strong>' . tc_filename( $file_path ) . '</strong>'
-			        ),
-			        $grep
-			    );
+			if ( ( is_string( $file_content ) && false !== strpos( $file_content, '<title>' ) ) || ( is_string( $file_content ) && false !== strpos( $file_content, '</title>' ) ) ) {
+				$filename      = tc_filename( $file_path );
+				$grep          = tc_grep( '<title>', $file_path );
+				$this->error[] = sprintf(
+					'<span class="tc-lead tc-recommended">%s</span>: %s. %s',
+					__( 'RECOMMENDED', 'theme-check' ),
+					sprintf(
+						__( '<strong>&lt;title&gt;</strong> tag was found in the file %1$s. Document titles must not be hard coded, use <strong>add_theme_support( "title-tag" )</strong> instead', 'theme-check' ),
+						'<strong>' . tc_filename( $file_path ) . '</strong>'
+					),
+					$grep
+				);
 			}
 		}
 
