@@ -29,9 +29,11 @@ class Title_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$php = implode( ' ', $php_files );
-
 		foreach ( $php_files as $file_path => $file_content ) {
+
+			if ( empty( $file_content ) ) {
+				continue;
+			}
 
 			// Check whether there is a call to wp_title().
 			checkcount();
