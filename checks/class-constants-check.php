@@ -56,6 +56,7 @@ class Constants_Check implements themecheck {
 						'<span class="tc-lead tc-required">%s</span>: %s %s',
 						__( 'REQUIRED', 'theme-check' ),
 						sprintf(
+							/* translators: %1$s is the error message, %2$s is the filename, %3$s is the suggested check */
 							__( '%1$s was found in the file %2$s. Use %3$s instead.', 'theme-check' ),
 							'<strong>' . $error . '</strong>',
 							'<strong>' . $filename . '</strong>',
@@ -63,7 +64,7 @@ class Constants_Check implements themecheck {
 						),
 						$grep
 					);
-					$ret           = false;
+					$ret = false;
 				}
 			}
 		}
