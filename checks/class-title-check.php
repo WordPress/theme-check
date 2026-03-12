@@ -31,7 +31,7 @@ class Title_Check implements themecheck {
 
 		foreach ( $php_files as $file_path => $file_content ) {
 
-			if ( empty( $file_content ) ) {
+			if ( ! is_string( $file_content ) || '' === $file_content ) {
 				continue;
 			}
 
@@ -53,6 +53,10 @@ class Title_Check implements themecheck {
 
 			// Look for anything that looks like <svg>...</svg> and exclude it (inline svg's have titles too).
 			$file_content = preg_replace( '/<svg.*>.*<\/svg>/s', '', $file_content );
+
+			if ( ! is_string( $file_content ) ) {
+				continue;
+			}
 
 			// Look for <title> and </title> tags.
 			checkcount();
