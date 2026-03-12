@@ -55,7 +55,7 @@ class Directories_Check implements themecheck {
 					__( 'REQUIRED', 'theme-check' ),
 					__( 'Please remove any extraneous directories like <strong>.git</strong>, <strong>.svn</strong> or <strong>__MACOSX</strong> from the ZIP file before uploading it.', 'theme-check' )
 				);
-				$ret = false;
+				$ret           = false;
 				break;
 			}
 		}
