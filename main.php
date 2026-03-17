@@ -196,7 +196,7 @@ function tc_success() {
 	<ul>
 	<li><a href="https://developer.wordpress.org/themes/"><?php esc_html_e( 'Theme Handbook', 'theme-check' ); ?></a></li>
 	<li><a href="https://wordpress.org/support/forum/wp-advanced/"><?php esc_html_e( 'Developing with WordPress Forum', 'theme-check' ); ?></a></li>
-	<li><a href="https://github.com/WPTRT/theme-unit-test"><?php esc_html_e( 'Theme Unit Tests', 'theme-check' ); ?></a></li>
+	<li><a href="https://github.com/WordPress/theme-test-data"><?php esc_html_e( 'Theme Test Data', 'theme-check' ); ?></a></li>
 	</ul></div>
 	<?php
 }
