@@ -1,7 +1,7 @@
 === Theme Check ===
 Contributors: Otto42, pross, poena, dingo-d, acosmin, kafleg, joyously
 Requires at Least: 3.7
-Tested Up To: 6.6
+Tested Up To: 6.7
 Tags: themes, guidelines, wordpress.org
 Stable tag: 20231220
 

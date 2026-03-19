@@ -54,7 +54,7 @@ class Title_Check implements themecheck {
 
 			// Look for <title> and </title> tags.
 			checkcount();
-			if ( ( false !== strpos( $file_content, '<title>' ) ) || ( false !== strpos( $file_content, '</title>' ) ) ) {
+			if ( ( is_string( $file_content ) && false !== strpos( $file_content, '<title>' ) ) || ( is_string( $file_content ) && false !== strpos( $file_content, '</title>' ) ) ) {
 				$filename      = tc_filename( $file_path );
 				$grep          = tc_grep( '<title>', $file_path );
 				$this->error[] = sprintf(
