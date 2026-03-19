@@ -49,7 +49,8 @@ class Directories_Check implements themecheck {
 
 			$path_segments = explode( '/', str_replace( '\\', '/', $path ) );
 
-			if ( array_intersect( $path_segments, $excluded_directories ) ) {
+			$matched_directories = array_intersect( $path_segments, $excluded_directories );
+			if ( ! empty( $matched_directories ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
