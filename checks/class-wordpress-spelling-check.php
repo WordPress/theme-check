@@ -106,7 +106,7 @@ class WordPress_Spelling_Check implements themecheck {
 
 		foreach ( $normalized_lines as $line_index => $line_content ) {
 			if ( preg_match( '/\bword\s+press\b/i', $line_content ) || preg_match( '/\bwordpres\b/i', $line_content ) ) {
-				$line_number                    = $line_index + 1;
+				$line_number                     = $line_index + 1;
 				$violation_lines[ $line_number ] = isset( $original_lines[ $line_index ] ) ? $original_lines[ $line_index ] : '';
 				continue;
 			}
@@ -127,7 +127,7 @@ class WordPress_Spelling_Check implements themecheck {
 					continue;
 				}
 
-				$line_number                    = $line_index + 1;
+				$line_number                     = $line_index + 1;
 				$violation_lines[ $line_number ] = isset( $original_lines[ $line_index ] ) ? $original_lines[ $line_index ] : '';
 				break;
 			}
@@ -143,10 +143,10 @@ class WordPress_Spelling_Check implements themecheck {
 	 * @return string HTML snippet matching existing tc_grep-style output.
 	 */
 	protected function build_violation_context( $violation_lines ) {
-		$line_grep    = '';
+		$line_grep = '';
 
 		foreach ( $violation_lines as $line_number => $line_text ) {
-			$line_grep     .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . $line_number . ': ' . htmlspecialchars( $line_text ) . '</pre>';
+			$line_grep .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . $line_number . ': ' . htmlspecialchars( $line_text ) . '</pre>';
 		}
 
 		return $line_grep;
