@@ -5,6 +5,7 @@
  * @package Theme Check
  */
 
+// phpcs:disable WordPress.WP.CapitalPDangit -- Intentional lowercase/typo variants are match targets in this checker.
 /**
  * Check that WordPress is spelled and capitalized correctly in text.
  *
@@ -193,7 +194,7 @@ class WordPress_Spelling_Check implements themecheck {
 	 * @return string
 	 */
 	protected function mask_wordpress_in_html_attributes( $content ) {
-		// Attribute values are machine data in many templates; ignore spelling there.
+		// Attribute values are machine data in many templates; skip spelling checks there.
 		return preg_replace_callback(
 			'/<[^>]+>/s',
 			function ( $tag_match ) {
@@ -240,5 +241,6 @@ class WordPress_Spelling_Check implements themecheck {
 		return in_array( $before, $allowed_neighbors, true ) || in_array( $after, $allowed_neighbors, true );
 	}
 }
+// phpcs:enable WordPress.WP.CapitalPDangit
 
 $themechecks[] = new WordPress_Spelling_Check();
