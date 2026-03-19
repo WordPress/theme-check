@@ -53,7 +53,7 @@ class Directories_Check implements themecheck {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
-					__( 'Please remove any extraneous directories like <strong>.git</strong>, <strong>.svn</strong>, <strong>.hg</strong>, <strong>.bzr</strong> or <strong>__MACOSX</strong> from the ZIP file before uploading it.', 'theme-check' )
+					__( 'Please remove any extraneous directories like .git, .svn, .hg, .bzr or __MACOSX from the ZIP file before uploading it.', 'theme-check' )
 				);
 				$ret           = false;
 				break;
