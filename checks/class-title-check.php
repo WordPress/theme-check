@@ -29,9 +29,11 @@ class Title_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$php = implode( ' ', $php_files );
-
 		foreach ( $php_files as $file_path => $file_content ) {
+
+			if ( ! is_string( $file_content ) || '' === $file_content ) {
+				continue;
+			}
 
 			// Check whether there is a call to wp_title().
 			checkcount();
@@ -51,6 +53,10 @@ class Title_Check implements themecheck {
 
 			// Look for anything that looks like <svg>...</svg> and exclude it (inline svg's have titles too).
 			$file_content = preg_replace( '/<svg.*>.*<\/svg>/isU', '', $file_content );
+
+			if ( ! is_string( $file_content ) ) {
+				continue;
+			}
 
 			// Look for <title> and </title> tags.
 			checkcount();
