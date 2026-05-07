@@ -1,9 +1,9 @@
 === Theme Check ===
 Contributors: Otto42, pross, poena, dingo-d, acosmin, kafleg, joyously
 Requires at Least: 3.7
-Tested Up To: 6.6
+Tested Up To: 6.9
 Tags: themes, guidelines, wordpress.org
-Stable tag: 20231220
+Stable tag: 20260508
 
 A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
 
