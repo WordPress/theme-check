@@ -42,7 +42,7 @@ class Copyright_Notice_Check implements themecheck {
 			if ( stripos( $path, $this->slug . '/readme.txt' ) ||
 				stripos( $path, $this->slug . '/readme.md' ) ||
 				stripos( $path, $this->slug . '/style.css' ) ||
-				stripos( $path, $this->slug . '/licence.txt' ) !== false ) {
+				stripos( $path, $this->slug . '/license.txt' ) !== false ) {
 				$content .= $contents;
 			}
 		}
