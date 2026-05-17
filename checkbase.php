@@ -351,7 +351,16 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	}
 
 	// Check whether this is a FSE theme by searching for an index.html block template.
-	if ( ! in_array( 'block-templates/index.html', $other_filenames, true ) && ! in_array( 'templates/index.html', $other_filenames, true ) ) {
+	// Match by suffix so themes nested under /themes/<dir>/<theme>/ are supported.
+	$has_fse_index_template = false;
+	foreach ( $other_filenames as $filename ) {
+		if ( preg_match( '!(^|/)(block-templates|templates)/index\.html$!i', $filename ) ) {
+			$has_fse_index_template = true;
+			break;
+		}
+	}
+
+	if ( ! $has_fse_index_template ) {
 		return false;
 	}
 
