@@ -1,3 +1,6 @@
+= 20260508 =
+ * Tested with WordPress 6.9
+
 = 20231220 =
  * Added checks: Style Variations tag for block theme
  * Update: Team name from Theme Review Team to Themes Team 
