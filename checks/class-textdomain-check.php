@@ -24,6 +24,13 @@ class TextDomain_Check implements themecheck {
 	protected $name = '';
 
 	/**
+	 * Theme template
+	 *
+	 * @var string $template
+	 */
+	protected $template = '';
+
+	/**
 	 * Theme slug
 	 *
 	 * @var string $slug
@@ -63,6 +70,9 @@ class TextDomain_Check implements themecheck {
 	function set_context( $data ) {
 		if ( isset( $data['theme']['Name'] ) ) {
 			$this->name = $data['theme']['Name'];
+		}
+		if ( isset( $data['theme']['Template'] ) ) {
+			$this->template = $data['theme']['Template'];
 		}
 		if ( isset( $data['slug'] ) ) {
 			$this->slug = $data['slug'];
@@ -198,6 +208,44 @@ class TextDomain_Check implements themecheck {
 		$domains      = array_unique( $domains );
 		$domainlist   = implode( ', ', $domains );
 		$domainscount = count( $domains );
+                
+                $this_name = sanitize_title_with_dashes( $this->name );
+                $this_template = sanitize_title_with_dashes( $this->template );
+
+                $get_stylesheet = get_stylesheet();
+                $get_stylesheet = sanitize_title_with_dashes( $get_stylesheet );
+                
+                $get_template = get_template();
+                $get_template = sanitize_title_with_dashes( $get_template );
+                
+                $wp_get_theme = wp_get_theme();
+                $wp_get_theme_template = sanitize_title_with_dashes( $wp_get_theme['Template'] );
+                
+                $is_theme_confirmed = $this_name == $get_stylesheet;
+                $is_template_confirmed = ($this_template == $get_template) && ($this_template == $wp_get_theme_template);
+                
+                $is_child_and_parent_theme_count = 0;
+                $is_valid_child_and_parent_theme = false;
+                if( ( !empty($this_name) && !empty($this_template) ) && 
+                        ( $this_name != $this_template ) && 
+                        ( 2 == $domainscount ) &&
+                        ( $is_theme_confirmed && $is_template_confirmed ) ) 
+                    {
+                    // If we get here, this is likely a child theme, along with corresponding parent theme
+                    foreach ( $domains as $domain ) {
+                        $domain_sanitized = sanitize_title_with_dashes( $domain );
+                        if( $this_name == $domain_sanitized ) {
+                            $is_child_and_parent_theme_count += 1;
+                        }
+                        if( $this_template == $domain_sanitized ) {
+                            $is_child_and_parent_theme_count += 1;
+                        }
+                    }
+                    if( 2 == $is_child_and_parent_theme_count ) {
+                        // If we get here, this is definitely a child theme, along with corresponding parent theme
+                        $is_valid_child_and_parent_theme = true;
+                    }
+                }
 
 		// ignore core themes and uploads on w.org for this one check
 		if ( ! in_array( $this->slug, $this->exceptions ) && ! $this->is_wporg ) {
@@ -229,7 +277,17 @@ class TextDomain_Check implements themecheck {
 			}
 		}
 
-		if ( $domainscount > 1 ) {
+		if ( $is_valid_child_and_parent_theme ) {
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-info">%s</span>: %s %s',
+				__( 'INFO', 'theme-check' ),
+				__( "This theme uses two text domains: one for the child theme and another for the parent theme. Ensure that these two text domains correctly match the slugs of the respective parent and child themes. Correctly aligning both slugs is essential for compatibility with WordPress.org language packs.", 'theme-check' ),
+				sprintf(
+					__( 'The domains found are: %s.', 'theme-check' ),
+					'<strong>' . $domainlist . '</strong>'
+				)
+			);
+		} else if ( $domainscount > 1 ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-warning">%s</span>: %s %s',
 				__( 'WARNING', 'theme-check' ),
