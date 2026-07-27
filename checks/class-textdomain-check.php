@@ -145,7 +145,7 @@ class TextDomain_Check implements themecheck {
 								$found_domain = true;
 							}
 							if ( $parens_balance == 1 ) {
-								$args_count++;
+								++$args_count;
 								$args[] = $text;
 							}
 						}

@@ -45,13 +45,13 @@ class I18N_Check implements themecheck {
 					while ( $open > 0 && isset( $search[ $i ] ) ) {
 						switch ( $search[ $i ] ) {
 							case '(':
-								$open++;
+								++$open;
 								break;
 							case ')':
-								$open--;
+								--$open;
 								break;
 						}
-						$i++;
+						++$i;
 					}
 					$stmts[] = substr( $search, 0, $i );
 					$search  = substr( $search, $i );

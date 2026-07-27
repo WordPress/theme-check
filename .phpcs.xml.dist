@@ -3,12 +3,6 @@
 
 	<description>Coding standards used for checking the code of the Theme Check plugin</description>
 
-	<!--
-	Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
-	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
-	-->
-	<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
-	
 	<!-- Exclude the Composer Vendor directory. -->
 	<exclude-pattern>/vendor/*</exclude-pattern>
 
@@ -79,13 +73,17 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 
 		<!-- We're not strict about this. -->
-		<exclude name="WordPress.PHP.StrictComparisons.LooseComparison"/>
+		<exclude name="Universal.Operators.StrictComparisons"/>
 
 		<!-- We don't want Yoda conditions.. -->
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
 
 		<!-- We want to allow this. -->
-		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found"/>
-		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.Found"/>
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+
+		<!-- New in WPCS 3.x; restructuring these is left as a judgment call. -->
+		<exclude name="Universal.ControlStructures.DisallowLonelyIf.Found"/>
+		<exclude name="Universal.Files.SeparateFunctionsFromOO.Mixed"/>
 	</rule>
 </ruleset>
