@@ -70,7 +70,6 @@ class Title_Check implements themecheck {
 		}
 
 		return true;
-
 	}
 
 	/**

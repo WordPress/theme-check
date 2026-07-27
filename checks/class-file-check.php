@@ -70,7 +70,7 @@ class File_Check implements themecheck {
 
 		$fse_find = array_filter(
 			array_keys( $other_files ),
-			function( $file_name ) {
+			function ( $file_name ) {
 				if ( false !== stripos( $file_name, 'templates/index.html' ) || false !== stripos( $file_name, 'block-templates/index.html' ) ) {
 					return true;
 				}

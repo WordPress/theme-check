@@ -95,7 +95,7 @@ class Style_Tags_Check implements themecheck {
 
 				if ( in_array( strtolower( $tag ), $subject_tags ) ) {
 					$subject_tags_name .= strtolower( $tag ) . ', ';
-					$subject_tags_count++;
+					++$subject_tags_count;
 				}
 
 				if ( $tag === 'full-site-editing' && $this->wp_theme ) {

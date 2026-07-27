@@ -46,8 +46,8 @@ do_action( 'themecheck_checks_loaded' );
  */
 function run_themechecks_against_theme( $theme, $theme_slug ) {
 	$files = $theme->get_files(
-		null /* all file types */,
-		-1 /* infinite recursion */,
+		null, /* all file types */
+		-1, /* infinite recursion */
 		true /* include parent theme files */
 	);
 	unset( $files[0] ); // Work around https://core.trac.wordpress.org/ticket/53599
@@ -161,7 +161,7 @@ function display_themechecks() {
 
 function checkcount() {
 	global $checkcount;
-	$checkcount++;
+	++$checkcount;
 }
 
 // some functions theme checks use.
@@ -182,7 +182,7 @@ function tc_grep( $error, $file ) {
 			$pre        = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
 		}
-		$line_index++;
+		++$line_index;
 	}
 	return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
 }
@@ -208,7 +208,7 @@ function tc_preg( $preg, $file ) {
 			$pre        = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
 		}
-		$line_index++;
+		++$line_index;
 
 	}
 	return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
@@ -252,8 +252,8 @@ function _get_filename_from_current_theme( $file ) {
 		$theme_path = $theme_check_current_theme->get_stylesheet_directory();
 
 		$theme_files = $theme_check_current_theme->get_files(
-			null /* all file types */,
-			-1 /* infinite recursion */,
+			null, /* all file types */
+			-1, /* infinite recursion */
 			true /* include parent theme files */
 		);
 	}

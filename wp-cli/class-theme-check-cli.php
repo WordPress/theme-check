@@ -90,7 +90,7 @@ class Theme_Check_Command extends WP_CLI_Command {
 		}
 
 		$processed_messages = array_map(
-			function( $message ) {
+			function ( $message ) {
 				if ( preg_match( '/<span[^>]*>(.*?)<\/span>(.*)/', $message, $matches ) ) {
 					$key   = $matches[1];
 					$value = $matches[2];
