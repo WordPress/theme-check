@@ -74,7 +74,7 @@ function check_main( $theme_slug ) {
 		}
 
 		if ( empty( $theme['Template Version'] ) ) {
-			echo '<p>' . __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) . '</p>';
+			echo '<p>' . wp_kses_post( __( 'Child theme does not have the <strong>Template Version</strong> tag in style.css.', 'theme-check' ) ) . '</p>';
 		} elseif ( $theme['Template Version'] < $parent_theme['Version'] ) {
 			echo '<p>';
 			printf(
@@ -97,9 +97,9 @@ function check_main( $theme_slug ) {
 	$results = display_themechecks();
 
 	if ( ! $success ) {
-		echo '<h2>' . sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
+		echo '<h2>' . esc_html( sprintf( __( 'One or more errors were found for %1$s.', 'theme-check' ), $theme['Title'] ) ) . '</h2>';
 	} else {
-		echo '<h2>' . sprintf( __( '%1$s passed the tests', 'theme-check' ), esc_html( $theme['Title'] ) ) . '</h2>';
+		echo '<h2>' . esc_html( sprintf( __( '%1$s passed the tests', 'theme-check' ), $theme['Title'] ) ) . '</h2>';
 		tc_success();
 	}
 
