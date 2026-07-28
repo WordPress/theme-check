@@ -67,6 +67,7 @@ class File_Check implements themecheck {
 		);
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
+		$readme   = null;
 
 		$fse_find = array_filter(
 			array_keys( $other_files ),
@@ -123,6 +124,24 @@ class File_Check implements themecheck {
 				);
 				$ret           = false;
 			}
+
+			if ( 'readme.txt' === $file ) {
+				foreach ( $other_files as $other_path => $other_content ) {
+					if ( 'readme.txt' === strtolower( basename( $other_path ) ) ) {
+						$readme = $other_content;
+						break;
+					}
+				}
+			}
+		}
+
+		if ( null !== $readme && '' === trim( $readme ) ) {
+			$this->error[] = sprintf(
+				'<span class="tc-lead tc-required">%s</span>: %s',
+				__( 'REQUIRED', 'theme-check' ),
+				__( 'The readme.txt file is empty.', 'theme-check' )
+			);
+			$ret           = false;
 		}
 
 		return $ret;
