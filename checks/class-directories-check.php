@@ -1,14 +1,15 @@
 <?php
 /**
- * Check if directories only intended for development are included
+ * Check if disallowed directories are included
  *
  * @package Theme Check
  */
 
 /**
- * Check if directories only intended for development are included.
+ * Check if disallowed directories are included.
  *
- * Check if directories only intended for development are included. If they are, require them to be removed.
+ * Checks each file path for disallowed directory names such as .git or __MACOSX.
+ * Empty disallowed directories will not be detected as they contain no files.
  */
 class Directories_Check implements themecheck {
 	/**
@@ -21,13 +22,14 @@ class Directories_Check implements themecheck {
 	/**
 	 * Check that return true for good/okay/acceptable, false for bad/not-okay/unacceptable.
 	 *
-	 * @param array $php_files File paths and content for PHP files.
-	 * @param array $css_files File paths and content for CSS files.
+	 * @param array $php_files   File paths and content for PHP files.
+	 * @param array $css_files   File paths and content for CSS files.
 	 * @param array $other_files Folder names, file paths and content for other files.
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
 		$excluded_directories = array(
+			'__MACOSX',
 			'.git',
 			'.svn',
 			'.hg',
@@ -45,15 +47,17 @@ class Directories_Check implements themecheck {
 		foreach ( $all_filenames as $path ) {
 			checkcount();
 
-			$filename = basename( $path );
+			$path_segments = explode( '/', str_replace( '\\', '/', $path ) );
 
-			if ( in_array( $filename, $excluded_directories, true ) ) {
+			$matched_directories = array_intersect( $path_segments, $excluded_directories );
+			if ( ! empty( $matched_directories ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s',
 					__( 'REQUIRED', 'theme-check' ),
-					__( 'Please remove any extraneous directories like .git or .svn from the ZIP file before uploading it.', 'theme-check' )
+					__( 'Please remove any extraneous directories like .git, .svn, .hg, .bzr or __MACOSX from the ZIP file before uploading it.', 'theme-check' )
 				);
 				$ret           = false;
+				break;
 			}
 		}
 
