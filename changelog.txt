@@ -1,3 +1,8 @@
+= 20260821 =
+ * Tested with WordPress 7.1
+ * Added checks: Add check for spelling “WordPress” correctly
+ * Added checks: Skip classic theme checks when the block theme is in a subfolder
+
 = 20260508 =
  * Tested with WordPress 6.9
 
