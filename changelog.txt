@@ -1,3 +1,6 @@
+= Next release ==
+* Fix: <Please replace this line> 
+
 = 20260821 =
  * Tested with WordPress 7.1
  * Added checks: Add check for spelling “WordPress” correctly
