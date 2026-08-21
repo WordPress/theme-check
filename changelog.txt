@@ -1,3 +1,9 @@
+= 20260720 =
+ * Fix: Ensure standard translation checks (I18N) are not bypassed when Polylang functions are present in the same file.
+ * Fix: Target the theme's main style.css file for header checks rather than parsing combined CSS text.
+ * Update: Verified compatibility with PHP 8.5+.
+ * Tested with WordPress 7.0.2
+
 = 20260508 =
  * Tested with WordPress 6.9
 

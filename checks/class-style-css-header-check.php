@@ -25,7 +25,36 @@ class Style_CSS_Header_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
-		$css = implode( ' ', $css_files );
+		$css = '';
+		global $theme_check_current_theme;
+		if ( $theme_check_current_theme ) {
+			$style_css_path = function_exists( 'wp_normalize_path' )
+				? wp_normalize_path( $theme_check_current_theme->get_stylesheet_directory() . '/style.css' )
+				: $theme_check_current_theme->get_stylesheet_directory() . '/style.css';
+
+			foreach ( $css_files as $path => $content ) {
+				$normalized_path = function_exists( 'wp_normalize_path' ) ? wp_normalize_path( $path ) : $path;
+				if ( $normalized_path === $style_css_path ) {
+					$css = $content;
+					break;
+				}
+			}
+		}
+
+		if ( empty( $css ) ) {
+			// Fallback: look for a file named style.css.
+			foreach ( $css_files as $path => $content ) {
+				if ( basename( $path ) === 'style.css' ) {
+					$css = $content;
+					break;
+				}
+			}
+		}
+
+		if ( empty( $css ) ) {
+			// Ultimate fallback: implode all CSS files.
+			$css = implode( ' ', $css_files );
+		}
 		$ret = true;
 
 		$checks = array(

@@ -36,9 +36,11 @@ class I18N_Check implements themecheck {
 			$stmts = array();
 			foreach ( array( '_e(', '__(', '_e (', '__ (' ) as $finder ) {
 				$search = $phpfile;
-				while ( ( $pos = strpos( $search, $finder ) ) !== false &&
-					strpos( $search, 'pll__' ) === false &&
-					strpos( $search, 'pll_e' ) === false ) {
+				while ( ( $pos = strpos( $search, $finder ) ) !== false ) {
+					if ( $pos >= 3 && substr( $search, $pos - 3, 3 ) === 'pll' ) {
+						$search = substr( $search, $pos + strlen( $finder ) );
+						continue;
+					}
 					$search = substr( $search, $pos );
 					$open   = 1;
 					$i      = strpos( $search, '(' ) + 1;
