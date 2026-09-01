@@ -59,7 +59,7 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 		if ( tc_is_php_file( $filename ) ) {
 			$php[ $filename ] = file_get_contents( $filename );
 			$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
-		} elseif ( substr( $filename, -4 ) === '.css' ) {
+		} elseif ( strtolower( substr( $filename, -4 ) ) === '.css' ) {
 			$css[ $filename ] = file_get_contents( $filename );
 		} else {
 			// In local development it might be useful to skip other files

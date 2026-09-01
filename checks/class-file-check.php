@@ -79,16 +79,11 @@ class File_Check implements themecheck {
 			}
 		);
 
-		if ( ! empty( $fse_find ) ) {
-			$fse_not_needed = array_search( 'index.php', $musthave );
-			unset( $musthave[ $fse_not_needed ] );
-		}
-
-		// Child themes inherit index.php from the parent via the template hierarchy.
-		if ( tc_is_child_theme() ) {
-			$inherited = array_search( 'index.php', $musthave, true );
-			if ( false !== $inherited ) {
-				unset( $musthave[ $inherited ] );
+		// FSE themes ship index.html and child themes inherit the parent's index.php, so neither needs its own.
+		if ( ! empty( $fse_find ) || tc_is_child_theme() ) {
+			$index = array_search( 'index.php', $musthave, true );
+			if ( false !== $index ) {
+				unset( $musthave[ $index ] );
 			}
 		}
 
