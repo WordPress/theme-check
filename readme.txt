@@ -54,4 +54,4 @@ If **either** of these two vars are defined a new trac tickbox will appear next 
 
 == Changelog ==
 
-Changes can be found in [the changelog.txt file](https://github.com/WordPress/theme-check/blob/master/changelog.txt).
+Changes can be found in [the changelog.txt file](https://github.com/WordPress/theme-check/blob/HEAD/changelog.txt).
