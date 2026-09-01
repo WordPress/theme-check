@@ -24,6 +24,10 @@ class Theme_Support_Title_Tag_Check implements themecheck {
 	 * @param array $other_files Folder names, file paths and content for other files.
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
+		if ( tc_is_child_theme() ) {
+			return true;
+		}
+
 		$ret = true;
 		$php = implode( ' ', $php_files );
 

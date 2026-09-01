@@ -56,7 +56,7 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 	$css   = array();
 	$other = array();
 	foreach ( $files as $filename ) {
-		if ( substr( $filename, -4 ) === '.php' ) {
+		if ( tc_is_php_file( $filename ) ) {
 			$php[ $filename ] = file_get_contents( $filename );
 			$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
 		} elseif ( substr( $filename, -4 ) === '.css' ) {
@@ -304,6 +304,35 @@ function tc_strip_comments( $code ) {
 		$token = next( $tokens );
 	}
 	return $return;
+}
+
+/**
+ * Whether the theme currently being checked is a child theme.
+ *
+ * @return boolean True when the current theme declares a parent theme.
+ */
+function tc_is_child_theme() {
+	global $theme_check_current_theme;
+
+	return $theme_check_current_theme instanceof WP_Theme && (bool) $theme_check_current_theme->parent();
+}
+
+/**
+ * Whether a filename should be scanned as executable PHP.
+ *
+ * Matches any extension component case-insensitively, so mixed-case and
+ * multi-extension names (functions.PhP, functions.php.bak) are still caught.
+ *
+ * @param string $filename A filename or path.
+ * @return boolean True when the file should be scanned as PHP.
+ */
+function tc_is_php_file( $filename ) {
+	$php_extensions = array( 'php', 'php3', 'php4', 'php5', 'php7', 'phtml', 'pht', 'phar' );
+
+	$components = explode( '.', strtolower( basename( $filename ) ) );
+	array_shift( $components );
+
+	return array() !== array_intersect( $components, $php_extensions );
 }
 
 /**

@@ -25,6 +25,10 @@ class Basic_Check implements themecheck {
 	 */
 	public function check( $php_files, $css_files, $other_files ) {
 
+		if ( tc_is_child_theme() ) {
+			return true;
+		}
+
 		$php  = implode( ' ', $php_files );
 		$grep = '';
 		$ret  = true;

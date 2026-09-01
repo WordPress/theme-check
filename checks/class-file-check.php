@@ -84,6 +84,14 @@ class File_Check implements themecheck {
 			unset( $musthave[ $fse_not_needed ] );
 		}
 
+		// Child themes inherit index.php from the parent via the template hierarchy.
+		if ( tc_is_child_theme() ) {
+			$inherited = array_search( 'index.php', $musthave, true );
+			if ( false !== $inherited ) {
+				unset( $musthave[ $inherited ] );
+			}
+		}
+
 		checkcount();
 
 		foreach ( $blocklist as $file => $reason ) {

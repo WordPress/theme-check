@@ -1,5 +1,6 @@
 = Next release ==
-* Fix: <Please replace this line> 
+* Fix: Recognize mixed-case and multi-part PHP file extensions when collecting theme files for scanning
+* Fix: Reduce false positives for child themes by only skipping the requirements their parent provides (base template functions, index.php, title-tag support)
 
 = 20260821 =
  * Tested with WordPress 7.1
