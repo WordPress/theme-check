@@ -14,7 +14,7 @@ Many sites use customized themes, and that's perfectly okay. But themes that are
 
 This theme checker is not perfect, and never will be. It is only a tool to help theme authors, or anybody else who wants to make their theme more capable. All themes submitted to WordPress.org are hand-reviewed by a team of experts. The automated theme checker is meant to be a useful tool only, not an absolute system of measurement.
 
-This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [Make Themes site](https://make.wordpress.org/themes), or [https://github.com/WPTRT/Theme-Requirements](https://github.com/WPTRT/Theme-Requirements)
+This plugin does not decide the guidelines used. Any issues with particular theme review guidelines should be discussed on the [Make Themes site](https://make.wordpress.org/themes), or in the [Theme Review Requirements](https://make.wordpress.org/themes/handbook/review/required/).
 
 ## Other Notes
 
