@@ -63,8 +63,8 @@ class Screenshot_Check implements themecheck {
 					}
 					if ( $image[1] / $image[0] != 0.75 ) {
 						$this->error[] = sprintf(
-							'<span class="tc-lead tc-required">%s</span> %s',
-							__( 'REQUIRED', 'theme-check' ),
+							'<span class="tc-lead tc-info">%s</span> %s',
+							__( 'INFO', 'theme-check' ),
 							__( 'Screenshot dimensions are wrong! Ratio of width to height should be 4:3.', 'theme-check' )
 						);
 						$ret           = false;
