@@ -1,0 +1,26 @@
+{
+	"name": "theme-check",
+	"version": "20231220",
+	"description": "Create a block-based theme",
+	"author": "The theme check plugin is an easy way to test your theme and make sure it’s up to spec with the latest theme review standards.",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"WordPress",
+		"theme"
+	],
+	"homepage": "https://wordpress.org/plugins/theme-check/",
+	"repository": "git+https://github.com/WordPress/theme-check.git",
+	"bugs": {
+		"url": "https://wordpress.org/support/plugin/theme-check/"
+	},
+	"engines": {
+		"node": ">=20.10.0",
+		"npm": ">=10.2.3"
+	},
+	"scripts": {
+		"update-version": "node update-version-and-changelog.js"
+	},
+    "devDependencies": {
+		"simple-git": "^3.26.0"
+	}
+}
