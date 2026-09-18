@@ -29,7 +29,7 @@ class JQuery_Check implements themecheck {
 
 		checkcount();
 
-		if ( ! preg_match( '/wp_enqueue_script\(\s?("|\')jquery("|\')/i', $php ) ) {
+		if ( preg_match( '/wp_enqueue_script\(\s?("|\')jquery("|\')/i', $php ) ) {
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-warning">%s</span>: %s',
 				__( 'RECOMMENDED', 'theme-check' ),
