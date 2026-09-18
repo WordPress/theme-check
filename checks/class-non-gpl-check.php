@@ -51,11 +51,14 @@ class Non_GPL_Check implements themecheck {
 					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),
 					sprintf(
+						/* translators: %s is the link slug that references the asset */
 						__( 'Found a reference to %s. Assets from this website does not use a license that is compatible with GPL.', 'theme-check' ),
 						'<code>' . esc_html( $link_slug ) . '</code>'
 					),
 					'<a href="' . esc_url( $link_url ) . '" target="_blank">' . __( 'View license (opens in a new window).', 'theme-check' ) . '</a>'
 				);
+				// Return false to indicate that the check failed with a REQUIRED change message.
+				$ret = false;
 			}
 		}
 

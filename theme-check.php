@@ -3,8 +3,8 @@
  * Plugin Name: Theme Check
  * Plugin URI: https://github.com/WordPress/theme-check/
  * Description: A simple and easy way to test your theme for all the latest WordPress standards and practices. A great theme development tool!
- * Author: Theme Review Team
- * Version: 20211203
+ * Author: Themes Team
+ * Version: 20260901
  * Text Domain: theme-check
  * License: GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,6 +14,10 @@ class ThemeCheckMain {
 	function __construct() {
 		add_action( 'admin_init', array( $this, 'tc_i18n' ) );
 		add_action( 'admin_menu', array( $this, 'themecheck_add_page' ) );
+
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			include 'wp-cli/class-theme-check-cli.php';
+		}
 	}
 
 	function tc_i18n() {

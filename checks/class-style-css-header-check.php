@@ -38,17 +38,30 @@ class Style_CSS_Header_Check implements themecheck {
 			'[ \t\/*#]*Text Domain:'  => __( '<strong>Text Domain:</strong> is missing from your style.css header.', 'theme-check' ),
 			'[ \t\/*#]*Tested up to:' => __( '<strong>Tested up to:</strong> is missing from your style.css header. Also, this should be numbers only, so <em>5.0</em> and not <em>WP 5.0</em>', 'theme-check' ),
 			'[ \t\/*#]*Requires PHP:' => __( '<strong>Requires PHP:</strong> is missing from your style.css header.', 'theme-check' ),
+			'[ \t\/*#]*Update URI:'   => __( '<strong>Update URI:</strong> is found from your style.css header. This feature is only for themes that are distributed outside the theme directory. Remove from your style.css file.', 'theme-check' ),
 		);
 
 		foreach ( $checks as $key => $check ) {
 			checkcount();
-			if ( ! preg_match( '/' . $key . '/i', $css, $matches ) ) {
-				$this->error[] = sprintf(
-					'<span class="tc-lead tc-required">%s</span> %s',
-					__( 'REQUIRED', 'theme-check' ),
-					$check
-				);
-				$ret           = false;
+
+			if ( $key === '[ \t\/*#]*Update URI:' ) {
+				if ( preg_match( '/' . $key . '/i', $css, $matches ) ) {
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-required">%s</span> %s',
+						__( 'REQUIRED', 'theme-check' ),
+						$check
+					);
+					$ret           = false;
+				}
+			} else {
+				if ( ! preg_match( '/' . $key . '/i', $css, $matches ) ) {
+					$this->error[] = sprintf(
+						'<span class="tc-lead tc-required">%s</span> %s',
+						__( 'REQUIRED', 'theme-check' ),
+						$check
+					);
+					$ret           = false;
+				}
 			}
 		}
 

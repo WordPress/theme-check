@@ -1,1 +1,42 @@
+# theme-check plugin
 /vendor/
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# IDE related files
+.vscode
+
+# Ignore local override files
+.wp-env.override.json
+
+# phpunit
+*.result.*
+
+# Directories/files that may appear in your environment
+*.log
+yarn.lock
+/composer.lock
+
+# The /.cache folder is needed for phpcs to cache results between runs, while other .cache folders must be ignored
+# It is not possible to re-include a file if a parent directory of that file is excluded
+# So, both /.cache and /.cache./.gitkeep must be re-included
+.cache
+!/.cache/
+/.cache/**
+!/.cache/.gitkeep
+
+.eslintcache
+*.tsbuildinfo
+
+# Operating system specific files
+.DS_Store
+Thumbs.db
+
+# Report generated from jest-junit
+junit.xml
+
+# Local overrides
+.wp-env.override.json

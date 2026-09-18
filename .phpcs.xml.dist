@@ -73,13 +73,17 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 
 		<!-- We're not strict about this. -->
-		<exclude name="WordPress.PHP.StrictComparisons.LooseComparison"/>
+		<exclude name="Universal.Operators.StrictComparisons"/>
 
 		<!-- We don't want Yoda conditions.. -->
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
 
 		<!-- We want to allow this. -->
-		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found"/>
-		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.Found"/>
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+
+		<!-- New in WPCS 3.x; restructuring these is left as a judgment call. -->
+		<exclude name="Universal.ControlStructures.DisallowLonelyIf.Found"/>
+		<exclude name="Universal.Files.SeparateFunctionsFromOO.Mixed"/>
 	</rule>
 </ruleset>

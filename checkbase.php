@@ -46,8 +46,8 @@ do_action( 'themecheck_checks_loaded' );
  */
 function run_themechecks_against_theme( $theme, $theme_slug ) {
 	$files = $theme->get_files(
-		null /* all file types */,
-		-1 /* infinite recursion */,
+		null, /* all file types */
+		-1, /* infinite recursion */
 		true /* include parent theme files */
 	);
 	unset( $files[0] ); // Work around https://core.trac.wordpress.org/ticket/53599
@@ -56,10 +56,10 @@ function run_themechecks_against_theme( $theme, $theme_slug ) {
 	$css   = array();
 	$other = array();
 	foreach ( $files as $filename ) {
-		if ( substr( $filename, -4 ) === '.php' ) {
+		if ( tc_is_php_file( $filename ) ) {
 			$php[ $filename ] = file_get_contents( $filename );
 			$php[ $filename ] = tc_strip_comments( $php[ $filename ] );
-		} elseif ( substr( $filename, -4 ) === '.css' ) {
+		} elseif ( strtolower( substr( $filename, -4 ) ) === '.css' ) {
 			$css[ $filename ] = file_get_contents( $filename );
 		} else {
 			// In local development it might be useful to skip other files
@@ -161,7 +161,7 @@ function display_themechecks() {
 
 function checkcount() {
 	global $checkcount;
-	$checkcount++;
+	++$checkcount;
 }
 
 // some functions theme checks use.
@@ -182,7 +182,7 @@ function tc_grep( $error, $file ) {
 			$pre        = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
 		}
-		$line_index++;
+		++$line_index;
 	}
 	return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
 }
@@ -208,7 +208,7 @@ function tc_preg( $preg, $file ) {
 			$pre        = ltrim( htmlspecialchars( $pre ) );
 			$bad_lines .= "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . ( $line_index + 1 ) . ': ' . $pre . htmlspecialchars( substr( stristr( $this_line, $error ), 0, 75 ) ) . '</pre>';
 		}
-		$line_index++;
+		++$line_index;
 
 	}
 	return str_replace( $error, '<span class="tc-grep">' . $error . '</span>', $bad_lines );
@@ -252,8 +252,8 @@ function _get_filename_from_current_theme( $file ) {
 		$theme_path = $theme_check_current_theme->get_stylesheet_directory();
 
 		$theme_files = $theme_check_current_theme->get_files(
-			null /* all file types */,
-			-1 /* infinite recursion */,
+			null, /* all file types */
+			-1, /* infinite recursion */
 			true /* include parent theme files */
 		);
 	}
@@ -307,6 +307,35 @@ function tc_strip_comments( $code ) {
 }
 
 /**
+ * Whether the theme currently being checked is a child theme.
+ *
+ * @return boolean True when the current theme declares a parent theme.
+ */
+function tc_is_child_theme() {
+	global $theme_check_current_theme;
+
+	return $theme_check_current_theme instanceof WP_Theme && (bool) $theme_check_current_theme->parent();
+}
+
+/**
+ * Whether a filename should be scanned as executable PHP.
+ *
+ * Matches any extension component case-insensitively, so mixed-case and
+ * multi-extension names (functions.PhP, functions.php.bak) are still caught.
+ *
+ * @param string $filename A filename or path.
+ * @return boolean True when the file should be scanned as PHP.
+ */
+function tc_is_php_file( $filename ) {
+	$php_extensions = array( 'php', 'php3', 'php4', 'php5', 'php7', 'phtml', 'pht', 'phar' );
+
+	$components = explode( '.', strtolower( basename( $filename ) ) );
+	array_shift( $components );
+
+	return array() !== array_intersect( $components, $php_extensions );
+}
+
+/**
  * Used to allow some directories to be skipped during development.
  *
  * @param  string $filename a filename/path.
@@ -351,7 +380,16 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 	}
 
 	// Check whether this is a FSE theme by searching for an index.html block template.
-	if ( ! in_array( 'block-templates/index.html', $other_filenames, true ) && ! in_array( 'templates/index.html', $other_filenames, true ) ) {
+	// Match by suffix so themes nested under /themes/<dir>/<theme>/ are supported.
+	$has_fse_index_template = false;
+	foreach ( $other_filenames as $filename ) {
+		if ( preg_match( '!(^|/)(block-templates|templates)/index\.html$!i', $filename ) ) {
+			$has_fse_index_template = true;
+			break;
+		}
+	}
+
+	if ( ! $has_fse_index_template ) {
 		return false;
 	}
 
@@ -378,6 +416,7 @@ function tc_adapt_checks_for_fse_themes( $php_files, $css_files, $other_files ) 
 			|| $check instanceof Theme_Support_Title_Tag_Check
 			|| $check instanceof Screen_Reader_Text_Check
 			|| $check instanceof Include_Check
+			|| $check instanceof Block_Patterns_Check
 		) {
 			unset( $themechecks[ $key ] );
 		}

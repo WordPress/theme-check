@@ -9,6 +9,7 @@
  * Checks if the tags in style.css are valid.
  */
 class Style_Tags_Check implements themecheck {
+
 	/**
 	 * Error messages, warnings and info notices.
 	 *
@@ -23,9 +24,17 @@ class Style_Tags_Check implements themecheck {
 	 */
 	protected $tags = array();
 
+	/**
+	 * The WP_Theme instance being checked.
+	 *
+	 * @var WP_Theme $wp_theme
+	 */
+	protected $wp_theme = false;
+
 	function set_context( $data ) {
 		if ( isset( $data['theme'] ) ) {
-			$this->tags = $data['theme']['Tags'];
+			$this->tags     = $data['theme']['Tags'];
+			$this->wp_theme = $data['theme'];
 		}
 	}
 
@@ -86,7 +95,29 @@ class Style_Tags_Check implements themecheck {
 
 				if ( in_array( strtolower( $tag ), $subject_tags ) ) {
 					$subject_tags_name .= strtolower( $tag ) . ', ';
-					$subject_tags_count++;
+					++$subject_tags_count;
+				}
+
+				if ( $tag === 'full-site-editing' && $this->wp_theme ) {
+					$theme_dir = $this->wp_theme->get_stylesheet_directory();
+
+					// Check if the theme has all the required files.
+					if (
+						! isset( $other_files[ "{$theme_dir}/theme.json" ] ) ||
+						(
+							! isset( $other_files[ "{$theme_dir}/templates/index.html" ] ) &&
+							! isset( $other_files[ "{$theme_dir}/block-templates/index.html" ] )
+						)
+					) {
+						$this->error[] = sprintf(
+							'<span class="tc-lead tc-required">%s</span> %s',
+							__( 'REQUIRED', 'theme-check' ),
+							sprintf(
+								__( 'The tag %s is being used, please remove it from your style.css header. It is only allowed for Block Themes.', 'theme-check' ),
+								'<strong>' . $tag . '</strong>'
+							)
+						);
+					}
 				}
 
 				if ( in_array( strtolower( $tag ), $allowed_tags ) ) {
@@ -169,6 +200,7 @@ class Style_Tags_Check implements themecheck {
 			'post-formats',
 			'rtl-language-support',
 			'sticky-post',
+			'style-variations',
 			'template-editing',
 			'theme-options',
 			'threaded-comments',
@@ -230,5 +262,4 @@ class Style_Tags_Check implements themecheck {
 		);
 	}
 }
-
 $themechecks[] = new Style_Tags_Check();

@@ -96,7 +96,6 @@ class Filesystem_HTTP_Check implements themecheck {
 		}
 
 		return true;
-
 	}
 
 	/**

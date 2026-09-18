@@ -50,11 +50,11 @@ class Title_Check implements themecheck {
 			}
 
 			// Look for anything that looks like <svg>...</svg> and exclude it (inline svg's have titles too).
-			$file_content = preg_replace( '/<svg.*>.*<\/svg>/s', '', $file_content );
+			$file_content = preg_replace( '/<svg.*>.*<\/svg>/isU', '', $file_content );
 
 			// Look for <title> and </title> tags.
 			checkcount();
-			if ( ( false !== strpos( $file_content, '<title>' ) ) || ( false !== strpos( $file_content, '</title>' ) ) ) {
+			if ( ( is_string( $file_content ) && false !== strpos( $file_content, '<title>' ) ) || ( is_string( $file_content ) && false !== strpos( $file_content, '</title>' ) ) ) {
 				$filename      = tc_filename( $file_path );
 				$grep          = tc_grep( '<title>', $file_path );
 				$this->error[] = sprintf(
@@ -70,7 +70,6 @@ class Title_Check implements themecheck {
 		}
 
 		return true;
-
 	}
 
 	/**

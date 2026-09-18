@@ -1,3 +1,37 @@
+= Next release ==
+* Fix: <Please replace this line>
+
+= 20260901 =
+* Fix: Recognize mixed-case and multi-part PHP file extensions when collecting theme files for scanning
+* Fix: Reduce false positives for child themes by only skipping the requirements their parent provides (base template functions, index.php, title-tag support)
+
+= 20260821 =
+ * Tested with WordPress 7.1
+ * Added checks: Add check for spelling “WordPress” correctly
+ * Added checks: Skip classic theme checks when the block theme is in a subfolder
+
+= 20260508 =
+ * Tested with WordPress 6.9
+
+= 20231220 =
+ * Added checks: Style Variations tag for block theme
+ * Update: Team name from Theme Review Team to Themes Team 
+ * Tested with WordPress 6.4 
+
+= 20230417 =
+ * Fixed Full Site Editing tag for block theme in WordPress.org 
+
+= 20230412 =
+ * Added checks: Full Site Editing tag for block theme
+ * Added checks: Update URI in style.css header
+ * Added checks: Style Variations tag to the list of valid tags
+ * Fix: PHPCS for WP version lower than 8.x
+ * Fix: PHPCS issues
+ * Update: Composer version 
+
+= 20220929 =
+ * Update: Removed index.php requirements for block theme
+
 = 20211203 =
  * Update: FSE theme folders to the new proposed structure
 

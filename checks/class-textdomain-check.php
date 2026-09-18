@@ -58,7 +58,7 @@ class TextDomain_Check implements themecheck {
 	);
 
 	// Core names their themes differently.
-	var $exceptions = array( 'twentyten', 'twentyeleven', 'twentytwelve', 'twentythirteen', 'twentyfourteen', 'twentyfifteen', 'twentysixteen', 'twentyseventeen', 'twentyeighteen', 'twentynineteen', 'twentytwenty', 'twentytwentyone' );
+	var $exceptions = array( 'twentyten', 'twentyeleven', 'twentytwelve', 'twentythirteen', 'twentyfourteen', 'twentyfifteen', 'twentysixteen', 'twentyseventeen', 'twentyeighteen', 'twentynineteen', 'twentytwenty', 'twentytwentyone', 'twentytwentytwo', 'twentytwentythree', 'twentytwentyfour', 'twentytwentyfive' );
 
 	function set_context( $data ) {
 		if ( isset( $data['theme']['Name'] ) ) {
@@ -145,7 +145,7 @@ class TextDomain_Check implements themecheck {
 								$found_domain = true;
 							}
 							if ( $parens_balance == 1 ) {
-								$args_count++;
+								++$args_count;
 								$args[] = $text;
 							}
 						}
@@ -212,7 +212,7 @@ class TextDomain_Check implements themecheck {
 					),
 					__( '(If this is a child theme, you can ignore this error.)', 'theme-check' )
 				);
-			} elseif ( ! in_array( $correct_domain, $domains ) ) {
+			} elseif ( ! empty( $domains ) && ! in_array( $correct_domain, $domains ) ) {
 				$this->error[] = sprintf(
 					'<span class="tc-lead tc-required">%s</span>: %s %s',
 					__( 'REQUIRED', 'theme-check' ),

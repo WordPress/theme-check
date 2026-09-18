@@ -35,6 +35,7 @@ class Plugin_Territory_Check implements themecheck {
 			'register_block_type',
 			'add_role',
 			'add_shortcode',
+			'registerBlockType',
 		);
 
 		// Hooks (actions & filters) that are required to be removed from the theme.

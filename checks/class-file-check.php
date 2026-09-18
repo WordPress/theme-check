@@ -68,6 +68,25 @@ class File_Check implements themecheck {
 
 		$musthave = array( 'index.php', 'style.css', 'readme.txt' );
 
+		$fse_find = array_filter(
+			array_keys( $other_files ),
+			function ( $file_name ) {
+				if ( false !== stripos( $file_name, 'templates/index.html' ) || false !== stripos( $file_name, 'block-templates/index.html' ) ) {
+					return true;
+				}
+
+				return false;
+			}
+		);
+
+		// FSE themes ship index.html and child themes inherit the parent's index.php, so neither needs its own.
+		if ( ! empty( $fse_find ) || tc_is_child_theme() ) {
+			$index = array_search( 'index.php', $musthave, true );
+			if ( false !== $index ) {
+				unset( $musthave[ $index ] );
+			}
+		}
+
 		checkcount();
 
 		foreach ( $blocklist as $file => $reason ) {
