@@ -35,7 +35,7 @@ class WordPress_Spelling_Check implements themecheck {
 		foreach ( $files_to_check as $file_path => $file_content ) {
 			checkcount();
 
-			$violation_lines = $this->find_bad_spellings( $file_content );
+			$violation_lines = $this->find_bad_spellings( $file_content, $file_path );
 			if ( empty( $violation_lines ) ) {
 				continue;
 			}
@@ -95,12 +95,13 @@ class WordPress_Spelling_Check implements themecheck {
 	 * - Incorrect capitalization variants such as "Wordpress" and plain "wordpress" in text.
 	 * - Common typos such as "word press" and "wordpres".
 	 *
-	 * @param string $content File content.
+	 * @param string $content   File content.
+	 * @param string $file_path File path.
 	 * @return array Line number => line content for violating lines.
 	 */
-	protected function find_bad_spellings( $content ) {
+	protected function find_bad_spellings( $content, $file_path ) {
 		$violation_lines    = array();
-		$normalized_content = $this->normalize_content_for_check( $content );
+		$normalized_content = $this->normalize_content_for_check( $content, $file_path );
 		$normalized_lines   = preg_split( "/\r\n|\n|\r/", $normalized_content );
 		$original_lines     = preg_split( "/\r\n|\n|\r/", $content );
 
@@ -157,14 +158,116 @@ class WordPress_Spelling_Check implements themecheck {
 	 *
 	 * This keeps line structure intact while masking known false-positive regions.
 	 *
-	 * @param string $content File content.
+	 * @param string $content   File content.
+	 * @param string $file_path File path.
 	 * @return string
 	 */
-	protected function normalize_content_for_check( $content ) {
+	protected function normalize_content_for_check( $content, $file_path ) {
+		if ( preg_match( '/\.php$/i', $file_path ) ) {
+			$content = $this->mask_php_machine_identifiers( $content );
+		}
+
 		$content = $this->mask_block_comments( $content );
 		$content = $this->mask_wordpress_in_html_attributes( $content );
 
 		return $content;
+	}
+
+	/**
+	 * Ignore literal WordPress slugs used as PHP array keys or values of a
+	 * machine-readable "value" key, while continuing to check display strings.
+	 *
+	 * Tokenization avoids treating translated labels or echoed text as data.
+	 * Replacing characters without changing length or line endings preserves
+	 * the existing line-number and context reporting.
+	 *
+	 * @param string $content PHP file content.
+	 * @return string
+	 */
+	protected function mask_php_machine_identifiers( $content ) {
+		$tokens = token_get_all( $content );
+		$text   = array();
+		foreach ( $tokens as $index => $token ) {
+			$text[ $index ] = is_array( $token ) ? $token[1] : $token;
+		}
+		$original_text = $text;
+
+		foreach ( $tokens as $index => $token ) {
+			if ( ! is_array( $token ) || T_CONSTANT_ENCAPSED_STRING !== $token[0] ) {
+				continue;
+			}
+
+			if ( ! in_array( $token[1], array( "'wordpress'", '"wordpress"' ), true ) ) {
+				continue;
+			}
+
+			$previous = $this->next_significant_php_token( $tokens, $index, -1 );
+			$next     = $this->next_significant_php_token( $tokens, $index, 1 );
+			$is_key   = null !== $next && T_DOUBLE_ARROW === $tokens[ $next ][0];
+			$is_value = false;
+
+			if ( null !== $previous && is_array( $tokens[ $previous ] ) && T_DOUBLE_ARROW === $tokens[ $previous ][0] ) {
+				$key_index = $this->next_significant_php_token( $tokens, $previous, -1 );
+				$is_value  = null !== $key_index &&
+					in_array( $text[ $key_index ], array( "'value'", '"value"' ), true ) &&
+					$this->is_value_in_wordpress_entry( $tokens, $original_text, $key_index );
+			}
+
+			if ( $is_key || $is_value ) {
+				$text[ $index ] = str_repeat( 'x', strlen( $token[1] ) );
+			}
+		}
+
+		return implode( '', $text );
+	}
+
+	/**
+	 * Check that a value field belongs to the array keyed by "wordpress".
+	 *
+	 * @param array $tokens PHP tokens.
+	 * @param array $text   Token text.
+	 * @param int   $index Index of the "value" key.
+	 * @return bool
+	 */
+	protected function is_value_in_wordpress_entry( $tokens, $text, $index ) {
+		$depth = 0;
+		for ( --$index; $index >= 0; --$index ) {
+			if ( ']' === $text[ $index ] ) {
+				++$depth;
+			} elseif ( '[' === $text[ $index ] ) {
+				if ( $depth > 0 ) {
+					--$depth;
+					continue;
+				}
+
+				$arrow_index = $this->next_significant_php_token( $tokens, $index, -1 );
+				$key_index   = null !== $arrow_index ? $this->next_significant_php_token( $tokens, $arrow_index, -1 ) : null;
+				return null !== $arrow_index && is_array( $tokens[ $arrow_index ] ) && T_DOUBLE_ARROW === $tokens[ $arrow_index ][0] &&
+					null !== $key_index && in_array( $text[ $key_index ], array( "'wordpress'", '"wordpress"' ), true );
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Find a neighboring PHP token while skipping whitespace and comments.
+	 *
+	 * @param array $tokens PHP tokens.
+	 * @param int   $index  Starting index.
+	 * @param int   $step   Direction (-1 or 1).
+	 * @return int|null
+	 */
+	protected function next_significant_php_token( $tokens, $index, $step ) {
+		for ( $index += $step; isset( $tokens[ $index ] ); $index += $step ) {
+			$token = $tokens[ $index ];
+			if ( is_array( $token ) && in_array( $token[0], array( T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ), true ) ) {
+				continue;
+			}
+			return $index;
+		}
+
+		return null;
 	}
 
 	/**
