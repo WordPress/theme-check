@@ -13,6 +13,13 @@
  */
 class JQuery_Check implements themecheck {
 	/**
+	 * Matches the script handles registered by WordPress that are jQuery or depend on it.
+	 *
+	 * @var string
+	 */
+	const JQUERY_HANDLE_REGEX = '/^jquery(?:-(?:core|migrate|ui-[a-z]+|effects-[a-z]+|color|form|hotkeys|masonry|query|serialize-object|table-hotkeys|touch-punch))?$/';
+
+	/**
 	 * Error messages, warnings and info notices.
 	 *
 	 * @var array $error
@@ -58,7 +65,7 @@ class JQuery_Check implements themecheck {
 			}
 
 			$handles = $this->resolve_handles( array_merge( array( $call['handle'] ), $call['deps'] ), $dependencies );
-			if ( ! preg_grep( '/^jquery(?:-core|-migrate|-ui-[a-z0-9_-]+)?$/', array_keys( $handles ) ) ) {
+			if ( ! preg_grep( self::JQUERY_HANDLE_REGEX, array_keys( $handles ) ) ) {
 				continue;
 			}
 
