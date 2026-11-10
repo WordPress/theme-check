@@ -1,5 +1,5 @@
 = Next release ==
-* Fix: <Please replace this line>
+* Added checks: Recommend against loading jQuery when a theme enqueues it or lists it as a script dependency
 
 = 20260901 =
 * Fix: Recognize mixed-case and multi-part PHP file extensions when collecting theme files for scanning
