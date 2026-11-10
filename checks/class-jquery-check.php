@@ -20,6 +20,19 @@ class JQuery_Check implements themecheck {
 	const JQUERY_HANDLE_REGEX = '/^jquery(?:-(?:core|migrate|ui-[a-z]+|effects-[a-z]+|color|form|hotkeys|masonry|query|serialize-object|table-hotkeys|touch-punch))?$/';
 
 	/**
+	 * Hooks that only fire in the admin, the Customizer, the block editor or on the login screen.
+	 *
+	 * @var string[]
+	 */
+	const ADMIN_HOOKS = array(
+		'admin_enqueue_scripts',
+		'customize_controls_enqueue_scripts',
+		'customize_preview_init',
+		'enqueue_block_editor_assets',
+		'login_enqueue_scripts',
+	);
+
+	/**
 	 * Error messages, warnings and info notices.
 	 *
 	 * @var array $error
@@ -36,7 +49,7 @@ class JQuery_Check implements themecheck {
 	public function check( $php_files, $css_files, $other_files ) {
 		checkcount();
 
-		$calls = $this->get_script_calls( $php_files );
+		$calls = $this->get_script_calls( $php_files, $this->get_admin_callbacks( $php_files ) );
 
 		// Dependencies of every script the theme registers or enqueues, keyed by handle.
 		$dependencies = array();
@@ -92,7 +105,10 @@ class JQuery_Check implements themecheck {
 	/**
 	 * Finds the wp_enqueue_script() and wp_register_script() calls in the theme.
 	 *
-	 * @param array $php_files File paths and content for PHP files.
+	 * Calls that only run outside the front end are left out.
+	 *
+	 * @param array    $php_files       File paths and content for PHP files.
+	 * @param string[] $admin_callbacks Names of the functions and methods hooked only to admin hooks.
 	 * @return array[] {
 	 *     One entry per call.
 	 *
@@ -104,7 +120,7 @@ class JQuery_Check implements themecheck {
 	 *     @type string   $text   The call, on a single line.
 	 * }
 	 */
-	protected function get_script_calls( $php_files ) {
+	protected function get_script_calls( $php_files, $admin_callbacks ) {
 		$calls = array();
 
 		foreach ( $php_files as $file_path => $file_content ) {
@@ -113,7 +129,13 @@ class JQuery_Check implements themecheck {
 				continue;
 			}
 
+			preg_match_all( '/\bfunction\b\s*&?\s*(\w*)\s*\(/i', $file_content, $functions, PREG_SET_ORDER | PREG_OFFSET_CAPTURE );
+
 			foreach ( $matches as $match ) {
+				if ( $this->is_admin_call( $file_content, $match[0][1], $functions, $admin_callbacks ) ) {
+					continue;
+				}
+
 				$arguments = $match[2][0];
 
 				$handle = '';
@@ -140,6 +162,74 @@ class JQuery_Check implements themecheck {
 		}
 
 		return $calls;
+	}
+
+	/**
+	 * Finds the functions and methods that are hooked to admin hooks and to nothing else.
+	 *
+	 * Methods are matched by name alone, so a name that is also hooked to a front end
+	 * action anywhere in the theme is not treated as admin only.
+	 *
+	 * @param array $php_files File paths and content for PHP files.
+	 * @return string[] Function and method names.
+	 */
+	protected function get_admin_callbacks( $php_files ) {
+		$hooks = array();
+
+		// The callback is a function name, a static method string or an array naming a method.
+		$regex = '/\badd_(?:action|filter)\s*\(\s*([\'"])([^\'"]+)\1\s*,\s*(?:(?:array\s*\(|\[)\s*[^,()\[\]]+,\s*)?([\'"])(?:[\w\\\\]+::)?(\w+)\3/i';
+
+		foreach ( $php_files as $file_content ) {
+			if ( preg_match_all( $regex, $file_content, $matches, PREG_SET_ORDER ) ) {
+				foreach ( $matches as $match ) {
+					$hooks[ strtolower( $match[4] ) ][] = $match[2];
+				}
+			}
+		}
+
+		$admin_callbacks = array();
+		foreach ( $hooks as $callback => $callback_hooks ) {
+			if ( ! array_diff( $callback_hooks, self::ADMIN_HOOKS ) ) {
+				$admin_callbacks[] = $callback;
+			}
+		}
+
+		return $admin_callbacks;
+	}
+
+	/**
+	 * Checks whether a call sits inside a function that only runs on an admin hook.
+	 *
+	 * @param string   $file_content    Content of the file containing the call.
+	 * @param int      $offset          Position of the call in the file.
+	 * @param array[]  $functions       Function declarations in the file, as offset-capturing matches.
+	 * @param string[] $admin_callbacks Names of the functions and methods hooked only to admin hooks.
+	 * @return bool
+	 */
+	protected function is_admin_call( $file_content, $offset, $functions, $admin_callbacks ) {
+		$closure_regex = '/\badd_(?:action|filter)\s*\(\s*([\'"])(?:' . implode( '|', self::ADMIN_HOOKS ) . ')\1\s*,\s*(?:static\s+)?$/i';
+
+		foreach ( $functions as $function ) {
+			$start = $function[0][1];
+			if ( $start > $offset ) {
+				break;
+			}
+
+			// Skip functions whose body, the first balanced pair of braces, ends before the call.
+			if ( ! preg_match( '/\G[^{;]*(\{(?:[^{}]++|(?1))*+\})/', $file_content, $body, 0, $start + strlen( $function[0][0] ) ) || $start + strlen( $function[0][0] ) + strlen( $body[0] ) < $offset ) {
+				continue;
+			}
+
+			if ( '' !== $function[1][0] ) {
+				if ( in_array( strtolower( $function[1][0] ), $admin_callbacks, true ) ) {
+					return true;
+				}
+			} elseif ( preg_match( $closure_regex, substr( $file_content, 0, $start ) ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
