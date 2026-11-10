@@ -85,17 +85,21 @@ class JQuery_Check implements themecheck {
 			$lines[ $call['file'] ][ $call['line'] ] = "<pre class='tc-grep'>" . __( 'Line ', 'theme-check' ) . $call['line'] . ': ' . htmlspecialchars( $call['text'] ) . '</pre>';
 		}
 
-		foreach ( $lines as $file_path => $file_lines ) {
+		if ( $lines ) {
+			$grep = '';
+			foreach ( $lines as $file_path => $file_lines ) {
+				$grep .= '<strong>' . tc_filename( $file_path ) . '</strong>' . implode( '', $file_lines );
+			}
+
 			$this->error[] = sprintf(
 				'<span class="tc-lead tc-recommended">%s</span>: %s %s',
 				__( 'RECOMMENDED', 'theme-check' ),
 				sprintf(
-					/* translators: 1: file name, 2: URL of an article about the performance impact of jQuery. */
-					__( 'jQuery is loaded by %1$s, either enqueued directly or listed as a dependency of another script. You may not need it, see <a href="%2$s">this article</a> for tips on switching to vanilla JavaScript.', 'theme-check' ),
-					'<strong>' . tc_filename( $file_path ) . '</strong>',
+					/* translators: %s: URL of an article about the performance impact of jQuery. */
+					__( 'This theme loads jQuery. Many themes no longer need it. See <a href="%s">this article</a> for tips on switching to vanilla JavaScript.', 'theme-check' ),
 					'https://make.wordpress.org/themes/2021/10/04/the-performance-impact-of-using-jquery-in-wordpress-themes/'
 				),
-				implode( '', $file_lines )
+				$grep
 			);
 		}
 
