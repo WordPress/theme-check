@@ -23,6 +23,9 @@ function check_main( $theme_slug ) {
 		return;
 	}
 
+	// Clear the cache for the selected theme so extra headers registered via filter are populated.
+	$theme->cache_delete();
+
 	// Run the checks.
 	$success = run_themechecks_against_theme( $theme, $theme_slug );
 
