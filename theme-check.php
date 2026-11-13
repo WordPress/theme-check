@@ -44,7 +44,6 @@ class ThemeCheckMain {
 		}
 
 		add_filter( 'extra_theme_headers', array( $this, 'tc_add_headers' ) );
-		wp_clean_themes_cache( false );
 
 		include 'checkbase.php';
 		include 'main.php';
